@@ -5,7 +5,7 @@ FlamingWight::Application.routes.draw do
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
-
+  match 'signup' => 'site#signup'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
