@@ -1,15 +1,15 @@
 FlamingWight::Application.routes.draw do
-  devise_for :members
-
+  devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks"}
 
   root :to => "site#index"
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
   
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
-
+  
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

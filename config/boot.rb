@@ -1,4 +1,8 @@
+
+require 'rubygems'
+
 require 'yaml'
+
 YAML::ENGINE.yamler = 'syck'
 
 require 'rubygems'
