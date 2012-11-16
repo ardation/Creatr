@@ -1,16 +1,17 @@
 FlamingWight::Application.routes.draw do
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks"}
 
-#  devise_scope :members do
-#    get 'sign_in', :to => 'devise/sessions#new', :as => :new_session
-#    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-#  end
+  devise_scope :members do
+    get 'sign_in', :to => 'devise/sessions#new', :as => :new_session
+    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
 
   root :to => "site#index"
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
   match 'signup' => 'site#signup'
+  match 'signup_fb' => 'site#signup_fb'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

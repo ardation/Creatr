@@ -16,6 +16,10 @@ class SiteController < ApplicationController
 	end
 
   def signup
+
+  end
+
+  def signup_fb
   	if session.exists? && !session["devise.facebook_data"].nil?
 	  	@name = session["devise.facebook_data"]['info']['name']  || ""
 	  	@email = if session["devise.facebook_data"]['info']['email'].include?("@facebook.com")
@@ -24,7 +28,7 @@ class SiteController < ApplicationController
 			session["devise.facebook_data"]['info']['email']
 		end
 
-  	else 
+  	else
     	redirect_to member_omniauth_authorize_path(:facebook)
 	end
   end

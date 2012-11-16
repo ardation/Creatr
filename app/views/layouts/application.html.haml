@@ -35,7 +35,7 @@
                   %a{:href => "/testimonials"}
                     %i{:class => "icon-user icon-white"}
                     Testimonials
-                %li{:class => ("active" if params[:action] == "signup")}
+                %li{:class => ("active" if params[:action] == "signup" or params[:action] == "signup_fb")}
                   %a{:href => "/signup"}
                     %i{:class => "icon-map-marker icon-white"}
                     Sign Up
@@ -43,3 +43,4 @@
                 %form.navbar-form.pull-right
                   %a.btn.btn-info{:href =>  member_omniauth_authorize_path(:facebook)} Sign in with Facebook
     = yield
+    = render 'footer'
