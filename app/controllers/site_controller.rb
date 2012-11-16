@@ -24,7 +24,6 @@ class SiteController < ApplicationController
 			session["devise.facebook_data"]['info']['email']
 		end
 
-		render :text => @name+@email
   	else 
     	redirect_to member_omniauth_authorize_path(:facebook)
 	end
