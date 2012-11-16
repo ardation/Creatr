@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20121116093404) do
     t.string   "name"
     t.string   "token"
     t.boolean  "activated",              :default => false
-    t.string   "usage"
+    t.text     "usage"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
