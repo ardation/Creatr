@@ -13,6 +13,7 @@ FlamingWight::Application.routes.draw do
   match 'signup' => 'site#signup'
   get 'signup_fb' => 'site#signup_fb'
   post 'signup_fb' => 'site#createUser'
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
