@@ -14,7 +14,7 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       end
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to '/signup_facebook'
+      redirect_to '/signup_fb'
     end
   end
 end

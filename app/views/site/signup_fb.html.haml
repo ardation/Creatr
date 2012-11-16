@@ -4,7 +4,7 @@
     %h1
       New to +Creator?
       %small Sign up
-  = semantic_form_for :members, :class => 'form-horizontal' do |f|
+  = semantic_form_for @member, :url => '/signup_fb', :class => 'form-horizontal' do |f|
     = f.inputs do
       .control-group
         = f.input :name, :input_html => { :placeholder => 'Full name', :value => @name}
