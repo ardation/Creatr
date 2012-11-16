@@ -11,7 +11,8 @@ FlamingWight::Application.routes.draw do
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
   match 'signup' => 'site#signup'
-  match 'signup_fb' => 'site#signup_fb'
+  get 'signup_fb' => 'site#signup_fb'
+  post 'signup_fb' => 'site#createUser'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

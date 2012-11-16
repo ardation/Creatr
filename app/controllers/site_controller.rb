@@ -33,7 +33,16 @@ class SiteController < ApplicationController
 	end
   end
 
+  def createUser
 
+  	@member = Member.new
+  	@member.name = params[:members][:name]
+  	@member.email = params[:members][:email]
+  	@member.token = session["devise.facebook_data"]['credentials']['token']
+  	@member.tokenExpires = Time.at(session["devise.facebook_data"]['credentials']['expires_at'])
+  	@member.uid = session["devise.facebook_data"]['uid']
 
+  	@member.save
+  end
 
 end
