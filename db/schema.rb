@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(:version => 20121116080038) do
     t.string   "uid"
     t.string   "name"
     t.string   "token"
-    t.boolean  "activated",              :default => false
-  end
+    t.boolean  "activated",              :default => false  
+end
+
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true

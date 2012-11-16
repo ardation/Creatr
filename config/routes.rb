@@ -10,11 +10,11 @@ FlamingWight::Application.routes.draw do
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
-  
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
