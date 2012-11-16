@@ -1,0 +1,15 @@
+.jumbotron
+.container
+  .page-header
+    %h1
+      New to +Creator?
+      %small Sign up
+  = semantic_form_for :members, :class => 'form-horizontal' do |f|
+    = f.inputs do
+      .control-group
+        = f.input :name, :input_html => { :placeholder => 'Full name'}
+      .control-group
+        = f.input :email, :input_html => { :placeholder => 'Email'}
+    = f.actions do
+      = f.submit "Sign Up", :class => 'btn btn-primary'
+      %a.btn{:href => "/features"} Cancel

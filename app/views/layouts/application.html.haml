@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Outreach Creator
+    %title +Creator
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
     = javascript_include_tag "application"
@@ -15,28 +15,31 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            %a.brand{:href => "#"} Outreach Creator
+            %a.brand{:href => "#"} +Creator
             .nav-collapse.collapse
               %ul.nav
-                %li.active
-                  %a{:href => "/ "} Home
-                %li
-                  %a{:href => "#about"} About
-                %li
-                  %a{:href => "#contact"} Contact
-                %li.dropdown
-                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                    Product Information
-                    %b.caret
-                  %ul.dropdown-menu
-                    %li
-                      %a{:href => "/features"} Features
-                    %li
-                      %a{:href => "/pricing"} Pricing
-                    %li
-                      %a{:href => "/testimonials"} Testimonials
+
+                %li{:class => ("active" if params[:action] == "index")}
+                  %a{:href => "/ "}
+                    %i{:class => "icon-home icon-white"}
+                    Home
+                %li{:class => ("active" if params[:action] == "features")}
+                  %a{:href => "/features"}
+                    %i{:class => "icon-star icon-white"}
+                    Features
+                %li{:class => ("active" if params[:action] == "pricing")}
+                  %a{:href => "/pricing"}
+                    %i{:class => "icon-shopping-cart icon-white"}
+                    Pricing
+                %li{:class => ("active" if params[:action] == "testimonials")}
+                  %a{:href => "/testimonials"}
+                    %i{:class => "icon-user icon-white"}
+                    Testimonials
+                %li{:class => ("active" if params[:action] == "signup")}
+                  %a{:href => "/signup"}
+                    %i{:class => "icon-map-marker icon-white"}
+                    Sign Up
               %form.navbar-form.pull-right
                 %form.navbar-form.pull-right
                   %a.btn.btn-info{:href =>  member_omniauth_authorize_path(:facebook)} Sign in with Facebook
-    .navbar-spacer
     = yield
