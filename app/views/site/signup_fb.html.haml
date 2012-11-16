@@ -10,6 +10,8 @@
         = f.input :name, :input_html => { :placeholder => 'Full name', :value => @name}
       .control-group
         = f.input :email, :input_html => { :placeholder => 'Email', :value => @email}
+      .control-group
+        = f.input :usage, :label => "How do you plan on using <strong>+Creator</strong>? ".html_safe, :as => :text, :input_html => {:class => 'span5', :rows => 8}
     = f.actions do
       = f.submit "Sign Up", :class => 'btn btn-primary'
       %a.btn{:href => "/features"} Cancel
