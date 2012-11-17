@@ -1,5 +1,5 @@
 class Member < ActiveRecord::Base
-  devise :omniauthable
+  devise :omniauthable, :confirmable, :registerable
   attr_accessible :email, :encrypted_password, :password_confirmation, :remember_me, :provider, :uid, :name, :token, :usage, :tokenExpires
   validates_presence_of :email, :name, :uid, :provider
   validates_uniqueness_of :email, :uid
