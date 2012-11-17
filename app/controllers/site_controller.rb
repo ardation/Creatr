@@ -15,43 +15,41 @@ class SiteController < ApplicationController
 
 	end
 
+  def activate
+    if session["devise.facebook_data"].nil?
+      redirect_to '/'
+    end
+  end
+
   def signup
   	unless session["devise.facebook_data"].nil?
-	  	@member = Member.find_for_facebook_oauth(session["devise.facebook_data"])
-	  	unless @member.nil?
-	  		if @member.activated
-	        sign_in_and_redirect @member, :event => :authentication #this will throw if @user is not activated
-	        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-		    else
-		    	session["devise.facebook_data"] = request.env["omniauth.auth"]
-		    	redirect_to '/activate'
-		    end
-      end
+      redirect_to '/signup_fb'
     end
   end
 
   def signup_fb
-  	@member = Member.find_for_facebook_oauth(session["devise.facebook_data"]) unless session["devise.facebook_data"].nil?
+    @data = session["devise.facebook_data"]
+    unless @data.nil?
+    	@member = Member.find_for_facebook_oauth(@data)
 
-  	if @member.nil?
-      @member = Member.new
-	  	if session.exists? && !session["devise.facebook_data"].nil?
-		  	@name = session["devise.facebook_data"]['info']['name']  || ""
-		  	@email = if session["devise.facebook_data"]['info']['email'].include?("@facebook.com")
-		  		""
-  			else
-  				session["devise.facebook_data"]['info']['email']
-  			end
-	  else
-	    redirect_to member_omniauth_authorize_path(:facebook)
-		end
-	else
-		redirect_to member_omniauth_authorize_path(:facebook)
-	end
+    	if @member.nil?
+        @member = Member.new
+		  	@name = @data['info']['name'] || ""
+        @email = @data['info']['email'].include?("@facebook.com") ? "" : @email = @data['info']['email']
+    	else
+        unless @member.activated
+          redirect_to '/activate'
+        else
+          redirect_to '/dashboard'
+        end
+    	end
+
+    else
+      redirect_to member_omniauth_authorize_path(:facebook)
+    end
   end
 
   def createUser
-
   	@member = Member.new
   	@member.name = params[:member][:name]
   	@member.email = params[:member][:email]
@@ -64,10 +62,14 @@ class SiteController < ApplicationController
   		@name = params[:member][:name]
   		@email = params[:member][:email]
   		render 'site/signup_fb'
-	else
-		render 'site/signup_done'
+    else
+		  redirect_to '/signup_done'
   	end
-  	#@member.errors[:email]
   end
 
+  def signup_done
+    if session["devise.facebook_data"].nil?
+      redirect_to '/', :error
+    end
+  end
 end
