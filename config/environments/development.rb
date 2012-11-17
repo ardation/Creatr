@@ -39,11 +39,11 @@ FlamingWight::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "smtp.mandrillapp.com",
   :port                 => 587,
   :domain               => 'godmedia.org.nz',
-  :user_name            => 'creator@godmedia.org.nz',
-  :password             => 'google7xuj81',
+  :user_name            => 'tataihono.nikora@gmail.com',
+  :password             => '3ba33630-3929-4de1-80c2-f7f86de2587e',
   :authentication       => 'plain',
   :enable_starttls_auto => true  }
 end

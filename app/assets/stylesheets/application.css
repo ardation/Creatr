@@ -12,3 +12,4 @@
  *= require formtastic-bootstrap
  *= require_tree .
  */
+@import 'bootstrap';

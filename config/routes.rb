@@ -9,7 +9,7 @@ FlamingWight::Application.routes.draw do
   devise_scope :members do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-    put '/confirm' => 'confirmations#confirm'
+    put 'confirm' => 'confirmations#confirm'
   end
 
   root :to => "site#index"
