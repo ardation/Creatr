@@ -1,5 +1,9 @@
 FlamingWight::Application.routes.draw do
 
+  get "create/index"
+
+  get "billing/index"
+
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks"}
 
   devise_scope :members do
@@ -16,7 +20,8 @@ FlamingWight::Application.routes.draw do
   post 'signup_fb' => 'site#createUser'
 
   match 'dashboard' => 'dashboard#index'
-  match 'dashboard/billing' => 'dashboard#billing'
+  match 'dashboard/billing' => 'billing#index'
+  match 'dashboard/new' => 'create#index'
 
   #match 'member_root' => 'site#features', :as => :dashboard
 

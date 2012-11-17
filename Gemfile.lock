@@ -14,6 +14,8 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.2)
+    active_model_serializers (0.6.0)
+      activemodel (>= 3.0)
     activemodel (3.2.3)
       activesupport (= 3.2.3)
       builder (~> 3.0.0)
@@ -52,6 +54,10 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    ember-rails (0.8.0)
+      active_model_serializers
+      execjs (>= 1.2)
+      railties (~> 3.1)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -66,6 +72,11 @@ GEM
       connection_pool (~> 0.9.0)
       rubinius-actor
     haml (3.1.7)
+    hamlbars (1.1.0)
+      execjs (>= 1.2)
+      haml
+      sprockets
+      tilt
     has_scope (0.5.1)
     hashie (1.2.0)
     highcharts-rails (2.3.3)
@@ -201,9 +212,11 @@ DEPENDENCIES
   ckeditor (= 3.7.1)
   coffee-rails (~> 3.2.1)
   devise
+  ember-rails
   formtastic
   formtastic-bootstrap
   haml
+  hamlbars
   highcharts-rails
   hirefireapp
   inherited_resources
