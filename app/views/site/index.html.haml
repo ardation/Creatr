@@ -1,10 +1,11 @@
 .jumbotron
   .container
     .hero-unit
-      %h1 +Creator!
+      %h1 +Creator
       %p This tool is for ministries around the world to create surveys and digital outreaches
       %p
-        = link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary"
+        - if current_member.nil?
+          = link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary"
 .container
   / Main hero unit for a primary marketing message or call to action
   .row

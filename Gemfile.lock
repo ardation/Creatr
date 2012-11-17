@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/edwin-wills/mandrill.git
+  revision: 7d0cc587102fb3bd6289505e42fdcb66e440b0fc
+  specs:
+    mandrill (0.0.2)
+      httpi
+      json
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,6 +65,9 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    font-awesome-sass-rails (2.0.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     formtastic-bootstrap (2.0.0)
@@ -73,6 +84,8 @@ GEM
     hike (1.2.1)
     hirefireapp (0.0.8)
     httpauth (0.2.0)
+    httpi (1.1.1)
+      rack
     i18n (0.6.1)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
@@ -201,6 +214,7 @@ DEPENDENCIES
   ckeditor (= 3.7.1)
   coffee-rails (~> 3.2.1)
   devise
+  font-awesome-sass-rails
   formtastic
   formtastic-bootstrap
   haml
@@ -209,6 +223,7 @@ DEPENDENCIES
   inherited_resources
   jquery-rails
   kaminari
+  mandrill!
   omniauth
   omniauth-facebook
   paperclip

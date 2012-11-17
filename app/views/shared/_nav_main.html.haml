@@ -26,10 +26,16 @@
               %a{:href => "/testimonials"}
                 %i{:class => "icon-user icon-white"}
                 Testimonials
-            %li{:class => ("active" if params[:action] == "signup" or params[:action] == "signup_fb")}
-              %a{:href => "/signup"}
-                %i{:class => "icon-map-marker icon-white"}
-                Sign Up
+            - if current_member.nil?
+              %li{:class => ("active" if params[:action] == "signup" or params[:action] == "signup_fb")}
+                %a{:href => "/signup"}
+                  %i{:class => "icon-map-marker icon-white"}
+                  Sign Up
           %form.navbar-form.pull-right
             %form.navbar-form.pull-right
-              %a.btn.btn-info{:href =>  member_omniauth_authorize_path(:facebook)} Sign in with Facebook
+              - if current_member.nil?
+                %a.btn.btn-info{:href =>  member_omniauth_authorize_path(:facebook)} Sign in with Facebook
+              - else
+                %a.btn.btn-info{:href => destroy_user_session_path}
+                  %strong +Creator
+                  Logout

@@ -16,8 +16,12 @@ class SiteController < ApplicationController
 	end
 
   def activate
-    if session["devise.facebook_data"].nil?
+    if current_member.nil?
       redirect_to '/'
+    else
+      if current_member.activated
+        redirect_to '/dashboard'
+      end
     end
   end
 
@@ -38,6 +42,7 @@ class SiteController < ApplicationController
         @email = @data['info']['email'].include?("@facebook.com") ? "" : @email = @data['info']['email']
     	else
         unless @member.activated
+          sign_in @member, :event => :authentication
           redirect_to '/activate'
         else
           redirect_to '/dashboard'
@@ -63,13 +68,14 @@ class SiteController < ApplicationController
   		@email = params[:member][:email]
   		render 'site/signup_fb'
     else
+      sign_in @member, :event => :authentication
 		  redirect_to '/signup_done'
   	end
   end
 
   def signup_done
     if session["devise.facebook_data"].nil?
-      redirect_to '/', :error
+      redirect_to '/'
     end
   end
 end
