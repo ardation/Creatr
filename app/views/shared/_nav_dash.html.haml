@@ -1,10 +1,13 @@
-.navbar.navbar-inverse
-  .navbar-inner
-    .container
-      %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.brand{:href => "#"} +Creator
-      .nav-collapse.collapse
-        
+.dash
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      %ul.nav
+        %li{:class => ("active" if params[:action] == "dashboard")}
+          %a{:href => "#"}
+            %i{:class => "icon-th-large icon-white"}
+            +Creator Dashboard
+      %form.navbar-form.pull-right
+        %form.navbar-form.pull-right
+          %a.btn.btn-info{:href => destroy_user_session_path, :style => 'margin-right:10px;'}
+            %strong +Creator
+            Logout

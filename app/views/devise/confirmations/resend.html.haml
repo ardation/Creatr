@@ -3,10 +3,13 @@
   .page-header
     %h1
       New to +Creator?
-      %small Resend confirmation instructions
+      %small Email Confirmation
   %p.lead
-    We Can't seem to find your activation token.
-    %span.muted You can resend your token using the form below.
+    We've sent you an email with an activation link.
+    %span.muted Check your spam folder, it might be hiding!
+  %p
+    %strong Can't find it?
+    You can resend the email using the form below.
   = semantic_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
     .control-group
       = f.input :email
