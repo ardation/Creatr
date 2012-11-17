@@ -1,4 +1,9 @@
 FlamingWight::Application.routes.draw do
+
+  get "create/index"
+
+  get "billing/index"
+
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks"}
 
   devise_scope :members do

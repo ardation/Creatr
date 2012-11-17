@@ -19,20 +19,25 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.1.1.0'
+  gem 'hamlbars'
 end
 
 gem 'jquery-rails'
+gem 'ember-rails'
+
 gem 'unicorn'
 
 gem 'ckeditor', '3.7.1'
 gem 'paperclip'
 gem 'formtastic'
 gem 'haml'
+
 gem 'kaminari'
 gem 'airbrake'
 
 gem 'inherited_resources'
 gem 'tabletastic'
 gem 'formtastic'
+gem 'formtastic-bootstrap'
 gem 'highcharts-rails'
 gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"
