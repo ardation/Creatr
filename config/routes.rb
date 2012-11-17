@@ -24,4 +24,6 @@ FlamingWight::Application.routes.draw do
 
   match 'dashboard' => 'dashboard#index'
   match 'dashboard/billing' => 'dashboard#billing'
+  match 'dashboard/new' => 'create#index'
+  match 'member_root' => 'site#features', :as => :dashboard
 end
