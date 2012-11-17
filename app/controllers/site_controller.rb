@@ -22,7 +22,7 @@ class SiteController < ApplicationController
 	  		if @member.activated
 	        sign_in_and_redirect @member, :event => :authentication #this will throw if @user is not activated
 	        set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
-		    else
+	        else
 		    	session["devise.facebook_data"] = request.env["omniauth.auth"]
 		    	redirect_to '/activate'
 		    end

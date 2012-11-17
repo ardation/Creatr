@@ -1,4 +1,5 @@
 FlamingWight::Application.routes.draw do
+
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks"}
 
   devise_scope :members do
@@ -13,7 +14,12 @@ FlamingWight::Application.routes.draw do
   match 'signup' => 'site#signup'
   get 'signup_fb' => 'site#signup_fb'
   post 'signup_fb' => 'site#createUser'
-  
+
+  match 'dashboard' => 'dashboard#index'
+  match 'dashboard/billing' => 'dashboard#billing'
+
+  #match 'member_root' => 'site#features', :as => :dashboard
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
