@@ -1,5 +1,7 @@
+= render 'shared/left_nav'
+.span5.wizard
+  %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
+    {{outlet}}
+
 - content_for :scripts do
   = javascript_include_tag 'create/create'
-
-
-= render 'shared/left_nav'

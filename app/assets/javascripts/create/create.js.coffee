@@ -2,15 +2,18 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-	App = Ember.Application.create()
+window.App = Ember.Application.create ({
 
-	App.ApplicationController = Ember.Controller.extend()
-	App.ApplicationView = Ember.View.extend
-		templateName: 'templates/application'
+	ApplicationController: Ember.Controller.extend()
+	ApplicationView: Ember.View.extend
+		templateName: 'app'
 
-	App.
+	StepView: Ember.View.extend
+		templateName: 'templates/step1'
 
-	App.Router = Em.Router.extend
+	StepController: Ember.Controller.extend()
+
+	Router: Em.Router.extend
 		enableLogging: true
 		location: 'hash'
 
@@ -21,19 +24,9 @@
 
 			step1: Ember.Route.extend
 				route: 'step1'
-				#connectOutlets: (router) ->
-			#		router.get('applicationController').connectOutlet('application', App.Data.showString)
+				connectOutlets: (router) ->
+					router.get('applicationController').connectOutlet('step')
 
+})
 
-	App.Data = Ember.Object.extend()
-
-	App.Data.reopenClass 
-		showString: ->
-			"Sup bro?"
-
-	window.App = App;
-
-
-	# Finally, initialize our glorious Ember application:
-	App.initialize()
-
+#$ -> App.initialize()
