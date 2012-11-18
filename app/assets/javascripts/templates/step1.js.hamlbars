@@ -1,3 +1,5 @@
+%h1 TEST
+
 %form.form-horizontal
   .control-group
     %label.control-label{:for => "crm"} CRM

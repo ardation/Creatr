@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.App = Ember.Application.create ({
-
+	autoinit: false
 	ApplicationController: Ember.Controller.extend()
 	ApplicationView: Ember.View.extend
 		templateName: 'app'
@@ -29,4 +29,6 @@ window.App = Ember.Application.create ({
 
 })
 
-#$ -> App.initialize()
+$ -> 
+  App.ApplicationView.create().replaceIn("#emberContainer")
+  App.initialize()
