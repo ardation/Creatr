@@ -1,4 +1,5 @@
 class DashboardController < ApplicationController
+  layout "dashboard"
   include ApplicationHelper
   before_filter :authenticate_member!
   def index

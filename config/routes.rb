@@ -15,11 +15,9 @@ FlamingWight::Application.routes.draw do
   get 'signup_fb' => 'site#signup_fb'
   post 'signup_fb' => 'site#createUser'
   get 'signup_done' => 'site#signup_done'
-  get "create/index"
-  get "billing/index"
 
   match 'dashboard' => 'dashboard#index'
-  match 'dashboard/billing' => 'dashboard#billing'
+  match 'dashboard/billing' => 'billing#index'
   match 'dashboard/new' => 'create#index'
   match 'member_root' => 'site#features', :as => :dashboard
 
