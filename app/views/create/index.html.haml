@@ -1,17 +1,5 @@
-- content_for :scripts do 
+- content_for :scripts do
   = javascript_include_tag 'create/create'
-
-#wrap
-  .navbar-spacer
-  .container-fluid
-    .row-fluid
-      .span3
-        = render 'shared/left_nav'
-      .span9#emberContainer
-
-  #push
-
-
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
   HI!
   {{outlet}}
