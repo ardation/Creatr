@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116225609) do
+ActiveRecord::Schema.define(:version => 20121118232709) do
+
+  create_table "member_organisations", :force => true do |t|
+    t.integer "member_id"
+    t.integer "organisation_id"
+  end
+
+  add_index "member_organisations", ["id"], :name => "index_member_organisations_on_id", :unique => true
+  add_index "member_organisations", ["member_id", "organisation_id"], :name => "index_member_organisations_on_member_id_and_organisation_id"
 
   create_table "members", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -42,6 +50,12 @@ ActiveRecord::Schema.define(:version => 20121116225609) do
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "organisations", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

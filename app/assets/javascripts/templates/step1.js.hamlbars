@@ -1,4 +1,4 @@
-%h1 TEST
+%h1 Select your survey provider and organisation
 
 %form.form-horizontal
   .control-group
