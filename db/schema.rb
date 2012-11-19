@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119062258) do
+ActiveRecord::Schema.define(:version => 20121119073345) do
 
   create_table "crms", :force => true do |t|
     t.string "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121119062258) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
+    t.string  "api_secret"
   end
 
   create_table "members", :force => true do |t|
