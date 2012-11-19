@@ -45,6 +45,7 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.1.1.0)
     builder (3.0.4)
+    cancan (1.6.8)
     ckeditor (3.7.1)
       mime-types
       orm_adapter
@@ -219,6 +220,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   bootstrap-sass (~> 2.1.1.0)
+  cancan
   ckeditor (= 3.7.1)
   coffee-rails (~> 3.2.1)
   devise

@@ -1,0 +1,59 @@
+%table#members.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Activation
+      %th Actions
+  %tbody
+    - @members.each do |p|
+      %tr#member_93.member.odd
+        %td= (p.name + admin_status_tag(p)).html_safe
+        %td
+          = mail_to p.email
+        %td
+          = activated_status_tag p
+        %td
+          %a{"data-toggle"=>"modal", "data-target" => "#modal_#{p.uid}", :href => "#"} View
+- @members.each do |p|
+  .modal.hide.fade{:id => "modal_#{p.uid}", "aria-hidden" => "true", :role => "dialog"}
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel= p.name
+    .modal-body
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %td
+              %strong Email
+            %td= mail_to p.email
+          %tr
+            %td
+              %strong Facebook
+            %td= link_to 'Profile', 'https://www.facebook.com/' +p.uid, :target => "_blank"
+          %tr
+            %td
+              %strong Usage Reason
+            %td= p.usage
+    .modal-footer
+      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+      .pull-left
+        - unless p.activated
+          .btn-group.dropup
+            %a.btn.btn-primary{:href => "/dashboard/admin/accounts/#{p.id}/activate?notify=true"} Activate &amp; Notify
+            %a.btn.btn-primary.dropdown-toggle{:href => "#", "data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "/dashboard/admin/accounts/#{p.id}/activate"} Just activate member
+        - if !p.admin and p.activated
+          .btn-group.dropup.pull-left{ :style => 'margin-right:10px;' }
+            %a.btn.btn-warning{:href => "/dashboard/admin/accounts/#{p.id}/deactivate?notify=true"} Deactivate &amp; Notify
+            %a.btn.btn-warning.dropdown-toggle{:href => "#", "data-toggle" => "dropdown"}
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "/dashboard/admin/accounts/#{p.id}/deactivate"} Just deactivate member
+          %a.btn.btn-danger{:href => "/dashboard/admin/accounts/#{p.id}/promote"} Make Admin
+        - if p.admin && p.uid != current_member.uid
+          %a.btn.btn-danger{:href => "/dashboard/admin/accounts/#{p.id}/demote"} Demote Admin

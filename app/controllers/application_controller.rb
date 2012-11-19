@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
       @current_action = controller.action_name
       @current_controller = controller.controller_name
   	end
+
+    def current_ability
+      @current_ability ||= Ability.new(current_member)
+    end
 end

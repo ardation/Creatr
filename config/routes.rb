@@ -19,6 +19,12 @@ FlamingWight::Application.routes.draw do
   match 'dashboard' => 'dashboard#index'
   match 'dashboard/billing' => 'billing#index'
   match 'dashboard/new' => 'create#index'
+  match 'dashboard/settings' => 'dashboard#settings'
+  match 'dashboard/admin/accounts' => 'administrator#accounts'
+  match 'dashboard/admin/accounts/:id/activate' => 'administrator#activate'
+  match 'dashboard/admin/accounts/:id/deactivate' => 'administrator#deactivate'
+  match 'dashboard/admin/accounts/:id/promote' => 'administrator#promote'
+  match 'dashboard/admin/accounts/:id/demote' => 'administrator#demote'
   match 'member_root' => 'site#features', :as => :dashboard
 
   match 'resent' => 'site#resent'

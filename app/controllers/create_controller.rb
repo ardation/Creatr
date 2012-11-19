@@ -1,6 +1,4 @@
-class CreateController < ApplicationController
-  layout "dashboard"
-  before_filter :authenticate_member!
+class CreateController < DashboardBaseController
   def index
   end
 end

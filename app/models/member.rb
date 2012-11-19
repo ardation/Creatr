@@ -11,4 +11,25 @@ class Member < ActiveRecord::Base
   def only_if_unconfirmed
     pending_any_confirmation {yield}
   end
+
+  def activate
+    self.activated = true
+    self.save
+  end
+
+  def deactivate
+    self.activated = false
+    self.save
+  end
+
+  def promote
+    self.admin = true
+    self.save
+  end
+
+  def demote
+    self.admin = false
+    self.save
+  end
+
 end

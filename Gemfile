@@ -35,6 +35,8 @@ gem 'haml'
 gem 'kaminari'
 gem 'airbrake'
 
+gem "cancan"
+
 gem 'inherited_resources'
 gem 'tabletastic'
 gem 'formtastic'

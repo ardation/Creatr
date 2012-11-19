@@ -1,6 +1,5 @@
 %ul.nav.nav-tabs.nav-stacked.nav-sidebar
-  %li.nav-header Outreach Manager
-  %li{:class=>("active" if params[:controller] == "dashboard") }
+  %li{:class=>("active" if params[:controller] == "dashboard" and params[:action] == "index") }
     %a{:href => "/dashboard"}
       %i.icon-chevron-right
       Summary
@@ -15,10 +14,10 @@
   - if current_member.try(:admin?)
     %li.nav-header Administrator
     %li{:class=>("active" if params[:controller] == "administrator") }
-      %a{:href => "/dashboard/administrator/accounts"}
+      %a{:href => "/dashboard/admin/accounts"}
         %i.icon-chevron-right
-        - if Member.where(:activated => false).count > 0
+        - if Member.where("activated = false AND confirmed_at is not null").count > 0
           %span.badge.badge-important
-            = Member.where(:activated => false).count
+            = Member.where("activated = false AND confirmed_at is not null").count
         Accounts
 
