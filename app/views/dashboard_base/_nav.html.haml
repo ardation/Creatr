@@ -8,10 +8,10 @@
             +Creator Dashboard
       .pull-right
         %ul.nav
-          %li{:class => ("active" if params[:action] == "settings")}
-            %a{:href => "/dashboard/settings"}
-              %i{:class => "icon-user icon-white"}
+          %li{:class => ("active" if params[:action] == "settings"), style: "line-height:30px;"}
+            %a{:href => "/dashboard/settings", style: "padding-top:10px"}
               = current_member.name
+              %img{:src => "https://graph.facebook.com/#{current_member.uid}/picture", :style => "border-radius:5px; width:28px; margin-left:10px;"}
           %li
             %form.navbar-form
               %a.btn.btn-info{:href => destroy_user_session_path}

@@ -19,7 +19,9 @@
   .modal.hide.fade{:id => "modal_#{p.uid}", "aria-hidden" => "true", :role => "dialog"}
     .modal-header
       %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-      %h3#myModalLabel= p.name
+      %h3#myModalLabel
+        %img{:src => "https://graph.facebook.com/#{p.uid}/picture", :style => "border-radius:5px;"}
+        = p.name
     .modal-body
       %table.table.table-bordered
         %tbody
