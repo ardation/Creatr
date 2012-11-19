@@ -1,7 +1,5 @@
-class BillingController < ApplicationController
-  layout "dashboard"
-  before_filter :authenticate_member!
+class BillingController < DashboardBaseController
   def index
-  	@member = current_member
+
   end
 end

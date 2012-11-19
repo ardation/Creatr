@@ -1,8 +1,9 @@
-class DashboardController < ApplicationController
-  layout "dashboard"
-  include ApplicationHelper
-  before_filter :authenticate_member!
+class DashboardController < DashboardBaseController
   def index
     route(current_member)
+  end
+
+  def settings
+
   end
 end

@@ -1,0 +1,19 @@
+.dash
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      %ul.nav
+        %li{:class => ("active" if params[:action] == "dashboard")}
+          %a{:href => "#"}
+            %i{:class => "icon-th-large icon-white"}
+            +Creator Dashboard
+      .pull-right
+        %ul.nav
+          %li{:class => ("active" if params[:action] == "settings")}
+            %a{:href => "/dashboard/settings"}
+              %i{:class => "icon-user icon-white"}
+              = current_member.name
+          %li
+            %form.navbar-form
+              %a.btn.btn-info{:href => destroy_user_session_path}
+                %strong +Creator
+                Logout

@@ -29,4 +29,43 @@ module ApplicationHelper
       @redirect_to
     end
   end
+
+  def mail(member, subject, content, link, link_text)
+    m = Mandrill::API.new(ENV['mandrill_api_key'])
+    m.messages 'send-template', {
+      :template_name => 'Default',
+      :template_content => [
+        {:name => :preheader_content, :content => subject}
+      ],
+      :message => {
+        :subject => subject,
+        :from_email => 'creator@godmedia.org.nz',
+        :from_name => '+Creator',
+        :to => [
+          {
+            :name => member.name,
+            :email => member.email
+          }
+        ],
+        :global_merge_vars => [
+          {
+            :name => :main_image,
+            :content => 'http://i47.tinypic.com/2a5f7nc.png'
+          },
+          { :name => :main_header,
+            :content => "Hey #{member.name}!"
+          },
+          { :name => :main_message,
+            :content => content
+          },
+          { :name => :main_button_text,
+            :content => link_text
+          },
+          { :name => :main_button,
+            :content => link
+          }
+        ]
+      }
+    }
+  end
 end
