@@ -1,7 +1,11 @@
 class Member < ActiveRecord::Base
-  
-  has_many :member_organisations
-  has_many :organisations, through: :member_organisations
+
+  has_many :member_crms
+  has_many :crms, :through => :member_crms
+
+  has_many :permissions
+  has_many :surveys, through: :permissions
+
   devise :omniauthable, :confirmable, :registerable
   attr_accessible :email, :encrypted_password, :password_confirmation, :remember_me, :provider, :uid, :name, :token, :usage, :tokenExpires
   validates_presence_of :email, :name, :uid, :provider

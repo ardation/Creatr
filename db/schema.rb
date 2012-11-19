@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116225609) do
+ActiveRecord::Schema.define(:version => 20121119062258) do
 
-  create_table "member_organisations", :force => true do |t|
-    t.integer "member_id"
-    t.integer "organisation_id"
+  create_table "crms", :force => true do |t|
+    t.string "name"
   end
 
-  add_index "member_organisations", ["id"], :name => "index_member_organisations_on_id", :unique => true
-  add_index "member_organisations", ["member_id", "organisation_id"], :name => "index_member_organisations_on_member_id_and_organisation_id"
-
+  create_table "member_crms", :force => true do |t|
+    t.integer "member_id"
+    t.integer "crm_id"
+  end
 
   create_table "members", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -54,10 +54,19 @@ ActiveRecord::Schema.define(:version => 20121116225609) do
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
 
   create_table "organisations", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "uid"
+    t.integer "crm_id"
   end
 
+  add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
+  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
+
+  create_table "permissions", :force => true do |t|
+    t.integer "survey_id"
+    t.integer "member_id"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -68,5 +77,10 @@ ActiveRecord::Schema.define(:version => 20121116225609) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "surveys", :force => true do |t|
+    t.string  "name"
+    t.integer "organisation_id"
+  end
 
 end
