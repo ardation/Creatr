@@ -1,9 +1,0 @@
-.well.sidebar-nav
-	%ul.nav.nav-list
-		%li.nav-header Outreach Manager
-		%li{:class=>("active" if params[:controller] == "dashboard") }
-			%a{:href => "/dashboard"} Summary
-		%li{:class=>("active" if params[:controller] == "billing") }
-			%a{:href => "/dashboard/billing"} Billing
-		%li{:class=>("active" if params[:controller] == "create") }
-			%a{:href => "/dashboard/new"} New Campaign

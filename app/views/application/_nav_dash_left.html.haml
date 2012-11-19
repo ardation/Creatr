@@ -1,0 +1,24 @@
+%ul.nav.nav-tabs.nav-stacked.nav-sidebar
+  %li.nav-header Outreach Manager
+  %li{:class=>("active" if params[:controller] == "dashboard") }
+    %a{:href => "/dashboard"}
+      %i.icon-chevron-right
+      Summary
+  %li{:class=>("active" if params[:controller] == "billing") }
+    %a{:href => "/dashboard/billing"}
+      %i.icon-chevron-right
+      Billing
+  %li{:class=>("active" if params[:controller] == "create") }
+    %a{:href => "/dashboard/new"}
+      %i.icon-chevron-right
+      New Campaign
+  - if current_member.try(:admin?)
+    %li.nav-header Administrator
+    %li{:class=>("active" if params[:controller] == "administrator") }
+      %a{:href => "/dashboard/administrator/accounts"}
+        %i.icon-chevron-right
+        - if Member.where(:activated => false).count > 0
+          %span.badge.badge-important
+            = Member.where(:activated => false).count
+        Accounts
+

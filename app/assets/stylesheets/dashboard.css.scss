@@ -33,6 +33,35 @@ body {
   width:100%;
 }
 
+.nav-sidebar {
+  li {
+    a {
+      span.badge {
+        float:right;
+        margin-right:5px;
+      }
+      .icon-chevron-right {
+        float:right;
+        opacity:0.25;
+      }
+      &:hover {
+        .icon-chevron-right {
+          opacity:0.5;
+        }
+      }
+    }
+    &.active {
+      a, a:hover {
+        color: white;
+        background-color: #08C;
+        .icon-chevron-right {
+          opacity:1;
+        }
+      }
+    }
+  }
+}
+
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {
   #footer {

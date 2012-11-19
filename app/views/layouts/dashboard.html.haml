@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %title
+      = "+Creator |"
+      = params[:controller].capitalize
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+    = javascript_include_tag "application"
+    = javascript_include_tag "templates/all"
+    = yield :scripts
+  %body
+    = render 'nav_dash'
+    #wrap
+      .navbar-spacer
+      .container-fluid
+        .row-fluid
+          .span3
+            = render 'nav_dash_left'
+          .span9#emberContainer
+            = yield
+      #push
+    = render 'footer_dash'

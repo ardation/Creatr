@@ -8,13 +8,9 @@
     = javascript_include_tag "templates/all"
     = yield :scripts
   %body
-    -if params[:controller] == 'site' or params[:controller] == 'members/confirmations'
-      -if current_member.nil?
-        =render 'shared/nav_main'
-      -else
-        =render 'shared/nav_main_auth'
+    -if current_member.nil?
+      =render 'nav'
     -else
-      =render 'shared/nav_dash'
-
+      =render 'nav_auth'
     = yield
     = render 'footer'
