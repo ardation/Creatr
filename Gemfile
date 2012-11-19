@@ -10,6 +10,10 @@ gem 'rake'
 gem 'redis'
 gem 'resque'
 
+group :development do
+  gem "rails-erd"
+end
+
 group :production do
   gem 'hirefireapp'
 end

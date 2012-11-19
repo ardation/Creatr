@@ -3,12 +3,13 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.App = Ember.Application.create ({
+	rootElement: '#emberContainer'
 	autoinit: false
 	ApplicationController: Ember.Controller.extend()
 	ApplicationView: Ember.View.extend
 		templateName: 'app'
 
-	StepView: Ember.View.extend
+	Step1View: Ember.View.extend
 		templateName: 'templates/step1'
 
 	StepController: Ember.Controller.extend()
@@ -25,10 +26,9 @@ window.App = Ember.Application.create ({
 			step1: Ember.Route.extend
 				route: 'step1'
 				connectOutlets: (router) ->
-					router.get('applicationController').connectOutlet('step')
+					router.get('applicationController').connectOutlet('step1')
 
 })
 
 $ -> 
-  App.ApplicationView.create().replaceIn("#emberContainer")
   App.initialize()

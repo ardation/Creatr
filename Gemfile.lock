@@ -45,7 +45,6 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.1.1.0)
     builder (3.0.4)
-    cancan (1.6.8)
     ckeditor (3.7.1)
       mime-types
       orm_adapter
@@ -157,6 +156,11 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
+    rails-erd (1.0.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     railties (3.2.3)
       actionpack (= 3.2.3)
       activesupport (= 3.2.3)
@@ -181,6 +185,7 @@ GEM
     rubinius-actor (0.0.2)
       rubinius-core-api
     rubinius-core-api (0.0.1)
+    ruby-graphviz (1.0.8)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -240,6 +245,7 @@ DEPENDENCIES
   paperclip
   pg
   rails (= 3.2.3)
+  rails-erd
   rake
   redis
   resque

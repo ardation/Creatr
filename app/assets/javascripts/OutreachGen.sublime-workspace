@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"App",
+				"ApplicationView"
+			],
+			[
 				"facebook",
 				"facebook_data"
 			],
@@ -16,10 +20,85 @@
 	"buffers":
 	[
 		{
-			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/members/omniauth_callbacks_controller.rb",
+			"file": "/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/assets/javascripts/App.js",
 			"settings":
 			{
-				"buffer_size": 758,
+				"buffer_size": 2107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/config/routes.rb",
+			"settings":
+			{
+				"buffer_size": 1020,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/application_controller.rb",
+			"settings":
+			{
+				"buffer_size": 304,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/step1.js.hamlbars",
+			"settings":
+			{
+				"buffer_size": 630,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "create/create.js.coffee",
+			"settings":
+			{
+				"buffer_size": 853,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/create/index.html.haml",
+			"settings":
+			{
+				"buffer_size": 302,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232709_create_member_organisations.rb",
+			"settings":
+			{
+				"buffer_size": 389,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "class CreateMembersOrganisationsTable < ActiveRecord::Migration\n  def up\n  	create_table :members_organisations do |t|\n      t.integer :id\n      t.integer :member_id\n      t.integer :organisation_id\n    end\n    add_index(:members_organisations, :id, :unique => true)\n    add_index(:members_organisations, [:member_id, :organisation_id])\n\n  end\n\n  def down\n    drop_table :members_organisations\n  end\nend\n",
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225459_create_members_organisations_table.rb",
+			"file_size": 404,
+			"file_write_time": 1353280654000000,
+			"settings":
+			{
+				"buffer_size": 404,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232646_create_organisations.rb",
+			"settings":
+			{
+				"buffer_size": 257,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/member_organisation.rb",
+			"settings":
+			{
+				"buffer_size": 98,
 				"line_ending": "Unix"
 			}
 		},
@@ -27,26 +106,18 @@
 			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
 			"settings":
 			{
-				"buffer_size": 558,
+				"buffer_size": 571,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "class SiteController < ApplicationController\n	def index\n\n	end\n\n	def features\n\n	end\n\n	def testimonials\n\n	end\n\n	def pricing\n\n	end\n\n  def signup\n\n  end\n\n  def signup_fb\n  	if session.exists? && !session[\"devise.facebook_data\"].nil?\n	  	@name = session[\"devise.facebook_data\"]['info']['name']  || \"\"\n	  	@email = if session[\"devise.facebook_data\"]['info']['email'].include?(\"@facebook.com\")\n	  		\"\"\n		else\n			session[\"devise.facebook_data\"]['info']['email']\n		end\n\n  	else\n    	redirect_to member_omniauth_authorize_path(:facebook)\n	end\n  end\n\n  def create\n  	`\n  end\n\n\n\n\n\nend\n",
-			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/site_controller.rb",
-			"file_size": 561,
-			"file_write_time": 1353063965000000,
+			"contents": "class Organisation < ActiveRecord::Base\n\n  has_many :members, through: :member_organisations\nend\n",
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/organisation.rb",
+			"file_size": 96,
+			"file_write_time": 1353281794000000,
 			"settings":
 			{
-				"buffer_size": 573,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121116093404_add_usage_to_members.rb",
-			"settings":
-			{
-				"buffer_size": 112,
+				"buffer_size": 97,
 				"line_ending": "Unix"
 			}
 		}
@@ -75,22 +146,44 @@
 	},
 	"file_history":
 	[
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/organisation.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/schema.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225351_create_organisations_table.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225459_create_members_organisations_table.rb",
+		"/Users/reubenposthuma/DEV/Ember/index.html",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/application.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/application.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/initializers/hamlbars.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/Gemfile",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/site.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/shared/_footer.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/create/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step1.js.hamlbars",
 		"/Users/reubenposthuma/DEV/outreach-generator/config/routes.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.handlebars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.hbs",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/billing.js.coffee",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/application.js",
+		"/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/assets/javascripts/App.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/all.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create.js.coffee",
+		"/Users/reubenposthuma/DEV/Rails/TestApp/Test/Gemfile",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/members/omniauth_callbacks_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121116093404_add_usage_to_members.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/site_controller.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/.gitignore",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/application_controller.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/config/initializers/session_store.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121116080038_add_activated_to_member.rb",
-		"/Users/reubenposthuma/DEV/outreach-generator/Gemfile",
 		"/Users/reubenposthuma/DEV/outreach-generator/.env",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/views/site/facebook.html.haml",
-		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/config/boot.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/Rakefile",
-		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/members/omniauth_callbacks_controller.rb",
-		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/application.html.haml",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/views/site/testimonials.html.haml",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/views/site/pricing.html.haml",
-		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/application.js",
 		"/Users/reubenposthuma/DEV/outreach-generator/tmp/cache/sass/b07876aea1ec00d5b93e8e3d8737c090f09248db/_bootstrap.scssc",
 		"/Users/reubenposthuma/DEV/outreach-generator/public/index.html",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/application.css",
@@ -116,6 +209,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"step",
+			"'\n",
 			"end"
 		],
 		"highlight": true,
@@ -134,23 +229,50 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 11,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/members/omniauth_callbacks_controller.rb",
+					"file": "/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/assets/javascripts/App.js",
 					"settings":
 					{
-						"buffer_size": 758,
+						"buffer_size": 2107,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								279,
-								279
+								1002,
+								1002
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/config/routes.rb",
+					"settings":
+					{
+						"buffer_size": 1020,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								86,
+								86
 							]
 						],
 						"settings":
@@ -166,45 +288,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
-					"settings":
-					{
-						"buffer_size": 558,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								410,
-								410
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Ruby/Ruby.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 2,
-					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/site_controller.rb",
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/controllers/application_controller.rb",
 					"settings":
 					{
-						"buffer_size": 573,
+						"buffer_size": 304,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								557,
-								557
+								82,
+								82
 							]
 						],
 						"settings":
@@ -219,18 +315,235 @@
 				},
 				{
 					"buffer": 3,
-					"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121116093404_add_usage_to_members.rb",
+					"file": "templates/step1.js.hamlbars",
 					"settings":
 					{
-						"buffer_size": 112,
+						"buffer_size": 630,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								101,
-								101
+								48,
+								48
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "create/create.js.coffee",
+					"settings":
+					{
+						"buffer_size": 853,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								537,
+								537
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/create/index.html.haml",
+					"settings":
+					{
+						"buffer_size": 302,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								302,
+								302
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232709_create_member_organisations.rb",
+					"settings":
+					{
+						"buffer_size": 389,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								365,
+								365
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225459_create_members_organisations_table.rb",
+					"settings":
+					{
+						"buffer_size": 404,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								76,
+								336
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232646_create_organisations.rb",
+					"settings":
+					{
+						"buffer_size": 257,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								252,
+								252
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/member_organisation.rb",
+					"settings":
+					{
+						"buffer_size": 98,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								93,
+								93
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
+					"settings":
+					{
+						"buffer_size": 571,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								376,
+								321
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/organisation.rb",
+					"settings":
+					{
+						"buffer_size": 97,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								40,
+								40
 							]
 						],
 						"settings":

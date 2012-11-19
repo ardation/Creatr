@@ -29,4 +29,6 @@ FlamingWight::Application.routes.draw do
 
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
+
+  match 'organisations' => 'organisation#index'
 end
