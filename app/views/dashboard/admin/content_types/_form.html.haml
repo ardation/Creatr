@@ -23,4 +23,5 @@
       });
   = f.actions do
     = f.submit :class => "btn btn-danger", :style => "margin-right:5px"
-    %a.btn{:href => dashboard_admin_content_type_path} Back
+    - if params[:action] == 'edit'
+      %a.btn{:href => dashboard_admin_content_type_path} Back
