@@ -13,4 +13,4 @@
 
 
 
-  %button.btn{:_action => 'showstep2'} Next Step >
+.btn{:_action => 'showstep2'} Next Step >

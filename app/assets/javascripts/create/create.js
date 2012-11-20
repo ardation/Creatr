@@ -4,6 +4,14 @@ App = Ember.Application.create({
   rootElement: '#emberContainer'
 });
 
+App.Surveys = Ember.Object.create({
+  name: "Reuben",
+  start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
+  end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
+  themeID: 0,
+  content: Ember.Array
+});
+
 App.CRMData = Ember.Object.extend();
 
 App.CRMData.reopenClass ({
@@ -28,25 +36,35 @@ App.CRMData.reopenClass ({
   updateOrganisations: function(crm_id) {
     context = this;
     this.org_display_data.clear();
+    console.log("clearing the buffer")
+    console.log(this.org_display_data)
     context.org_data.forEach(function(org) {
       if(org.crm_id == crm_id) {
-        console.log(org)
         context.org_display_data.pushObject(App.CRMData.create({id: org.id, name: org.name}));
       }
     }, context)
-    return this.org_display_data;
   }
 });
 
+App.DateField = Ember.TextField.extend({
+  attributeBindings: ['id', 'class']
+});
+
+App.CRMSelect = Ember.Select.extend({
+  attributeBindings: ['id'],
+  change: function(evt) {
+    console.log(evt)
+    App.CRMData.updateOrganisations($('#crm').val())
+  }
+});
 
 App.ApplicationController = Ember.Controller.extend();
 
 App.Step1Controller = Ember.ArrayController.extend({});
 
-App.Step2Controller = Ember.ArrayController.extend();
+App.Step2Controller = Ember.ArrayController.extend({
 
-
-
+});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
@@ -57,12 +75,11 @@ App.Step1View = Ember.View.extend ({
 });
 
 App.Step2View = Ember.View.extend ({
-  templateName: 'templates/step2'
+  templateName: 'templates/step2',
+  didInsertElement: function() {
+    $( ".jquery-ui-datepicker" ).datepicker();
+  }
 });
-
-
-
-
 
 
 
@@ -86,27 +103,13 @@ App.Router = Em.Router.extend ({
     step2: Ember.Route.extend ({
       route: 'step2',
       connectOutlets: function(router) {
-        router.get('applicationController').connectOutlet( 'step2')
-      }
+        router.get('applicationController').connectOutlet('step2')
+      },
     })
   })
-});
-
-
-
-
-
-
-App.CRMSelect = Ember.Select.extend({
-  attributeBindings: ['id'],
-  change: function(evt) {
-    console.log(evt)
-    App.CRMData.updateOrganisations($('#crm').val())
-  }
 });
 
 
 Ember.LOG_BINDINGS=true;
 
 App.LOG_BINDINGS = true;
- 
