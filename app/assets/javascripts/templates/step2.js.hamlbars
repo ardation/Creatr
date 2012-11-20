@@ -1,0 +1,6 @@
+%h1 Step2
+
+we could put some questions in here!
+%br
+
+%button.btn{:_action => 'showstep3'} Next Step >

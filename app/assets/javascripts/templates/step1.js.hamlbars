@@ -6,19 +6,15 @@
     .controls
       %select#crm
         %option{:name => 'MissionHub'}
-          MissionHub
+          Reuben
 
   .control-group
     %label.control-label{:for => "organisation"} Organisation
     .controls
       %select#organisation
-      =hb 'each organisation' do
-        %option#inputPassword{:bind => { :name => 'name' , :value => 'id'}}
-          {{name}}
+        {{#each crm in controller}}
+        %option{:name => 'name' , :value => 'id'}
+          {{crm.crm_name}}
+        {{/each}}
 
-  .control-group
-    .controls
-      %label.checkbox
-        %input{:type => "checkbox"}
-          Remember me
-      %button.btn{:type => "submit"} Sign in
+  %button.btn{:_action => 'showstep2'} Next Step >

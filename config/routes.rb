@@ -30,5 +30,6 @@ FlamingWight::Application.routes.draw do
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
 
-  match 'organisations' => 'organisation#index'
+  match 'dashboard/ajax/crm_data' => 'create#crm_data'
+
 end
