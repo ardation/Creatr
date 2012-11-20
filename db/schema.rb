@@ -11,16 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120034122) do
+ActiveRecord::Schema.define(:version => 20121120074731) do
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
-    t.text     "hash"
+    t.text     "validator"
     t.text     "js"
     t.integer  "template_id"
     t.integer  "inherited_type_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.string   "default_template_file_name"
+    t.string   "default_template_content_type"
+    t.integer  "default_template_file_size"
+    t.datetime "default_template_updated_at"
   end
 
   create_table "contents", :force => true do |t|
@@ -49,7 +53,6 @@ ActiveRecord::Schema.define(:version => 20121120034122) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true

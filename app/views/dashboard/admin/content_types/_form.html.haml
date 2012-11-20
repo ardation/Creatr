@@ -1,0 +1,26 @@
+= semantic_form_for [:dashboard, :admin, @content_type] do |f|
+  = f.inputs do
+    = f.input :name
+  = f.inputs title: "Configuration" do
+    = f.input :inheritance
+    = f.input :default_template
+  = f.inputs title: "Interactors" do
+    = f.input :validator, :label => "Validation JSON"
+    :javascript
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_validator"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "application/json",
+        theme: "neat"
+      });
+    = f.input :js, :label => "Javascript"
+    :javascript
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_js"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/javascript",
+        theme: "neat"
+      });
+  = f.actions do
+    = f.submit :class => "btn btn-danger", :style => "margin-right:5px"
+    %a.btn{:href => dashboard_admin_content_type_path} Back

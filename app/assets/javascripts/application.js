@@ -16,3 +16,11 @@
 //= require bootstrap
 //= require handlebars
 //= require ember
+
+//= require codemirror
+//= require codemirror/modes/javascript
+//= require codemirror/utils/javascript-hint
+
+//= require jquery-fileupload
+
+//= require cocoon

@@ -3,7 +3,7 @@ class Theme < ActiveRecord::Base
   has_many :images
   has_many :templates
   has_many :surveys
-  belongs_to :owner, :class_name => "Member", :foreign_key => "owner_id"
+  belongs_to :owner, :class_name => "Member", :foreign_key => "owner_id"
   has_attached_file :featured_image
   has_attached_file :main_image
   has_attached_file :css

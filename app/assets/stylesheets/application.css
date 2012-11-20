@@ -9,7 +9,11 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require formtastic-bootstrap
+ *= require bootstrap-without-forms
+ *= require formtastic-plus-bootstrap
+ *= require formtastic-plus-bootstrap/responsive
+ *= require codemirror
+ *= require codemirror/themes/neat
+ *= require jquery.fileupload-ui
  *= require_tree .
  */
-@import 'bootstrap';
