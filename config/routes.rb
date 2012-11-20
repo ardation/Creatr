@@ -1,13 +1,26 @@
 FlamingWight::Application.routes.draw do
-  resources :themes
-
-  resources :s3_uploads
-
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks", :confirmations => 'members/confirmations'}
 
   devise_scope :member do
     get 'sign_in', :to => 'devise/sessions#new', :as => :new_session
     get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
+  namespace :dashboard do
+    resources :themes
+    root :to => 'dashboard#index'
+    match 'billing' => 'billing#index'
+    match 'billing/credit_card' => 'billing#credit_card'
+    match 'new' => 'create#index'
+    match 'settings' => 'dashboard#settings'
+    match 'themes' => 'theme#index'
+    namespace :admin do
+      match 'accounts' => 'administrator#accounts'
+      match 'accounts/:id/activate' => 'administrator#activate'
+      match 'accounts/:id/deactivate' => 'administrator#deactivate'
+      match 'accounts/:id/promote' => 'administrator#promote'
+      match 'accounts/:id/demote' => 'administrator#demote'
+    end
   end
 
   root :to => "site#index"
@@ -20,17 +33,6 @@ FlamingWight::Application.routes.draw do
   post 'signup_fb' => 'site#createUser'
   get 'signup_done' => 'site#signup_done'
 
-  match 'dashboard' => 'dashboard#index'
-  match 'dashboard/billing' => 'billing#index'
-  match 'dashboard/billing/credit_card' => 'billing#credit_card'
-  match 'dashboard/new' => 'create#index'
-  match 'dashboard/settings' => 'dashboard#settings'
-  match 'dashboard/themes' => 'theme#index'
-  match 'dashboard/admin/accounts' => 'administrator#accounts'
-  match 'dashboard/admin/accounts/:id/activate' => 'administrator#activate'
-  match 'dashboard/admin/accounts/:id/deactivate' => 'administrator#deactivate'
-  match 'dashboard/admin/accounts/:id/promote' => 'administrator#promote'
-  match 'dashboard/admin/accounts/:id/demote' => 'administrator#demote'
   match 'member_root' => 'site#features', :as => :dashboard
 
   match 'resent' => 'site#resent'

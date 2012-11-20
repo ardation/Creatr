@@ -1,4 +1,4 @@
-class BillingController < DashboardBaseController
+class Dashboard::BillingController < Dashboard::BaseController
   def index
 
   end

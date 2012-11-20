@@ -10,13 +10,13 @@
     = javascript_include_tag "templates/all"
     = yield :scripts
   %body
-    = render 'nav'
+    = render 'dash_nav'
     #wrap
       .navbar-spacer
       .container-fluid
         .row-fluid
           .span3
-            = render 'nav_left'
+            = render 'dash_nav_left'
           .span9#emberContainer
             - if flash[:notice]
               .alert.alert-info
@@ -36,4 +36,4 @@
                 = flash[:error]
             = yield
       #push
-    = render 'footer'
+    = render 'dash_footer'

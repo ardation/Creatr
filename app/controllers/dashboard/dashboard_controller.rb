@@ -1,6 +1,6 @@
-class DashboardController < DashboardBaseController
+class Dashboard::DashboardController < Dashboard::BaseController
   def index
-    route(current_member)
+    #route(current_member)
   end
 
   def settings

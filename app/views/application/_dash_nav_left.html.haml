@@ -1,23 +1,23 @@
 %ul.nav.nav-tabs.nav-stacked.nav-sidebar
-  %li{:class=>("active" if params[:controller] == "dashboard" and params[:action] == "index") }
+  %li{:class=>("active" if params[:controller] == "dashboard/dashboard" and params[:action] == "index") }
     %a{:href => "/dashboard"}
       %i.icon-chevron-right
       Summary
-  %li{:class=>("active" if params[:controller] == "billing") }
+  %li{:class=>("active" if params[:controller] == "dashboard/billing") }
     %a{:href => "/dashboard/billing"}
       %i.icon-chevron-right
       Billing
-  %li{:class=>("active" if params[:controller] == "create") }
+  %li{:class=>("active" if params[:controller] == "dashboard/create") }
     %a{:href => "/dashboard/new"}
       %i.icon-chevron-right
       New Campaign
-  %li{:class=>("active" if params[:controller] == "theme") }
+  %li{:class=>("active" if params[:controller] == "dashboard/themes") }
     %a{:href => "/dashboard/themes"}
       %i.icon-chevron-right
       Themes
   - if current_member.try(:admin?)
     %li.nav-header Administrator
-    %li{:class=>("active" if params[:controller] == "administrator") }
+    %li{:class=>("active" if params[:controller] == "dashboard/admin/administrator") }
       %a{:href => "/dashboard/admin/accounts"}
         %i.icon-chevron-right
         - if Member.where("activated = false AND confirmed_at is not null").count > 0
