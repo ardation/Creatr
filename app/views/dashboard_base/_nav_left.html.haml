@@ -11,6 +11,10 @@
     %a{:href => "/dashboard/new"}
       %i.icon-chevron-right
       New Campaign
+  %li{:class=>("active" if params[:controller] == "theme") }
+    %a{:href => "/dashboard/themes"}
+      %i.icon-chevron-right
+      Themes
   - if current_member.try(:admin?)
     %li.nav-header Administrator
     %li{:class=>("active" if params[:controller] == "administrator") }

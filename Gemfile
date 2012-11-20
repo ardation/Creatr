@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'ember-rails'
 
 gem 'unicorn'
+gem 's3_swf_upload'
 
 gem 'ckeditor', '3.7.1'
 gem 'paperclip'
@@ -46,4 +47,6 @@ gem 'tabletastic'
 gem 'formtastic'
 gem 'formtastic-bootstrap'
 gem 'highcharts-rails'
+
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"

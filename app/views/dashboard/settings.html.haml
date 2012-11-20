@@ -1,2 +1,76 @@
+- content_for :scripts do
+  = javascript_include_tag 'https://js.stripe.com/v1/'
+  = javascript_include_tag 'dashboard/settings'
+%script{type:"text/javascript"}
+  Stripe.setPublishableKey('#{ENV['stripe_publishable_key']}');
+  $(function () {
+  $('#myTab a:first').tab('show');
+  })
 .page-header
   %h1 Settings
+%ul#myTab.nav.nav-tabs
+  %li.active
+    %a{:href => "#profile", "data-toggle" => "tab"} Profile
+  %li
+    %a{:href => "#mhub", "data-toggle" => "tab"} MissionHub
+  %li
+    %a{:href => "#billing", "data-toggle" => "tab"} Billing
+.tab-content
+  #profile.tab-pane.active ...
+  #mhub.tab-pane
+    %label Your MissionHub API Key
+    %input.input-xlarge{:placeholder => "MissionHub API Key", :type => "text"}
+    %br
+    %small This Key allows +Creator to access MissionHub on your behalf
+    .form-actions
+      %button.btn.btn-primary Save
+  #billing.tab-pane
+    - unless @customer.active_card.nil?
+      %h4 Billing Information
+      %hr
+      %table.table.table-bordered
+        %tbody
+          %tr
+            %td
+              %strong Number
+            %td= "**** **** **** " + @customer.active_card.last4
+          %tr
+            %td
+              %strong Expires
+            %td= @customer.active_card.exp_month.to_s + ' / ' + @customer.active_card.exp_year.to_s
+          %tr
+            %td
+              %strong Type
+            %td= @customer.active_card.type
+          %tr
+            %td
+              %strong Origin
+            %td= @customer.active_card.country
+    %br
+    %h4 Update Billing Information
+    %hr
+    %form#payment-form{:action => "", :method => "POST"}
+      .payment-errors
+      .form-row
+        %input.card-name{:type => "hidden", value: current_member.name}/
+        %label Card Number
+        %input.card-number{:autocomplete => "off", :size => "20", :type => "text"}/
+      .form-row
+        %label CVC
+        %input.card-cvc.input-small{:autocomplete => "off", :size => "4", :type => "text"}/
+      .form-row
+        %label Expiration (MM/YYYY)
+        %input.card-expiry-month.input-mini{:size => "2", :type => "text"}/
+        %span /
+        %input.card-expiry-year.input-mini{:size => "4", :type => "text"}/
+      .form-actions
+        %button.submit_button.btn.btn-primary{:type => "submit"} Save
+        .pull-right
+          .cards
+            .visa
+            .mastercard
+            .amex
+            .jcb
+            .discover
+            .diners
+

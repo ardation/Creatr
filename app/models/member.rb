@@ -7,7 +7,7 @@ class Member < ActiveRecord::Base
   has_many :surveys, through: :permissions
 
   devise :omniauthable, :confirmable, :registerable
-  attr_accessible :email, :encrypted_password, :password_confirmation, :remember_me, :provider, :uid, :name, :token, :usage, :tokenExpires
+  attr_accessible :email, :encrypted_password, :password_confirmation, :remember_me, :provider, :uid, :name, :token, :usage, :tokenExpires, :stripe
   validates_presence_of :email, :name, :uid, :provider
   validates_uniqueness_of :email, :uid
 

@@ -1,0 +1,239 @@
+.page-header
+  %h1 Themes
+.row{style: "margin-left:0;"}
+  .pull-right
+    %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
+      %li.active
+        %a{:href => "#libary_featured", "data-toggle" => "tab"}
+          %i{class:"icon-gift"}
+          Featured
+      %li
+
+        %a{:href => "#libary_popular", "data-toggle" => "tab"}
+          %i{class:"icon-star"}
+          Popular
+      %li
+        %a{:href => "#libary_recent", "data-toggle" => "tab"}
+          %i{class:"icon-time"}
+          Recent
+  %h4.muted Theme Library
+  %hr
+  .tab-content
+    #libary_featured.tab-pane.active
+      - (1..2).each do
+        .row{style: "margin-left:0;"}
+          .span5
+            %div{style:"text-align:center"}
+              %img.img-polaroid{src:"http://placehold.it/600x200"}
+          .span5
+            %h4 libary_featured
+            %p
+              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+            %form
+              %button.btn.btn-info More
+        %br
+    #libary_popular.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4
+            libary_popular
+            %br
+            %span.muted
+              %small 10 Campaigns
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+    #libary_recent.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4
+            libary_recent
+            %br
+            %span.muted
+              %small= Date.today.strftime("%A, %d %b %Y")
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+.row{style: "margin-left:0;"}
+  %br
+  .pull-right
+    %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
+      %li.active
+        %a{:href => "#my_favourites", "data-toggle" => "tab"}
+          %i{class:"icon-heart"}
+          Favourites
+      %li
+        %a{:href => "#my_owned", "data-toggle" => "tab"}
+          %i{class:"icon-shopping-cart"}
+          Purchased
+      %li
+        %a{:href => "#my_themes", "data-toggle" => "tab"}
+          %i{class:"icon-folder-open"}
+          Custom
+  %h4.muted
+    Your Themes
+  %hr
+  .tab-content
+    #my_favourites.tab-pane.active
+      - (1..2).each do
+        .row{style: "margin-left:0;"}
+          .span5
+            %div{style:"text-align:center"}
+              %img.img-polaroid{src:"http://placehold.it/600x200"}
+          .span5
+            %h4 libary_featured
+            %p
+              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+            %form
+              %button.btn.btn-info More
+        %br
+    #my_themes.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4 my_themes
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+    #my_owned.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4 my_owned
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+:javascript
+  var queueBytesLoaded = 0;
+  var queueBytesTotal = 0;
+  var myQueue = null;
+
+  var queueChangeHandler = function(queue){
+    // alert('Uploading Started');
+    myQueue = queue;
+    // console.log("COLLECTION CHANGE!");
+    var list = document.getElementById('file_todo_list');
+    // Clear out the old
+    while (list.hasChildNodes()){list.removeChild(list.firstChild);}
+    // Add the new
+    for (i=0;i<queue.files.length;i++)
+    {
+      addFileToTodoList(queue.files[i].name, queue.files[i].size, i);
+    }
+  };
+
+  var uploadingStartHandler = function(){
+    queueBytesTotal = 0;
+    queueBytesLoaded = 0;
+    for (i=0;i<myQueue.files.length;i++)
+    {
+      queueBytesTotal += parseInt(myQueue.files[i].size);
+    }
+    document.getElementById('queue_size').innerHTML = readableBytes(queueBytesTotal);
+  };
+
+  var uploadingFinishHandler = function(){
+    document.getElementById('overall').firstChild.style.width = '100%';
+    document.getElementById('overall').firstChild.firstChild.innerHTML = '100%';
+    alert('All files have been successfully uploaded');
+  };
+
+  var queueClearHandler = function(queue){
+    document.getElementById('overall').firstChild.style.display = 'none';
+    document.getElementById('overall').firstChild.style.width = '0%';
+    document.getElementById('overall').firstChild.firstChild.innerHTML = '0%';
+    var list = document.getElementById('file_done_list');
+    while (list.hasChildNodes()){list.removeChild(list.firstChild);}
+  };
+
+  var addFileToDoneList = function(file_name, file_size){
+    var list = document.getElementById('file_done_list');
+    var li = document.createElement("li");
+    li.innerHTML =
+      '100%'+
+      ''+file_name+''+
+      ''+readableBytes(file_size)+'';
+    list.appendChild(li);
+  };
+
+  var addFileToTodoList = function(file_name, file_size, index){
+    var list = document.getElementById('file_todo_list');
+    var li = document.createElement("li");
+    li.innerHTML =
+      '0%'+
+      ''+file_name+''+
+      ''+readableBytes(file_size)+''+
+      'Delete';
+    list.appendChild(li);
+  };
+
+  var progressHandler = function(progress_event){
+    document.getElementById('file_todo_list').firstChild.children[3].style.display = 'none';
+    var current_percentage = Math.floor((parseInt(progress_event.bytesLoaded)/parseInt(progress_event.bytesTotal))*100)+'%';
+    document.getElementById('file_todo_list').firstChild.firstChild.style.display = 'block';
+    document.getElementById('file_todo_list').firstChild.firstChild.style.width = current_percentage;
+    document.getElementById('file_todo_list').firstChild.firstChild.firstChild.innerHTML = current_percentage;
+
+    var overall_percentage = Math.floor(((queueBytesLoaded+parseInt(progress_event.bytesLoaded))/queueBytesTotal)*100)+'%';
+    document.getElementById('overall').firstChild.style.display = 'block';
+    document.getElementById('overall').firstChild.style.width = overall_percentage;
+    document.getElementById('overall').firstChild.firstChild.innerHTML = overall_percentage;
+  };
+
+  var uploadCompleteHandler = function(upload_options,event){
+    queueBytesLoaded += parseInt(upload_options.FileSize);
+    addFileToDoneList(upload_options.FileName,upload_options.FileSize);
+  };
+
+  var readableBytes = function(bytes) {
+    var s = ['bytes', 'kb', 'MB', 'GB', 'TB', 'PB'];
+    var e = Math.floor(Math.log(bytes)/Math.log(1024));
+    return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+" "+s[e];
+  }
+#wrapper
+  %h4.muted Theme Uploader
+  %hr
+  #file_lists
+    %ul#file_done_list.file_list.nav.nav-tabs.nav-stacked
+    %ul#file_todo_list.file_list.nav.nav-tabs.nav-stacked
+  #queue_size
+  #overall
+    .progress.progress-striped.active
+      .bar{:style => "width: 0%;"}
+    %span#status
+  = raw s3_swf_upload_tag(                                                         |
+    :fileTypes => '*.jpg;*.gif;*.png;',                                            |
+    :fileTypeDescs => 'Image files.',                                              |
+    :onFileNotInQueue => "alert('File not found in the queue');",                  |
+    :onFileSizeLimitReached => "alert('That file is too big');",                   |
+    :onQueueChange => "queueChangeHandler(queue);",                                |
+    :onQueueSizeLimitReached => "alert('There are too many files in the queue');", |
+    :onQueueEmpty => "alert('You gotta have at least one file in there');",        |
+    :onQueueClear => "queueClearHandler(queue);",                                  |
+    :onUploadingStart => "uploadingStartHandler();",                               |
+    :onUploadingFinish => "uploadingFinishHandler();",                             |
+    :onSignatureIOError => "alert('onSignatureIOError There was an error ');",                         |
+    :onSignatureXMLError => "alert('onSignatureXMLError There was an error');",                        |
+    :onSignatureSecurityError => "alert('onSignatureSecurityError There was an error');",                   |
+    :onUploadError => "alert('onUploadError There was an error');",                              |
+    :onUploadIOError => "alert('onUploadIOError There was an error');",                            |
+    :onUploadSecurityError => "alert('onUploadSecurityError There was an error');",                      |
+    :onUploadProgress => "progressHandler(progress_event);",                       |
+    :onUploadComplete => "uploadCompleteHandler(upload_options,event);"            |
+    )                                                                              |
+  %div
+    %input#StartButton.btn.btn-primary{:onclick => "s3_swf_1_object.startUploading();", :type => "submit", :value => "Start Uploading"}/
+    %input#StopButton.btn{:onclick => "s3_swf_1_object.stopUploading();", :type => "submit", :value => "Stop Uploading"}/
+    %input#ResetButton.btn.btn-warning{:onclick => "s3_swf_1_object.clearQueue();", :type => "submit", :value => "Clear Queue"}/
+
+%br
