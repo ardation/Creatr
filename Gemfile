@@ -31,10 +31,15 @@ gem 'jquery-ui-rails'
 gem 'ember-rails'
 
 gem 'unicorn'
-gem 's3_swf_upload'
+
+gem 'jshintrb'
+
+gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
+
+gem "jquery-fileupload-rails"
 
 gem 'ckeditor', '3.7.1'
-gem 'paperclip'
 gem 'formtastic'
 gem 'haml'
 
@@ -42,12 +47,18 @@ gem 'kaminari'
 gem 'airbrake'
 
 gem "cancan"
+gem "cocoon"
+
+gem 'be_valid_asset'
 
 gem 'inherited_resources'
 gem 'tabletastic'
 gem 'formtastic'
-gem 'formtastic-bootstrap'
+gem 'formtastic-plus-bootstrap'
 gem 'highcharts-rails'
+
+#This Editor costs real money
+gem 'codemirror-rails'
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"

@@ -1,0 +1,30 @@
+- @content_type = ContentType.find(params[:id])
+.alert.alert-error.alert-block
+  %strong Content Types heavily affect +Creator operation!
+  %p It is recommended that you consult the operations guidelines for this system before making any changes
+.page-header
+  %h1 Content Types
+  %h4.muted= @content_type.name
+.formtastic.content_type
+  %fieldset.inputs
+    %legend
+      %span Configuration
+    %ol
+      - unless @content_type.inheritance.nil?
+        %li.text.input
+          %label.label{:style => 'padding-top:0'} Inherited From
+          %a{:href => dashboard_admin_content_type_path(@content_type.inheritance) }
+            = @content_type.inheritance.name
+      %li.text.input
+        %label.label{:style => 'padding-top:0'} Default Template
+        %a{:href => @content_type.default_template.url, :target => '_blank' }
+          default_template.html
+  %fieldset.inputs
+    %legend
+      %span Interactors
+    = render "code"
+  %fieldset.actions
+    %ol
+      %li#content_type_submit_action.action.input_action
+        %a.btn.btn-primary{:href => edit_dashboard_admin_content_type_path(@dcontent_type)} Edit
+        %a.btn{:href => dashboard_admin_content_types_path} Back

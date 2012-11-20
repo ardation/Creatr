@@ -16,4 +16,12 @@
 
 //= require bootstrap
 //= require handlebars
-//= require create/ember-1.0.0-pre.2
+//= require ember
+
+//= require codemirror
+//= require codemirror/modes/javascript
+//= require codemirror/utils/javascript-hint
+
+//= require jquery-fileupload
+
+//= require cocoon

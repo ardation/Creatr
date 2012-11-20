@@ -17,11 +17,15 @@
       Themes
   - if current_member.try(:admin?)
     %li.nav-header Administrator
-    %li{:class=>("active" if params[:controller] == "dashboard/admin/administrator") }
+    %li{:class=>("active" if params[:action] == "accounts") }
       %a{:href => "/dashboard/admin/accounts"}
         %i.icon-chevron-right
         - if Member.where("activated = false AND confirmed_at is not null").count > 0
           %span.badge.badge-important
             = Member.where("activated = false AND confirmed_at is not null").count
         Accounts
+    %li{:class=>("active" if params[:controller] == "dashboard/admin/content_types") }
+      %a{:href => "/dashboard/admin/content_types"}
+        %i.icon-chevron-right
+        Content Types
 

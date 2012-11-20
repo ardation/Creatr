@@ -11,16 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120042446) do
+ActiveRecord::Schema.define(:version => 20121120013332) do
 
   create_table "crms", :force => true do |t|
     t.string "name"
   end
 
+  create_table "images", :force => true do |t|
+    t.integer  "theme_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+  end
+
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
@@ -87,9 +96,39 @@ ActiveRecord::Schema.define(:version => 20121120042446) do
     t.integer "organisation_id"
   end
 
+  create_table "templates", :force => true do |t|
+    t.integer  "theme_id"
+    t.integer  "content_type_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "hamlbars_file_name"
+    t.string   "hamlbars_content_type"
+    t.integer  "hamlbars_file_size"
+    t.datetime "hamlbars_updated_at"
+  end
+
   create_table "themes", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.string   "featured_image_file_name"
+    t.string   "featured_image_content_type"
+    t.integer  "featured_image_file_size"
+    t.datetime "featured_image_updated_at"
+    t.string   "main_image_file_name"
+    t.string   "main_image_content_type"
+    t.integer  "main_image_file_size"
+    t.datetime "main_image_updated_at"
+    t.string   "css_file_name"
+    t.string   "css_content_type"
+    t.integer  "css_file_size"
+    t.datetime "css_updated_at"
+    t.string   "title"
+    t.text     "description"
+    t.boolean  "featured",                    :default => false
+    t.datetime "featured_at"
+    t.boolean  "published",                   :default => false
+    t.datetime "published_at"
+    t.boolean  "request_to_publish",          :default => false
   end
 
 end
