@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119073345) do
+ActiveRecord::Schema.define(:version => 20121120013332) do
 
   create_table "crms", :force => true do |t|
     t.string "name"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(:version => 20121119073345) do
     t.integer "member_id"
     t.integer "crm_id"
     t.string  "api_secret"
+  end
+
+  add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
+
+  create_table "member_organisations", :force => true do |t|
+    t.integer "member_id"
+    t.integer "organisation_id"
   end
 
   create_table "members", :force => true do |t|
@@ -48,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20121119073345) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  :default => false
+    t.string   "stripe"
   end
 
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
@@ -82,6 +90,11 @@ ActiveRecord::Schema.define(:version => 20121119073345) do
   create_table "surveys", :force => true do |t|
     t.string  "name"
     t.integer "organisation_id"
+  end
+
+  create_table "themes", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
