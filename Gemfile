@@ -32,8 +32,10 @@ gem 'ember-rails'
 gem 'unicorn'
 gem 's3_swf_upload'
 
+gem "paperclip", "~> 3.0"
+gem 'aws-sdk'
+
 gem 'ckeditor', '3.7.1'
-gem 'paperclip'
 gem 'formtastic'
 gem 'haml'
 

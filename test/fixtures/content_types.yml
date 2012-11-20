@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  hash: MyText
+  js: MyText
+  template_id: 1
+  inherited_type_id: 1
+
+two:
+  name: MyString
+  hash: MyText
+  js: MyText
+  template_id: 1
+  inherited_type_id: 1
