@@ -4,17 +4,13 @@
   .control-group
     %label.control-label{:for => "crm"} CRM
     .controls
-      %select#crm
-        %option{:name => 'MissionHub'}
-          Reuben
+      {{view App.CRMSelect contentBinding="App.CRMData.crm_data" optionValuePath="content.id" optionLabelPath="content.name" id="crm"}}
 
   .control-group
     %label.control-label{:for => "organisation"} Organisation
     .controls
-      %select#organisation
-        {{#each crm in controller}}
-        %option{:name => 'name' , :value => 'id'}
-          {{crm.crm_name}}
-        {{/each}}
+      {{view Ember.Select contentBinding="App.CRMData.org_display_data" optionValuePath="content.id" optionLabelPath="content.name"}}
+
+
 
   %button.btn{:_action => 'showstep2'} Next Step >

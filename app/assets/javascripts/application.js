@@ -15,4 +15,4 @@
 
 //= require bootstrap
 //= require handlebars
-//= require ember
+//= require create/ember-1.0.0-pre.2

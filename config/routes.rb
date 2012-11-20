@@ -14,6 +14,7 @@ FlamingWight::Application.routes.draw do
     match 'new' => 'create#index'
     match 'settings' => 'dashboard#settings'
     match 'themes' => 'theme#index'
+    match 'ajax/crm_data' => 'create#crm_data'
     namespace :admin do
       match 'accounts' => 'administrator#accounts'
       match 'accounts/:id/activate' => 'administrator#activate'
@@ -38,6 +39,6 @@ FlamingWight::Application.routes.draw do
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
 
-  match 'dashboard/ajax/crm_data' => 'create#crm_data'
+  
 
 end
