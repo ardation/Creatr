@@ -25,7 +25,7 @@
     .form-actions
       %button.btn.btn-primary Save
   #billing.tab-pane
-    - unless @customer.active_card.nil?
+    - unless @customer.try(:active_card)
       %h4 Billing Information
       %hr
       %table.table.table-bordered
