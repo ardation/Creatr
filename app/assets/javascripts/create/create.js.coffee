@@ -21,7 +21,7 @@ window.App = Ember.Application.create ({
 		root: Em.Route.extend
 			index: Ember.Route.extend
 				route: '/'
-				
+
 
 			step1: Ember.Route.extend
 				route: 'step1'
@@ -30,5 +30,5 @@ window.App = Ember.Application.create ({
 
 })
 
-$ -> 
+$ ->
   App.initialize()

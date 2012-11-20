@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
 	end
 
 	def instantiate_controller_and_action_names
-      @current_action = controller.action_name
-      @current_controller = controller.controller_name
-  	end
+    @current_action = controller.action_name
+    @current_controller = controller.controller_name
+	end
 
-    def current_ability
-      @current_ability ||= Ability.new(current_member)
-    end
+  def current_ability
+    @current_ability ||= Ability.new(current_member)
+  end
 end

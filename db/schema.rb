@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119062258) do
+ActiveRecord::Schema.define(:version => 20121119110315) do
 
   create_table "crms", :force => true do |t|
     t.string "name"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20121119062258) do
     t.integer "member_id"
     t.integer "crm_id"
   end
+
+  add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
 
   create_table "members", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -47,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20121119062258) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "admin",                  :default => false
+    t.string   "stripe"
   end
 
   add_index "members", ["confirmation_token"], :name => "index_members_on_confirmation_token", :unique => true
@@ -55,13 +58,11 @@ ActiveRecord::Schema.define(:version => 20121119062258) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "survey_id"

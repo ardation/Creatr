@@ -22,6 +22,10 @@ body {
   height: 60px;
 }
 #footer {
+  position: fixed;
+  bottom:0;
+  right:0;
+  left:0;
   background-color: #f5f5f5;
   p {
     padding:20px;
@@ -31,6 +35,36 @@ body {
 .navbar-spacer {
   height:70px;
   width:100%;
+}
+
+div.cards div {
+  background:url(asset_path('card-types.png', image)) 0 0 no-repeat;
+  height:18px;
+  float:left;
+  &.visa {
+    width: 39px;
+    background-position: -1px 0;
+  }
+  &.mastercard {
+    width: 30px;
+    background-position: -49px 0;
+    margin-left: 9px;
+  }
+  &.amex {
+    width: 52px;
+    background-position: -88px 0;
+    margin-left: 9px;
+  }
+  &.discover {
+    width: 77px;
+    background-position: -153px 0;
+    margin-left: 13px;
+  }
+  &.jcb {
+    width: 16px;
+    background-position: -240px 0;
+    margin-left: 10px;
+  }
 }
 
 .nav-sidebar {
