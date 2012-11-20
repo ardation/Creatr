@@ -1,4 +1,4 @@
-class CreateController < DashboardBaseController
+class Dashboard::CreateController < Dashboard::BaseController
   before_filter :authenticate_member!
   def index
   end

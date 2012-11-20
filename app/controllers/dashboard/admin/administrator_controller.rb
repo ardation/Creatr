@@ -1,4 +1,4 @@
-class AdministratorController < DashboardBaseController
+class Dashboard::Admin::AdministratorController < Dashboard::BaseController
   before_filter :is_admin
 
   def is_admin
