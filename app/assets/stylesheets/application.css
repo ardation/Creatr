@@ -16,4 +16,5 @@
  *= require codemirror/themes/neat
  *= require jquery.fileupload-ui
  *= require_tree .
+ *= require jquery.ui.datepicker
  */

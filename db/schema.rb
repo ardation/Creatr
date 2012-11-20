@@ -11,30 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120074731) do
-
-  create_table "content_types", :force => true do |t|
-    t.string   "name"
-    t.text     "validator"
-    t.text     "js"
-    t.integer  "template_id"
-    t.integer  "inherited_type_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
-    t.string   "default_template_file_name"
-    t.string   "default_template_content_type"
-    t.integer  "default_template_file_size"
-    t.datetime "default_template_updated_at"
-  end
-
-  create_table "contents", :force => true do |t|
-    t.integer  "survey_id"
-    t.integer  "content_type_id"
-    t.text     "data"
-    t.integer  "position"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
+ActiveRecord::Schema.define(:version => 20121120013332) do
 
   create_table "crms", :force => true do |t|
     t.string "name"
@@ -56,11 +33,6 @@ ActiveRecord::Schema.define(:version => 20121120074731) do
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
-
-  create_table "member_organisations", :force => true do |t|
-    t.integer "member_id"
-    t.integer "organisation_id"
-  end
 
   create_table "members", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -96,11 +68,13 @@ ActiveRecord::Schema.define(:version => 20121120074731) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
+    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
+  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "survey_id"

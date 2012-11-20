@@ -6,19 +6,19 @@ class Dashboard::CreateController < Dashboard::BaseController
   def crm_data
     @crm_data = Array.new
     member = current_member
+
     member.crms.all.each do |crm|
-      @org_data = Array.new
-      crm.organisations.each do |organisation|
-        @org_data << {
-          :org_data => organisation.id,
-          :org_name => organisation.name
+      @orgs = Array.new
+      crm.organisations.all.each do |org|
+        @orgs << {
+          :org_name => org.name,
+          :org_id => org.id
         }
       end
-
       @crm_data << {
-        :crm_id => crm.id,
-        :crm_name => crm.name,
-        :organisation => @org_data
+          :crm_id => crm.id,
+          :crm_name => crm.name,
+          :orgs => @orgs
       }
     end
     render :json => @crm_data.to_json
