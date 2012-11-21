@@ -3,8 +3,9 @@
   %p It is recommended that you consult the operations guidelines for this system before making any changes
 .page-header
   %h1 Content Types
-  .pull-right
-    %a.btn{:href => new_dashboard_admin_content_type_path} Create Content Type
+  - unless @content_types.empty?
+    .pull-right
+      %a.btn{:href => new_dashboard_admin_content_type_path} Create Content Type
   %h4.muted Directory
 - if @content_types.empty?
   %div.muted{:style => 'text-align:center'}
