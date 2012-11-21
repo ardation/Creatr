@@ -4,12 +4,19 @@ App = Ember.Application.create({
   rootElement: '#emberContainer'
 });
 
+App.SurveyContent = Ember.Object.extend({
+  name: null,
+  content_type: null,
+  content_pos: null,
+  hash: Em.A([])
+});
+
 App.Surveys = Ember.Object.create({
-  name: "Reuben",
+  name: null,
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 0,
-  content: Ember.Array
+  contents: Ember.A([App.SurveyContent.create()])     //Pushing a copy of App.SurveyContent onto this
 });
 
 App.CRMData = Ember.Object.extend();
@@ -62,12 +69,16 @@ App.ApplicationController = Ember.Controller.extend();
 
 App.Step1Controller = Ember.ArrayController.extend({});
 
-App.Step2Controller = Ember.ArrayController.extend({
+App.Step2Controller = Ember.ArrayController.extend({});
 
-});
+App.Step2Controller = Ember.ArrayController.extend({});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
+});
+
+App.Step0View = Ember.View.extend ({
+  templateName: 'templates/step0'
 });
 
 App.Step1View = Ember.View.extend ({
@@ -81,16 +92,25 @@ App.Step2View = Ember.View.extend ({
   }
 });
 
+App.Step3View = Ember.View.extend ({
+  templateName: 'templates/step3',
+});
+
 
 
 App.Router = Em.Router.extend ({
   enableLogging: true,
 
   root: Em.Route.extend ({
+    showstep1: Ember.Route.transitionTo('step1'),
     showstep2: Ember.Route.transitionTo('step2'),
+    showstep3: Ember.Route.transitionTo('step3'),
 
     index: Ember.Route.extend({
-      route: '/'
+      route: '/',
+      connectOutlets: function(router){
+        router.get('applicationController').connectOutlet( 'step0');
+      }      
     }),
 
     step1: Ember.Route.extend ({
@@ -104,6 +124,13 @@ App.Router = Em.Router.extend ({
       route: 'step2',
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet('step2')
+      },
+    }),
+
+    step3: Ember.Route.extend ({
+      route: 'step3',
+      connectOutlets: function(router) {
+        router.get('applicationController').connectOutlet('step3')
       },
     })
   })

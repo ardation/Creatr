@@ -1,18 +1,16 @@
-%h1 Set up survey parameters
+%h1 Add content to {{App.Surveys.name}} 
 %br
-%form.form-horizontal
-  .control-group
-    %label.control-label{:for => "txtName"} Survey Name
-    .controls
-      {{view Ember.TextField valueBinding="App.Surveys.name" class="txtName"}}
-  .control-group
-    %label.control-label{:for => "dateStart"} Survey Start 
-    .controls
-      {{view App.DateField valueBinding="App.Surveys.start" class="dateStart" class="jquery-ui-datepicker"}}
-  .control-group
-    %label.control-label{:for => "dateEnd"} Survey End 
-    .controls
-      {{view App.DateField valueBinding="App.Surveys.end" class="dateEnd" class="jquery-ui-datepicker"}}
+
+#accordion2.accordion
+  {{#each content in App.Surveys.contents}}
+  .accordion-group
+    .accordion-heading
+      %a.accordion-toggle{"data-parent" => "#accordion2", "data-toggle" => "collapse", :href => "#collapseOne"}
+        {{content.name}}
+    #collapseOne.accordion-body.collapse.in
+      .accordion-inner
+        {{view Ember.TextField valueBinding="content.name" class="txtName"}}
+  {{/each}}
 
 
 %br
