@@ -18,12 +18,13 @@ group :production do
   gem 'hirefireapp'
 end
 
+gem 'hamlbars'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.1.1.0'
-  gem 'hamlbars'
 end
 
 gem 'jquery-rails'
@@ -39,7 +40,6 @@ gem 'aws-sdk'
 
 gem "jquery-fileupload-rails"
 
-gem 'ckeditor', '3.7.1'
 gem 'formtastic'
 gem 'haml'
 
