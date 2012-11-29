@@ -1,0 +1,15 @@
+.page-header
+  %h1 Theme Library
+  %h4.muted= @theme.title
+.formtastic.content_type
+  %fieldset.inputs
+    %ol
+      %li.text.input
+        %label.label{:style => 'padding-top:0'} Featured Image
+        =# @content_type.inheritance.name
+        = image_tag @theme.featured_image.url, :class => "img-polaroid"
+  %fieldset.actions
+    %ol
+      %li#content_type_submit_action.action.input_action
+        %a.btn.btn-primary{:href => edit_dashboard_theme_path(@content_type)} Edit
+        %a.btn{:href => dashboard_themes_path} Back

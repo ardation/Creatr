@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :name
   = f.inputs title: "Configuration" do
-    = f.input :inheritance
+    = f.input :inheritance, :label => "Parent Content Type"
     = f.input :default_template
   = f.inputs title: "Interactors" do
     = f.input :validator, :label => "Validation JSON"

@@ -1,2 +1,6 @@
 = semantic_form_for [:dashboard, @theme] do |f|
+  = f.inputs do
+    = f.input :title
+    = f.input :description
+    = f.input :featured_image, :as => :attachment, :required => true, :hint => 'Resolution 600x200. Maximum size of 400KB. JPG, GIF, PNG.', :image => proc { |o| o.featured_image.url(:thumb) }
   = f.actions

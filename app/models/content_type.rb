@@ -6,11 +6,11 @@ class ContentType < ActiveRecord::Base
     :path => ":class/:id/default_template.html"
   validates :name, :format => { :with => /[a-z0-9]/ }, :uniqueness => true, :presence => true
   validates_presence_of :name
-  validates_presence_of :default_template, :unless => :inheritance?
+  validates_presence_of :default_template, :validator, :js, :unless => :inheritance?
   validates_attachment :default_template,
     :content_type => { :content_type => "text/html" },
     :size => { :in => 0..50.kilobytes }
-  validate :working_javascript, :working_validator
+  validate :working_javascript, :working_validator, :working_inheritance
   has_many :content
 
   def working_javascript
@@ -24,9 +24,22 @@ class ContentType < ActiveRecord::Base
     end
   end
 
+  def working_inheritance
+    @parent = inheritance
+    while !@parent.nil?
+      if @parent.id == id
+        errors.add(:inheritance, "Cannot inherit child Content Type")
+        @parent =  nil
+      else
+        @parent = @parent.inheritance
+      end
+    end
+  end
+
   def inheritance?
     !inheritance.nil?
   end
+
   def working_validator
     errors[:validator] << "Not valid json format" unless is_json?(validator) || validator.empty?
   end
