@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"c",
+				"create"
+			],
+			[
+				"te",
+				"Testing"
+			],
+			[
+				"Su",
+				"SurveyContent"
+			],
+			[
 				"org_",
 				"org_display_data"
 			],
@@ -31,31 +43,7 @@
 			"file": "create/create.js",
 			"settings":
 			{
-				"buffer_size": 3519,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/create/index.html.haml",
-			"settings":
-			{
-				"buffer_size": 154,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/step2.js.hamlbars",
-			"settings":
-			{
-				"buffer_size": 663,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/step0.js.hamlbars",
-			"settings":
-			{
-				"buffer_size": 66,
+				"buffer_size": 4550,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +51,7 @@
 			"file": "templates/step3.js.hamlbars",
 			"settings":
 			{
-				"buffer_size": 495,
+				"buffer_size": 658,
 				"line_ending": "Unix"
 			}
 		},
@@ -116,11 +104,13 @@
 	},
 	"file_history":
 	[
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step0.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step2.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/create/index.html.haml",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step1.js.hamlbars",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/application.js",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/dashboard/create_controller.rb",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
-		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step2.js.hamlbars",
 		"/Users/reubenposthuma/DEV/Ember/js/app.js",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create/stuff.js",
 		"/Users/reubenposthuma/DEV/outreach-generator/app/models/organisation.rb",
@@ -252,15 +242,15 @@
 					"file": "create/create.js",
 					"settings":
 					{
-						"buffer_size": 3519,
+						"buffer_size": 4550,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2572,
-								2572
+								653,
+								653
 							]
 						],
 						"settings":
@@ -270,30 +260,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1034.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/create/index.html.haml",
+					"file": "templates/step3.js.hamlbars",
 					"settings":
 					{
-						"buffer_size": 154,
+						"buffer_size": 658,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								68,
-								68
+								596,
+								596
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Rails/Ruby Haml.tmLanguage"
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -303,90 +295,6 @@
 				},
 				{
 					"buffer": 2,
-					"file": "templates/step2.js.hamlbars",
-					"settings":
-					{
-						"buffer_size": 663,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								663,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "templates/step0.js.hamlbars",
-					"settings":
-					{
-						"buffer_size": 66,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								64,
-								64
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "templates/step3.js.hamlbars",
-					"settings":
-					{
-						"buffer_size": 495,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								40,
-								40
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "/Users/reubenposthuma/DEV/outreach-generator/Gemfile",
 					"settings":
 					{
@@ -412,7 +320,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/application.css",
 					"settings":
 					{
@@ -438,7 +346,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "application.js",
 					"settings":
 					{

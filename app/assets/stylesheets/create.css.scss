@@ -1,3 +1,17 @@
 // Place all the styles related to the Create controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.accordion {
+
+  .accordion-heading {
+    background-color: #e3e3e3;
+    padding: 8px;
+    .accordion-toggle {
+      line-height: 30px;
+      padding: 0px;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  }
+
+}

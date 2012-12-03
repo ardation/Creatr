@@ -1,14 +1,8 @@
-//Testing this out!
+//Testing this out
+content_id_counter = 0;
 
 App = Ember.Application.create({
   rootElement: '#emberContainer'
-});
-
-App.SurveyContent = Ember.Object.extend({
-  name: null,
-  content_type: null,
-  content_pos: null,
-  hash: Em.A([])
 });
 
 App.Surveys = Ember.Object.create({
@@ -16,8 +10,65 @@ App.Surveys = Ember.Object.create({
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 0,
-  contents: Ember.A([App.SurveyContent.create()])     //Pushing a copy of App.SurveyContent onto this
+  contents: [],    //Pushing an instance of App.SurveyContent onto this
+  contentsNameObserver: function() {
+    context = this;
+    if(this.get('contents.lastObject').name) {
+      context.contents.pushObject(App.SurveyContent.create());  
+    }
+  }.observes("contents.lastObject.name"),
+
+  moveItem: function(fromIndex, toIndex){
+    this.contents.forEach(function(content){
+      content_pos_temp = content.get('content_pos');
+      if(content_pos_temp >= toIndex)
+        content.set('content_pos', content_pos_temp + 1);
+      else if(content.content_pos > fromIndex)
+        content.set('content_pos', content_pos_temp - 1);
+    }, this);
+  },
 });
+
+App.SurveyContent = Ember.Object.extend({
+  init: function() {
+    this.set('id', 'content'+content_id_counter);
+    this.set('idhref', '#content'+content_id_counter);
+    this.set('id2', 'outer_content'+content_id_counter);
+    content_id_counter++;
+  },
+  name: "",
+  content_type: 1,
+  content_pos: function() {
+    return Ember.get('App.Surveys.contents').indexOf(this) + 1;
+  }.property(),
+
+  hash: Em.A([]),
+
+  types: function() {
+    return App.ContentTypes.findProperty('id', this.content_type).hash;
+  }.property(),
+
+  delete: function(event) {
+    if(App.Surveys.contents.length > 1)
+      App.Surveys.contents.removeObject(this)
+  }
+
+});
+
+
+App.ContentTypes = [
+  Ember.Object.create({name: 'Text question', id:1, hash: [Ember.Object.create({name: 'Question', help: 'Enter the question here', type: 'text'})]}),
+
+  Ember.Object.create({name: 'Multichoice question', id:2, hash: [Ember.Object.create({name: 'Multichoice Question', help: 'Enter the question here', type: 'text'}), 
+                        Ember.Object.create({name: 'Answer', help: 'Enter possible answers here', type: 'text', multiple: true})]})
+];
+
+App.ViewTypeConvention = Ember.Mixin.create({
+  viewType: function() {
+    return Em.get("Ember.TextField");
+  }.property().cacheable()
+});
+
 
 App.CRMData = Ember.Object.extend();
 
@@ -71,7 +122,9 @@ App.Step1Controller = Ember.ArrayController.extend({});
 
 App.Step2Controller = Ember.ArrayController.extend({});
 
-App.Step2Controller = Ember.ArrayController.extend({});
+App.Step3Controller = Ember.ArrayController.extend({});
+
+App.Step4Controller = Ember.ArrayController.extend({});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
@@ -94,8 +147,40 @@ App.Step2View = Ember.View.extend ({
 
 App.Step3View = Ember.View.extend ({
   templateName: 'templates/step3',
+    didInsertElement: function() {
+      App.Surveys.contents.pushObject(App.SurveyContent.create());
+      $('#accordion').sortable({
+        axis: "y",
+        forcePlaceholderSize: true,
+        placeholder: "accordion-heading",
+        start: function(event, ui) {
+          ui.item.previousIndex = App.Step3View.findIndex(ui.item.attr('id'));
+        },
+        stop: function(event, ui) {
+          App.Surveys.moveItem(ui.item.previousIndex, App.Step3View.findIndex(ui.item.attr('id')));
+        }
+      });
+  },
 });
 
+App.Step3View.reopenClass( {
+  findIndex: function(id) {
+    order = $('#accordion').sortable("toArray");
+    i = 0;
+    while(i < order.length) {
+      if(order[i].indexOf("outer_content") == -1)
+        order.removeAt(i);
+      else
+        i++;
+    }
+    console.log(order);
+    return order.indexOf(id);
+  } 
+})
+
+App.Step4View = Ember.View.extend ({
+  templateName: 'templates/step4',
+});
 
 
 App.Router = Em.Router.extend ({
@@ -105,6 +190,7 @@ App.Router = Em.Router.extend ({
     showstep1: Ember.Route.transitionTo('step1'),
     showstep2: Ember.Route.transitionTo('step2'),
     showstep3: Ember.Route.transitionTo('step3'),
+    showstep4: Ember.Route.transitionTo('step4'),
 
     index: Ember.Route.extend({
       route: '/',
@@ -132,11 +218,21 @@ App.Router = Em.Router.extend ({
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet('step3')
       },
+    }),
+    step4: Ember.Route.extend ({
+      route: 'step4',
+      connectOutlets: function(router) {
+        router.get('applicationController').connectOutlet('step4')
+      },
     })
   })
 });
 
 
-Ember.LOG_BINDINGS=true;
+//Ember.LOG_BINDINGS=true;
 
-App.LOG_BINDINGS = true;
+App.ContentTypes.forEach(function(object) {
+  object.hash.forEach(function(hash) {
+    hash.reopen(App.ViewTypeConvention);
+  }, this);
+}, this);
