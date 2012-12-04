@@ -22,14 +22,18 @@ gem 'hamlbars'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'compass-rails'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.1.1.0'
+  gem 'font-awesome-sass-rails'
 end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ember-rails'
+
+gem 'haml2erb'
 
 gem 'unicorn'
 
@@ -37,8 +41,6 @@ gem 'jshintrb'
 
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
-
-gem "jquery-fileupload-rails"
 
 gem 'formtastic'
 gem 'haml'
@@ -57,8 +59,11 @@ gem 'formtastic'
 gem 'formtastic-plus-bootstrap'
 gem 'highcharts-rails'
 
-#This Editor costs real money
-gem 'codemirror-rails'
+gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"
+
+gem "jquery-fileupload-rails"
+
+gem 'useragent', :git => "git://github.com/josh/useragent.git"

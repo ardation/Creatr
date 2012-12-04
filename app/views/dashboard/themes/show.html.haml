@@ -8,6 +8,11 @@
         %label.label{:style => 'padding-top:0'} Featured Image
         =# @content_type.inheritance.name
         = image_tag @theme.featured_image.url, :class => "img-polaroid"
+      %li.text.input
+        %label.label{:style => 'padding-top:0'} Images
+        =# @content_type.inheritance.name
+        - @theme.images.each do |image|
+          = link_to (image_tag image.picture.url(:thumb)), image.picture.url, :target => "_blank"
   %fieldset.actions
     %ol
       %li#content_type_submit_action.action.input_action

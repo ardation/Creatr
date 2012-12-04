@@ -1,6 +1,8 @@
 // Place all the styles related to the Dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "compass/css3";
+
 html,
 body {
   height: 100%;
@@ -14,6 +16,15 @@ body {
   height: 100%;
   /* Negative indent footer by it's height */
   margin: 0 auto -60px;
+}
+.ace {
+  float:left;
+  width:400px;
+  height:500px;
+  div {
+    width:400px;
+    height:500px;
+  }
 }
 
 /* Set the fixed height of the footer here */
@@ -124,3 +135,217 @@ div.CodeMirror {
     }
   }
 }
+
+body.dashboard-themes {
+  &.new {
+    .navbar-inverse .navbar-inner {
+      background:rgba(0,0,0,0.6);
+    }
+    #footer {
+      background:rgba(0,0,0,0.6);
+      color:#fff;
+    }
+    background:image-url('bg_tile.png') repeat;
+    #page {
+      position:relative;
+      margin:0 auto;
+      margin-bottom:20px;
+      height:900px;
+      background-color:#fff;
+      @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+      @include transition-property(width);
+      @include transition-duration(0.2s);
+      .frame-loading {
+        display:none;
+        position:absolute;
+        top:0;
+        left:0;
+        bottom:0;
+        right:0;
+        background-color:#222;
+        background-color:rgba(0,0,0,0.8);
+        div {
+          position:absolute;
+          top:50%;
+          left:50%;
+          margin-left:-64px;
+          margin-top:-7px;
+        }
+      }
+      iframe {
+        overflow:hidden;
+        width:100%;
+        height:900px;
+      }
+      &.desktop {
+        width:1400px;
+      }
+      &.laptop {
+        width:980px;
+      }
+      &.tablet {
+        width:767px;
+      }
+      &.phone {
+        width:480px;
+      }
+    }
+    #theme-code-spacer {
+      height:350px;
+      display:none;
+    }
+    #theme-code {
+      position: fixed;
+      overflow: visible !important;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background-color: white;
+      z-index: 100;
+      border-top: 1px solid #AAA;
+      @include transition-property(height);
+      @include transition-duration(0.2s);
+      &.visible {
+        height:400px;
+      }
+      #show-css {
+        position: absolute;
+        top: -39px;
+        left: 20px;
+        z-index: 9001;
+        background-color: white;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight:bold;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px 20px 10px 20px;
+      }
+      .css, .html {
+        .pull-right {
+          padding:4px;
+        }
+        position:absolute;
+        left:0;
+        width:50%;
+        height:400px;
+        h5 {
+          height:20px;
+          padding:10px;
+          margin:0;
+          border-bottom:1px #ccc solid;
+        }
+        .CodeMirror {
+          border:0;
+        }
+      }
+      .html {
+        left:50%;
+        border-left:1px #ccc solid;
+      }
+      .relative {
+        position:relative;
+        width:100%;
+        height:360px;
+        .editor {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+    .page-left {
+      position:fixed;
+      left:20px;
+      top:70px;
+    }
+    .page-right {
+      position:fixed;
+      right:20px;
+      top:70px;
+    }
+    .icons {
+      a {
+        [class^="icon-"] {
+          vertical-align:middle;
+          width:auto;
+          height:auto;
+        }
+        &:hover {
+          text-decoration:none;
+        }
+        &.phone {
+          background-image:image-url('phone_icon.png');
+        }
+        &.tablet {
+          background-image:image-url('tablet_icon.png');
+        }
+        &.laptop {
+          background-image:image-url('laptop_icon.png');
+        }
+        &.desktop {
+          background-image:image-url('desktop_icon.png');
+        }
+        font-size:30px;
+        background:#000 no-repeat center center;
+        display:block;
+        width:50px;
+        height:50px;
+        text-align:center;
+        color:#fff;
+        border:3px solid #fff;
+        margin-bottom:10px;
+        line-height: 45px;
+        @include border-radius(30px);
+        @include opacity(0.5);
+        @include transition-property(opacity);
+        @include transition-duration(0.2s);
+        &:hover {
+          @include opacity(0.8);
+        }
+        &.selected {
+          @include opacity(1.0);
+        }
+      }
+    }
+  }
+}
+.picture_upload_box {
+  .nested-fields {
+    .span6 {
+      margin-left:0 !important;
+      margin-right:10px;
+      border:1px #ccc solid;
+      margin-bottom:10px;
+      @include border-radius(2px);
+      &.links {
+        height: 125px;
+        text-align: center;
+        padding-top: 40px;
+      }
+      fieldset.inputs {
+        padding:0;
+        margin:10px;
+        ol > li.input {
+          label.label {
+            width:100px;
+          }
+          p.inline-hints {
+            margin-left:120px;
+          }
+          img {
+            float:left;
+            width:40px;
+            height:40px;
+            margin-right:10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+

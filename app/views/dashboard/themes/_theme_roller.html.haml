@@ -1,0 +1,62 @@
+- content_for :scripts do
+  = javascript_include_tag 'theme_roller.js'
+.page-left.icons
+  %a.phone.size{"data-size" => "phone", :href => "#"}
+  %a.tablet.size{"data-size" => "tablet", :href => "#"}
+  %a.laptop.size.selected{"data-size" => "laptop", :href => "#"}
+  %a.desktop.size{"data-size" => "desktop", :href => "#"}
+.page-right.icons
+  %a.settings{:href => "#"}
+    %i.icon-cogs
+  %a.play{:href => "#"}
+    %i.icon-refresh
+#page.laptop
+  .frame-loading
+    %div
+      = image_tag('frame_loading.gif')
+  %iframe#demo{ :scrolling=>"no" }
+#theme-code
+  #show-css
+    CSS/HTML
+    %i.icon-chevron-up
+  .css
+    .pull-right
+      %select{:id => "css-render"}
+        %option{:value => "css"}CSS
+        %option{:value => "sass"}SASS
+        %option{:value => "scss"}SCSS
+    %h5
+      CSS
+      - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+        %span.badge Ctrl-Option-1
+      - else
+        %span.badge Ctrl-Alt-1
+    .relative
+      #css.editor
+  .html
+    .pull-right
+      %select{:id => "type"}
+        %option{:value => "Body"}Default
+        - ContentType.all.each do |content|
+          %option{:value => content.id}= content.name
+      %select{:id => "html-render"}
+        %option{:value => "HTML"}HTML
+        %option{:value => "HAML"}HAML
+    %h5
+      HTML
+      - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+        %span.badge Ctrl-Option-2
+      - else
+        %span.badge Ctrl-Alt-2
+    .relative
+      #html.editor
+#theme-code-spacer
+#settings.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Modal header
+  .modal-body
+    %p One fine body…
+  .modal-footer
+    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+    %button.btn.btn-primary Save changes

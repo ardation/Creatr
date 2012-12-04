@@ -18,10 +18,7 @@
 //= require handlebars
 //= require ember
 
-//= require codemirror
-//= require codemirror/modes/javascript
-//= require codemirror/utils/javascript-hint
-
-//= require jquery-fileupload
+//= require ace
+//= require mode-javascript.js
 
 //= require cocoon

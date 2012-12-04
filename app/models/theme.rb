@@ -17,16 +17,19 @@ class Theme < ActiveRecord::Base
   has_attached_file :css
   has_many :templates, :dependent => :destroy
   has_many :images, :dependent => :destroy
-  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :featured_image, :main_image, :css
-  validates_attachment :featured_image,
-    :size => { :in => 0..400.kilobytes }
-  validates_attachment_content_type :featured_image, :content_type => /image/
-
-
+  accepts_nested_attributes_for :images, :reject_if => :all_blank, :allow_destroy => true
+  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :featured_image, :main_image, :css, :images_attributes
+  validates_attachment :featured_image, :size => { :in => 0..100.kilobytes }
+  validates_attachment_content_type :featured_image, :content_type => ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment :main_image, :size => { :in => 0..100.kilobytes }
+  validates_attachment_content_type :main_image, :content_type=> ['image/jpeg', 'image/png', 'image/gif']
+  validates_attachment :css, :size => { :in => 0..100.kilobytes }
+  validates_attachment_content_type :css, :content_type=> ['text/css']
+  validates_presence_of :title, :main_image
+  validates_uniqueness_of :title
   private
 
   def set_default_url_on_category
-    raise category.inspect
     "http://placehold.it/600x200"
   end
 end
