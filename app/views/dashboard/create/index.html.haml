@@ -1,6 +1,7 @@
 - content_for :scripts do
+  = javascript_include_tag "all"
+- content_for :scripts do
   = javascript_include_tag 'create/create'
-
 
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
   {{outlet}}

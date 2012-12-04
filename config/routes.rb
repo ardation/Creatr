@@ -13,6 +13,7 @@ FlamingWight::Application.routes.draw do
     match 'billing/credit_card' => 'billing#credit_card'
     match 'new' => 'create#index'
     match 'settings' => 'dashboard#settings'
+    match 'iframe' => 'dashboard#iframe'
     match 'themes' => 'theme#index'
     match 'ajax/crm_data' => 'create#crm_data'
     namespace :admin do
@@ -42,6 +43,6 @@ FlamingWight::Application.routes.draw do
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
 
-  
+
 
 end

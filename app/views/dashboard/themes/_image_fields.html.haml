@@ -1,0 +1,5 @@
+.nested-fields
+  .span6
+    = f.inputs do
+      = f.input :picture, :as => :attachment, :required => false, :hint => 'Maximum size of 200KB. JPG, GIF, PNG.', :image => proc { |o| o.picture.url(:thumb) }
+      = link_to_remove_association "remove image", f, :class => "btn btn-danger btn-mini pull-right"

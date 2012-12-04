@@ -1,49 +1,21 @@
 %ol
   %li.text.input{:id => "content_type_li_validator_#{@content_type.id}" }
     %label.label{:style => ("width:100px" if params[:action] == "index")} Validation JSON
-    %textarea{:id => "content_type_validator_#{@content_type.id}" }= @content_type.validator
-    - if params[:action] == "index"
-      :javascript
-        $('#content_#{@content_type.id}').on('shown', function () {
-            if ( $("#content_type_li_validator_#{@content_type.id}").children('.CodeMirror').length == 0 )
-              var editor = CodeMirror.fromTextArea(document.getElementById("content_type_validator_#{@content_type.id}"), {
-                lineNumbers: true,
-                matchBrackets: true,
-                mode: "application/json",
-                theme: "neat",
-                readOnly :true
-              });
-        });
-    -else
-      :javascript
-        var editor = CodeMirror.fromTextArea(document.getElementById("content_type_validator_#{@content_type.id}"), {
-          lineNumbers: true,
-          matchBrackets: true,
-          mode: "application/json",
-          theme: "neat",
-          readOnly :true
-        });
+    .ace
+      %div{:id => "content_type_validator_#{@content_type.id}" }= @content_type.validator
+    :javascript
+      $(document).ready(function() {
+      var validator = ace.edit("content_type_validator_#{@content_type.id}");
+      validator.getSession().setMode("ace/mode/javascript");
+      validator.setReadOnly(true);
+      });
   %li.text.input{:id => "content_type_li_js_#{@content_type.id}" }
     %label.label{:style => ("width:100px" if params[:action] == "index")}  Javascript
-    %textarea{:id => "content_type_js_#{@content_type.id}" }= @content_type.js
-    - if params[:action] == "index"
-      :javascript
-        $('#content_#{@content_type.id}').on('shown', function () {
-            if ( $("#content_type_li_js_#{@content_type.id}").children('.CodeMirror').length == 0 )
-              var editor = CodeMirror.fromTextArea(document.getElementById("content_type_js_#{@content_type.id}"), {
-                lineNumbers: true,
-                matchBrackets: true,
-                mode: "text/javascript",
-                theme: "neat",
-                readOnly :true
-              });
-        });
-    - else
-      :javascript
-        var editor = CodeMirror.fromTextArea(document.getElementById("content_type_js_#{@content_type.id}"), {
-          lineNumbers: true,
-          matchBrackets: true,
-          mode: "text/javascript",
-          theme: "neat",
-          readOnly :true
-        });
+    .ace
+      %div{:id => "content_type_js_#{@content_type.id}" }= @content_type.js
+    :javascript
+      $(document).ready(function() {
+      var js = ace.edit("content_type_js_#{@content_type.id}");
+      js.getSession().setMode("ace/mode/javascript");
+      js.setReadOnly(true);
+      });

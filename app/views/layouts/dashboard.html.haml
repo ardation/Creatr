@@ -7,17 +7,14 @@
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
     = javascript_include_tag "application"
-    = javascript_include_tag "templates/all"
     = yield :scripts
-  %body
+  %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
     = render 'dash_nav'
     #wrap
       .navbar-spacer
       .container-fluid
         .row-fluid
-          .span3
-            = render 'dash_nav_left'
-          .span9#emberContainer
+          .span12#emberContainer
             - if flash[:notice]
               .alert.alert-info
                 %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x

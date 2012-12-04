@@ -1,73 +1,18 @@
 .page-header
+  .pull-right
+    %a.btn.btn-primary{href: new_dashboard_theme_path} Roll your own Theme
   %h1 Themes
 .row{style: "margin-left:0;"}
   .pull-right
     %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
       %li.active
-        %a{:href => "#libary_featured", "data-toggle" => "tab"}
+        %a{:href => "#library_featured", "data-toggle" => "tab"}
           %i{class:"icon-gift"}
           Featured
       %li
-
-        %a{:href => "#libary_popular", "data-toggle" => "tab"}
+        %a{:href => "#library_popular", "data-toggle" => "tab"}
           %i{class:"icon-star"}
           Popular
-      %li
-        %a{:href => "#libary_recent", "data-toggle" => "tab"}
-          %i{class:"icon-time"}
-          Recent
-  %h4.muted Theme Library
-  %hr
-  .tab-content
-    #libary_featured.tab-pane.active
-      - (1..2).each do
-        .row{style: "margin-left:0;"}
-          .span5
-            %div{style:"text-align:center"}
-              %img.img-polaroid{src:"http://placehold.it/600x200"}
-          .span5
-            %h4 libary_featured
-            %p
-              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-            %form
-              %button.btn.btn-info More
-        %br
-    #libary_popular.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4
-            libary_popular
-            %br
-            %span.muted
-              %small 10 Campaigns
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
-    #libary_recent.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4
-            libary_recent
-            %br
-            %span.muted
-              %small= Date.today.strftime("%A, %d %b %Y")
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
-.row{style: "margin-left:0;"}
-  %br
-  .pull-right
-    %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
-      %li.active
-        %a{:href => "#my_favourites", "data-toggle" => "tab"}
-          %i{class:"icon-heart"}
-          Favourites
       %li
         %a{:href => "#my_owned", "data-toggle" => "tab"}
           %i{class:"icon-shopping-cart"}
@@ -75,19 +20,59 @@
       %li
         %a{:href => "#my_themes", "data-toggle" => "tab"}
           %i{class:"icon-folder-open"}
-          Custom
-  %h4.muted
-    Your Themes
+          My Library
+  %h4.muted Theme Library
   %hr
   .tab-content
-    #my_favourites.tab-pane.active
+    #library_featured.tab-pane.active
       - (1..2).each do
         .row{style: "margin-left:0;"}
           .span5
             %div{style:"text-align:center"}
               %img.img-polaroid{src:"http://placehold.it/600x200"}
           .span5
-            %h4 libary_featured
+            %h4 library_featured
+            %p
+              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+            %form
+              %button.btn.btn-info More
+        %br
+    #library_popular.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4
+            library_popular
+            %br
+            %span.muted
+              %small 10 Campaigns
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+    #library_recent.tab-pane
+      - (1..5).each do
+        .span2
+          %div{style:"text-align:center"}
+            %img.img-polaroid{src:"http://placehold.it/200x140"}
+          %h4
+            library_recent
+            %br
+            %span.muted
+              %small= Date.today.strftime("%A, %d %b %Y")
+          %p
+            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
+          %form
+            %button.btn.btn-info More
+    #my_favourites.tab-pane
+      - (1..2).each do
+        .row{style: "margin-left:0;"}
+          .span5
+            %div{style:"text-align:center"}
+              %img.img-polaroid{src:"http://placehold.it/600x200"}
+          .span5
+            %h4 library_featured
             %p
               %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
             %form

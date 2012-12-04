@@ -25,6 +25,6 @@ protected
       options[:image].to_s
     end
 
-    builder.template.image_tag(url, image_html_options).html_safe
+    "#{builder.template.image_tag(url, {:class => 'img-polaroid'})}".html_safe
   end
 end

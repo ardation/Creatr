@@ -6,12 +6,39 @@
           %a{:href => "#"}
             %i{:class => "icon-th-large icon-white"}
             +Creator Dashboard
+        %li{:class=>("active" if params[:controller] == "dashboard/dashboard" and params[:action] == "index") }
+          %a{:href => "/dashboard"}
+            Summary
+        %li{:class=>("active" if params[:controller] == "dashboard/billing") }
+          %a{:href => "/dashboard/billing"}
+            Billing
+        %li{:class=>("active" if params[:controller] == "dashboard/create") }
+          %a{:href => "/dashboard/new"}
+            New Campaign
+        %li{:class=>("active" if params[:controller] == "dashboard/themes") }
+          %a{:href => "/dashboard/themes"}
+            Themes
+        - if current_member.try(:admin?)
+          %li.dropdown{:class=>("active" if params[:action] == "accounts" or params[:controller] == "dashboard/admin/content_types") }
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Admin
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "/dashboard/admin/accounts"}
+                  - if Member.where("activated = false AND confirmed_at is not null").count > 0
+                    %span.badge.badge-important
+                      = Member.where("activated = false AND confirmed_at is not null").count
+                  Accounts
+              %li
+                %a{:href => "/dashboard/admin/content_types"}
+                  Content Types
       .pull-right
         %ul.nav
           %li{:class => ("active" if params[:action] == "settings"), style: "line-height:30px;"}
             %a{:href => "/dashboard/settings", style: "padding-top:10px"}
               = current_member.name
-              %img{:src => "https://graph.facebook.com/#{current_member.uid}/picture", :style => "border-radius:5px; width:28px; margin-left:10px;"}
+              /%img{:src => "https://graph.facebook.com/#{current_member.uid}/picture", :style => "border-radius:5px; width:28px; margin-left:10px;"}
           %li
             %form.navbar-form
               %a.btn.btn-info{:href => destroy_user_session_path}
