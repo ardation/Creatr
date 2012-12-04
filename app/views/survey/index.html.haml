@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title 
+      = @message
+    = stylesheet_link_tag    "survey/application", :media => "all"
+    = csrf_meta_tags
+    = javascript_include_tag "survey/application"
+    = javascript_include_tag "survey/templates/all"
+    = yield :scripts
+  %body
+    %h1 Sup bro?
+    - @survey.contents.each do|content|
+      = content  
+    - end

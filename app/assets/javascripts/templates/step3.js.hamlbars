@@ -2,18 +2,19 @@
 %br
 
 #accordion.accordion
-  {{#each content in App.Surveys.contents}}
-  .accordion-group{:bind => {:id => 'content.id2'}}
-    .accordion-heading
-      {{content.content_pos}}
-      %a.btn.btn-warning.pull-right{:_action => 'delete  target="content"'}
-        Delete
-      %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :bind => { :href => 'content.idhref' }}
-        {{#if content.name}}
-        {{content.name}}
-        {{else}}
-        New content item
-        {{/if}}
+  {{#each content in App.Surveys.contents }}
+  %div{:bind => {:id => 'content.id2'}}
+    .accordion-group
+      .accordion-heading
+        {{content.content_pos}}
+        %a.btn.btn-warning.pull-right{:_action => 'delete  target="content"'}
+          Delete
+        %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :bind => { :href => 'content.idhref' }}
+          {{#if content.name}}
+          {{content.name}}
+          {{else}}
+          New content item
+          {{/if}}
 
 
     .accordion-body.collapse{:bind => {:id => 'content.id'}}

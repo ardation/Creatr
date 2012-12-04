@@ -1,4 +1,17 @@
 //Testing this out
+$.fn.extend({
+  safeClone: function() {
+    var clone = this;
+    prev = clone.prev();
+    clone = prev.add(clone);
+    clone = clone.add(clone.next());
+    
+    clone = $(clone).clone();
+    console.log(clone);
+    return clone;
+  }
+});
+
 content_id_counter = 0;
 
 App = Ember.Application.create({
@@ -19,13 +32,11 @@ App.Surveys = Ember.Object.create({
   }.observes("contents.lastObject.name"),
 
   moveItem: function(fromIndex, toIndex){
-    this.contents.forEach(function(content){
-      content_pos_temp = content.get('content_pos');
-      if(content_pos_temp >= toIndex)
-        content.set('content_pos', content_pos_temp + 1);
-      else if(content.content_pos > fromIndex)
-        content.set('content_pos', content_pos_temp - 1);
-    }, this);
+    console.log(fromIndex, toIndex);
+    var items = this.get('contents');
+    item = items.objectAt(fromIndex);
+    //items.removeAt(fromIndex);
+    //items.insertAt(toIndex, item);
   },
 });
 
@@ -147,19 +158,23 @@ App.Step2View = Ember.View.extend ({
 
 App.Step3View = Ember.View.extend ({
   templateName: 'templates/step3',
-    didInsertElement: function() {
+  didInsertElement: function() {
+    if(App.Surveys.contents.length == 0)
       App.Surveys.contents.pushObject(App.SurveyContent.create());
-      $('#accordion').sortable({
-        axis: "y",
-        forcePlaceholderSize: true,
-        placeholder: "accordion-heading",
-        start: function(event, ui) {
-          ui.item.previousIndex = App.Step3View.findIndex(ui.item.attr('id'));
-        },
-        stop: function(event, ui) {
-          App.Surveys.moveItem(ui.item.previousIndex, App.Step3View.findIndex(ui.item.attr('id')));
-        }
-      });
+    $('#accordion').sortable({
+      axis: "y",
+      start: function(event, ui) {
+        ui.item.previousIndex = App.Step3View.findIndex(ui.item.attr('id'));
+      },
+      update: function(event, ui) {
+        App.Surveys.moveItem(ui.item.previousIndex, App.Step3View.findIndex(ui.item.attr('id')));
+      },
+      helper: function(event, ui) {
+        test = $(ui).safeClone();
+        console.log(test);
+        return test;
+      }
+    });
   },
 });
 
@@ -236,3 +251,15 @@ App.ContentTypes.forEach(function(object) {
     hash.reopen(App.ViewTypeConvention);
   }, this);
 }, this);
+
+    // fromIndex += 1;
+    // toIndex += 1;
+    // this.contents.forEach(function(content){
+    //   content_pos_temp = content.get('content_pos');
+    //   if(content_pos_temp == fromIndex) 
+    //     content.set('content_pos', toIndex);
+    //   else if(content_pos_temp > toIndex)
+    //     content.incrementProperty('content_pos');
+    //   else if(content.content_pos >= fromIndex)
+    //     content.decrementProperty('content_pos');
+    // }, this);
