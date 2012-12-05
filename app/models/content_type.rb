@@ -1,11 +1,11 @@
 class ContentType < ActiveRecord::Base
   require 'json'
-  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published
+  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published, :theming_data
   belongs_to :inheritance, :class_name => "ContentType", :foreign_key => "inherited_type_id"
   validates :name, :format => { :with => /[a-z0-9]/ }, :uniqueness => true, :presence => true
   validates_presence_of :name
-  validates_presence_of :default_template, :validator, :unless => :inheritance?
-  validate :working_javascript, :working_validator, :working_inheritance
+  validates_presence_of :default_template, :validator, :js, :theming_data, :unless => :inheritance?
+  validate :working_javascript, :working_validator, :working_theming_data, :working_inheritance
   has_many :content
 
   def working_javascript
@@ -37,6 +37,10 @@ class ContentType < ActiveRecord::Base
 
   def working_validator
     errors[:validator] << "Not valid json format" unless is_json?(validator) || validator.empty?
+  end
+
+  def working_theming_data
+    errors[:theming_data] << "Not valid json format" unless is_json?(theming_data) || theming_data.empty?
   end
 
   def get_default_template

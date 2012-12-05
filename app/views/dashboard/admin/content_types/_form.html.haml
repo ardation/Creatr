@@ -29,6 +29,14 @@
         mode: "text/javascript",
         theme: "neat"
       });
+    = f.input :theming_data, :label => "Theming Data"
+    :javascript
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_theming_data"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "application/json",
+        theme: "neat"
+      });
   = f.actions do
     = f.submit :class => "btn btn-danger", :style => "margin-right:5px"
     - if params[:action] == 'edit'
