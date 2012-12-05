@@ -2,14 +2,13 @@
 //= require mode-css.js
 //= require mode-html.js
 $(document).ready(function() {
-  var iFrameDoc = $('#demo').contents()[0];
   var css_val = '', html_val = '';
   $('#show-css').click(toggleCoder);
 
   $('.size').click(function() {
     $('.size').removeClass('selected');
     $(this).addClass('selected');
-    $('#page').removeClass().addClass($(this).data('size'));
+    $('#page').removeClass('desktop laptop tablet phone').addClass($(this).data('size'));
   });
 
   var css = ace.edit("css");
@@ -38,16 +37,31 @@ $(document).ready(function() {
   setup_binds(html);
   $('.play').click(play);
 
+  $('.upload').click(function() {
+    $(this).toggleClass('selected');
+    $('.page-right.icons').toggleClass('panel');
+  });
+
   $('#css-render').change(function(e) {
     css.getSession().setMode("ace/mode/" + $(this).val());
   });
 
   $('#type').change(function(e) {
-    html.getSession().setValue( $(this).find(':selected').data('default') );
+    select_content_type();
   });
 
-  html.getSession().setValue( $('#type').find(':selected').data('default') );
+  $('.capable').change(function(e) {
+    $('.' + $(this).attr('id') ).toggle();
+  });
 
+  $('#settings').on('show', function () {
+    $('.capable').prop('disabled', false);
+    $('#' + $('.size.selected').data('size')).prop('disabled', true);
+  });
+
+  $('#input_theme_name').change(function() {
+    $('#theme_name').text( $(this).val() );
+  });
   function play() {
     $('.frame-loading').fadeIn();
     $.post('/dashboard/iframe', {
@@ -58,14 +72,20 @@ $(document).ready(function() {
       content_type:$('#type').val(),
       app_html:$('#app').data('default')
     }, function(data) {
+      $('#iframe-container').empty().append('<iframe height="100%" id="demo" width="100%"></iframe>');
+      var iFrameDoc = $('#demo').contents()[0];
       iFrameDoc.write(data);
       iFrameDoc.close();
       $('.frame-loading').fadeOut();
     });
   }
+  function select_content_type() {
+    html.getSession().setValue( $('#type').find(':selected').data('default') );
+  } select_content_type();
 
   function toggleCoder() {
     $('#theme-code').toggleClass('visible');
+    $('.page-right, .page-left, #page').toggleClass('builder');
     $('#theme-code-spacer').toggle();
     $('#show-css').children('i').toggleClass('icon-chevron-down');
   }

@@ -6,15 +6,26 @@
   %a.laptop.size.selected{"data-size" => "laptop", :href => "#"}
   %a.desktop.size{"data-size" => "desktop", :href => "#"}
 .page-right.icons
-  %a.settings{:href => "#"}
+  %a.settings{href:"#settings", role:"button", "data-toggle" => "modal", "data-backdrop"=>"static", "data-keyboard"=> false}
     %i.icon-cogs
   %a.play{:href => "#"}
     %i.icon-refresh
+  %a.upload{:href => "#"}
+    %i.icon-picture
+  #image-manager
+    .content-box
+      .droppable
+        %h4 Drop Images Here
 #page.laptop
   .frame-loading
     %div
       = image_tag('frame_loading.gif')
-  %iframe#demo{ :scrolling=>"no" }
+  .title
+    %h3
+      %i.icon-beaker
+      %span#theme_name
+  #iframe-container
+    %iframe#demo{ width:"100%", height:"100%"}
 #theme-code
   #show-css
     CSS/HTML
@@ -51,11 +62,4 @@
       #html.editor
 #theme-code-spacer
 #settings.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel Modal header
-  .modal-body
-    %p One fine body…
-  .modal-footer
-    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
-    %button.btn.btn-primary Save changes
+  = render 'settings'

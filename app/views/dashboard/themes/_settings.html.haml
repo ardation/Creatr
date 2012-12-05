@@ -1,0 +1,28 @@
+.modal-header
+  %h3#myModalLabel
+    %i.icon-cogs
+    Theme Settings
+.modal-body
+  .formtastic.content_type
+    %fieldset.inputs{:style => "padding:0; margin:0;"}
+      %ol
+        %li.text.input
+          %label.label{:style => "width:100px"} Name
+          %input{:id => "input_theme_name", type: "text"}
+        %li.text.input
+          %label.label{:style => "width:100px"} Platform
+          .checkbox-container
+            %input#phone.capable{type: "checkbox", checked: true} Mobile
+            %br
+            %input#tablet.capable{type: "checkbox", checked: true} Tablet
+            %br
+            %input#laptop.capable{type: "checkbox", checked: true} Laptop
+            %br
+            %input#desktop.capable{type: "checkbox", checked: true} Desktop
+        %li.text.input
+          %label.label{:style => "width:100px"}
+          .checkbox-container
+            %input{:id => "", type: "checkbox"} Publish Theme
+.modal-footer
+  %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Close
+  %button.btn.btn-primary Save changes
