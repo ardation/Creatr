@@ -33,8 +33,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ember-rails'
 
-gem 'haml2erb'
-
 gem 'unicorn'
 
 gem 'jshintrb'
