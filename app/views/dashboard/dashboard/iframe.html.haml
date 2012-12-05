@@ -1,12 +1,20 @@
+- unless @content_type.nil?
+  - content_for :scripts do
+    :javascript
+      var content_type = #{@content_type.to_json}
+
 - content_for :style do
   = @css
+
+- content_for :scripts do
+  = javascript_include_tag 'survey/demo'
+
 
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
   = @app_html.html_safe
 
 - unless @content_type.nil?
-  %script{:type => "text/x-handlebars", :'data-template-name' => @content_type.name}
+  %script{:type => "text/x-handlebars", :'data-template-name' => 'test'}
     = @html
 
-  :javascript
-    var content_type = #{@content_type.to_json}
+#view

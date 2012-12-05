@@ -1,8 +1,13 @@
 !!!
 %html
   %head
-    %title +Creator
-    = stylesheet_link_tag    "application", :media => "all"
+    %title 
+      = yield :title
+      = @message
+    = stylesheet_link_tag    "survey/application", :media => "all"
+    = csrf_meta_tags
+    = javascript_include_tag "survey/application"
+    = yield :scripts
     %style
       = yield :style
   %body
