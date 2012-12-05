@@ -4,15 +4,31 @@
   = f.inputs title: "Configuration" do
     = f.input :inheritance, :label => "Parent Content Type"
     = f.input :default_template
+    :javascript
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_default_template"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/html",
+        theme: "neat"
+      });
+    = f.input :is_published, :label => "Published"
   = f.inputs title: "Interactors" do
     = f.input :validator, :label => "Validation JSON"
     :javascript
-      var vallidator = ace.edit("content_type_validator");
-      vallidator.getSession().setMode("ace/mode/javascript");
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_validator"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "application/json",
+        theme: "neat"
+      });
     = f.input :js, :label => "Javascript"
     :javascript
-      var js = ace.edit("content_type_js");
-      js.getSession().setMode("ace/mode/javascript");
+      var editor = CodeMirror.fromTextArea(document.getElementById("content_type_js"), {
+        lineNumbers: true,
+        matchBrackets: true,
+        mode: "text/javascript",
+        theme: "neat"
+      });
   = f.actions do
     = f.submit :class => "btn btn-danger", :style => "margin-right:5px"
     - if params[:action] == 'edit'

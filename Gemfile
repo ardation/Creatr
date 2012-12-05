@@ -33,8 +33,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ember-rails'
 
-gem 'haml2erb'
-
 gem 'unicorn'
 
 gem 'jshintrb'
@@ -67,3 +65,5 @@ gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"
 gem "jquery-fileupload-rails"
 
 gem 'useragent', :git => "git://github.com/josh/useragent.git"
+
+gem 'codemirror-rails'

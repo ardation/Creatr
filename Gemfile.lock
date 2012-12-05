@@ -7,12 +7,23 @@ GIT
       json
 
 GIT
+  remote: git://github.com/josh/useragent.git
+  revision: 0953b7bffe9b5d8a9da0d6e6740158b8d53987f5
+  specs:
+    useragent (0.4.14)
+
+GIT
   remote: https://github.com/stripe/stripe-ruby
   revision: cf3c4a11b63abf958adc7549d5af8a91c9c30bb4
   specs:
     stripe (1.7.8)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+
+PATH
+  remote: vendor/gems/ace-rails-ap-1.0.0
+  specs:
+    ace-rails-ap (1.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -62,9 +73,7 @@ GEM
     builder (3.0.4)
     cancan (1.6.8)
     choice (0.1.6)
-    ckeditor (3.7.1)
-      mime-types
-      orm_adapter
+    chunky_png (1.2.6)
     cocaine (0.4.2)
     cocoon (1.1.1)
     codemirror-rails (2.35)
@@ -76,6 +85,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.0.3)
+      compass (>= 0.12.2, < 0.14)
     connection_pool (0.9.2)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
@@ -92,6 +107,9 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    font-awesome-sass-rails (2.0.0.0)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     formtastic-plus-bootstrap (1.1.3)
@@ -99,6 +117,7 @@ GEM
       formtastic (~> 2.2)
       railties (>= 3.1.0)
       sass-rails
+    fssm (0.2.9)
     girl_friday (0.11.1)
       connection_pool (~> 0.9.0)
       rubinius-actor
@@ -272,17 +291,19 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ace-rails-ap!
   airbrake
   aws-sdk
   be_valid_asset
   bootstrap-sass (~> 2.1.1.0)
   cancan
-  ckeditor (= 3.7.1)
   cocoon
   codemirror-rails
   coffee-rails (~> 3.2.1)
+  compass-rails
   devise
   ember-rails
+  font-awesome-sass-rails
   formtastic
   formtastic-plus-bootstrap
   haml
@@ -310,3 +331,4 @@ DEPENDENCIES
   tabletastic
   uglifier (>= 1.0.3)
   unicorn
+  useragent!

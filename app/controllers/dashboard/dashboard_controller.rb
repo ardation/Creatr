@@ -36,14 +36,14 @@ class Dashboard::DashboardController < Dashboard::BaseController
         return
       end
     end
-    unless params[:html_render].nil?
+    #unless params[:html_render].nil?
       begin
-        if params[:html_render] == "HAML"
-          require 'haml'
-          @html = Haml::Engine.new(params[:html], :suppress_eval => true).render unless params[:html].nil?
-        else
+        #if params[:html_render] == "HAML"
+        #  require 'haml'
+        #  @html = Haml::Engine.new(params[:html], :suppress_eval => true).render unless params[:html].nil?
+        #else
           @html = params[:html].html_safe unless params[:html].nil?
-        end
+        #end
         #strip style and script tags
         unless @html.blank?
           require 'nokogiri'
@@ -57,7 +57,7 @@ class Dashboard::DashboardController < Dashboard::BaseController
         render "iframe_error", :layout => "error"
         return
       end
-    end
+    #end
     render "iframe", :layout => "survey"
   end
 end
