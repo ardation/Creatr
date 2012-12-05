@@ -41,6 +41,10 @@ $(document).ready(function() {
     css.getSession().setMode("ace/mode/" + $(this).val());
   });
 
+  $('#type').change(function(e) {
+    html.getSession().setValue($(this).find(':selected').data('default'));
+  });
+
   function play() {
     $('.frame-loading').fadeIn();
     $.post('/dashboard/iframe', {

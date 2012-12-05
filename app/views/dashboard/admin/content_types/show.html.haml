@@ -16,9 +16,23 @@
           %a{:href => dashboard_admin_content_type_path(@content_type.inheritance) }
             = @content_type.inheritance.name
       %li.text.input
+        %label.label{:style => 'padding-top:0'} State
+        - if @content_type.is_published?
+          %span.badge.badge-success Published
+        - else
+          %span.badge.badge-important Unpublished
+      %li.text.input
         %label.label{:style => 'padding-top:0'} Default Template
-        %a{:href => @content_type.default_template.url, :target => '_blank' }
-          default_template.html
+        %textarea#content_type_default_template
+          = @content_type.default_template unless @content_type.default_template.blank?
+        :javascript
+          var editor = CodeMirror.fromTextArea(document.getElementById("content_type_default_template"), {
+            lineNumbers: true,
+            matchBrackets: true,
+            mode: "text/html",
+            theme: "neat",
+            readOnly: true
+          });
   %fieldset.inputs
     %legend
       %span Interactors

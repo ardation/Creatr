@@ -65,3 +65,5 @@ gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"
 gem "jquery-fileupload-rails"
 
 gem 'useragent', :git => "git://github.com/josh/useragent.git"
+
+gem 'codemirror-rails'

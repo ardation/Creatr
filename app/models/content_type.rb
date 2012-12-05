@@ -1,15 +1,10 @@
 class ContentType < ActiveRecord::Base
   require 'json'
-  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template
+  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published
   belongs_to :inheritance, :class_name => "ContentType", :foreign_key => "inherited_type_id"
-  has_attached_file :default_template,
-    :path => ":class/:id/default_template.html"
   validates :name, :format => { :with => /[a-z0-9]/ }, :uniqueness => true, :presence => true
   validates_presence_of :name
-  validates_presence_of :default_template, :validator, :js, :unless => :inheritance?
-  validates_attachment :default_template,
-    :content_type => { :content_type => "text/html" },
-    :size => { :in => 0..50.kilobytes }
+  validates_presence_of :default_template, :validator, :unless => :inheritance?
   validate :working_javascript, :working_validator, :working_inheritance
   has_many :content
 
@@ -42,6 +37,18 @@ class ContentType < ActiveRecord::Base
 
   def working_validator
     errors[:validator] << "Not valid json format" unless is_json?(validator) || validator.empty?
+  end
+
+  def get_default_template
+    @default_template = read_attribute(:default_template)
+    @parent = self
+
+    while @default_template.blank?
+      @default_template = @parent.default_template
+      @parent = @parent.inheritance
+
+    end
+    return @default_template
   end
 
   def is_json?(value)

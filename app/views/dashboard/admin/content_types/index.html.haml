@@ -19,8 +19,9 @@
     = t.data do
       = t.cell(:id, :heading => "ID") {|p| link_to p.id, dashboard_admin_content_type_path(p)}
       = t.cell :name
+      = t.cell("State") {|p|  if p.is_published? then "<span class=\"label label-success\">Published</span>".html_safe else "<span class=\"label label-important\">Unpublished</span>".html_safe end  }
       = t.cell(:inheritance) {|p| link_to p.inheritance.name, dashboard_admin_content_type_path(p.inheritance) unless p.inheritance.nil? }
-      = t.cell(:default_template) {|p| link_to "Show Template", p.default_template.url, :class => "btn btn-mini", :target => "_blank" if p.default_template.exists?}
+      = t.cell(:default_template) {|p|  "<span class=\"label label-success\">Active</span>".html_safe unless p.default_template.blank? }
       = t.cell(:validator) {|p| "<span class=\"label label-success\">Active</span>".html_safe unless p.validator.empty? }
       = t.cell(:javascript) {|p| "<span class=\"label label-success\">Active</span>".html_safe unless p.js.empty? }
       = t.cell(:show, :heading => "Actions") {|p| "<div class=\"btn-group\"><a href=\"#content_#{p.id}\" role=\"button\" class=\"btn btn-primary btn-mini\" data-toggle=\"modal\">View Configuration</a><a href=\"#{dashboard_admin_content_type_path(p)}\" class=\"btn btn-mini\">Show</a><a href=\"#{edit_dashboard_admin_content_type_path(p)}\" class=\"btn btn-mini\">Edit</a></div>".html_safe }
