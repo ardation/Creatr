@@ -10,8 +10,11 @@
  *
  *= require_self
  *= require jquery.ui.datepicker
+*= require_tree .
 
  */
+@import "bootstrap";
+@import "bootstrap-responsive";
 
 @import 'bootstrap-without-forms';
 @import 'formtastic-plus-bootstrap';
