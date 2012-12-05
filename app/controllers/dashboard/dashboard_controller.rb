@@ -22,9 +22,6 @@ class Dashboard::DashboardController < Dashboard::BaseController
         if params[:css_render] == "scss"
           require 'sass'
           @css = Sass::Engine.new(params[:css], :syntax => :scss).render unless params[:css].nil?
-        elsif params[:css_render] == "sass"
-          require 'sass'
-          @css = Sass::Engine.new(params[:css]).render unless params[:css].nil?
         elsif params[:css_render] == "css"
           require 'sass'
           @css = Sass::Engine.new(params[:css], :syntax => :scss).render unless params[:css].nil?
@@ -36,28 +33,22 @@ class Dashboard::DashboardController < Dashboard::BaseController
         return
       end
     end
-    #unless params[:html_render].nil?
-      begin
-        #if params[:html_render] == "HAML"
-        #  require 'haml'
-        #  @html = Haml::Engine.new(params[:html], :suppress_eval => true).render unless params[:html].nil?
-        #else
-          @html = params[:html].html_safe unless params[:html].nil?
-        #end
-        #strip style and script tags
-        unless @html.blank?
-          require 'nokogiri'
-          doc = Nokogiri::HTML(@html)
-          doc.css("style,script").remove
-          @html = doc.at_css("body").children.to_s.html_safe
-        end
-      rescue
-        @error = $!
-        @description = "Your HTML has an error. Check and try again."
-        render "iframe_error", :layout => "error"
-        return
+    begin
+      @html = params[:html].html_safe unless params[:html].nil?
+      unless @html.blank?
+        require 'nokogiri'
+        doc = Nokogiri::HTML(@html)
+        doc.css("style,script").remove
+        @html = doc.at_css("body").children.to_s.html_safe
       end
-    #end
+    rescue
+      @error = $!
+      @description = "Your HTML has an error. Check and try again."
+      render "iframe_error", :layout => "error"
+      return
+    end
+    @content_type = ContentType.find(params[:content_type].to_i) unless params[:content_type] == "Body"
+    @app_html = params[:app_html]
     render "iframe", :layout => "survey"
   end
 end

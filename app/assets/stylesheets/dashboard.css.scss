@@ -224,6 +224,9 @@ body.dashboard-themes {
       }
       .css, .html {
         .pull-right {
+          select {
+            margin-bottom:0;
+          }
           padding:4px;
         }
         position:absolute;

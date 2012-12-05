@@ -23,7 +23,6 @@
     .pull-right
       %select{:id => "css-render"}
         %option{:value => "css"}CSS
-        %option{:value => "sass"}SASS
         %option{:value => "scss"}SCSS
     %h5
       CSS
@@ -35,16 +34,13 @@
       #css.editor
   .html
     .pull-right
-      %a.btn{href: '#'}
+      %button.btn{type: :button}
         %i.icon-bolt
         Fork this template
       %select{:id => "type"}
-        %option{:value => "Body", "data-default" => "<div>{{outlet}}</div>"} Default
+        %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
         - @content_types.each do |content|
-          %option{:value => content.id, "data-default" => content.get_default_template}= content.name
-      -#%select{:id => "html-render"}
-        -#%option{:value => "HTML"}HTML
-        -#%option{:value => "HAML"}HAML
+          %option{:value => content.id, "data-default" => content.get_default_template, "data-editable" => false}= content.name
     %h5
       HTML
       - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'

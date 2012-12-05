@@ -28,6 +28,7 @@ $(document).ready(function() {
 
   html.getSession().on('change', function (e) {
     html_val = html.getSession().getValue();
+    $('#type').find(':selected').data('default', html_val );
   });
 
   $(document).bind('keydown', 'Alt+Ctrl+1', switch_to_css);
@@ -42,8 +43,10 @@ $(document).ready(function() {
   });
 
   $('#type').change(function(e) {
-    html.getSession().setValue($(this).find(':selected').data('default'));
+    html.getSession().setValue( $(this).find(':selected').data('default') );
   });
+
+  html.getSession().setValue( $('#type').find(':selected').data('default') );
 
   function play() {
     $('.frame-loading').fadeIn();
@@ -51,7 +54,9 @@ $(document).ready(function() {
       css_render:$('#css-render').val(),
       html_render:$('#html-render').val(),
       css:css_val,
-      html:html_val
+      html:html_val,
+      content_type:$('#type').val(),
+      app_html:$('#app').data('default')
     }, function(data) {
       iFrameDoc.write(data);
       iFrameDoc.close();
