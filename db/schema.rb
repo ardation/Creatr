@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
+    t.string  "api_secret"
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
@@ -90,11 +91,13 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
+    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
+  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "survey_id"
