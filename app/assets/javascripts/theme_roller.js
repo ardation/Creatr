@@ -1,4 +1,5 @@
 //= require ./lib/jquery.hotkeys.js
+//= require ./lib/jquery.event.drag.js
 //= require mode-css.js
 //= require mode-html.js
 $(document).ready(function() {
@@ -62,6 +63,31 @@ $(document).ready(function() {
   $('#input_theme_name').change(function() {
     $('#theme_name').text( $(this).val() );
   });
+
+  $('#theme-code .resize').bind('dragstart',function( event ){
+    $('.frame-cover').fadeIn();
+    $('#theme-code, #page, #image-manager').addClass('dragged');
+  });
+
+  $('#theme-code .resize').bind('drag',function( event ){
+    var height = $(window).height() - event.pageY;
+    if (height < 100)
+      height = 100;
+    else if (height >= 400)
+      height = 400;
+    $('#theme-code').height( height );
+    $('#page').css( 'bottom', height );
+    $('#image-manager').css( 'bottom', height + 20 );
+    $('.css .relative, .html .relative').height( height - 50 );
+  });
+
+  $('#theme-code .resize').bind('dragend',function( event ){
+    $('.frame-cover').fadeOut();
+    $('#theme-code, #page, #image-manager').removeClass('dragged');
+    css.resize();
+    html.resize();
+  });
+
   function play() {
     $('.frame-loading').fadeIn();
     $.post('/dashboard/iframe', {
@@ -84,8 +110,8 @@ $(document).ready(function() {
   } select_content_type();
 
   function toggleCoder() {
-    $('#theme-code').toggleClass('visible');
-    $('.page-right, .page-left, #page').toggleClass('builder');
+    $('#theme-code').toggleClass('noheight visible');
+    $('.page-right, .page-left, #page').toggleClass('builder').toggleClass('no-builder');
     $('#theme-code-spacer').toggle();
     $('#show-css').children('i').toggleClass('icon-chevron-down');
   }
