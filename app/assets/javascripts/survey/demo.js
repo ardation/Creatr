@@ -1,5 +1,5 @@
 if(typeof content_type != 'undefined')
-  content_template = 'test';//content_type.name;
+  content_template = content_type.name;
 else
   content_template = null
 
@@ -19,7 +19,8 @@ App.ApplicationController = Ember.Controller.extend({});
 App.ContentController = Ember.Controller.extend({
   name: 'Reuben Posthuma',
   data: function() {
-    return {name: 'Tom', age: 12};
+    fx = eval(content_type.js);
+    return fx();
   }.property()
 });
 
@@ -32,7 +33,6 @@ App.Router = Ember.Router.extend({
       connectOutlets: function(router){
         router.get('applicationController').connectOutlet( 'content');
       }
-
     })
   })
 });
