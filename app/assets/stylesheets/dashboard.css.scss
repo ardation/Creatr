@@ -158,7 +158,6 @@ body.dashboard-themes {
     background:image-url('bg_tile.png') repeat;
     #page {
       position:fixed;
-      bottom: 61px;
       top: 118px;
       left:50%;
       margin-bottom:20px;
@@ -166,6 +165,10 @@ body.dashboard-themes {
       @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
       @include transition-property(width, margin-left, bottom);
       @include transition-duration(0.2s);
+      &.dragged {
+        @include transition-property(none);
+        @include transition-duration(0);
+      }
       .title {
         color:#fff;
         height:48px;
@@ -178,13 +181,19 @@ body.dashboard-themes {
           }
         }
       }
-      .frame-loading {
+      .frame-loading, .frame-cover {
         display:none;
         position:absolute;
         top:0;
         left:0;
         bottom:0;
         right:0;
+      }
+      .frame-cover {
+        background-color:#fff;
+        background-color:rgba(255,255,255,0.0);
+      }
+      .frame-loading {
         background-color:#222;
         background-color:rgba(0,0,0,0.8);
         div {
@@ -214,6 +223,9 @@ body.dashboard-themes {
       &.builder {
         bottom: 401px;
       }
+      &.no-builder {
+        bottom: 61px !important;
+      }
     }
     #theme-code-spacer {
       height:350px;
@@ -225,12 +237,18 @@ body.dashboard-themes {
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 0;
       background-color: white;
       z-index: 100;
       border-top: 1px solid #AAA;
       @include transition-property(height);
       @include transition-duration(0.2s);
+      &.dragged {
+        @include transition-property(none);
+        @include transition-duration(0);
+      }
+      &.noheight {
+        height:0 !important;
+      }
       &.visible {
         height:400px;
       }
@@ -247,6 +265,21 @@ body.dashboard-themes {
         border-top-right-radius: 10px;
         padding: 10px 20px 10px 20px;
       }
+      .resize {
+        width:100%;
+        height:8px;
+        line-height:0px;
+        border-bottom:1px solid #ccc;
+        cursor: n-resize;
+        text-align:center;
+      }
+      .content-box {
+        position:absolute;
+        left:0;
+        right:0;
+        top:9px;
+        bottom:0;
+      }
       .css, .html {
         .pull-right {
           select {
@@ -257,7 +290,7 @@ body.dashboard-themes {
         position:absolute;
         left:0;
         width:50%;
-        height:400px;
+        height:100%;
         h5 {
           height:20px;
           padding:10px;
@@ -275,7 +308,7 @@ body.dashboard-themes {
       .relative {
         position:relative;
         width:100%;
-        height:360px;
+        height:350px;
         .editor {
           position: absolute;
           top: 0;
@@ -301,7 +334,6 @@ body.dashboard-themes {
       position:fixed;
       right:0;
       top:70px;
-      bottom: 80px;
       padding:20px;
       padding-top:0;
       @include transition-property(right);
@@ -318,6 +350,10 @@ body.dashboard-themes {
         border-right: 0;
         @include transition-property(width, bottom);
         @include transition-duration(0.5s, 0.2s);
+        &.dragged {
+          @include transition-property(none);
+          @include transition-duration(0);
+        }
         .content-box {
           width:280px;
           padding:10px;
@@ -331,9 +367,14 @@ body.dashboard-themes {
         }
       }
       &.builder {
-        bottom: 420px;
         #image-manager {
           bottom: 420px;
+        }
+      }
+
+      &.no-builder {
+        #image-manager {
+          bottom: 80px !important;
         }
       }
       &.panel {

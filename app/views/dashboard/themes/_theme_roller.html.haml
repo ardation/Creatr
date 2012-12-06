@@ -1,22 +1,23 @@
 - content_for :scripts do
   = javascript_include_tag 'theme_roller.js'
-.page-left.icons
+.page-left.icons.no-builder
   %a.phone.size{"data-size" => "phone", :href => "#"}
   %a.tablet.size{"data-size" => "tablet", :href => "#"}
   %a.laptop.size.selected{"data-size" => "laptop", :href => "#"}
   %a.desktop.size{"data-size" => "desktop", :href => "#"}
-.page-right.icons
+.page-right.icons.no-builder
   %a.settings{href:"#settings", role:"button", "data-toggle" => "modal", "data-backdrop"=>"static", "data-keyboard"=> false}
     %i.icon-cogs
-  %a.play{:href => "#"}
-    %i.icon-refresh
   %a.upload{:href => "#"}
     %i.icon-picture
+  %a.play{:href => "#"}
+    %i.icon-refresh
   #image-manager
     .content-box
       .droppable
         %h4 Drop Images Here
-#page.laptop
+#page.laptop.no-builder
+  .frame-cover
   .frame-loading
     %div
       = image_tag('frame_loading.gif')
@@ -26,40 +27,38 @@
       %span#theme_name
   #iframe-container
     %iframe#demo{ width:"100%", height:"100%"}
-#theme-code
+#theme-code.noheight
   #show-css
     CSS/HTML
     %i.icon-chevron-up
-  .css
-    .pull-right
-      %select{:id => "css-render"}
-        %option{:value => "css"}CSS
-        %option{:value => "scss"}SCSS
-    %h5
-      CSS
-      - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
-        %span.badge Ctrl-Option-1
-      - else
-        %span.badge Ctrl-Alt-1
-    .relative
-      #css.editor
-  .html
-    .pull-right
-      %button.btn{type: :button}
-        %i.icon-bolt
-        Fork this template
-      %select{:id => "type"}
-        %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
-        - @content_types.each do |content|
-          %option{:value => content.id, "data-default" => content.get_default_template, "data-editable" => false}= content.name
-    %h5
-      HTML
-      - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
-        %span.badge Ctrl-Option-2
-      - else
-        %span.badge Ctrl-Alt-2
-    .relative
-      #html.editor
-#theme-code-spacer
+  .resize ...
+  .content-box
+    .css
+      .pull-right
+        %select{:id => "css-render"}
+          %option{:value => "css"}CSS
+          %option{:value => "scss"}SCSS
+      %h5
+        CSS
+        - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+          %span.badge Ctrl-Option-1
+        - else
+          %span.badge Ctrl-Alt-1
+      .relative
+        #css.editor
+    .html
+      .pull-right
+        %select{:id => "type"}
+          %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
+          - @content_types.each do |content|
+            %option{:value => content.id, "data-default" => content.get_default_template, "data-editable" => false}= content.name
+      %h5
+        HTML
+        - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+          %span.badge Ctrl-Option-2
+        - else
+          %span.badge Ctrl-Alt-2
+      .relative
+        #html.editor
 #settings.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   = render 'settings'
