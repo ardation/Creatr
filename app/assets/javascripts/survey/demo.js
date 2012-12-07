@@ -12,14 +12,18 @@ App.ApplicationView = Ember.View.extend({
 });
   
 App.ContentView = Ember.View.extend({
-    templateName: content_template
+    templateName: content_template,
+    didInsertElement: function() {
+      fx = eval(content_type.js).render;
+      fx();
+    }
+
 });
 
 App.ApplicationController = Ember.Controller.extend({});
 App.ContentController = Ember.Controller.extend({
-  name: 'Reuben Posthuma',
   data: function() {
-    fx = eval(content_type.js);
+    fx = eval(content_type.js).data;
     return fx();
   }.property()
 });
