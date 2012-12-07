@@ -2,6 +2,7 @@
 //= require ./lib/jquery.event.drag.js
 //= require mode-css.js
 //= require mode-html.js
+//= require s3_direct_upload
 $(document).ready(function() {
   var css_val = '', html_val = '';
   $('#show-css').click(toggleCoder);
@@ -37,6 +38,8 @@ $(document).ready(function() {
   setup_binds(css);
   setup_binds(html);
   $('.play').click(play);
+
+  $("#myS3Uploader").S3Uploader();
 
   $('.upload').click(function() {
     $(this).toggleClass('selected');
@@ -86,6 +89,10 @@ $(document).ready(function() {
     $('#theme-code, #page, #image-manager').removeClass('dragged');
     css.resize();
     html.resize();
+  });
+
+  $('#myS3Uploader').bind("s3_upload_complete", function(e, content) {
+    $('.gallery').append('<a href="'+content.url+'" target="_blank"><img style="background-image:url('+content.url+');"></a>');
   });
 
   function play() {

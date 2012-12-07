@@ -3,13 +3,4 @@
     = f.input :title
     = f.input :description
     = f.input :main_image, :as => :attachment, :required => true, :hint => 'Resolution 200x140. Maximum size of 100KB. JPG, GIF, PNG.', :image => proc { |o| o.featured_image.url(:thumb) }
-    = f.input :featured_image, :as => :attachment, :required => false, :hint => 'Resolution 600x200. Maximum size of 100KB. JPG, GIF, PNG.', :image => proc { |o| o.featured_image.url(:thumb) }
-    = f.input :css
-    %h4 Images
-    .row-fluid.picture_upload_box
-      = f.semantic_fields_for :images do |image|
-        = render 'image_fields', :f => image
-      .nested-fields
-        .span6.links
-          = link_to_add_association '+ add image', f, :images, :class => "btn btn-success"
   = f.actions

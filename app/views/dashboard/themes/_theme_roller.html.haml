@@ -1,21 +1,30 @@
 - content_for :scripts do
   = javascript_include_tag 'theme_roller.js'
 .page-left.icons.no-builder
-  %a.phone.size{"data-size" => "phone", :href => "#"}
-  %a.tablet.size{"data-size" => "tablet", :href => "#"}
-  %a.laptop.size.selected{"data-size" => "laptop", :href => "#"}
-  %a.desktop.size{"data-size" => "desktop", :href => "#"}
+  %a.phone.size.link{"data-size" => "phone", :href => "#"}
+  %a.tablet.size.link{"data-size" => "tablet", :href => "#"}
+  %a.laptop.size.selected.link{"data-size" => "laptop", :href => "#"}
+  %a.desktop.size.link{"data-size" => "desktop", :href => "#"}
 .page-right.icons.no-builder
-  %a.settings{href:"#settings", role:"button", "data-toggle" => "modal", "data-backdrop"=>"static", "data-keyboard"=> false}
+  %a.settings.link{href:"#settings", role:"button", "data-toggle" => "modal", "data-backdrop"=>"static", "data-keyboard"=> false}
     %i.icon-cogs
-  %a.upload{:href => "#"}
+  %a.upload.link{:href => "#"}
     %i.icon-picture
-  %a.play{:href => "#"}
+  %a.play.link{:href => "#"}
     %i.icon-refresh
   #image-manager
     .content-box
-      .droppable
-        %h4 Drop Images Here
+      = s3_uploader_form post: dashboard_theme_url + '.json', as: "theme[images_attributes][0][url]", id: "myS3Uploader", max_file_size: 200.kilobytes, key: "themes/#{@theme.id}/images/${filename}" do
+        = file_field_tag :file, multiple: true
+      %script#template-upload{:type => "text/x-tmpl"}
+        .upload
+          {%=o.name%}
+          .progress.progress-striped.active
+            .bar{:style => "width: 0%"}
+      .gallery
+        - @theme.images.each do |image|
+          %a{href:image.url, target:"_blank"}
+            %img{style:"background-image:url(#{image.url});"}
 #page.laptop.no-builder
   .frame-cover
   .frame-loading
@@ -24,7 +33,7 @@
   .title
     %h3
       %i.icon-beaker
-      %span#theme_name
+      %span#theme_name= @theme.title
   #iframe-container
     %iframe#demo{ width:"100%", height:"100%"}
 #theme-code.noheight

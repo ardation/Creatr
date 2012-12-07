@@ -25,6 +25,15 @@ PATH
   specs:
     ace-rails-ap (1.0.0)
 
+PATH
+  remote: vendor/gems/s3_direct_upload-0.0.3
+  specs:
+    s3_direct_upload (0.0.3)
+      coffee-rails (~> 3.2.1)
+      jquery-fileupload-rails (~> 0.3.5)
+      rails (~> 3.2)
+      sass-rails (~> 3.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -196,6 +205,9 @@ GEM
       mime-types
     pg (0.14.1)
     polyglot (0.3.3)
+    rabl-rails (0.3.0)
+      activesupport (~> 3.0)
+      railties (~> 3.0)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -321,11 +333,13 @@ DEPENDENCIES
   omniauth-facebook
   paperclip (~> 3.0)
   pg
+  rabl-rails
   rails (= 3.2.3)
   rails-erd
   rake
   redis
   resque
+  s3_direct_upload!
   sass-rails (~> 3.2.3)
   stripe!
   tabletastic

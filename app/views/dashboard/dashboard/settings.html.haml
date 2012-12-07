@@ -16,14 +16,21 @@
   %li
     %a{:href => "#billing", "data-toggle" => "tab"} Billing
 .tab-content
-  #profile.tab-pane.active ...
+  #profile.tab-pane.active
+    .goose
   #mhub.tab-pane
-    %label Your MissionHub API Key
-    %input.input-xlarge{:placeholder => "MissionHub API Key", :type => "text"}
-    %br
-    %small This Key allows +Creator to access MissionHub on your behalf
-    .form-actions
-      %button.btn.btn-primary Save
+    %form.formtastic
+      %fieldset.inputs
+        %ol
+          %li.input.string.stringish.required
+            %label.label Your MissionHub API Key
+            %input.input-xlarge{:placeholder => "MissionHub API Key", :type => "text"}
+            %div{style:"margin-left:240px;"}
+              %small This Key allows +Creator to access MissionHub on your behalf
+      %fieldset.actions
+        %ol
+          %li.action.input_action
+            %button.btn.btn-primary Save
   #billing.tab-pane
     - unless @customer.try(:active_card)
       %h4 Billing Information
@@ -47,25 +54,32 @@
               %strong Origin
             %td= @customer.active_card.country
     %br
-    %h4 Update Billing Information
-    %hr
-    %form#payment-form{:action => "", :method => "POST"}
+    %form#payment-form.formtastic{:action => "", :method => "POST"}
       .payment-errors
-      .form-row
-        %input.card-name{:type => "hidden", value: current_member.name}/
-        %label Card Number
-        %input.card-number{:autocomplete => "off", :size => "20", :type => "text"}/
-      .form-row
-        %label CVC
-        %input.card-cvc.input-small{:autocomplete => "off", :size => "4", :type => "text"}/
-      .form-row
-        %label Expiration (MM/YYYY)
-        %input.card-expiry-month.input-mini{:size => "2", :type => "text"}/
-        %span /
-        %input.card-expiry-year.input-mini{:size => "4", :type => "text"}/
-      .form-actions
-        %button.submit_button.btn.btn-primary{:type => "submit"} Save
-        .pull-right
+      %fieldset.inputs
+        %h4 Update Billing Information
+        %hr
+        %ol
+          %li.input.string.stringish.required
+            %input.card-name{:type => "hidden", value: current_member.name}/
+            %label.label
+              Card Number
+              %abbr{title:"required"} *
+            %input.card-number{:autocomplete => "off", :size => "20", :type => "text"}/
+          %li.input.string.stringish.required
+            %label.label
+              CVC
+              %abbr{title:"required"} *
+            %input.card-cvc.input-small{:autocomplete => "off", :size => "4", :type => "text"}/
+          %li.input.string.stringish.required
+            %label.label
+              Expiration (MM/YYYY)
+              %abbr{title:"required"} *
+            %input.card-expiry-month.input-mini{:size => "2", :type => "text"}/
+            %span /
+            %input.card-expiry-year.input-mini{:size => "4", :type => "text"}/
+      %fieldset.actions
+        .pull-right{style:"margin-right:10px; margin-top:5px;"}
           .cards
             .visa
             .mastercard
@@ -73,4 +87,7 @@
             .jcb
             .discover
             .diners
+        %ol
+          %li.action.input_action
+            %button.submit_button.btn.btn-primary{:type => "submit"} Update
 

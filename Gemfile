@@ -67,3 +67,7 @@ gem "jquery-fileupload-rails"
 gem 'useragent', :git => "git://github.com/josh/useragent.git"
 
 gem 'codemirror-rails'
+
+gem 's3_direct_upload', :path => "vendor/gems/s3_direct_upload-0.0.3"
+
+gem 'rabl-rails'

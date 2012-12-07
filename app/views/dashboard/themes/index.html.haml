@@ -1,3 +1,42 @@
+- content_for :scripts do
+  = javascript_include_tag 'theme_library.js'
+%script#extra-template{type:"text/x-handlebars-template"}
+  .span2.extra
+    %a.btn.btn-small{href: new_dashboard_theme_path}
+      %i.icon-bolt &nbsp;
+      Roll your own Theme
+%script#content-template{type:"text/x-handlebars-template"}
+  {{#each themes}}
+  .span2.theme
+    .stats
+      .pull-right
+        .name
+          %strong {{owner_name}}
+      %i.icon-bolt
+      {{stats.surveys}} &nbsp;
+      %i.icon-heart
+      {{stats.favourite.count}}
+    %img{src:"{{main_image_url}}"}
+    .content-container
+      %h4 {{title}}
+      %p.description
+        %small {{short_description}}
+      .pull-right
+        {{#if stats.editable}}
+        %a.btn.btn-small{href: "/dashboard/themes/{{id}}/edit"}
+          %i.icon-edit
+        {{/if}}
+        {{#if stats.favourite.me}}
+        %a.btn.btn-danger.btn-small.un.likable{href:"#", "data-id" => "{{id}}"}
+          %i.icon-heart
+        {{else}}
+        %a.btn.btn-small.likable{href:"#", "data-id" => "{{id}}"}
+          %i.icon-heart-empty
+        {{/if}}
+      %a.btn.btn-primary.btn-small
+        %i.icon-bolt &nbsp;
+        %strong Use Theme
+  {{/each}}
 .page-header
   .pull-right
     %a.btn.btn-primary{href: new_dashboard_theme_path} Roll your own Theme
@@ -6,95 +45,78 @@
   .pull-right
     %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
       %li.active
-        %a{:href => "#library_featured", "data-toggle" => "tab"}
+        %a{id: "featured", :href => "#library_featured", "data-toggle" => "tab", "data-offset" => 0}
           %i{class:"icon-gift"}
           Featured
       %li
-        %a{:href => "#library_popular", "data-toggle" => "tab"}
-          %i{class:"icon-star"}
-          Popular
+        %a{id: "recent",:href => "#library_recent", "data-toggle" => "tab", "data-offset" => 0}
+          %i{class:"icon-time"}
+          Recent
       %li
-        %a{:href => "#my_owned", "data-toggle" => "tab"}
-          %i{class:"icon-shopping-cart"}
-          Purchased
+        %a{id: "favourites",:href => "#my_favourites", "data-toggle" => "tab", "data-offset" => 0}
+          %i{class:"icon-heart"}
+          Favourites
       %li
-        %a{:href => "#my_themes", "data-toggle" => "tab"}
+        %a{id: "me", :href => "#my_themes", "data-toggle" => "tab", "data-offset" => 0}
           %i{class:"icon-folder-open"}
-          My Library
+          My Themes
   %h4.muted Theme Library
   %hr
   .tab-content
     #library_featured.tab-pane.active
-      - (1..2).each do
-        .row{style: "margin-left:0;"}
-          .span5
-            %div{style:"text-align:center"}
-              %img.img-polaroid{src:"http://placehold.it/600x200"}
-          .span5
-            %h4 library_featured
-            %p
-              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-            %form
-              %button.btn.btn-info More
+      .loading
+      .empty.hidden
+        %h3 No themes are currently featured.
+        %a.btn.btn-primary{:href => new_dashboard_theme_path}
+          %i{class:"icon-bolt"}
+          Roll your own theme
+      .content.row-fluid.hidden
+      .pager
+        %ul.pager
+          %li.previous.disabled
+            %a{:href => "#"} ← Newer
+          %li.next.disabled
+            %a{:href => "#"} Older →
         %br
-    #library_popular.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4
-            library_popular
-            %br
-            %span.muted
-              %small 10 Campaigns
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
     #library_recent.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4
-            library_recent
-            %br
-            %span.muted
-              %small= Date.today.strftime("%A, %d %b %Y")
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
+      .loading
+      .empty.hidden
+        %h3 No recent themes.
+        %a.btn.btn-primary{:href => new_dashboard_theme_path}
+          %i{class:"icon-bolt"}
+          Roll your own theme
+      .content.row-fluid.hidden
+      .pager
+        %ul.pager
+          %li.previous.disabled
+            %a{:href => "#"} ← Newer
+          %li.next.disabled
+            %a{:href => "#"} Older →
     #my_favourites.tab-pane
-      - (1..2).each do
-        .row{style: "margin-left:0;"}
-          .span5
-            %div{style:"text-align:center"}
-              %img.img-polaroid{src:"http://placehold.it/600x200"}
-          .span5
-            %h4 library_featured
-            %p
-              %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-            %form
-              %button.btn.btn-info More
-        %br
+      .loading
+      .empty.hidden
+        %h3 You haven't added any themes to your favourites.
+        %a.btn.btn-primary{:href => new_dashboard_theme_path}
+          %i{class:"icon-bolt"}
+          Roll your own theme
+      .content.row-fluid.hidden
+      .pager
+        %ul.pager
+          %li.previous.disabled
+            %a{:href => "#"} ← Newer
+          %li.next.disabled
+            %a{:href => "#"} Older →
     #my_themes.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4 my_themes
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
-    #my_owned.tab-pane
-      - (1..5).each do
-        .span2
-          %div{style:"text-align:center"}
-            %img.img-polaroid{src:"http://placehold.it/200x140"}
-          %h4 my_owned
-          %p
-            %small Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur justo arcu, ornare eu commodo nec, tincidunt ac massa. Maecenas quis dolor elit, eget rhoncus libero. Nunc sed blandit velit. Suspendisse velit elit, venenatis et imperdiet sit amet, dapibus sed ipsum.
-          %form
-            %button.btn.btn-info More
+      .loading
+      .empty.hidden
+        %h3 You haven't created any themes.
+        %a.btn.btn-primary{:href => new_dashboard_theme_path}
+          %i{class:"icon-bolt"}
+          Roll your own theme
+      .content.row-fluid.hidden
+      .pager
+        %ul.pager
+          %li.previous.disabled
+            %a{:href => "#"} ← Newer
+          %li.next.disabled
+            %a{:href => "#"} Older →
