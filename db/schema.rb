@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205035228) do
+ActiveRecord::Schema.define(:version => 20121207134406) do
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
     t.text     "default_template"
     t.boolean  "is_published",      :default => false
     t.text     "theming_data"
+    t.text     "css"
   end
 
   create_table "contents", :force => true do |t|
@@ -39,20 +40,23 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
     t.string "name"
   end
 
+  create_table "favourites", :force => true do |t|
+    t.integer  "theme_id"
+    t.integer  "member_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "images", :force => true do |t|
     t.integer  "theme_id"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
-    t.integer  "picture_file_size"
-    t.datetime "picture_updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "url"
   end
 
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
@@ -91,13 +95,11 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "survey_id"
@@ -117,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
   create_table "surveys", :force => true do |t|
     t.string  "name"
     t.integer "organisation_id"
+    t.integer "theme_id"
   end
 
   create_table "templates", :force => true do |t|
@@ -131,27 +134,24 @@ ActiveRecord::Schema.define(:version => 20121205035228) do
   end
 
   create_table "themes", :force => true do |t|
-    t.datetime "created_at",                                     :null => false
-    t.datetime "updated_at",                                     :null => false
-    t.string   "featured_image_file_name"
-    t.string   "featured_image_content_type"
-    t.integer  "featured_image_file_size"
-    t.datetime "featured_image_updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.string   "main_image_file_name"
     t.string   "main_image_content_type"
     t.integer  "main_image_file_size"
     t.datetime "main_image_updated_at"
-    t.string   "css_file_name"
-    t.string   "css_content_type"
-    t.integer  "css_file_size"
-    t.datetime "css_updated_at"
     t.string   "title"
     t.text     "description"
-    t.boolean  "featured",                    :default => false
+    t.boolean  "featured",                :default => false
     t.datetime "featured_at"
-    t.boolean  "published",                   :default => false
+    t.boolean  "published",               :default => false
     t.datetime "published_at"
-    t.boolean  "request_to_publish",          :default => false
+    t.boolean  "request_to_publish",      :default => false
+    t.integer  "owner_id"
+    t.boolean  "mobile",                  :default => true
+    t.boolean  "tablet",                  :default => true
+    t.boolean  "laptop",                  :default => true
+    t.boolean  "desktop",                 :default => true
   end
 
 end

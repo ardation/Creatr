@@ -1,4 +1,5 @@
 FlamingWight::Application.routes.draw do
+
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks", :confirmations => 'members/confirmations'}
 
   devise_scope :member do
@@ -7,15 +8,17 @@ FlamingWight::Application.routes.draw do
   end
 
   namespace :dashboard do
-    resources :themes
     root :to => 'dashboard#index'
     match 'billing' => 'billing#index'
     match 'billing/credit_card' => 'billing#credit_card'
     match 'new' => 'create#index'
     match 'settings' => 'dashboard#settings'
     match 'iframe' => 'dashboard#iframe'
-    match 'themes' => 'theme#index'
     match 'ajax/crm_data' => 'create#crm_data'
+    resources :themes
+    get 'themes/:method/:offset' => 'themes#get_data'
+    get 'themes/favourites/add/:theme_id' => 'themes#add_favourite'
+    get 'themes/favourites/remove/:theme_id' => 'themes#remove_favourite'
     namespace :admin do
       match 'accounts' => 'administrator#accounts'
       match 'accounts/:id/activate' => 'administrator#activate'
@@ -42,7 +45,5 @@ FlamingWight::Application.routes.draw do
 
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
-
-
 
 end

@@ -1,12 +1,14 @@
 /*
 *= require codemirror
 */
+@import 'bootstrap';
+@import 'formtastic-plus-bootstrap';
+@import 'font-awesome';
 @import "compass/css3";
 
 html,
 body {
   height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
 }
 
 /* Wrapper for page content to push down footer */
@@ -42,9 +44,27 @@ body {
     padding:20px;
   }
 }
-
+.navbar .btn {
+  margin-top: 8px;
+}
+.goose {
+  background:image-url('goose-egg.png') top center no-repeat;
+  margin:20px auto 20px auto;
+  width:100%;
+  padding-top:186px;
+  text-align:center;
+  font-weight:bold;
+  font-size:20px;
+  color:#636363;
+  &:after {
+    content:"Goose egg. There's no information available.";
+  }
+}
+.nav-pills > .active > a > [class^="icon-"] {
+  background:inherit;
+}
 .navbar-spacer {
-  height:70px;
+  height:50px;
   width:100%;
 }
 
@@ -78,66 +98,62 @@ div.cards div {
   }
 }
 
-.nav-sidebar {
-  li {
-    a {
-      span.badge {
-        float:right;
-        margin-right:5px;
-      }
-      .icon-chevron-right {
-        float:right;
-        opacity:0.25;
-      }
-      &:hover {
-        .icon-chevron-right {
-          opacity:0.5;
-        }
-      }
-    }
-    &.active {
-      a, a:hover {
-        color: white;
-        background-color: #08C;
-        .icon-chevron-right {
-          opacity:1;
-        }
-      }
-    }
-  }
-}
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-
-@media (max-width: 979px) {
-  .dash {
-    .navbar-fixed-top {
-      position:fixed;
-    }
-
-    .navbar-inner {
-      display:fixed;
-      border-radius: 0;
-      padding:0 !important;
-      margin: 0 !important;
-    }
-  }
-}
-
 div.CodeMirror {
   border:1px #ccc solid;
 }
 
 body.dashboard-themes {
-  &.new {
+  &.index {
+    .tab-content {
+      overflow:hidden;
+    }
+    .loading {
+      margin:0 auto;
+      background:image-url('ajax-loader.gif') no-repeat center center;
+      width:32px;
+      min-height:429px;
+    }
+    .empty {
+      text-align:center;
+      min-height:419px;
+    }
+    .description {
+      height: 105px;
+      overflow:hidden;
+    }
+    .theme {
+      color:#fff;
+      background-color: #36C4D2;
+      @include background(linear-gradient(top, #60D0DB,#36C4D2 60%,#36C4D2));
+      @include box-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+      @include border-radius(5px);
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      padding-bottom:20px;
+      img {
+        width:100%;
+        max-height:189px;
+      }
+      .stats {
+        font-size:10px;
+        text-transform: uppercase;
+        padding:3px 10px;
+      }
+      .content-container {
+        padding:10px 20px 0 20px;
+      }
+    }
+    .extra {
+      min-height:429px;
+      padding-top:200px;
+      text-align:center;
+      border:5px dashed #eee;
+      @include border-radius(5px);
+    }
+    div.pager {
+      border-top:1px solid #eee;
+    }
+  }
+  &.edit {
     .formtastic {
       .checkbox-container {
         display:inline-block;
@@ -179,6 +195,11 @@ body.dashboard-themes {
           i {
             margin-top: -5px;
           }
+        }
+      }
+      #iframe-container {
+        iframe {
+          border:0;
         }
       }
       .frame-loading, .frame-cover {
@@ -355,14 +376,25 @@ body.dashboard-themes {
           @include transition-duration(0);
         }
         .content-box {
-          width:280px;
-          padding:10px;
-          .droppable {
-            color:#aaa;
-            text-align:center;
-            padding:20px;
-            border: 5px dashed #AAA;
-            @include border-radius(10px);
+          width:277px;
+          padding:12.5px;
+        }
+        .gallery {
+          margin-top:10px;
+          padding-top:10px;
+          border-top:1px solid #eee;
+          a {
+            float:left;
+            &:hover {
+              text-decoration:none;
+            }
+            img {
+              margin-bottom:5px;
+              margin-right:5px;
+              background-size: cover;
+              width:50px;
+              height:50px;
+            }
           }
         }
       }
@@ -386,7 +418,7 @@ body.dashboard-themes {
       }
     }
     .icons {
-      a {
+      a.link {
         [class^="icon-"] {
           vertical-align:middle;
           width:auto;
@@ -431,39 +463,3 @@ body.dashboard-themes {
     }
   }
 }
-.picture_upload_box {
-  .nested-fields {
-    .span6 {
-      margin-left:0 !important;
-      margin-right:10px;
-      border:1px #ccc solid;
-      margin-bottom:10px;
-      @include border-radius(2px);
-      &.links {
-        height: 125px;
-        text-align: center;
-        padding-top: 40px;
-      }
-      fieldset.inputs {
-        padding:0;
-        margin:10px;
-        ol > li.input {
-          label.label {
-            width:100px;
-          }
-          p.inline-hints {
-            margin-left:120px;
-          }
-          img {
-            float:left;
-            width:40px;
-            height:40px;
-            margin-right:10px;
-          }
-        }
-      }
-    }
-  }
-}
-
-

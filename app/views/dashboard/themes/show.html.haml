@@ -5,9 +5,11 @@
   %fieldset.inputs
     %ol
       %li.text.input
-        %label.label{:style => 'padding-top:0'} Featured Image
-        =# @content_type.inheritance.name
-        = image_tag @theme.featured_image.url, :class => "img-polaroid"
+        %label.label{:style => 'padding-top:0'} Title
+        = @theme.title
+      %li.text.input
+        %label.label{:style => 'padding-top:0'} Description
+        %div{style: "float:right"}= @theme.description
       %li.text.input
         %label.label{:style => 'padding-top:0'} Images
         =# @content_type.inheritance.name

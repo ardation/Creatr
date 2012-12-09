@@ -8,6 +8,8 @@ class Member < ActiveRecord::Base
 
   has_many :organisations, through: :crms
 
+  has_many :favourites, dependent: :destroy
+
   devise :omniauthable, :confirmable, :registerable
   attr_accessible :email, :encrypted_password, :password_confirmation, :remember_me, :provider, :uid, :name, :token, :usage, :tokenExpires, :stripe
   validates_presence_of :email, :name, :uid, :provider
