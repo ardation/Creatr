@@ -1,7 +1,6 @@
 %body
   #survey
 
-  .btn{:_action => 'showstep1'} Start >
 - content_for :scripts do
   = javascript_include_tag 'survey/survey'
 
@@ -14,9 +13,11 @@
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
+.btn{:_action => 'incrementStep controller'} Start >
 </script>
 
 <script data-template-name="Text Template" type="text/x-handlebars">
 {{data.question}}
 {{view Ember.TextField valueBinding="answer"}}
+{{view Ember.TextField valueBinding="testproperty"}}
 </script>
