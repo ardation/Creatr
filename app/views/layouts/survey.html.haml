@@ -3,9 +3,9 @@
   %head
     %title 
       = yield :title
-      = @message
     = stylesheet_link_tag    "survey/application", :media => "all"
     = csrf_meta_tags
+    = yield :script_includes
     = javascript_include_tag "survey/application"
     = yield :scripts
     %style

@@ -1,7 +1,22 @@
-  
-  
 %body
-  %h1 Sup bro?
-  = raise @survey.inspect
-  - @survey.contents.each do|content|
-    = content  
+  #survey
+
+  .btn{:_action => 'showstep1'} Start >
+- content_for :scripts do
+  = javascript_include_tag 'survey/survey'
+
+- content_for :script_includes do
+  :javascript
+    var survey_contents = #{@survey.contents.to_json};
+    var content_types = #{@content_types}
+
+-content_for :title, @survey.name
+
+<script data-template-name="app" type="text/x-handlebars">
+{{outlet}}
+</script>
+
+<script data-template-name="Text Template" type="text/x-handlebars">
+{{data.question}}
+{{view Ember.TextField valueBinding="answer"}}
+</script>
