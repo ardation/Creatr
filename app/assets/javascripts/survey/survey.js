@@ -28,6 +28,7 @@ for(i = 0; i<survey_contents.length; i++) {
 
   App.surveyViews[i] = Ember.View.extend({
     templateName: 'Text Template',
+    classTest: 'test',
     didInsertElement: function() {
       fx = eval(content_type.js).render;
       fx();
@@ -40,7 +41,7 @@ for(i = 0; i<survey_contents.length; i++) {
 
     data: function() {
       fx = eval(content_type.js).data;
-      return fx(survey_contents[this.id].data);
+      return fx($.parseJSON(survey_contents[this.id].data));
     }.property(),
 
     enter: function() {
