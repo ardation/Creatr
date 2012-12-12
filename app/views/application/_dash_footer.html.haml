@@ -4,3 +4,16 @@
       ©
       %a{:href => "http://www.cru.org"} Cru
       = DateTime.now.strftime("%Y")
+%script{:src => "//assets.zendesk.com/external/zenbox/v2.5/zenbox.js", :type => "text/javascript"}
+%style{:media => "screen, projection", :type => "text/css"}
+  @import url(//assets.zendesk.com/external/zenbox/v2.5/zenbox.css);
+:javascript
+  if (typeof(Zenbox) !== "undefined") {
+    Zenbox.init({
+      dropboxID:   "20113443",
+      url:         "https://crusade.zendesk.com",
+      tabID:       "Support",
+      tabColor:    "#36C4D2",
+      tabPosition: "Right"
+    });
+  }

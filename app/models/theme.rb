@@ -18,11 +18,18 @@ class Theme < ActiveRecord::Base
   has_many :images, :dependent => :destroy
   has_many :favourites, dependent: :destroy
   accepts_nested_attributes_for :images, :reject_if => :all_blank, :allow_destroy => true
-  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :main_image, :css, :images_attributes
+  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :main_image, :css, :images_attributes, :mobile, :tablet, :laptop, :desktop
   validates_attachment :main_image, :size => { :in => 0..100.kilobytes }
   validates_attachment_content_type :main_image, :content_type=> ['image/jpeg', 'image/png', 'image/gif']
   validates_presence_of :title, :main_image, :owner
   validates_uniqueness_of :title
+  validate :at_least_one_platform
+
+  def at_least_one_platform
+    unless self.mobile or self.tablet or self.laptop or self.desktop
+      errors[:platform] << ("Selection: Please choose at least one platform - any platform will do.")
+    end
+  end
 
   def main_image_url
     main_image.url(:original)

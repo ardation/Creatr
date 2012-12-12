@@ -28,7 +28,49 @@ body {
     height:500px;
   }
 }
-
+#main-nav {
+  background-color: #E7E7E7;
+  border-right: 1px solid #CCC;
+  display: block;
+  position: absolute;
+  overflow: none;
+  top: 42px;
+  bottom: 0;
+  left: -1px;
+  width: 60px;
+  li {
+    font-size:30px;
+    line-height:60px;
+    text-align:center;
+    a {
+      color:#888;
+    }
+  }
+}
+.inputs {
+  .fl {
+    float:left;
+    label {
+      input[type="checkbox"] {
+        margin-left:0 !important;
+      }
+    }
+    &.first {
+      margin-left:240px;
+    }
+  }
+  .checkboxlist {
+    list-style-type: none;
+    padding-top:5px;
+  }
+  .platform ul.errors {
+    list-style-type: none;
+    margin-left:240px;
+    color:red;
+    display:block;
+    float:none;
+  }
+}
 /* Set the fixed height of the footer here */
 #push,
 #footer {
