@@ -3,4 +3,13 @@
     = f.input :title
     = f.input :description
     = f.input :main_image, :as => :attachment, :required => true, :hint => 'Resolution 200x140. Maximum size of 100KB. JPG, GIF, PNG.', :image => proc { |o| o.featured_image.url(:thumb) }
+    %li.boolean.input.optional.platform
+      %label.label Platform
+      %ul.checkboxlist
+        = f.input :mobile, :wrapper_html => { :class => 'fl' }
+        = f.input :tablet, :wrapper_html => { :class => 'fl' }
+        = f.input :laptop, :wrapper_html => { :class => 'fl' }
+        = f.input :desktop, :wrapper_html => { :class => 'fl' }
+      %br
+      = f.semantic_errors :platform
   = f.actions

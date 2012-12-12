@@ -10,11 +10,11 @@ class Dashboard::ThemesController < Dashboard::ResourceController
     super
   end
 
-  def create
+  /def create
     @theme = Theme.new(params[:theme])
     @theme.owner = current_member
     create!{ edit_dashboard_theme_url(@theme) }
-  end
+  end/
 
   def get_data
     @offset = ( (params[:offset].to_i || 0) * 6 )

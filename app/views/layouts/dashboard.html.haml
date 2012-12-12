@@ -10,6 +10,7 @@
     = yield :scripts
   %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
     = render 'dash_nav'
+    = render 'dash_nav_left'
     #wrap
       .navbar-spacer
       .container-fluid

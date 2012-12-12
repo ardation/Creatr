@@ -1,0 +1,28 @@
+#main-nav
+  %ul.nav
+    %li{:class => ("active" if params[:action] == "dashboard")}
+      %a{:href => "#"}
+        %i.icon-plus
+    %li{:class=>("active" if params[:controller] == "dashboard/dashboard" and params[:action] == "index") }
+      %a{:href => "/dashboard"}
+        %i.icon-dashboard
+    %li{:class=>("active" if params[:controller] == "dashboard/themes") }
+      %a{:href => "/dashboard/themes"}
+        %i.icon-plane
+    - if current_member.try(:admin?)
+      %li.dropdown{:class=>("active" if params[:action] == "accounts" or params[:controller] == "dashboard/admin/content_types") }
+        %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+          %i.icon-wrench
+        %ul.dropdown-menu
+          %li
+            %a{:href => "/dashboard/admin/accounts"}
+              - if Member.where("activated = false AND confirmed_at is not null").count > 0
+                %span.badge.badge-important
+                  = Member.where("activated = false AND confirmed_at is not null").count
+              Accounts
+          %li
+            %a{:href => "/dashboard/admin/content_types"}
+              Content Types
+    %li{:class => ("active" if params[:action] == "settings")}
+      %a{:href => "/dashboard/settings", style: "padding-top:10px"}
+        %i.icon-user
