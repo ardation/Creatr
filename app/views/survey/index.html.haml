@@ -1,22 +1,27 @@
-%body
-  #survey
+#survey
 
-  .btn{:_action => 'showstep1'} Start >
 - content_for :scripts do
   = javascript_include_tag 'survey/survey'
 
 - content_for :script_includes do
   :javascript
-    var survey_contents = #{@survey.contents.to_json};
+    var survey_contents = #{@survey.contents.find(:all, :order => "position").to_json};
     var content_types = #{@content_types}
 
 -content_for :title, @survey.name
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
+.btn{:_action => 'incrementStep' } Next > 
 </script>
 
 <script data-template-name="Text Template" type="text/x-handlebars">
+<div class = "survey_box">
 {{data.question}}
 {{view Ember.TextField valueBinding="answer"}}
+</div>
+</script>
+
+<script data-template-name="final" type="text/x-handlebars">
+DONE BRO!
 </script>
