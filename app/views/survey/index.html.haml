@@ -1,5 +1,4 @@
-%body
-  #survey
+#survey
 
 - content_for :scripts do
   = javascript_include_tag 'survey/survey'
@@ -13,11 +12,16 @@
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
-.btn{:_action => 'incrementStep controller'} Start >
+.btn{:_action => 'incrementStep next'} Start >
 </script>
 
 <script data-template-name="Text Template" type="text/x-handlebars">
+<div class = "survey_box">
 {{data.question}}
 {{view Ember.TextField valueBinding="answer"}}
-{{view Ember.TextField valueBinding="testproperty"}}
+</div>
+</script>
+
+<script data-template-name="final" type="text/x-handlebars">
+DONE BRO!
 </script>
