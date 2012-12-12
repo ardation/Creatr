@@ -1,5 +1,6 @@
 .footerClass
   #footer
+    %a{href:"#", onClick:"script: Zenbox.show(); return false;"}Support
     %p.pull-right
       ©
       %a{:href => "http://www.cru.org"} Cru
@@ -14,6 +15,7 @@
       url:         "https://crusade.zendesk.com",
       tabID:       "Support",
       tabColor:    "#36C4D2",
-      tabPosition: "Right"
+      tabPosition: "Right",
+      hide_tab: "true"
     });
   }
