@@ -6,7 +6,7 @@ content_types_obj = Ember.ArrayProxy.create({content: content_types});
 App = Ember.Application.create(Em.Facebook);
 
 App.setProperties({
-    rootElement: '#survey',
+    //rootElement: 'survey',
     autoinit: false,
     nextStep: 1,
     appId: 113411778806173
