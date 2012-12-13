@@ -270,6 +270,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    sass-rails-bootstrap (2.1.1)
+      rails (~> 3.1)
+      sass-rails (~> 3.2.3)
     sinatra (1.3.3)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -307,7 +310,6 @@ DEPENDENCIES
   airbrake
   aws-sdk
   be_valid_asset
-  bootstrap-sass (~> 2.1.1.0)
   cancan
   cocoon
   codemirror-rails
@@ -341,6 +343,7 @@ DEPENDENCIES
   resque
   s3_direct_upload!
   sass-rails (~> 3.2.3)
+  sass-rails-bootstrap
   stripe!
   tabletastic
   uglifier (>= 1.0.3)

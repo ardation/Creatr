@@ -1,7 +1,8 @@
 /*
-*= require codemirror
+ *= require codemirror
+ *= require jquery.ui.datepicker
 */
-@import 'bootstrap';
+@import 'twitter/bootstrap';
 @import 'formtastic-plus-bootstrap';
 @import 'font-awesome';
 @import "compass/css3";
@@ -31,7 +32,7 @@ body {
 #main-nav {
   background-color: #E7E7E7;
   border-right: 1px solid #CCC;
-  display: block;
+  display: none;
   position: absolute;
   overflow: none;
   top: 42px;
@@ -505,3 +506,19 @@ body.dashboard-themes {
     }
   }
 }
+
+body .dashboard-create {
+  .accordion {
+    .accordion-heading {
+      background-color: #e3e3e3;
+      padding: 8px;
+      .accordion-toggle {
+        line-height: 30px;
+        padding: 0px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
