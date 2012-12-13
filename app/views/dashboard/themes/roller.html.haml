@@ -1,17 +1,24 @@
 - content_for :scripts do
   = javascript_include_tag 'theme_roller.js'
 .page-left.icons.no-builder
-  %a.phone.size.link{"data-size" => "phone", :href => "#"}
-  %a.tablet.size.link{"data-size" => "tablet", :href => "#"}
-  %a.laptop.size.selected.link{"data-size" => "laptop", :href => "#"}
-  %a.desktop.size.link{"data-size" => "desktop", :href => "#"}
+  - if @theme.mobile
+    %a.phone.size.link{"data-size" => "phone", :href => "#", class: ("selected" if @media == "phone")}
+  - if @theme.tablet
+    %a.tablet.size.link{"data-size" => "tablet", :href => "#", class: ("selected" if @media == "tablet")}
+  - if @theme.laptop
+    %a.laptop.size.link{"data-size" => "laptop", :href => "#", class: ("selected" if @media == "laptop") }
+  - if @theme.desktop
+    %a.desktop.size.link{"data-size" => "desktop", :href => "#", class: ("selected" if @media == "desktop")}
 .page-right.icons.no-builder
-  %a.settings.link{href:"#settings", role:"button", "data-toggle" => "modal", "data-backdrop"=>"static", "data-keyboard"=> false}
-    %i.icon-cogs
   %a.upload.link{:href => "#"}
     %i.icon-picture
   %a.play.link{:href => "#"}
     %i.icon-refresh
+  .bottom
+    %a.settings.link{href:"edit"}
+      %i.icon-cogs
+    %a.save.link{:href => "#"}
+      %i.icon-save
   #image-manager
     .content-box
       = s3_uploader_form post: dashboard_theme_url + '.json', as: "theme[images_attributes][0][url]", id: "myS3Uploader", max_file_size: 200.kilobytes, key: "themes/#{@theme.id}/images/${filename}" do
@@ -25,7 +32,7 @@
         - @theme.images.each do |image|
           %a{href:image.url, target:"_blank"}
             %img{style:"background-image:url(#{image.url});"}
-#page.laptop.no-builder
+#page.no-builder{ class: @media }
   .frame-cover
   .frame-loading
     %div
@@ -54,13 +61,13 @@
         - else
           %span.badge Ctrl-Alt-1
       .relative
-        #css.editor
+        #css.editor= @theme.css
     .html
       .pull-right
         %select{:id => "type"}
           %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
           - @content_types.each do |content|
-            %option{:value => content.id, "data-default" => content.get_default_template, "data-editable" => false}= content.name
+            %option{:value => content.id, "data-default" => content.get_default_template}= content.name
       %h5
         HTML
         - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
@@ -69,5 +76,3 @@
           %span.badge Ctrl-Alt-2
       .relative
         #html.editor
-#settings.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-  = render 'settings'

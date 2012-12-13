@@ -30,6 +30,7 @@ $(document).ready(function() {
   html.getSession().on('change', function (e) {
     html_val = html.getSession().getValue();
     $('#type').find(':selected').data('default', html_val );
+    $('#type').find(':selected').data('edited', true );
   });
 
   $(document).bind('keydown', 'Alt+Ctrl+1', switch_to_css);
@@ -58,18 +59,36 @@ $(document).ready(function() {
     $('.' + $(this).attr('id') ).toggle();
   });
 
-  $('#settings').on('show', function () {
-    $('.capable').prop('disabled', false);
-    $('#' + $('.size.selected').data('size')).prop('disabled', true);
-  });
-
   $('#input_theme_name').change(function() {
     $('#theme_name').text( $(this).val() );
   });
 
+  $('.save').click(function() {
+    var templates = [];
+
+    $('#type').children().each(function() {
+      if ( !isNaN($(this).val()) && $(this).data('edited') ) {
+        templates.push( { content_type_id : $(this).val(), content : $(this).data('default') });
+      }
+    });
+    $.ajax({
+      url: location.pathname.replace(/\/[^/]*$/,'') + '.json',
+      type: 'PUT',
+      data: {
+        theme: {
+          css: css_val,
+          templates_attributes: templates
+        }
+      },
+      success: function(data) {
+
+      }
+    });
+  });
+
   $('#theme-code .resize').bind('dragstart',function( event ){
     $('.frame-cover').fadeIn();
-    $('#theme-code, #page, #image-manager').addClass('dragged');
+    $('#theme-code, #page, #image-manager, .page-right').addClass('dragged');
   });
 
   $('#theme-code .resize').bind('drag',function( event ){
@@ -80,13 +99,13 @@ $(document).ready(function() {
       height = 400;
     $('#theme-code').height( height );
     $('#page').css( 'bottom', height );
-    $('#image-manager').css( 'bottom', height + 20 );
+    $('#image-manager, .page-right').css( 'bottom', height + 20 );
     $('.css .relative, .html .relative').height( height - 50 );
   });
 
   $('#theme-code .resize').bind('dragend',function( event ){
     $('.frame-cover').fadeOut();
-    $('#theme-code, #page, #image-manager').removeClass('dragged');
+    $('#theme-code, #page, #image-manager, .page-right').removeClass('dragged');
     css.resize();
     html.resize();
   });

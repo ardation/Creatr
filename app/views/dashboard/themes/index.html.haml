@@ -23,7 +23,7 @@
         %small {{short_description}}
       .pull-right
         {{#if stats.editable}}
-        %a.btn.btn-small{href: "/dashboard/themes/{{id}}/edit"}
+        %a.btn.btn-small{href: "/dashboard/themes/{{id}}/roller"}
           %i.icon-edit
         {{/if}}
         {{#if stats.favourite.me}}
@@ -39,7 +39,9 @@
   {{/each}}
 .page-header
   .pull-right
-    %a.btn.btn-primary{href: new_dashboard_theme_path} Roll your own Theme
+    %a.btn.btn-primary{href: new_dashboard_theme_path}
+      %i.icon-bolt &nbsp;
+      Roll your own Theme
   %h1 Themes
 .row{style: "margin-left:0;"}
   .pull-right

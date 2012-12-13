@@ -7,13 +7,15 @@
       dropboxID:   "20113443",
       url:         "https://crusade.zendesk.com",
       tabID:       "Support",
-      tabColor:    "black",
-      tabPosition: "Left"
+      tabColor:    "#36C4D2",
+      tabPosition: "Right",
+      hide_tab: "true"
     });
   }
 .container.footerClass
   %hr
     %footer
+      %a{href:"#", onClick:"script: Zenbox.show(); return false;"}Support
       %p.pull-right
         ©
         %a{:href => "http://www.cru.org"} Cru

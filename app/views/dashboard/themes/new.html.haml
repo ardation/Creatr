@@ -1,4 +1,8 @@
 .page-header
   %h1 Theme Library
   %h4.muted Create your Theme
-= render 'form'
+= semantic_form_for [:dashboard, @theme] do |f|
+  = render 'form', f: f
+  = f.actions do
+    = f.action :submit, :label => "Create theme & Go to Roller", input_html: {:class => "btn btn_primary"}
+    = f.action :cancel, :as => :link, :label => "Cancel"

@@ -196,7 +196,7 @@ body.dashboard-themes {
       border-top:1px solid #eee;
     }
   }
-  &.edit {
+  &.roller {
     .formtastic {
       .checkbox-container {
         display:inline-block;
@@ -400,8 +400,16 @@ body.dashboard-themes {
       top:70px;
       padding:20px;
       padding-top:0;
-      @include transition-property(right);
-      @include transition-duration(0.5s);
+      @include transition-property(right, bottom);
+      @include transition-duration(0.5s, 0.2s);
+      &.dragged {
+        @include transition-property(none);
+        @include transition-duration(0);
+      }
+      .bottom {
+        position:absolute;
+        bottom:0;
+      }
       #image-manager {
         position: fixed;
         overflow: visible !important;
@@ -442,12 +450,14 @@ body.dashboard-themes {
         }
       }
       &.builder {
+        bottom: 420px;
         #image-manager {
           bottom: 420px;
         }
       }
 
       &.no-builder {
+        bottom: 80px !important;
         #image-manager {
           bottom: 80px !important;
         }

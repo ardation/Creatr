@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207134406) do
+ActiveRecord::Schema.define(:version => 20121213024541) do
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
@@ -125,12 +125,9 @@ ActiveRecord::Schema.define(:version => 20121207134406) do
   create_table "templates", :force => true do |t|
     t.integer  "theme_id"
     t.integer  "content_type_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "hamlbars_file_name"
-    t.string   "hamlbars_content_type"
-    t.integer  "hamlbars_file_size"
-    t.datetime "hamlbars_updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.text     "content"
   end
 
   create_table "themes", :force => true do |t|
@@ -152,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20121207134406) do
     t.boolean  "tablet",                  :default => true
     t.boolean  "laptop",                  :default => true
     t.boolean  "desktop",                 :default => true
+    t.text     "css"
   end
 
 end

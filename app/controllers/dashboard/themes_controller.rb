@@ -1,20 +1,27 @@
 class Dashboard::ThemesController < Dashboard::ResourceController
   respond_to :html, :json, :xml
 
-  def edit
+  def create
+    @theme = Theme.new(params[:theme])
+    @theme.owner = current_member
+    create!{ "/dashboard/themes/#{@theme.id}/roller" }
+  end
+
+  def update
+    update! do |success, failure|
+      success.html {"/dashboard/themes/#{@theme.id}/roller"}
+    end
+  end
+
+  def roller
+    @theme = Theme.find params[:id]
     if current_member.admin?
       @content_types = ContentType.all
     else
       @content_types = ContentType.where(is_published: true).all
     end
-    super
+    @media = (if @theme.laptop then "laptop" elsif @theme.desktop then "desktop" elsif @theme.tablet then "tablet" else "phone" end)
   end
-
-  /def create
-    @theme = Theme.new(params[:theme])
-    @theme.owner = current_member
-    create!{ edit_dashboard_theme_url(@theme) }
-  end/
 
   def get_data
     @offset = ( (params[:offset].to_i || 0) * 6 )
