@@ -3,10 +3,13 @@ nextStep = 1;
 subViews = new Array();
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
 
-App = Ember.Application.create({
+App = Ember.Application.create(Em.Facebook);
+
+App.setProperties({
     rootElement: '#survey',
     autoinit: false,
-    nextStep: 1
+    nextStep: 1,
+    appId: 113411778806173
 });
 
 App.SurveyData = Ember.ArrayProxy.create({
@@ -26,8 +29,9 @@ for(i = 0; i<survey_contents.length; i++) {
   content_type = content_types_obj.get('content').findProperty('id', content_type_id);
   Ember.get('App.SurveyData').pushObject(""),
 
-  App.surveyViews[i] = Ember.View.extend({
-    templateName: 'Text Template',
+  App.surveyViews[i] = Ember.View.extend
+  ({
+    templateName: content_type.name,
     classTest: 'test',
     didInsertElement: function() {
       fx = eval(content_type.js).render;
@@ -37,21 +41,22 @@ for(i = 0; i<survey_contents.length; i++) {
 
   App.surveyControllers[i] = Ember.Controller.extend({
     id: i,
+    content_store: content_type,
     next: this.id+1,
 
     data: function() {
-      fx = eval(content_type.js).data;
+      fx = eval(this.content_store.js).data;
       return fx($.parseJSON(survey_contents[this.id].data));
     }.property(),
 
     enter: function() {
-      fx = eval(content_type.js).enter;
-      fx(this.readHelper, this.id, this.data, this);
+      fx = eval(this.content_store.js).enter;
+      fx(this.readHelper, this.writeHelper, this.id, this.data, this);
     },
     
     exit: function() {
-      fx = eval(content_type.js).exit;
-      fx(this.writeHelper, this.id, this.data, this);
+      fx = eval(this.content_store.js).exit;
+      fx(this.readHelper, this.writeHelper, this.id, this.data, this);
     },
 
     writeHelper: function(index, data) {
@@ -116,7 +121,7 @@ App.Router = Ember.Router.extend({
         }
       },
       exit: function(router) {
-        //App.surveyControllers[this.currentStep-1].exit();
+        App.surveyControllers[this.currentStep-1].exit();
       }
     }),
     finish: Em.Route.extend({
@@ -132,5 +137,5 @@ App.Router = Ember.Router.extend({
 Ember.LOG_BINDINGS=true;
 
 $(document).ready(function() {
-  App.initialize();
+  //App.initialize();
 });

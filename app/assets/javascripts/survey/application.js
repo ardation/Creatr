@@ -4,3 +4,4 @@
 //= require bootstrap
 //= require handlebars
 //= require ember
+//= require ./ember-facebook

@@ -15,11 +15,21 @@
 .btn{:_action => 'incrementStep' } Next > 
 </script>
 
-<script data-template-name="Text Template" type="text/x-handlebars">
+<script data-template-name="Test Content Type" type="text/x-handlebars">
 <div class = "survey_box">
 {{data.question}}
 {{view Ember.TextField valueBinding="answer"}}
 </div>
+</script>
+
+<script data-template-name="Facebook" type="text/x-handlebars">
+{{#if App.FBUser}}
+Thanks, you're connected with facebook!
+{{else}}
+{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}} 
+Connect with facebook
+{{/view}}
+{{/if}}
 </script>
 
 <script data-template-name="final" type="text/x-handlebars">
