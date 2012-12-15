@@ -2,15 +2,14 @@ nextStep = 1;
 
 subViews = new Array();
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
+while( typeof(Ember.Facebook) != "object" );
 
-App = Ember.Application.create(Em.Facebook);
-
-App.setProperties({
-    //rootElement: 'survey',
+App = Ember.Application.create({
+    rootElement: '#surveyContainer',
     autoinit: false,
     nextStep: 1,
     appId: 113411778806173
-});
+}, Em.Facebook);
 
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
@@ -51,12 +50,12 @@ for(i = 0; i<survey_contents.length; i++) {
 
     enter: function() {
       fx = eval(this.content_store.js).enter;
-      fx(this.readHelper, this.writeHelper, this.id, this.data, this);
+      fx(this.readHelper, this.writeHelper, this.id, survey_contents[this.id].data, this);
     },
     
     exit: function() {
       fx = eval(this.content_store.js).exit;
-      fx(this.readHelper, this.writeHelper, this.id, this.data, this);
+      fx(this.readHelper, this.writeHelper, this.id, survey_contents[this.id].data, this);
     },
 
     writeHelper: function(index, data) {
@@ -137,5 +136,5 @@ App.Router = Ember.Router.extend({
 Ember.LOG_BINDINGS=true;
 
 $(document).ready(function() {
-  //App.initialize();
+  App.initialize();
 });

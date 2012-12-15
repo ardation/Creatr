@@ -2,10 +2,13 @@
  *= require codemirror
  *= require jquery.ui.datepicker
 */
-@import 'twitter/bootstrap';
-@import 'formtastic-plus-bootstrap';
+/*@import 'twitter/bootstrap';
+@import 'formtastic-plus-bootstrap';*/
+@import 'bootstrap';
+
+
 @import 'font-awesome';
-@import "compass/css3";
+@import 'compass/css3';
 
 html,
 body {

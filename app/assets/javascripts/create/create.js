@@ -1,57 +1,20 @@
 //Testing this out
-$.fn.extend({
-  safeClone: function() {
-    var clone = this;
-    prev = clone.prev();
-    clone = prev.add(clone);
-    clone = clone.add(clone.next());
-    
-    clone = $(clone).clone();
-    console.log(clone);
-    return clone;
-  }
-});
-
 content_id_counter = 0;
 
 App = Ember.Application.create({
-  rootElement: '#emberContainer'
-});
-
-App.Surveys = Ember.Object.create({
-  name: null,
-  start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
-  end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
-  themeID: 0,
-  contents: [],    //Pushing an instance of App.SurveyContent onto this
-  contentsNameObserver: function() {
-    context = this;
-    if(this.get('contents.lastObject').name) {
-      context.contents.pushObject(App.SurveyContent.create());  
-    }
-  }.observes("contents.lastObject.name"),
-
-  moveItem: function(fromIndex, toIndex){
-    console.log(fromIndex, toIndex);
-    var items = this.get('contents');
-    item = items.objectAt(fromIndex);
-    //items.removeAt(fromIndex);
-    //items.insertAt(toIndex, item);
-  },
+  rootElement: '#emberContainer',
 });
 
 App.SurveyContent = Ember.Object.extend({
-  init: function() {
+  init: function(pos) {
     this.set('id', 'content'+content_id_counter);
     this.set('idhref', '#content'+content_id_counter);
     this.set('id2', 'outer_content'+content_id_counter);
+    this.set('content_pos', content_id_counter + 1);
     content_id_counter++;
   },
   name: "",
   content_type: 1,
-  content_pos: function() {
-    return Ember.get('App.Surveys.contents').indexOf(this) + 1;
-  }.property(),
 
   hash: Em.A([]),
 
@@ -62,8 +25,43 @@ App.SurveyContent = Ember.Object.extend({
   delete: function(event) {
     if(App.Surveys.contents.length > 1)
       App.Surveys.contents.removeObject(this)
-  }
+  },
+  findIndex: function() {
+    order = $('#accordion').sortable("toArray");
+    i = 0;
+    while(i < order.length) {
+      if(order[i].indexOf("outer_content") == -1)
+        order.removeAt(i);
+      else
+        i++;
+    }
+    console.log(order);
+    return order.indexOf(this.id);
+  } 
+});
 
+
+App.Surveys = Ember.Object.create({
+  name: null,
+  start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
+  end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
+  themeID: 0,
+  contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
+  contentsNameObserver: function() {
+    context = this;
+    if(this.get('contents.lastObject').name) {
+      context.contents.pushObject(App.SurveyContent.create());  
+    }
+  }.observes("contents.lastObject.name"),
+  updatePositions: function() {
+    elements = $('.sortable_').sortable('toArray');
+    for(i = 0; i<elements.length; i++) {
+      element = $('#'+elements[i]);
+      e_id = element.children()[0].id;
+      obj = this.contents.findProperty('id2', e_id);
+      obj.set('content_pos', i+1);
+    };
+  }
 });
 
 
@@ -142,59 +140,46 @@ App.ApplicationView = Ember.View.extend({
 });
 
 App.Step0View = Ember.View.extend ({
-  templateName: 'templates/step0'
+  templateName: 'step0'
 });
 
 App.Step1View = Ember.View.extend ({
-  templateName: 'templates/step1'
+  templateName: 'step1'
 });
 
 App.Step2View = Ember.View.extend ({
-  templateName: 'templates/step2',
+  templateName: 'step2',
   didInsertElement: function() {
     $( ".jquery-ui-datepicker" ).datepicker();
   }
 });
 
 App.Step3View = Ember.View.extend ({
-  templateName: 'templates/step3',
-  didInsertElement: function() {
-    if(App.Surveys.contents.length == 0)
-      App.Surveys.contents.pushObject(App.SurveyContent.create());
-    $('#accordion').sortable({
-      axis: "y",
-      start: function(event, ui) {
-        ui.item.previousIndex = App.Step3View.findIndex(ui.item.attr('id'));
-      },
-      update: function(event, ui) {
-        App.Surveys.moveItem(ui.item.previousIndex, App.Step3View.findIndex(ui.item.attr('id')));
-      },
-      helper: function(event, ui) {
-        test = $(ui).safeClone();
-        console.log(test);
-        return test;
-      }
-    });
-  },
+  templateName: 'step3',
 });
 
-App.Step3View.reopenClass( {
-  findIndex: function(id) {
-    order = $('#accordion').sortable("toArray");
-    i = 0;
-    while(i < order.length) {
-      if(order[i].indexOf("outer_content") == -1)
-        order.removeAt(i);
-      else
-        i++;
-    }
-    console.log(order);
-    return order.indexOf(id);
-  } 
-})
-
 App.Step4View = Ember.View.extend ({
-  templateName: 'templates/step4',
+  templateName: 'step4',
+});
+
+
+App.JQuerySortableView = Ember.CollectionView.extend( {
+  classNames: ['sortable_'],
+  contentBinding: 'App.Surveys.contents',
+  itemViewClass: 'App.JQuerySortableItemView',
+  didInsertElement: function() {
+    this._super();
+    this.$().sortable({
+      axis: "y", 
+      update: function(event, ui) {
+        App.Surveys.updatePositions();
+      }
+    }).disableSelection();
+  }
+});
+
+App.JQuerySortableItemView = Ember.View.extend({
+  templateName: 'jquery-sortable-item'
 });
 
 
