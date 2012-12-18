@@ -1,10 +1,8 @@
 %div{:bind => {:id => 'view.view.content.id2'}}
   .accordion-group
     .accordion-heading
-      {{view.content.content_pos}}
-      %a.btn.btn-warning.pull-right{:_action => 'delete  target="view.content"'}
-        Delete
       %a.accordion-toggle{"data-parent" => "#accordion", "data-toggle" => "collapse", :bind => { :href => 'view.content.idhref' }}
+        %span.muted {{view.content.content_pos}}
         {{#if view.content.name}}
         {{view.content.name}}
         {{else}}
@@ -13,19 +11,29 @@
 
 
   .accordion-body.collapse{:bind => {:id => 'view.content.id'}}
-    %form.form-horizontal
-      .accordion-inner
-        {{view Ember.TextField valueBinding="view.content.name" class="txtName"}}
+    .accordion-inner
+      %form.form-horizontal
         .control-group
-          %label.control-label{:for => "organisation"} 
+          %label.control-label{:for => "organisation"}
+            Name
+          .controls
+            {{view Ember.TextField valueBinding="view.content.name" class="txtName"}}
+            %br
+            %small.muted So you know how to find specific content later on.
+        .control-group
+          %label.control-label{:for => "organisation"}
             Content Type
-            .controls
-              {{view Ember.Select contentBinding="App.ContentTypes" optionValuePath="view.content.id" optionLabelPath="view.content.name" valueBinding="view.content.content_type"}}
+          .controls
+            {{view Ember.Select contentBinding="App.ContentTypes" optionValuePath="view.content.id" optionLabelPath="view.content.name" valueBinding="view.content.content_type"}}
 
         {{#each item in view.content.types }}
         .control-group
-          %label.control-label{:for => "organisation"} 
+          %label.control-label{:for => "organisation"}
             {{item.name}}
-            .controls
-              {{view item.viewType }}
+          .controls
+            {{view item.viewType }}
         {{/each}}
+        .form-actions
+          .btn.btn-danger.btn-mini.pull-right{:_action => 'delete  target="view.content"'}
+            %i.icon-remove
+            Delete this Content

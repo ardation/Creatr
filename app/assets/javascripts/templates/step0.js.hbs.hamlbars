@@ -1,3 +1,41 @@
-%h1 Create an outreach!
-%br 
-.btn{:_action => 'showstep1'} Start >
+.row
+  .span3
+    %ul.nav.nav-tabs.nav-stacked
+      %li.active
+        %a
+          %i.icon-bolt
+          Get Started
+          %i.icon-chevron-right
+      %li
+        %a
+          %i.icon-filter
+          Data Point
+      %li
+        %a
+          %i.icon-calendar
+          Campaign Dates
+      %li
+        %a
+          %i.icon-file
+          Create Content
+      %li
+        %a
+          %i.icon-gift
+          Theme Selection
+  .span9
+    %h2 Setup a new Campaign!
+    %p
+      Getting Started couldn't be easier. Give your campaign a name and Click below to get started.
+      %br
+      %small.muted Note: You won't be billed for this new campaign until you leave developer mode.
+    %hr
+    %form.form-horizontal
+      %fieldset
+        .control-group
+          %label.control-label{:for => "txtName"} Survey Name
+          .controls
+            {{view Ember.TextField valueBinding="App.Surveys.name" class="txtName"}}
+        .form-actions
+          .btn.btn-primary{:_action => 'showstep1'}
+            Start
+            %i.icon-chevron-right

@@ -1,11 +1,25 @@
-- content_for :scripts do
-  = javascript_include_tag "backbone/app"
 - content_for :masthead do
   %h2 Dashboard
   %p= "You are currently working on #{@surveys.length} campaigns."
-#dashboard
-
-:javascript
-  window.router = new FlamingWight.Routers.SurveysRouter({});
-  Backbone.history.start({pushState: true, root: "/dashboard/"})
-
+.row
+  .span4
+    %h3= "Welcome back, #{current_member.name}."
+    %p
+      All your campaigns are currently in development mode.
+      %br
+        %a{:href => "/pricing"}> Check out Creatr pricing
+        \.
+    %table.table.stat-table
+      %tbody
+        %tr
+          %td.value 789
+          %td.full Surveys Completed
+        %tr
+          %td.value 634
+          %td.full Surveys Today
+        %tr
+          %td.value= current_member.surveys.length
+          %td.full Active Campaigns
+        %tr
+          %td.value= current_member.themes.length
+          %td.full Personalised Themes

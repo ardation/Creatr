@@ -1,9 +1,42 @@
-%h1 Add content to {{App.Surveys.name}} 
-%br
-
-#accordion.accordion
-  {{view App.JQuerySortableView}}
-
-%br
-
-.btn{:_action => 'showstep4'} Next Step >
+.row
+  .span3
+    %ul.nav.nav-tabs.nav-stacked
+      %li
+        %a
+          %i.icon-ok
+          Get Started
+      %li
+        %a
+          %i.icon-ok
+          Data Point
+      %li
+        %a
+          %i.icon-ok
+          Campaign Dates
+      %li.active
+        %a
+          %i.icon-file
+          Create Content
+          %i.icon-chevron-right
+      %li
+        %a
+          %i.icon-gift
+          Theme Selection
+  .span9
+    %h2 Create Content
+    %p
+      Your campaign wouldn't be much use without content now would it? Add content below and drag and drop content to reorder things!
+      %br
+      %small.muted Tip: Creatr automatically adds new content when you fill in the last blank one.
+    %hr
+    %form.form-horizontal
+      .control-group
+        #accordion.accordion
+          {{view App.JQuerySortableView}}
+        .form-actions
+          .btn{:_action => 'showstep0'}
+            %i.icon-chevron-left
+            Back
+          .btn.btn-primary{:_action => 'showstep4'}
+            Next Step
+            %i.icon-chevron-right

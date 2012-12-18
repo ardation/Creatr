@@ -1,18 +1,48 @@
-%h1 Pick theme for {{App.Surveys.name}} 
-%br
-#myCarousel.carousel.slide
-  / Carousel items
-  .carousel-inner
-    .active.item 
-      %img{:src => "http://l2.yimg.com/bt/api/res/1.2/OaV7iwyYJn_BnmmrX_l6Sg--/YXBwaWQ9eW5ld3M7Zmk9ZmlsbDtoPTMxMDtxPTg1O3NtPTE7dz0zMTA-/http://media.zenfs.com/289/2011/08/02/TaylorSwift_071645.jpg"}/
-    .item 
-      %img{:src=>"http://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Taylor_Swift.png/220px-Taylor_Swift.png"}/
-    .item
-      %img{:src=>"http://www.cmt.com/sitewide/assets/img/artists/swift_taylor/taylorswift65-430x250.jpg"}/
-  / Carousel nav
-  %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
-  %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
-
-%br
-
-.btn{:_action => 'showstep4'} Next Step >
+.row
+  .span3
+    %ul.nav.nav-tabs.nav-stacked
+      %li
+        %a
+          %i.icon-ok
+          Get Started
+      %li
+        %a
+          %i.icon-ok
+          Data Point
+      %li
+        %a
+          %i.icon-ok
+          Campaign Dates
+      %li
+        %a
+          %i.icon-ok
+          Create Content
+      %li.active
+        %a
+          %i.icon-gift
+          Theme Selection
+          %i.icon-chevron-right
+  .span9
+    %h2 Theme Selection
+    %hr
+    %form.form-horizontal
+      .control-group
+        #myCarousel.carousel.slide
+          / Carousel items
+          .carousel-inner
+            .active.item
+              %img{:src => "http://l2.yimg.com/bt/api/res/1.2/OaV7iwyYJn_BnmmrX_l6Sg--/YXBwaWQ9eW5ld3M7Zmk9ZmlsbDtoPTMxMDtxPTg1O3NtPTE7dz0zMTA-/http://media.zenfs.com/289/2011/08/02/TaylorSwift_071645.jpg"}/
+            .item
+              %img{:src=>"http://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Taylor_Swift.png/220px-Taylor_Swift.png"}/
+            .item
+              %img{:src=>"http://www.cmt.com/sitewide/assets/img/artists/swift_taylor/taylorswift65-430x250.jpg"}/
+          / Carousel nav
+          %a.carousel-control.left{"data-slide" => "prev", :href => "#myCarousel"} ‹
+          %a.carousel-control.right{"data-slide" => "next", :href => "#myCarousel"} ›
+      .form-actions
+        .btn{:_action => 'showstep0'}
+          %i.icon-chevron-left
+          Back
+        .btn.btn-primary{:_action => 'showstep4'}
+          Next Step
+          %i.icon-chevron-right
