@@ -63,7 +63,7 @@ gem 'highcharts-rails'
 gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"
 
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
-gem 'mandrill', :git => "git://github.com/edwin-wills/mandrill.git"
+gem 'mandrill'
 
 gem "jquery-fileupload-rails"
 
