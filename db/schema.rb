@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213024541) do
+ActiveRecord::Schema.define(:version => 20121217085721) do
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
@@ -57,6 +57,8 @@ ActiveRecord::Schema.define(:version => 20121213024541) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
+    t.text    "api_key"
+    t.integer "client"
   end
 
   add_index "member_crms", ["crm_id", "member_id"], :name => "index_member_crms_on_crm_id_and_member_id", :unique => true
@@ -150,6 +152,7 @@ ActiveRecord::Schema.define(:version => 20121213024541) do
     t.boolean  "laptop",                  :default => true
     t.boolean  "desktop",                 :default => true
     t.text     "css"
+    t.text     "container_template"
   end
 
 end

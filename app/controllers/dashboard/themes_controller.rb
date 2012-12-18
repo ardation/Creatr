@@ -7,13 +7,7 @@ class Dashboard::ThemesController < Dashboard::ResourceController
     create!{ "/dashboard/themes/#{@theme.id}/roller" }
   end
 
-  def update
-    update! do |success, failure|
-      success.html {"/dashboard/themes/#{@theme.id}/roller"}
-    end
-  end
-
-  def roller
+  def show
     @theme = Theme.find params[:id]
     if current_member.admin?
       @content_types = ContentType.all
@@ -21,10 +15,11 @@ class Dashboard::ThemesController < Dashboard::ResourceController
       @content_types = ContentType.where(is_published: true).all
     end
     @media = (if @theme.laptop then "laptop" elsif @theme.desktop then "desktop" elsif @theme.tablet then "tablet" else "phone" end)
+    render layout: "roller"
   end
 
   def get_data
-    @offset = ( (params[:offset].to_i || 0) * 6 )
+    @offset = ( (params[:offset].to_i || 0) * 4 )
     @offset = 0 if @offset < 0
     send(params[:method], @offset) if ['featured', 'recent', 'me', 'favourites'].include?(params[:method])
   end
@@ -47,23 +42,23 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   private
 
   def featured(offset)
-    @themes = Theme.where(featured: true, published: true).all(offset: offset, limit: 6, order: :featured_at)
+    @themes = Theme.where(featured: true, published: true).all(offset: offset, limit: 4, order: :featured_at)
     respond_with(@themes)
   end
 
   def recent(offset)
-    @themes = Theme.where(published: true).all(offset: offset, limit: 6, order: :published_at)
+    @themes = Theme.where(published: true).all(offset: offset, limit: 4, order: :published_at)
     respond_with(@themes)
   end
 
   def me(offset)
-    @themes = Theme.where(owner_id: current_member.id).all(offset: offset, limit: 6, order: "created_at DESC")
+    @themes = Theme.where(owner_id: current_member.id).all(offset: offset, limit: 4, order: "created_at DESC")
     respond_with(@themes)
   end
 
   def favourites(offset)
     @themes = []
-    current_member.favourites.all(offset: offset, limit: 6, order: "created_at DESC").each do |favourite|
+    current_member.favourites.all(offset: offset, limit: 4, order: "created_at DESC").each do |favourite|
       @themes.push favourite.theme
     end
     respond_with(@themes)

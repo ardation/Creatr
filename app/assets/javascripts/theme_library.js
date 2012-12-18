@@ -19,13 +19,13 @@ $(document).ready(function() {
           });
         } else {
           target.find('.content').empty().html(content_template(data));
-          if (data.themes.length == 6)
+          if (data.themes.length == 4)
             target.find('.next').removeClass('disabled');
           else {
             target.find('.next').addClass('disabled');
           }
 
-          for (var i=0; i < 6 - data.themes.length; i++) {
+          for (var i=0; i < 4 - data.themes.length; i++) {
             target.find('.content').append(extra_template());
           }
           if ( $(e.target).attr('id') == 'me' )

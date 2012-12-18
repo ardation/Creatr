@@ -63,25 +63,51 @@ $(document).ready(function() {
     $('#theme_name').text( $(this).val() );
   });
 
+  $('#alert-header').bind('closed', function() {
+    $('#page').removeClass('alertbox');
+  });
+
   $('.save').click(function() {
     var templates = [];
 
+    $('.frame-loading').fadeIn();
     $('#type').children().each(function() {
       if ( !isNaN($(this).val()) && $(this).data('edited') ) {
         templates.push( { content_type_id : $(this).val(), content : $(this).data('default') });
       }
     });
     $.ajax({
-      url: location.pathname.replace(/\/[^/]*$/,'') + '.json',
+      url: location.pathname +
+      '.json',
       type: 'PUT',
       data: {
         theme: {
           css: css_val,
-          templates_attributes: templates
+          templates_attributes: templates,
+          container_template: $('#app').data('default')
         }
       },
       success: function(data) {
-
+        $('.frame-loading').fadeOut();
+        $('#alerts').html('<div class="alert alert-success"><strong>Saved</strong> Theme has been synced successfully.</div>');
+        $('#page').addClass('alertbox');
+        setTimeout(function() {
+          $('#alerts .alert').fadeOut(function() {
+            $(this).remove();
+            $('#page').removeClass('alertbox');
+          });
+        }, 2000);
+      },
+      error: function(data) {
+        $('.frame-loading').fadeOut();
+        $('#alerts').html('<div class="alert alert-error"><strong>Error</strong> There has been a problem saving your theme.</div>');
+        $('#page').addClass('alertbox');
+        setTimeout(function() {
+          $('#alerts .alert').fadeOut(function() {
+            $(this).remove();
+            $('#page').removeClass('alertbox');
+          });
+        }, 2000);
       }
     });
   });

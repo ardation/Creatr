@@ -20,13 +20,41 @@ class Theme < ActiveRecord::Base
   has_many :favourites, dependent: :destroy
   accepts_nested_attributes_for :images, :reject_if => :all_blank, :allow_destroy => true
   accepts_nested_attributes_for :templates, :reject_if => :all_blank, :allow_destroy => true
-  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :main_image, :css, :images_attributes, :mobile, :tablet, :laptop, :desktop, :templates_attributes
+  attr_accessible :title, :description, :featured, :featured_at, :published, :published_at, :main_image, :css, :images_attributes, :mobile, :tablet, :laptop, :desktop, :templates_attributes, :container_template
   validates_attachment :main_image, :size => { :in => 0..100.kilobytes }
   validates_attachment_content_type :main_image, :content_type=> ['image/jpeg', 'image/png', 'image/gif']
   validates_presence_of :title, :main_image, :owner
   validates_uniqueness_of :title
   validate :at_least_one_platform
   validate :css_validator
+  before_create :create_default_container
+
+
+  def create_default_container
+    self.container_template = "<div>{{outlet}}</div>"
+  end
+
+  def get_content_type_template(id)
+    @record = self.templates.where(content_type_id:id).first
+    if @record.nil?
+      ContentType.find(:first, id).default_template
+    else
+      @record.content
+    end
+  end
+
+  def templates_attributes=(data)
+    data.each do |t|
+      t = t[1]
+      record = self.templates.where(content_type_id: t["content_type_id"].to_i ).first_or_create
+      record.content = t["content"]
+      begin
+        record.save!
+      rescue
+        @template_attributes_errors = "Your " + record.content_type.name + " template has a syntax error. Check and try again."
+      end
+    end
+  end
 
   def at_least_one_platform
     unless self.mobile or self.tablet or self.laptop or self.desktop

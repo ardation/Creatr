@@ -1,13 +1,13 @@
 - content_for :scripts do
   = javascript_include_tag 'theme_library.js'
 %script#extra-template{type:"text/x-handlebars-template"}
-  .span2.extra
+  .span3.extra
     %a.btn.btn-small{href: new_dashboard_theme_path}
       %i.icon-bolt &nbsp;
       Roll your own Theme
 %script#content-template{type:"text/x-handlebars-template"}
   {{#each themes}}
-  .span2.theme
+  .span3.theme
     .stats
       .pull-right
         .name
@@ -23,7 +23,7 @@
         %small {{short_description}}
       .pull-right
         {{#if stats.editable}}
-        %a.btn.btn-small{href: "/dashboard/themes/{{id}}/roller"}
+        %a.btn.btn-small{href: "/dashboard/themes/{{id}}"}
           %i.icon-edit
         {{/if}}
         {{#if stats.favourite.me}}
@@ -37,14 +37,15 @@
         %i.icon-bolt &nbsp;
         %strong Use Theme
   {{/each}}
-.page-header
-  .pull-right
+- content_for :masthead do
+  .pull-right.operations
     %a.btn.btn-primary{href: new_dashboard_theme_path}
       %i.icon-bolt &nbsp;
       Roll your own Theme
-  %h1 Themes
-.row{style: "margin-left:0;"}
-  .pull-right
+  %h2 Themes
+  %p Theme Library
+.row
+  .span12
     %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
       %li.active
         %a{id: "featured", :href => "#library_featured", "data-toggle" => "tab", "data-offset" => 0}
@@ -62,63 +63,62 @@
         %a{id: "me", :href => "#my_themes", "data-toggle" => "tab", "data-offset" => 0}
           %i{class:"icon-folder-open"}
           My Themes
-  %h4.muted Theme Library
-  %hr
-  .tab-content
-    #library_featured.tab-pane.active
-      .loading
-      .empty.hidden
-        %h3 No themes are currently featured.
-        %a.btn.btn-primary{:href => new_dashboard_theme_path}
-          %i{class:"icon-bolt"}
-          Roll your own theme
-      .content.row-fluid.hidden
-      .pager
-        %ul.pager
-          %li.previous.disabled
-            %a{:href => "#"} ← Newer
-          %li.next.disabled
-            %a{:href => "#"} Older →
-        %br
-    #library_recent.tab-pane
-      .loading
-      .empty.hidden
-        %h3 No recent themes.
-        %a.btn.btn-primary{:href => new_dashboard_theme_path}
-          %i{class:"icon-bolt"}
-          Roll your own theme
-      .content.row-fluid.hidden
-      .pager
-        %ul.pager
-          %li.previous.disabled
-            %a{:href => "#"} ← Newer
-          %li.next.disabled
-            %a{:href => "#"} Older →
-    #my_favourites.tab-pane
-      .loading
-      .empty.hidden
-        %h3 You haven't added any themes to your favourites.
-        %a.btn.btn-primary{:href => new_dashboard_theme_path}
-          %i{class:"icon-bolt"}
-          Roll your own theme
-      .content.row-fluid.hidden
-      .pager
-        %ul.pager
-          %li.previous.disabled
-            %a{:href => "#"} ← Newer
-          %li.next.disabled
-            %a{:href => "#"} Older →
-    #my_themes.tab-pane
-      .loading
-      .empty.hidden
-        %h3 You haven't created any themes.
-        %a.btn.btn-primary{:href => new_dashboard_theme_path}
-          %i{class:"icon-bolt"}
-          Roll your own theme
-      .content.row-fluid.hidden
-      .pager
-        %ul.pager
-          %li.previous.disabled
-            %a{:href => "#"} ← Newer
-          %li.next.disabled
-            %a{:href => "#"} Older →
+    %hr
+    .tab-content
+      #library_featured.tab-pane.active
+        .loading
+        .empty.hidden
+          %h3 No themes are currently featured.
+          %a.btn.btn-primary{:href => new_dashboard_theme_path}
+            %i{class:"icon-bolt"}
+            Roll your own theme
+        .content.row.hidden
+        .pager
+          %ul.pager
+            %li.previous.disabled
+              %a{:href => "#"} ← Newer
+            %li.next.disabled
+              %a{:href => "#"} Older →
+          %br
+      #library_recent.tab-pane
+        .loading
+        .empty.hidden
+          %h3 No recent themes.
+          %a.btn.btn-primary{:href => new_dashboard_theme_path}
+            %i{class:"icon-bolt"}
+            Roll your own theme
+        .content.row.hidden
+        .pager
+          %ul.pager
+            %li.previous.disabled
+              %a{:href => "#"} ← Newer
+            %li.next.disabled
+              %a{:href => "#"} Older →
+      #my_favourites.tab-pane
+        .loading
+        .empty.hidden
+          %h3 You haven't added any themes to your favourites.
+          %a.btn.btn-primary{:href => new_dashboard_theme_path}
+            %i{class:"icon-bolt"}
+            Roll your own theme
+        .content.row.hidden
+        .pager
+          %ul.pager
+            %li.previous.disabled
+              %a{:href => "#"} ← Newer
+            %li.next.disabled
+              %a{:href => "#"} Older →
+      #my_themes.tab-pane
+        .loading
+        .empty.hidden
+          %h3 You haven't created any themes.
+          %a.btn.btn-primary{:href => new_dashboard_theme_path}
+            %i{class:"icon-bolt"}
+            Roll your own theme
+        .content.row.hidden
+        .pager
+          %ul.pager
+            %li.previous.disabled
+              %a{:href => "#"} ← Newer
+            %li.next.disabled
+              %a{:href => "#"} Older →

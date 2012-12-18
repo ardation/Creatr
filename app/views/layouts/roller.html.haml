@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title
+      = "+Creator |"
+      = params[:controller].capitalize
+    = stylesheet_link_tag    "dashboard", :media => "all"
+    = csrf_meta_tags
+    = javascript_include_tag "application"
+    = yield :scripts
+  %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
+    = render 'dash_nav'
+    = render 'dash_nav_left'
+    = yield
+    = render 'dash_footer'

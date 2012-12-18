@@ -1,22 +1,95 @@
-.page-header
-  %h1 Theme Library
-  %h4.muted= @theme.title
-.formtastic.content_type
-  %fieldset.inputs
-    %ol
-      %li.text.input
-        %label.label{:style => 'padding-top:0'} Title
-        = @theme.title
-      %li.text.input
-        %label.label{:style => 'padding-top:0'} Description
-        %div{style: "float:right"}= @theme.description
-      %li.text.input
-        %label.label{:style => 'padding-top:0'} Images
-        =# @content_type.inheritance.name
+- content_for :scripts do
+  = javascript_include_tag 'theme_roller.js'
+.page-left.icons.no-builder
+  - if @theme.mobile
+    %a.phone.size.link{"data-size" => "phone", :href => "#", class: ("selected" if @media == "phone")}
+  - if @theme.tablet
+    %a.tablet.size.link{"data-size" => "tablet", :href => "#", class: ("selected" if @media == "tablet")}
+  - if @theme.laptop
+    %a.laptop.size.link{"data-size" => "laptop", :href => "#", class: ("selected" if @media == "laptop") }
+  - if @theme.desktop
+    %a.desktop.size.link{"data-size" => "desktop", :href => "#", class: ("selected" if @media == "desktop")}
+.page-right.icons.no-builder
+  %a.upload.link{:href => "#"}
+    %i.icon-picture
+  %a.play.link{:href => "#"}
+    %i.icon-refresh
+  .bottom
+    %a.settings.link{href: edit_dashboard_theme_path(@theme)}
+      %i.icon-cogs
+    %a.save.link{:href => "#"}
+      %i.icon-save
+  #image-manager
+    .content-box
+      = s3_uploader_form post: dashboard_theme_url + '.json', as: "theme[images_attributes][0][url]", id: "myS3Uploader", max_file_size: 200.kilobytes, key: "themes/#{@theme.id}/images/${filename}" do
+        = file_field_tag :file, multiple: true
+      %script#template-upload{:type => "text/x-tmpl"}
+        .upload
+          {%=o.name%}
+          .progress.progress-striped.active
+            .bar{:style => "width: 0%"}
+      .gallery
         - @theme.images.each do |image|
-          = link_to (image_tag image.picture.url(:thumb)), image.picture.url, :target => "_blank"
-  %fieldset.actions
-    %ol
-      %li#content_type_submit_action.action.input_action
-        %a.btn.btn-primary{:href => edit_dashboard_theme_path(@content_type)} Edit
-        %a.btn{:href => dashboard_themes_path} Back
+          %a{href:image.url, target:"_blank"}
+            %img{style:"background-image:url(#{image.url});"}
+#page.no-builder{ class: @media + (if flash[:notice] or flash[:warning] or flash[:success] or flash[:error] then " alertbox" else "" end)}
+  .frame-cover
+  .frame-loading
+    %div
+      = image_tag('frame_loading.gif')
+  .title
+    %h3
+      %i.icon-beaker
+      %span#theme_name= @theme.title
+    #alerts
+      - if flash[:notice]
+        #alert-header.alert.alert-info
+          %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+          = flash[:notice]
+      - if flash[:warning]
+        #alert-header.alert
+          %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+          = flash[:warning]
+      - if flash[:success]
+        #alert-header.alert.alert-success
+          %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+          = flash[:success]
+      - if flash[:error]
+        #alert-header.alert.alert-error
+          %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+          = flash[:error]
+  #iframe-container
+    %iframe#demo{ width:"100%", height:"100%"}
+#theme-code.noheight
+  #show-css
+    CSS/HTML
+    %i.icon-chevron-up
+  .resize ...
+  .content-box
+    .css
+      .pull-right
+        %select{:id => "css-render"}
+          %option{:value => "css"}CSS
+          %option{:value => "scss"}SCSS
+      %h5
+        CSS
+        - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+          %span.badge Ctrl-Option-1
+        - else
+          %span.badge Ctrl-Alt-1
+      .relative
+        #css.editor= @theme.css
+    .html
+      .pull-right
+        %select{:id => "type"}
+          %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
+          - @content_types.each do |content|
+            %option{:value => content.id, "data-default" => @theme.get_content_type_template(content.id)}= content.name
+      %h5
+        HTML
+        - if UserAgent.parse(request.env['HTTP_USER_AGENT']).platform == 'Macintosh'
+          %span.badge Ctrl-Option-2
+        - else
+          %span.badge Ctrl-Alt-2
+      .relative
+        #html.editor

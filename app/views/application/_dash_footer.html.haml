@@ -1,11 +1,14 @@
-.footerClass
-  #footer
-    %p.pull-right
-      ©
-      %a{:href => "http://www.cru.org"} Cru
-      = DateTime.now.strftime("%Y")
-    %p
-      %a{href:"#", onClick:"script: Zenbox.show(); return false;"}Support
+#footer
+  .container
+    .row
+      .span6
+        [
+        %a{href:"#", onClick:"script: Zenbox.show(); return false;"}Support
+        ]
+      #copyright.span6
+        ©
+        %a{:href => "http://www.cru.org"} Cru
+        = DateTime.now.strftime("%Y")
 %script{:src => "//assets.zendesk.com/external/zenbox/v2.5/zenbox.js", :type => "text/javascript"}
 %style{:media => "screen, projection", :type => "text/css"}
   @import url(//assets.zendesk.com/external/zenbox/v2.5/zenbox.css);
