@@ -142,7 +142,7 @@ body.dashboard-themes {
     .loading {
       margin:0 auto;
       background:image-url('ajax-loader.gif') no-repeat center center;
-      width:32px;
+      width:48px;
       min-height:429px;
     }
     .empty {
@@ -187,27 +187,18 @@ body.dashboard-themes {
     }
   }
   &.show {
-    .formtastic {
-      .checkbox-container {
-        display:inline-block;
-        line-height:25px;
-        padding-top:3px;
-        input[type="checkbox"] {
-          margin:0 10px 2px 0;
-        }
-      }
-    }
-    .navbar-inverse .navbar-inner {
-      background:rgba(0,0,0,0.6);
-    }
     #footer {
       background:rgba(0,0,0,0.6);
       color:#fff;
+      position:absolute;
+      bottom:0;
+      left:0;
+      right:0;
     }
     background:image-url('bg_tile.png') repeat;
     #page {
       position:fixed;
-      top: 118px;
+      top: 178px;
       left:50%;
       margin-bottom:20px;
       background-color:#fff;
@@ -218,7 +209,7 @@ body.dashboard-themes {
         @include transition-property(none);
         @include transition-duration(0);
       }
-      .title {
+      .page-title {
         @include transition-property(margin-top);
         @include transition-duration(0.5s);
         color:#fff;
@@ -234,8 +225,8 @@ body.dashboard-themes {
       }
 
       &.alertbox {
-        top:166px;
-        .title {
+        top:226px;
+        .page-title {
           margin-top:-96px;
         }
       }
@@ -383,7 +374,7 @@ body.dashboard-themes {
     }
     .page-left {
       position:fixed;
-      top:70px;
+      top:140px;
       bottom: 80px;
       left:0;
       padding:20px;
@@ -396,7 +387,7 @@ body.dashboard-themes {
       z-index: 90;
       position:fixed;
       right:0;
-      top:70px;
+      top:140px;
       padding:20px;
       padding-top:0;
       @include transition-property(right, bottom);
@@ -413,7 +404,7 @@ body.dashboard-themes {
         position: fixed;
         overflow: visible !important;
         bottom: 80px;
-        top:70px;
+        top:135px;
         right:0;
         width: 0;
         background-color: white;
