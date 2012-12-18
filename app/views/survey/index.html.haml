@@ -12,7 +12,9 @@
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
+{{#if App.button}}
 .btn{:_action => 'incrementStep' } Next > 
+{{/if}}
 </script>
 
 <script data-template-name="Test Content Type" type="text/x-handlebars">
