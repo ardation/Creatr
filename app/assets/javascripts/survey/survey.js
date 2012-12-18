@@ -3,10 +3,11 @@ nextStep = 1;
 subViews = new Array();
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
 
-App = Ember.Application.create({
+App = Ember.Application.create({    // When ember updates we will need to use createWithMixins
     rootElement: '#surveyContainer',
     autoinit: false,
     nextStep: 1,
+    button: true
 }, Em.Facebook);
 
 
@@ -129,6 +130,7 @@ App.Router = Ember.Router.extend({
     finish: Em.Route.extend({
       route: '/submit',
       connectOutlets: function(router, context) {
+        App.set('button', false);
         router.get('applicationController').connectOutlet('submit');
         App.SurveyData.uploadData();
       }

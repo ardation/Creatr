@@ -24,7 +24,8 @@ App.SurveyContent = Ember.Object.extend({
 
   delete: function(event) {
     if(App.Surveys.contents.length > 1)
-      App.Surveys.contents.removeObject(this)
+      App.Surveys.contents.removeObject(this);
+      App.Surveys.updatePositions();
   },
   findIndex: function() {
     order = $('#accordion').sortable("toArray");
@@ -237,14 +238,3 @@ App.ContentTypes.forEach(function(object) {
   }, this);
 }, this);
 
-    // fromIndex += 1;
-    // toIndex += 1;
-    // this.contents.forEach(function(content){
-    //   content_pos_temp = content.get('content_pos');
-    //   if(content_pos_temp == fromIndex) 
-    //     content.set('content_pos', toIndex);
-    //   else if(content_pos_temp > toIndex)
-    //     content.incrementProperty('content_pos');
-    //   else if(content.content_pos >= fromIndex)
-    //     content.decrementProperty('content_pos');
-    // }, this);
