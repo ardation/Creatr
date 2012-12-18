@@ -6,8 +6,9 @@
   $(function () {
   $('#myTab a:first').tab('show');
   })
-.page-header
-  %h1 Settings
+- content_for :masthead do
+  %h2 Account Settings
+  %p Configure your account
 %ul#myTab.nav.nav-tabs
   %li.active
     %a{:href => "#profile", "data-toggle" => "tab"} Profile
@@ -23,8 +24,23 @@
       %fieldset.inputs
         %ol
           %li.input.string.stringish.required
-            %label.label Your MissionHub API Key
+            %label.label
+            - unless @mhub.api_key.nil?
+              %strong Active:
+              = truncate(@mhub.api_key, length: 20)
+          %li.input.string.stringish.required
+            %label.label New MissionHub API Key
             %input.input-xlarge{:placeholder => "MissionHub API Key", :type => "text"}
+            %div{style:"margin-left:240px;"}
+              %small This Key allows +Creator to access MissionHub on your behalf
+          %li.input.string.stringish.required
+            %label.label
+            - unless @mhub.client.nil?
+              %strong Active:
+              = @mhub.client
+          %li.input.string.stringish.required
+            %label.label New MissionHub Client ID
+            %input.input-xlarge{:placeholder => "MissionHub Client ID", :type => "number"}
             %div{style:"margin-left:240px;"}
               %small This Key allows +Creator to access MissionHub on your behalf
       %fieldset.actions

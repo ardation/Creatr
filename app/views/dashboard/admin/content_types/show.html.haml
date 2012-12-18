@@ -1,10 +1,11 @@
 - @content_type = ContentType.find(params[:id])
+- content_for :masthead do
+  %h2 Content Types
+  %p= "#{@content_type.name} Configuration"
+
 .alert.alert-error.alert-block
   %strong Content Types heavily affect +Creator operation!
   %p It is recommended that you consult the documentation for this system before making any changes
-.page-header
-  %h1 Content Types
-  %h4.muted= @content_type.name
 .formtastic.content_type
   %fieldset.inputs
     %legend

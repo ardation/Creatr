@@ -9,29 +9,33 @@
     = javascript_include_tag "application"
     = yield :scripts
   %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
-    = render 'dash_nav'
-    = render 'dash_nav_left'
-    #wrap
-      .navbar-spacer
-      .container-fluid
-        .row-fluid
-          .span12#emberContainer
-            - if flash[:notice]
-              .alert.alert-info
-                %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
-                = flash[:notice]
-            - if flash[:warning]
-              .alert
-                %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
-                = flash[:warning]
-            - if flash[:success]
-              .alert.alert-success
-                %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
-                = flash[:success]
-            - if flash[:error]
-              .alert.alert-error
-                %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
-                = flash[:error]
-            = yield
+    #wrapper
+      = render 'dash_nav'
+      #masthead
+        .container
+          .masthead-pad
+            .masthead-text
+              = yield :masthead
+      .content
+        .container
+          .row
+            .span12#emberContainer
+              - if flash[:notice]
+                .alert.alert-info
+                  %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+                  = flash[:notice]
+              - if flash[:warning]
+                .alert
+                  %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+                  = flash[:warning]
+              - if flash[:success]
+                .alert.alert-success
+                  %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+                  = flash[:success]
+              - if flash[:error]
+                .alert.alert-error
+                  %button{:type => "button", :class => "close", "data-dismiss" => "alert"} x
+                  = flash[:error]
+              = yield
       #push
     = render 'dash_footer'
