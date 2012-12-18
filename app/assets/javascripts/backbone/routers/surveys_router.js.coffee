@@ -12,20 +12,20 @@ class FlamingWight.Routers.SurveysRouter extends Backbone.Router
 
   newSurveys: ->
     @view = new FlamingWight.Views.Surveys.NewView(collection: @surveys)
-    $("#surveys").html(@view.render().el)
+    $("#dashboard").html(@view.render().el)
 
   index: ->
     @view = new FlamingWight.Views.Surveys.IndexView(surveys: @surveys)
-    $("#surveys").html(@view.render().el)
+    $("#dashboard").html(@view.render().el)
 
   show: (id) ->
     surveys = @surveys.get(id)
 
     @view = new FlamingWight.Views.Surveys.ShowView(model: surveys)
-    $("#surveys").html(@view.render().el)
+    $("#dashboard").html(@view.render().el)
 
   edit: (id) ->
     surveys = @surveys.get(id)
 
     @view = new FlamingWight.Views.Surveys.EditView(model: surveys)
-    $("#surveys").html(@view.render().el)
+    $("#dashboard").html(@view.render().el)

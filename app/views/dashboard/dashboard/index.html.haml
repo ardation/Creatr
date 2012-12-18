@@ -1,9 +1,11 @@
 - content_for :scripts do
   = javascript_include_tag "backbone/app"
-
+- content_for :masthead do
+  %h2 Dashboard
+  %p= "You are currently working on #{@surveys.length} campaigns."
 #dashboard
 
 :javascript
-  window.router = new FlamingWight.Routers.DashboardRouter({});
+  window.router = new FlamingWight.Routers.SurveysRouter({});
   Backbone.history.start({pushState: true, root: "/dashboard/"})
 

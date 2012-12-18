@@ -12,8 +12,11 @@
 
 @import 'dashboard-black-orange';
 
+@import 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,300';
+
 html,
 body {
+  font-family: 'Open Sans', sans-serif;
   height: 100%;
 }
 .operations{

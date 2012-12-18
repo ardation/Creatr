@@ -21,16 +21,16 @@
             Logout
 #header
   .container
-    %a.brand{href: "/dashboard"} Creator+
+    %a.brand{href: "/dashboard/"} Creator+
     %a.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :href => "javascript:;"}
       %i.icon-reorder
     .nav-collapse.collapse
       %ul#main-nav.nav.pull-right
         %li.nav-icon{:class => ("active" if params[:controller] == "dashboard/dashboard" and params[:action] == "index")}
-          %a{:href => "/dashboard"}
+          %a{:href => "/dashboard/"}
             %i.icon-home
-        %li.nav-icon{:class=>("active" if params[:controller] == "dashboard/campaigns") }
-          %a{:href => "/dashboard"}
+        %li.nav-icon{:class=>("active" if params[:controller] == "dashboard/dashboard" and params[:action] == "campaigns") }
+          %a{:href => "/dashboard/campaigns"}
             %i.icon-th
             %span Campaigns
         %li.nav-icon{:class=>("active" if params[:controller] == "dashboard/themes") }

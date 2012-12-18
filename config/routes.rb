@@ -13,6 +13,7 @@ FlamingWight::Application.routes.draw do
     match 'billing/credit_card' => 'billing#credit_card'
     match 'new' => 'create#index'
     match 'settings' => 'dashboard#settings'
+    match 'campaigns' => 'dashboard#campaigns'
     match 'iframe' => 'dashboard#iframe'
     match 'ajax/crm_data' => 'create#crm_data'
     resources :themes

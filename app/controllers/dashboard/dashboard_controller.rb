@@ -3,6 +3,10 @@ class Dashboard::DashboardController < Dashboard::BaseController
     @surveys = current_member.surveys
   end
 
+  def campaigns
+    @surveys = current_member.surveys
+  end
+
   def settings
     # set your secret key
     Stripe.api_key = ENV['stripe_secret_key']
