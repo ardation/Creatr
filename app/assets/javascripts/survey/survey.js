@@ -2,14 +2,17 @@ nextStep = 1;
 
 subViews = new Array();
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
-while( typeof(Ember.Facebook) != "object" );
 
 App = Ember.Application.create({
     rootElement: '#surveyContainer',
     autoinit: false,
     nextStep: 1,
-    appId: 113411778806173
 }, Em.Facebook);
+
+
+App.setProperties({
+    appId: 113411778806173
+});
 
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
