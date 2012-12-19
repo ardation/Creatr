@@ -9,6 +9,14 @@
     var content_types = #{@content_types}
 
 -content_for :title, @campaign.name
+- content_for :style do
+  = @css
+
+- @templates.each do |template|
+  %script{:'data-template-name' => template["name"] , :type=>"text/x-handlebars"}
+    != template["template"]
+
+
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}

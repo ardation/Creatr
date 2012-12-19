@@ -27,6 +27,7 @@ FlamingWight::Application.routes.draw do
     resources :themes
 
     get 'campaigns/crm_data' => 'campaigns#crm_data'
+    get 'campaigns/content_types' => 'campaigns#content_types'
     resources :campaigns
 
     namespace :admin do
