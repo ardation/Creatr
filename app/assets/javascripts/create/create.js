@@ -38,7 +38,7 @@ App.SurveyContent = Ember.Object.extend({
     }
     console.log(order);
     return order.indexOf(this.id);
-  } 
+  }
 });
 
 
@@ -51,7 +51,7 @@ App.Surveys = Ember.Object.create({
   contentsNameObserver: function() {
     context = this;
     if(this.get('contents.lastObject').name) {
-      context.contents.pushObject(App.SurveyContent.create());  
+      context.contents.pushObject(App.SurveyContent.create());
     }
   }.observes("contents.lastObject.name"),
   updatePositions: function() {
@@ -101,15 +101,15 @@ App.CRMData.reopenClass ({
   loadData: function() {
     context = this;
     context.crm_data = [];
-    $.getJSON ("ajax/crm_data", function(data) {
-      data.forEach(function(crm) {
-        context.crm_data.pushObject(App.CRMData.create({id: crm.crm_id, name: crm.crm_name}));
+    $.getJSON ("ajax/crm_data.json", function(data) {
+      data.crms.forEach(function(crm) {
+        context.crm_data.pushObject(App.CRMData.create({id: crm.id, name: crm.name}));
         crm.orgs.forEach(function(org) {
-          context.org_data.pushObject(App.CRMData.create({id: org.org_id, name: org.org_name, crm_id: crm.crm_id}));
+          context.org_data.pushObject(App.CRMData.create({id: org.id, name: org.name, crm_id: crm.id}));
         }, context)
       }, context)
       context.updateOrganisations(5);
-    }); 
+    });
     return this.crm_data;
   },
   updateOrganisations: function(crm_id) {
@@ -182,7 +182,7 @@ App.JQuerySortableView = Ember.CollectionView.extend( {
   didInsertElement: function() {
     this._super();
     this.$().sortable({
-      axis: "y", 
+      axis: "y",
       update: function(event, ui) {
         App.Surveys.updatePositions();
       }
@@ -208,7 +208,7 @@ App.Router = Em.Router.extend ({
       route: '/',
       connectOutlets: function(router){
         router.get('applicationController').connectOutlet( 'step0');
-      }      
+      }
     }),
 
     step1: Ember.Route.extend ({

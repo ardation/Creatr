@@ -1,6 +1,6 @@
 class SurveyController < ApplicationController
   def index
-    @survey = Survey.find(params[:id])
+    @survey = Campaign.find(params[:id])
     @content_types = Array.new
     @templates = Array.new
     @survey.contents.each do |content| 

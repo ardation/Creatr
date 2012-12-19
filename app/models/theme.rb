@@ -3,7 +3,7 @@ class Theme < ActiveRecord::Base
   # attr_accessible :title, :body
   has_many :images
   has_many :templates
-  has_many :surveys
+  has_many :campaigns
   belongs_to :owner, :class_name => "Member", :foreign_key => "owner_id"
   has_attached_file :main_image,
     :path => ":class/:id/main_image/:style/:filename",

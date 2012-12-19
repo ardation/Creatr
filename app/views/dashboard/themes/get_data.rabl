@@ -4,7 +4,7 @@ node(:stats) { |theme| {
     favourite: { me: theme.favourite?(current_member.id), count: theme.favourites.size },
     publish:{ published: theme.published?, pending: theme.publish_pending? },
     feature: theme.featured?,
-    surveys: theme.surveys.size,
+    campaigns: theme.campaigns.size,
     editable: theme.editable?(current_member.id)
   }
 }
