@@ -4,7 +4,7 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   def create
     @theme = Theme.new(params[:theme])
     @theme.owner = current_member
-    create!{ "/dashboard/themes/#{@theme.id}/roller" }
+    create!{ "/dashboard/themes/#{@theme.id}/" }
   end
 
   def show
