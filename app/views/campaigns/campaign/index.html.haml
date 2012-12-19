@@ -10,36 +10,8 @@
 
 -content_for :title, @campaign.name.gsub(/_/, ' ').capitalize
 - content_for :style do
-  = @css
+  = @campaign.theme.css
 
 - @templates.each do |template|
-  %script{:'data-template-name' => template["name"] , :type=>"text/x-handlebars"}
-    != template["content"]
-
-<script data-template-name="app" type="text/x-handlebars">
-{{outlet}}
-{{#if App.button}}
-.btn{:_action => 'incrementStep' } Next >
-{{/if}}
-</script>
-
-<script data-template-name="Test Content Type" type="text/x-handlebars">
-<div class = "survey_box">
-{{data.question}}
-{{view Ember.TextField valueBinding="answer"}}
-</div>
-</script>
-
-<script data-template-name="Facebook" type="text/x-handlebars">
-{{#if App.FBUser}}
-Thanks, you're connected with facebook!
-{{else}}
-{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}}
-Connect with facebook
-{{/view}}
-{{/if}}
-</script>
-
-<script data-template-name="final" type="text/x-handlebars">
-DONE BRO!
-</script>
+  %script{:'data-template-name' => template.name , :type=>"text/x-handlebars"}
+    != template.content

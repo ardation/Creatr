@@ -2,7 +2,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
   def index
     unless @campaign.nil?
       @content_types = []
-      @templates = {}
+      @templates = []
       @campaign.contents.each do |content|
         unless @content_types.include?(content.content_type)
           @content_types << content.content_type
