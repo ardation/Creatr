@@ -2,8 +2,9 @@
   %h2 Admin
   %p Themes
 = table_for(@themes) do |t|
-  = t.data actions: [:show, :edit], action_prefix: "dashboard" do
+  = t.data do
     = t.cell :title
     = t.cell :owner
     = t.cell(:platform) {|p| ("<span class=\"label label-info\">Mobile</span>&nbsp;".html_safe if p.mobile?) + ("<span class=\"label label-info label-info\">Tablet</span>&nbsp;".html_safe if p.tablet?) + ("<span class=\"label label-info\">Laptop</span>&nbsp;".html_safe if p.laptop?) + ("<span class=\"label label-info\">Desktop</span>".html_safe if p.desktop?) }
-    = t.cell(:state) {|p| if p.published? and p.published_at.nil? then "<span class=\"label label-warning\">Pending</span>".html_safe elsif p.published? and not p.published_at.nil? then "<span class=\"label label-success\">Published</span>".html_safe else "<span class=\"label\">Private</span>".html_safe end }
+    = t.cell(:state) {|p| if p.published? and p.published_at.nil? then "<span class=\"label label-warning\">Pending</span>".html_safe elsif p.published? and not p.published_at.nil? then if p.featured? then "<span class=\"label label-success\">Featured</span>".html_safe else "<span class=\"label label-success\">Published</span>".html_safe end else "<span class=\"label\">Private</span>".html_safe end }
+    = t.cell(:actions) {|p| (if can? :show, p then "#{link_to "Theme Roller", dashboard_theme_path(p)} | #{link_to "Publish", "/dashboard/admin/themes/#{p.id}/publish"}".html_safe else (if p.featured? then "#{link_to "Unfeature", "/dashboard/admin/themes/#{p.id}/unfeature"} | ".html_safe else "#{link_to "Feature", "/dashboard/admin/themes/#{p.id}/feature"} | ".html_safe end) + "#{link_to "Unpublish", "/dashboard/admin/themes/#{p.id}/unpublish"}".html_safe end) }

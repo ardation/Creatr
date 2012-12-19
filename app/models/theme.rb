@@ -94,6 +94,25 @@ class Theme < ActiveRecord::Base
     owner.id == id and !published?
   end
 
+  def publish
+    self.published_at = Time.now
+  end
+
+  def unpublish
+    self.unfeature
+    self.published_at = nil
+  end
+
+  def feature
+    self.featured = true
+    self.featured_at = Time.now
+  end
+
+  def unfeature
+    self.featured = false
+    self.featured_at = nil
+  end
+
   private
 
   def set_default_url_on_category
