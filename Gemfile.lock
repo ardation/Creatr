@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/edwin-wills/mandrill.git
-  revision: 7d0cc587102fb3bd6289505e42fdcb66e440b0fc
-  specs:
-    mandrill (0.0.2)
-      httpi
-      json
-
-GIT
   remote: git://github.com/josh/useragent.git
   revision: d575b214128ab2a44b971e714e01446786932322
   specs:
@@ -85,7 +77,7 @@ GEM
     chunky_png (1.2.6)
     cocaine (0.4.2)
     cocoon (1.1.1)
-    codemirror-rails (2.35)
+    codemirror-rails (3.00)
       railties (~> 3.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -107,7 +99,7 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.1.3)
-    ejs (1.0.0)
+    ejs (1.1.1)
     ember-rails (0.8.0)
       active_model_serializers
       execjs (>= 1.2)
@@ -139,15 +131,15 @@ GEM
       tilt
     has_scope (0.5.1)
     hashie (1.2.0)
-    highcharts-rails (2.3.3)
-      railties (~> 3.1)
+    highcharts-rails (2.3.3.1)
+      railties (>= 3.1)
     hike (1.2.1)
     hirefireapp (0.0.8)
     httparty (0.9.0)
       multi_json (~> 1.0)
       multi_xml
     httpauth (0.2.0)
-    httpi (1.1.1)
+    httpi (2.0.0)
       rack
     i18n (0.6.1)
     inherited_resources (1.3.1)
@@ -178,6 +170,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill (0.0.2)
+      httpi
+      json
     mime-types (1.19)
     multi_json (1.5.0)
     multi_xml (0.5.1)
@@ -226,9 +221,10 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
-    rails-backbone (0.6.1)
+    rails-backbone (0.9.0)
       coffee-script (~> 2.2.0)
-      ejs (~> 1.0.0)
+      ejs (~> 1.1.1)
+      jquery-rails (~> 2.1.3)
       railties (>= 3.1.0)
     rails-erd (1.0.0)
       activerecord (>= 3.0)
@@ -262,8 +258,8 @@ GEM
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
       rspec-mocks (~> 2.12.0)
-    rspec-core (2.12.1)
-    rspec-expectations (2.12.0)
+    rspec-core (2.12.2)
+    rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.12.0)
     rubinius-actor (0.0.2)
@@ -334,7 +330,7 @@ DEPENDENCIES
   jquery-ui-rails
   jshintrb
   kaminari
-  mandrill!
+  mandrill
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)
