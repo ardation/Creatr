@@ -1,15 +1,13 @@
 class Organisation < ActiveRecord::Base
 
-  has_many :surveys
+  has_many :campaigns
 
   validates_presence_of :name
 
-  has_one :crm
+  belongs_to :crm
 
   attr_accessible :name
 
-  #has_many :member_organisations
-  #has_many :members, through: :member_organisations
-
-  delegate :crms, to: :member, prefix: true
+  has_many :member_organisations
+  has_many :members, through: :member_organisations
 end

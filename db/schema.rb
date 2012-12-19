@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217085721) do
+ActiveRecord::Schema.define(:version => 20121219061136) do
+
+  create_table "campaigns", :force => true do |t|
+    t.string  "name"
+    t.integer "organisation_id"
+    t.integer "theme_id"
+    t.date    "start_date"
+    t.date    "finish_date"
+  end
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
@@ -28,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20121217085721) do
   end
 
   create_table "contents", :force => true do |t|
-    t.integer  "survey_id"
+    t.integer  "campaign_id"
     t.integer  "content_type_id"
     t.text     "data"
     t.integer  "position"
@@ -95,6 +103,14 @@ ActiveRecord::Schema.define(:version => 20121217085721) do
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
 
+  create_table "messages", :force => true do |t|
+    t.text     "message_template"
+    t.boolean  "is_sms"
+    t.boolean  "is_email"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "organisations", :force => true do |t|
     t.string  "name"
     t.integer "crm_id"
@@ -104,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20121217085721) do
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
 
   create_table "permissions", :force => true do |t|
-    t.integer "survey_id"
+    t.integer "campaign_id"
     t.integer "member_id"
   end
 
@@ -117,12 +133,6 @@ ActiveRecord::Schema.define(:version => 20121217085721) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
-
-  create_table "surveys", :force => true do |t|
-    t.string  "name"
-    t.integer "organisation_id"
-    t.integer "theme_id"
-  end
 
   create_table "templates", :force => true do |t|
     t.integer  "theme_id"

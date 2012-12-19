@@ -4,7 +4,7 @@ class Member < ActiveRecord::Base
   has_many :crms, :through => :member_crms
 
   has_many :permissions
-  has_many :surveys, through: :permissions
+  has_many :campaigns, through: :permissions
 
   has_many :organisations, through: :crms
 

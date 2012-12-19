@@ -1,10 +1,7 @@
 class Dashboard::DashboardController < Dashboard::BaseController
+  before_filter :authenticate_member!
   def index
-    @surveys = current_member.surveys
-  end
-
-  def campaigns
-    @surveys = current_member.surveys
+    @surveys = current_member.campaigns
   end
 
   def settings

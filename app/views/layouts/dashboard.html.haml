@@ -6,7 +6,7 @@
       = params[:controller].capitalize
     = stylesheet_link_tag    "dashboard", :media => "all"
     = csrf_meta_tags
-    = javascript_include_tag "application"
+    = javascript_include_tag "dashboard"
     = yield :scripts
   %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
     #wrapper
