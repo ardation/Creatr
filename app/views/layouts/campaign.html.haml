@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title
+      = yield :title
+    = stylesheet_link_tag    "campaign/application", :media => "all"
+    = csrf_meta_tags
+    = yield :script_includes
+    = javascript_include_tag "campaign/application"
+    = yield :scripts
+    %style
+      = yield :style
+  %body{class: "#{params[:action]}"}
+    #surveyContainer
+      = yield

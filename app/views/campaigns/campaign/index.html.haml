@@ -5,15 +5,15 @@
 
 - content_for :script_includes do
   :javascript
-    var survey_contents = #{@survey.contents.find(:all, :order => "position").to_json};
+    var survey_contents = #{@campaign.contents.find(:all, :order => "position").to_json};
     var content_types = #{@content_types}
 
--content_for :title, @survey.name
+-content_for :title, @campaign.name
 
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
 {{#if App.button}}
-.btn{:_action => 'incrementStep' } Next > 
+.btn{:_action => 'incrementStep' } Next >
 {{/if}}
 </script>
 
@@ -28,7 +28,7 @@
 {{#if App.FBUser}}
 Thanks, you're connected with facebook!
 {{else}}
-{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}} 
+{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}}
 Connect with facebook
 {{/view}}
 {{/if}}

@@ -1,4 +1,12 @@
 FlamingWight::Application.routes.draw do
+
+  # config/routes
+  constraints(PersonalizedDomain) do
+    namespace :campaigns, :path => '/' do
+      root :to => "campaign#index"
+    end
+  end
+
   devise_for :members, :controllers => { :omniauth_callbacks => "members/omniauth_callbacks", :confirmations => 'members/confirmations'}
 
   devise_scope :member do

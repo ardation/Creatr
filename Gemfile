@@ -75,6 +75,4 @@ gem 's3_direct_upload', :path => "vendor/gems/s3_direct_upload-0.0.3"
 
 gem 'rabl-rails'
 
-gem 'rails-backbone'
-
 gem 'ejs'

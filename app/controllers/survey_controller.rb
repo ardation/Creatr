@@ -1,6 +1,5 @@
 class SurveyController < ApplicationController
   def index
-    @survey = Campaign.find(params[:id])
     @content_types = Array.new
     @survey.contents.each do |content|
       @content_types << content.content_type unless @content_types.include?(content.content_type)
