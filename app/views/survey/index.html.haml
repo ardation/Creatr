@@ -1,0 +1,48 @@
+
+- content_for :scripts do
+  = javascript_include_tag 'survey/ember-facebook'
+  = javascript_include_tag 'survey/survey'
+
+- content_for :script_includes do
+  :javascript
+    var survey_contents = #{@survey.contents.find(:all, :order => "position").to_json};
+    var content_types = #{@content_types}
+
+- content_for :style do
+  = @css
+
+-content_for :title, @survey.name
+
+- @templates.each do |template|
+  %script{:'data-template-name' => template["name"] , :type=>"text/x-handlebars"}
+    != template["template"]
+
+
+
+<script data-template-name="app" type="text/x-handlebars">
+{{outlet}}
+{{#if App.button}}
+.btn{:_action => 'incrementStep' } Next > 
+{{/if}}
+</script>
+
+<script data-template-name="Test Content Type" type="text/x-handlebars">
+<div class = "survey_box">
+{{data.question}}
+{{view Ember.TextField valueBinding="answer"}}
+</div>
+</script>
+
+<script data-template-name="Facebook" type="text/x-handlebars">
+{{#if App.FBUser}}
+Thanks, you're connected with facebook!
+{{else}}
+{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}} 
+Connect with facebook
+{{/view}}
+{{/if}}
+</script>
+
+<script data-template-name="final" type="text/x-handlebars">
+DONE BRO!
+</script>
