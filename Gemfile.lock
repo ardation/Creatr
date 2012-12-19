@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/edwin-wills/mandrill.git
-  revision: 7d0cc587102fb3bd6289505e42fdcb66e440b0fc
-  specs:
-    mandrill (0.0.2)
-      httpi
-      json
-
-GIT
   remote: git://github.com/josh/useragent.git
   revision: d575b214128ab2a44b971e714e01446786932322
   specs:
@@ -178,6 +170,9 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill (0.0.2)
+      httpi
+      json
     mime-types (1.19)
     multi_json (1.5.0)
     multi_xml (0.5.1)
@@ -334,7 +329,7 @@ DEPENDENCIES
   jquery-ui-rails
   jshintrb
   kaminari
-  mandrill!
+  mandrill
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)
