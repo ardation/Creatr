@@ -12,17 +12,17 @@ App.SurveyContent = Ember.Object.extend({
     this.set('id', 'content'+content_id_counter);
     this.set('idhref', '#content'+content_id_counter);
     this.set('id2', 'outer_content'+content_id_counter);
-    this.set('content_pos', content_id_counter + 1);
+    this.set('position', content_id_counter + 1);
     content_id_counter++;
     this.set('hash', Ember.Object.create());
   },
   name: "",
-  content_type: 2,
+  content_type_id: 2,
 
   content_hash: function() {
-    test = App.ContentTypes.content.findProperty('id', this.content_type).validator;
+    test = App.ContentTypes.content.findProperty('id', this.content_type_id).validator;
     return JSON.parse(test);
-  }.property('content_type').volatile(),
+  }.property('content_type_id').volatile(),
 
   delete: function(event) {
     if(App.Surveys.contents.length > 1)
@@ -49,6 +49,7 @@ App.Surveys = Ember.Object.create({
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 0,
+  cname_alias: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
   contentsNameObserver: function() {
     context = this;
@@ -62,9 +63,20 @@ App.Surveys = Ember.Object.create({
       element = $('#'+elements[i]);
       e_id = element.children()[0].id;
       obj = this.contents.findProperty('id2', e_id);
-      obj.set('content_pos', i+1);
+      obj.set('position', i+1);
     };
+  },
+  uploadModel: function() {
+    $.post('/dashboard/campaigns/', {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: JSON.stringify(this.jsonContents())}});
+  },
+  jsonContents: function() {
+    json = [];
+    this.contents.forEach(function(content) {
+      json.pushObject({name: content.name, content_type_id: content.content_type_id, position: content.position, data: content.hash});
+    });
+    return json;
   }
+
 });
 
 
