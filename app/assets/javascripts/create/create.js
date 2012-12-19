@@ -1,26 +1,28 @@
 //Testing this out
 content_id_counter = 0;
-
+test = "hey";
 App = Ember.Application.create({
   rootElement: '#emberContainer',
+  test: "hey"
 });
 
 App.SurveyContent = Ember.Object.extend({
   init: function(pos) {
+    this._super();
     this.set('id', 'content'+content_id_counter);
     this.set('idhref', '#content'+content_id_counter);
     this.set('id2', 'outer_content'+content_id_counter);
-    this.set('content_pos', content_id_counter + 1);
+    this.set('position', content_id_counter + 1);
     content_id_counter++;
+    this.set('hash', Ember.Object.create());
   },
   name: "",
-  content_type: 1,
+  content_type_id: 2,
 
-  hash: Em.A([]),
-
-  // types: function() {
-  //   return App.ContentTypes.findProperty('id', this.content_type).hash;
-  // }.property(),
+  content_hash: function() {
+    test = App.ContentTypes.content.findProperty('id', this.content_type_id).validator;
+    return JSON.parse(test);
+  }.property('content_type_id').volatile(),
 
   delete: function(event) {
     if(App.Surveys.contents.length > 1)
@@ -47,6 +49,7 @@ App.Surveys = Ember.Object.create({
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 0,
+  cname_alias: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
   contentsNameObserver: function() {
     context = this;
@@ -60,19 +63,30 @@ App.Surveys = Ember.Object.create({
       element = $('#'+elements[i]);
       e_id = element.children()[0].id;
       obj = this.contents.findProperty('id2', e_id);
-      obj.set('content_pos', i+1);
+      obj.set('position', i+1);
     };
+  },
+  uploadModel: function() {
+    $.post('/dashboard/campaigns/', {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: JSON.stringify(this.jsonContents())}});
+  },
+  jsonContents: function() {
+    json = [];
+    this.contents.forEach(function(content) {
+      json.pushObject({name: content.name, content_type_id: content.content_type_id, position: content.position, data: content.hash});
+    });
+    return json;
   }
+
 });
 
 
 App.ContentTypes = Ember.ArrayProxy.create({
-  content: Ember.A(),
+  content: [],
   loadData: function() {
     context = this;
-    $.getJSON ("ajax/content_types", function(data) {
+    $.getJSON ("content_types", function(data) {
       data.forEach(function(content_type) {
-        context.content.push(content_type);
+        context.content.push(Ember.Object.create(content_type));
       });
     });
   }
@@ -101,7 +115,7 @@ App.CRMData.reopenClass ({
   loadData: function() {
     context = this;
     context.crm_data = [];
-    $.getJSON ("ajax/crm_data.json", function(data) {
+    $.getJSON ("crm_data.json", function(data) {
       data.crms.forEach(function(crm) {
         context.crm_data.pushObject(App.CRMData.create({id: crm.id, name: crm.name}));
         crm.orgs.forEach(function(org) {
@@ -127,6 +141,32 @@ App.CRMData.reopenClass ({
 
 App.DateField = Ember.TextField.extend({
   attributeBindings: ['id', 'class']
+});
+
+App.HackExtreme = Ember.TextField.extend({
+  init: function() {
+    this._super();
+    saveObject = this.get('parentView').get('content');
+    name = this.get('templateData').view.content.name;
+    ext = new Object();
+    ext[name] = "";
+
+    if(typeof saveObject.hash[name] =='undefined')
+      $.extend(saveObject.hash, ext);
+
+    this.set('obj_path', 'hash.'+name);
+    this.set('obj', saveObject);
+    this.set('val', this.obj.get(this.obj_path));
+  },
+  valueBinding: "val",
+  val: "",
+  valObserver: function() {
+    test = this.obj;
+    this.obj.set(this.obj_path, this.val);
+  }.observes('val')
+
+
+
 });
 
 App.CRMSelect = Ember.Select.extend({
@@ -241,11 +281,32 @@ App.Router = Em.Router.extend ({
 });
 
 
-//Ember.LOG_BINDINGS=true;
+Ember.LOG_BINDINGS=true;
 
 // App.ContentTypes.forEach(function(object) {
 //   object.hash.forEach(function(hash) {
 //     hash.reopen(App.ViewTypeConvention);
 //   }, this);
 // }, this);
+
+Person = Ember.Object.extend({
+  // these will be supplied by `create`
+  firstName: null,
+  lastName: null,
+  fullName: function(key, value) {
+    // getter
+    if (arguments.length === 1) {
+      var firstName = this.get('firstName');
+      var lastName = this.get('lastName');
+      return firstName + ' ' + lastName;
+    // setter
+    } else {
+      var name = value.split(" ");
+      this.set('firstName', name[0]);
+      this.set('lastName', name[1]);
+      return value;
+    }
+  }.property('firstName', 'lastName')
+});
+var person = Person.create();
 
