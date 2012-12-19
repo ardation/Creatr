@@ -1,5 +1,6 @@
 class Dashboard::ThemesController < Dashboard::ResourceController
   respond_to :html, :json, :xml
+  load_and_authorize_resource
 
   def create
     @theme = Theme.new(params[:theme])
@@ -42,12 +43,12 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   private
 
   def featured(offset)
-    @themes = Theme.where(featured: true, published: true).all(offset: offset, limit: 4, order: :featured_at)
+    @themes = Theme.where(featured: true, published: true).where("published_at is not null").all(offset: offset, limit: 4, order: :featured_at)
     respond_with(@themes)
   end
 
   def recent(offset)
-    @themes = Theme.where(published: true).all(offset: offset, limit: 4, order: :published_at)
+    @themes = Theme.where(published: true).where("published_at is not null").all(offset: offset, limit: 4, order: :published_at)
     respond_with(@themes)
   end
 
@@ -59,7 +60,7 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   def favourites(offset)
     @themes = []
     current_member.favourites.all(offset: offset, limit: 4, order: "created_at DESC").each do |favourite|
-      @themes.push favourite.theme
+      @themes.push favourite.theme if (favourite.theme.published? or favourite.theme.owner_id == current_member.id) and !favourite.theme.published_at.nil?
     end
     respond_with(@themes)
   end

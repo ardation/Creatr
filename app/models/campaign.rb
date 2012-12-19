@@ -3,6 +3,7 @@ class Campaign < ActiveRecord::Base
   has_many :permissions
   has_many :members, through: :permissions
   has_many :contents
+  has_many :campaign_counters
   belongs_to :theme
   attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
@@ -27,5 +28,13 @@ class Campaign < ActiveRecord::Base
     else
       "#{self.cname_alias}"
     end
+  end
+
+  def total
+    self.campaign_counters.sum(:count)
+  end
+
+  def tidy_name
+    self.name.gsub(/_/, ' ').capitalize
   end
 end

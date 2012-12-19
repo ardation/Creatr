@@ -37,6 +37,7 @@ FlamingWight::Application.routes.draw do
       match 'accounts/:id/promote' => 'administrator#promote'
       match 'accounts/:id/demote' => 'administrator#demote'
       resources :content_types, :except => :destroy
+      resources :themes, :except => [:create, :new]
     end
   end
 

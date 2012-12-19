@@ -15,7 +15,18 @@
       %i.icon-bolt
       {{stats.campaigns}} &nbsp;
       %i.icon-heart
-      {{stats.favourite.count}}
+      {{stats.favourite.count}} &nbsp;
+      {{#if stats.feature}}
+      %i.icon-star
+      {{else}}
+      {{#if stats.publish.published}}
+      {{#if stats.publish.pending}}
+      %i.icon-bookmark-empty
+      {{else}}
+      %i.icon-bookmark
+      {{/if}}
+      {{/if}}
+      {{/if}}
     %img{src:"{{main_image_url}}"}
     .content-container
       %h4 {{title}}

@@ -1,4 +1,4 @@
-class Dashboard::Admin::ContentTypesController < Dashboard::ResourceController
+class Dashboard::Admin::ThemesController < Dashboard::ResourceController
   before_filter :is_admin
 
   def index

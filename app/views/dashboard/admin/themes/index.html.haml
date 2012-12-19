@@ -1,0 +1,9 @@
+- content_for :masthead do
+  %h2 Admin
+  %p Themes
+= table_for(@themes) do |t|
+  = t.data actions: [:show, :edit], action_prefix: "dashboard" do
+    = t.cell :title
+    = t.cell :owner
+    = t.cell(:platform) {|p| ("<span class=\"label label-info\">Mobile</span>&nbsp;".html_safe if p.mobile?) + ("<span class=\"label label-info label-info\">Tablet</span>&nbsp;".html_safe if p.tablet?) + ("<span class=\"label label-info\">Laptop</span>&nbsp;".html_safe if p.laptop?) + ("<span class=\"label label-info\">Desktop</span>".html_safe if p.desktop?) }
+    = t.cell(:state) {|p| if p.published? and p.published_at.nil? then "<span class=\"label label-warning\">Pending</span>".html_safe elsif p.published? and not p.published_at.nil? then "<span class=\"label label-success\">Published</span>".html_safe else "<span class=\"label\">Private</span>".html_safe end }

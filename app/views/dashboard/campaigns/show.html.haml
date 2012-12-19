@@ -1,0 +1,7 @@
+- content_for :masthead do
+  %h2 Campaign Statistics
+  %p= @campaign.tidy_name
+
+= link_to 'Edit', edit_dashboard_campaign_path(@campaign)
+\|
+= link_to 'Back', dashboard_campaigns_path

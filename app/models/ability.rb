@@ -2,11 +2,17 @@ class Ability
   include CanCan::Ability
 
   def initialize(member)
-    member ||= User.new # guest user (not logged in)
-    if member.admin?
-      can :manage, :all
-    else
-      can :read, :all
+    member ||= Member.new
+    if member.persisted?
+      can :manage, Campaign, permissions: { member_id: member.id}
+      can :new, Campaign
+      can :manage, Theme, owner_id: member.id, published: false
+      can :read, Theme, published: true
+      if member.admin?
+        can :manage, Member
+        can :manage, ContentType
+        can :manage, Theme, published: true, published_at: nil
+      end
     end
   end
 end
