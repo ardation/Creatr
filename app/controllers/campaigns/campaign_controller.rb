@@ -1,9 +1,13 @@
 class Campaigns::CampaignController < Campaigns::BaseController
   def index
     unless @campaign.nil?
-      @content_types = Array.new
+      @content_types = []
+      @templates = {}
       @campaign.contents.each do |content|
-        @content_types << content.content_type unless @content_types.include?(content.content_type)
+        unless @content_types.include?(content.content_type)
+          @content_types << content.content_type
+          @templates << {name: content.content_type.name, content: @campaign.theme.get_content_type_template(content.content_type.id) }
+        end
       end
       @content_types = @content_types.to_json(only: [:name, :js, :id])
       render layout: "campaign"

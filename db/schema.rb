@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219075435) do
+ActiveRecord::Schema.define(:version => 20121219112124) do
 
   create_table "campaigns", :force => true do |t|
     t.string  "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20121219075435) do
     t.date    "start_date"
     t.date    "finish_date"
     t.string  "cached_domain"
+    t.string  "cname_alias"
   end
 
   add_index "campaigns", ["cached_domain"], :name => "index_campaigns_on_cached_domain"
@@ -68,7 +69,6 @@ ActiveRecord::Schema.define(:version => 20121219075435) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
     t.text    "api_key"
     t.integer "client"
   end
@@ -117,13 +117,11 @@ ActiveRecord::Schema.define(:version => 20121219075435) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"

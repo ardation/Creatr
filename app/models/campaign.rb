@@ -4,7 +4,7 @@ class Campaign < ActiveRecord::Base
   has_many :members, through: :permissions
   has_many :contents
   belongs_to :theme
-  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes
+  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
   validate :valid_name
   validates_uniqueness_of :name,
@@ -23,7 +23,7 @@ class Campaign < ActiveRecord::Base
 
   def cache_domain
     self.cached_domain = if self.cname_alias.blank?
-      "#{self.name}.#{ENV['app_url']}"
+      "#{self.name.downcase}.#{ENV['app_url']}"
     else
       "#{self.cname_alias}"
     end
