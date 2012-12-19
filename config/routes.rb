@@ -16,6 +16,7 @@ FlamingWight::Application.routes.draw do
     match 'campaigns' => 'dashboard#campaigns'
     match 'iframe' => 'dashboard#iframe'
     match 'ajax/crm_data' => 'create#crm_data'
+    match 'ajax/content_types' => 'create#content_types'
     resources :themes
     get 'themes/:method/:offset' => 'themes#get_data'
     get 'themes/favourites/add/:theme_id' => 'themes#add_favourite'

@@ -18,9 +18,9 @@ App.SurveyContent = Ember.Object.extend({
 
   hash: Em.A([]),
 
-  types: function() {
-    return App.ContentTypes.findProperty('id', this.content_type).hash;
-  }.property(),
+  // types: function() {
+  //   return App.ContentTypes.findProperty('id', this.content_type).hash;
+  // }.property(),
 
   delete: function(event) {
     if(App.Surveys.contents.length > 1)
@@ -66,12 +66,23 @@ App.Surveys = Ember.Object.create({
 });
 
 
-App.ContentTypes = [
-  Ember.Object.create({name: 'Text question', id:1, hash: [Ember.Object.create({name: 'Question', help: 'Enter the question here', type: 'text'})]}),
+App.ContentTypes = Ember.ArrayProxy.create({
+  content: Ember.A(),
+  loadData: function() {
+    context = this;
+    $.getJSON ("ajax/content_types", function(data) {
+      data.forEach(function(content_type) {
+        context.content.push(content_type);
+      });
+    });
+  }
+});
+  // Ember.Object.create({name: 'Text question', id:1, hash: [Ember.Object.create({name: 'Question', help: 'Enter the question here', type: 'text'})]}),
 
-  Ember.Object.create({name: 'Multichoice question', id:2, hash: [Ember.Object.create({name: 'Multichoice Question', help: 'Enter the question here', type: 'text'}), 
-                        Ember.Object.create({name: 'Answer', help: 'Enter possible answers here', type: 'text', multiple: true})]})
-];
+  // Ember.Object.create({name: 'Multichoice question', id:2, hash: [Ember.Object.create({name: 'Multichoice Question', help: 'Enter the question here', type: 'text'}), 
+  //                       Ember.Object.create({name: 'Answer', help: 'Enter possible answers here', type: 'text', multiple: true})]})
+
+App.ContentTypes.loadData();
 
 App.ViewTypeConvention = Ember.Mixin.create({
   viewType: function() {
@@ -232,9 +243,9 @@ App.Router = Em.Router.extend ({
 
 //Ember.LOG_BINDINGS=true;
 
-App.ContentTypes.forEach(function(object) {
-  object.hash.forEach(function(hash) {
-    hash.reopen(App.ViewTypeConvention);
-  }, this);
-}, this);
+// App.ContentTypes.forEach(function(object) {
+//   object.hash.forEach(function(hash) {
+//     hash.reopen(App.ViewTypeConvention);
+//   }, this);
+// }, this);
 

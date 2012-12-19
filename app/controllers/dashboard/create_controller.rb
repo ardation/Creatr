@@ -23,4 +23,9 @@ class Dashboard::CreateController < Dashboard::BaseController
     end
     render :json => @crm_data.to_json
   end
+
+  def content_types
+    @content_types = ContentType.all
+    render :json => @content_types.to_json(only: [:name, :id, :validator])
+  end
 end
