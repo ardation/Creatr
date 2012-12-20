@@ -340,6 +340,7 @@ DEPENDENCIES
   resque
   s3_direct_upload!
   sass-rails (~> 3.2.3)
+  sprockets
   stripe!
   tabletastic
   uglifier (>= 1.0.3)

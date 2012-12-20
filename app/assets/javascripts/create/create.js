@@ -18,7 +18,6 @@ App.SurveyContent = Ember.Object.extend({
   },
   name: "",
   content_type_id: 2,
-
   content_hash: function() {
     test = App.ContentTypes.content.findProperty('id', this.content_type_id).validator;
     return JSON.parse(test);
@@ -48,10 +47,11 @@ App.Surveys = Ember.Object.create({
   name: null,
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
-  themeID: 0,
+  themeID: 3,
   cname_alias: "",
   sms_template: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
+  createResponse: "Please wait",
   contentsNameObserver: function() {
     context = this;
     if(this.get('contents.lastObject').name) {
@@ -69,13 +69,25 @@ App.Surveys = Ember.Object.create({
   },
   uploadModel: function() {
     data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: this.jsonContents()}};//this.jsonContents()
-    $.post('/dashboard/campaigns.json',  data);
+    $.post('/dashboard/campaigns.json',  data, function(data) {
+      
+    }).fail(function(error, text) {
+      App.Surveys.set('createResponse', error.responseText);
+    });
   },
   jsonContents: function() {
     json = [];
     this.contents.forEach(function(content) {
-      if(content.name != "")
+      if(content.name != "") {
+        hash = content.get('content_hash');
+        for (var key in content.hash) {
+          if (content.hash.hasOwnProperty(key)) {
+            if(hash.findProperty('name', key) == undefined )
+              delete content.hash[key]
+          }
+        }
         json.push({name: content.name, content_type_id: content.content_type_id, position: content.position, data: JSON.parse(JSON.stringify(content.hash))});
+      }
     });
     return json;
   }
@@ -186,6 +198,7 @@ App.Step3Controller = Ember.ArrayController.extend({});
 App.Step4Controller = Ember.ArrayController.extend({});
 App.Step5Controller = Ember.ArrayController.extend({});
 App.Step6Controller = Ember.ArrayController.extend({});
+App.Step6Controller = Ember.ArrayController.extend({});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
@@ -224,6 +237,9 @@ App.Step6View = Ember.View.extend ({
   templateName: 'step6',
 });
 
+App.CreateView = Ember.View.extend ({
+  templateName: 'create',
+});
 
 App.JQuerySortableView = Ember.CollectionView.extend( {
   classNames: ['sortable_'],
@@ -256,6 +272,7 @@ App.Router = Em.Router.extend ({
     showstep4: Ember.Route.transitionTo('step4'),
     showstep5: Ember.Route.transitionTo('step5'),
     showstep6: Ember.Route.transitionTo('step6'),
+    createCampaign: Ember.Route.transitionTo('create'),
 
     index: Ember.Route.extend({
       route: '/',
@@ -302,10 +319,29 @@ App.Router = Em.Router.extend ({
     connectOutlets: function(router) {
       router.get('applicationController').connectOutlet('step6')
     },
+    }),
+
+    create: Ember.Route.extend ({
+    route: 'create',
+    connectOutlets: function(router) {
+      router.get('applicationController').connectOutlet('create')
+    },
+    enter: function() {
+      App.Surveys.uploadModel();
+    }
     })
   })
 });
 
 function selectThisTheme(id) {
   App.Surveys.set('themeID', id);
+  App.get('router').transitionTo('step5');
 }
+
+Handlebars.registerHelper('ifequal', function (val1, val2, options) {
+  console.log(val1, val2)
+  if (val1 === Ember.get(val2)) {
+      return options.fn(this);
+  }
+  return options.inverse(this);
+});
