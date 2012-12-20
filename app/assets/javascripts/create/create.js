@@ -47,7 +47,7 @@ App.Surveys = Ember.Object.create({
   name: null,
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
-  themeID: 0,
+  themeID: 3,
   cname_alias: "",
   sms_template: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
@@ -335,5 +335,13 @@ App.Router = Em.Router.extend ({
 
 function selectThisTheme(id) {
   App.Surveys.set('themeID', id);
+  App.get('router').transitionTo('step5');
 }
 
+Handlebars.registerHelper('ifequal', function (val1, val2, options) {
+  console.log(val1, val2)
+  if (val1 === Ember.get(val2)) {
+      return options.fn(this);
+  }
+  return options.inverse(this);
+});
