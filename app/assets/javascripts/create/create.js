@@ -50,6 +50,7 @@ App.Surveys = Ember.Object.create({
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 0,
   cname_alias: "",
+  sms_template: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
   contentsNameObserver: function() {
     context = this;
@@ -67,12 +68,14 @@ App.Surveys = Ember.Object.create({
     };
   },
   uploadModel: function() {
-    $.post('/dashboard/campaigns/', {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: JSON.stringify(this.jsonContents())}});
+    test = this.jsonContents()[0];
+    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: test}};//this.jsonContents()
+    $.post('/dashboard/campaigns/',  data);
   },
   jsonContents: function() {
     json = [];
     this.contents.forEach(function(content) {
-      json.pushObject({name: content.name, content_type_id: content.content_type_id, position: content.position, data: content.hash});
+      json.push({name: content.name, content_type_id: content.content_type_id, position: content.position, data: JSON.parse(JSON.stringify(content.hash))});
     });
     return json;
   }
@@ -91,11 +94,6 @@ App.ContentTypes = Ember.ArrayProxy.create({
     });
   }
 });
-  // Ember.Object.create({name: 'Text question', id:1, hash: [Ember.Object.create({name: 'Question', help: 'Enter the question here', type: 'text'})]}),
-
-  // Ember.Object.create({name: 'Multichoice question', id:2, hash: [Ember.Object.create({name: 'Multichoice Question', help: 'Enter the question here', type: 'text'}), 
-  //                       Ember.Object.create({name: 'Answer', help: 'Enter possible answers here', type: 'text', multiple: true})]})
-
 App.ContentTypes.loadData();
 
 App.ViewTypeConvention = Ember.Mixin.create({
@@ -186,6 +184,8 @@ App.Step2Controller = Ember.ArrayController.extend({});
 App.Step3Controller = Ember.ArrayController.extend({});
 
 App.Step4Controller = Ember.ArrayController.extend({});
+App.Step5Controller = Ember.ArrayController.extend({});
+App.Step6Controller = Ember.ArrayController.extend({});
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
@@ -212,6 +212,13 @@ App.Step3View = Ember.View.extend ({
 
 App.Step4View = Ember.View.extend ({
   templateName: 'step4',
+});
+
+App.Step5View = Ember.View.extend ({
+  templateName: 'step5',
+});
+App.Step6View = Ember.View.extend ({
+  templateName: 'step6',
 });
 
 
@@ -243,6 +250,8 @@ App.Router = Em.Router.extend ({
     showstep2: Ember.Route.transitionTo('step2'),
     showstep3: Ember.Route.transitionTo('step3'),
     showstep4: Ember.Route.transitionTo('step4'),
+    showstep5: Ember.Route.transitionTo('step5'),
+    showstep6: Ember.Route.transitionTo('step6'),
 
     index: Ember.Route.extend({
       route: '/',
@@ -276,37 +285,22 @@ App.Router = Em.Router.extend ({
       connectOutlets: function(router) {
         router.get('applicationController').connectOutlet('step4')
       },
+    }),
+    step5: Ember.Route.extend ({
+    route: 'step5',
+    connectOutlets: function(router) {
+      router.get('applicationController').connectOutlet('step5')
+    },
+    }),    
+
+    step6: Ember.Route.extend ({
+    route: 'step6',
+    connectOutlets: function(router) {
+      router.get('applicationController').connectOutlet('step6')
+    },
     })
   })
 });
 
 
 Ember.LOG_BINDINGS=true;
-
-// App.ContentTypes.forEach(function(object) {
-//   object.hash.forEach(function(hash) {
-//     hash.reopen(App.ViewTypeConvention);
-//   }, this);
-// }, this);
-
-Person = Ember.Object.extend({
-  // these will be supplied by `create`
-  firstName: null,
-  lastName: null,
-  fullName: function(key, value) {
-    // getter
-    if (arguments.length === 1) {
-      var firstName = this.get('firstName');
-      var lastName = this.get('lastName');
-      return firstName + ' ' + lastName;
-    // setter
-    } else {
-      var name = value.split(" ");
-      this.set('firstName', name[0]);
-      this.set('lastName', name[1]);
-      return value;
-    }
-  }.property('firstName', 'lastName')
-});
-var person = Person.create();
-

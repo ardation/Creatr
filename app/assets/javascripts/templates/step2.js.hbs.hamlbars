@@ -39,7 +39,7 @@
         .controls
           {{view App.DateField valueBinding="App.Surveys.end" class="dateEnd" class="jquery-ui-datepicker"}}
       .form-actions
-        .btn{:_action => 'showstep0'}
+        .btn{:_action => 'showstep1'}
           %i.icon-chevron-left
           Back
         .btn.btn-primary{:_action => 'showstep3'}

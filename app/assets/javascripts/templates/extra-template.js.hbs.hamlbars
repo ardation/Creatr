@@ -1,0 +1,4 @@
+.span3.extra
+  %a.btn.btn-small{href: new_dashboard_theme_path}
+    %i.icon-bolt &nbsp;
+    Roll your own Theme

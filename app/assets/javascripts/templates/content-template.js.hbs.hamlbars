@@ -1,0 +1,31 @@
+{{#each themes}}
+.span3.theme
+  .stats
+    .pull-right
+      .name
+        %strong {{owner_name}}
+    %i.icon-bolt
+    {{stats.campaigns}} &nbsp;
+    %i.icon-heart
+    {{stats.favourite.count}}
+  %img{src:"{{main_image_url}}"}
+  .content-container
+    %h4 {{title}}
+    %p.description
+      %small {{short_description}}
+    .pull-right
+      {{#if stats.editable}}
+      %a.btn.btn-small{href: "/dashboard/themes/{{id}}"}
+        %i.icon-edit
+      {{/if}}
+      {{#if stats.favourite.me}}
+      %a.btn.btn-danger.btn-small.un.likable{href:"#", "data-id" => "{{id}}"}
+        %i.icon-heart
+      {{else}}
+      %a.btn.btn-small.likable{href:"#", "data-id" => "{{id}}"}
+        %i.icon-heart-empty
+      {{/if}}
+    %a.btn.btn-primary.btn-small
+      %i.icon-bolt &nbsp;
+      %strong Use Theme
+{{/each}}

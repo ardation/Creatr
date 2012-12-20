@@ -1,0 +1,35 @@
+.row
+  .span3
+    %ul.nav.nav-tabs.nav-stacked
+      %li
+        %a
+          %i.icon-ok
+          Get Started
+      %li.active
+        %a
+          %i.icon-filter
+          Data Point
+          %i.icon-chevron-right
+      %li
+        %a
+          %i.icon-calendar
+          Campaign Dates
+      %li
+        %a
+          %i.icon-file
+          Create Content
+      %li
+        %a
+          %i.icon-gift
+          Theme Selection
+  .span9
+    %h2 Add ons
+    %p Creatr has support for custom domains.  Set up your CNAME alias here
+    %hr
+    %form.form-horizontal
+      %fieldset
+        .control-group
+          %label.control-label{:for => "crm"} CNAME Alias
+          .controls
+            {{view Ember.TextField valueBinding="App.Surveys.cname_alias"}}
+
