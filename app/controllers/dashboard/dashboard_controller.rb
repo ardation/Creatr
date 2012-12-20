@@ -12,10 +12,22 @@ class Dashboard::DashboardController < Dashboard::BaseController
     unless current_member.stripe.blank?
       @customer = Stripe::Customer.retrieve(current_member.stripe)
     end
-    mHub = current_member.crms.where(name: "MissionHub").first
+    mHub = Crm.where(name: "MissionHub").first_or_create
     unless mHub.nil?
-      @mhub = current_member.member_crms.where(crm_id: mHub.id).first
+      @mhub = current_member.member_crms.where(crm_id: mHub.id).first_or_create
     end
+  end
+
+  def settings_mhub
+    mHub = Crm.where(name: "MissionHub").first
+    @mhub_user = current_member.member_crms.where(crm_id: mHub.id).first
+    @mhub_user.api_key = params[:member_crm][:api_key]
+    begin
+      @mhub_user.save!
+    rescue
+      flash[:error] = $!
+    end
+    redirect_to "#{request.referer}#mhub"
   end
 
   def iframe

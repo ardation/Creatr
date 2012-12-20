@@ -9,101 +9,104 @@
 - content_for :masthead do
   %h2 Account Settings
   %p Configure your account
-%ul#myTab.nav.nav-tabs
-  %li.active
-    %a{:href => "#profile", "data-toggle" => "tab"} Profile
-  %li
-    %a{:href => "#mhub", "data-toggle" => "tab"} MissionHub
-  %li
-    %a{:href => "#billing", "data-toggle" => "tab"} Billing
-.tab-content
-  #profile.tab-pane.active
-    .goose
-  #mhub.tab-pane
-    %form.formtastic
-      %fieldset.inputs
-        %ol
-          %li.input.string.stringish.required
-            %label.label
+.row
+  .span3
+    %ul.nav.nav-tabs.nav-stacked
+      %li.active
+        %a{:href => "#profile", "data-toggle" => "tab"}
+          %i.icon-user
+          My Profile
+          %i.pull-right.icon-chevron-right
+      %li
+        %a{:href => "#mhub", "data-toggle" => "tab"}
+          %i.icon-globe
+          MissionHub Sync
+          %i.pull-right.icon-chevron-right
+      %li
+        %a{:href => "#billing", "data-toggle" => "tab"}
+          %i.icon-book
+          Billing & Invoicing
+          %i.pull-right.icon-chevron-right
+  .span9
+    .tab-content
+      #profile.tab-pane.active
+        .goose
+      #mhub.tab-pane
+        %h2 MissionHub Sync
+        %p
+          Want your surveys to Sync with MissionHub? Get your API Key and Client ID to get started.
+          %br
+          %small.muted
+            Tip: To get your MissionHub API infomation, see
+            %a{href: "http://www.missionhub.com/organizations/api", target:"_blank"} here
+            \.
+        %hr{style:"margin:0;"}
+        = semantic_form_for @mhub, url: "/dashboard/settings/mhub" do |f|
+          = f.inputs do
             - unless @mhub.api_key.nil?
-              %strong Active:
-              = truncate(@mhub.api_key, length: 20)
-          %li.input.string.stringish.required
-            %label.label New MissionHub API Key
-            %input.input-xlarge{:placeholder => "MissionHub API Key", :type => "text"}
-            %div{style:"margin-left:240px;"}
-              %small This Key allows +Creator to access MissionHub on your behalf
-          %li.input.string.stringish.required
-            %label.label
-            - unless @mhub.client.nil?
-              %strong Active:
-              = @mhub.client
-          %li.input.string.stringish.required
-            %label.label New MissionHub Client ID
-            %input.input-xlarge{:placeholder => "MissionHub Client ID", :type => "number"}
-            %div{style:"margin-left:240px;"}
-              %small This Key allows +Creator to access MissionHub on your behalf
-      %fieldset.actions
-        %ol
-          %li.action.input_action
-            %button.btn.btn-primary Save
-  #billing.tab-pane
-    - unless @customer.try(:active_card)
-      %h4 Billing Information
-      %hr
-      %table.table.table-bordered
-        %tbody
-          %tr
-            %td
-              %strong Number
-            %td= "**** **** **** " + @customer.active_card.last4
-          %tr
-            %td
-              %strong Expires
-            %td= @customer.active_card.exp_month.to_s + ' / ' + @customer.active_card.exp_year.to_s
-          %tr
-            %td
-              %strong Type
-            %td= @customer.active_card.type
-          %tr
-            %td
-              %strong Origin
-            %td= @customer.active_card.country
-    %br
-    %form#payment-form.formtastic{:action => "", :method => "POST"}
-      .payment-errors
-      %fieldset.inputs
-        %h4 Update Billing Information
-        %hr
-        %ol
-          %li.input.string.stringish.required
-            %input.card-name{:type => "hidden", value: current_member.name}/
-            %label.label
-              Card Number
-              %abbr{title:"required"} *
-            %input.card-number{:autocomplete => "off", :size => "20", :type => "text"}/
-          %li.input.string.stringish.required
-            %label.label
-              CVC
-              %abbr{title:"required"} *
-            %input.card-cvc.input-small{:autocomplete => "off", :size => "4", :type => "text"}/
-          %li.input.string.stringish.required
-            %label.label
-              Expiration (MM/YYYY)
-              %abbr{title:"required"} *
-            %input.card-expiry-month.input-mini{:size => "2", :type => "text"}/
-            %span /
-            %input.card-expiry-year.input-mini{:size => "4", :type => "text"}/
-      %fieldset.actions
-        .pull-right{style:"margin-right:10px; margin-top:5px;"}
-          .cards
-            .visa
-            .mastercard
-            .amex
-            .jcb
-            .discover
-            .diners
-        %ol
-          %li.action.input_action
-            %button.submit_button.btn.btn-primary{:type => "submit"} Update
-
+              %li.input.string.stringish.required
+                %label.label
+                %strong Current Key:
+                = truncate(@mhub.api_key, length: 20)
+            = f.input :api_key, as: :string, input_html: {placeholder:"New MissionHub API Key", value: ""}
+          = f.actions do
+            = f.action :submit, :button_html => { :value => "Save", :disable_with => 'Wait...' }
+      #billing.tab-pane
+        - unless @customer.try(:active_card)
+          %h4 Billing Information
+          %hr
+          %table.table.table-bordered
+            %tbody
+              %tr
+                %td
+                  %strong Number
+                %td= "**** **** **** " + @customer.active_card.last4
+              %tr
+                %td
+                  %strong Expires
+                %td= @customer.active_card.exp_month.to_s + ' / ' + @customer.active_card.exp_year.to_s
+              %tr
+                %td
+                  %strong Type
+                %td= @customer.active_card.type
+              %tr
+                %td
+                  %strong Origin
+                %td= @customer.active_card.country
+        %br
+        %form#payment-form.formtastic{:action => "", :method => "POST"}
+          .payment-errors
+          %fieldset.inputs
+            %h4 Update Billing Information
+            %hr
+            %ol
+              %li.input.string.stringish.required
+                %input.card-name{:type => "hidden", value: current_member.name}/
+                %label.label
+                  Card Number
+                  %abbr{title:"required"} *
+                %input.card-number{:autocomplete => "off", :size => "20", :type => "text"}/
+              %li.input.string.stringish.required
+                %label.label
+                  CVC
+                  %abbr{title:"required"} *
+                %input.card-cvc.input-small{:autocomplete => "off", :size => "4", :type => "text"}/
+              %li.input.string.stringish.required
+                %label.label
+                  Expiration (MM/YYYY)
+                  %abbr{title:"required"} *
+                %input.card-expiry-month.input-mini{:size => "2", :type => "text"}/
+                %span /
+                %input.card-expiry-year.input-mini{:size => "4", :type => "text"}/
+          %fieldset.actions
+            .pull-right{style:"margin-right:10px; margin-top:5px;"}
+              .cards
+                .visa
+                .mastercard
+                .amex
+                .jcb
+                .discover
+                .diners
+            %ol
+              %li.action.input_action
+                %button.submit_button.btn.btn-primary{:type => "submit"} Update

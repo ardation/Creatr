@@ -15,7 +15,7 @@ stripeResponseHandler = function(status, response) {
 };
 
 $(document).ready(function() {
-  return $("#payment-form").submit(function(event) {
+  $("#payment-form").submit(function(event) {
     $(".submit-button").attr("disabled", "disabled");
     Stripe.createToken({
       number: $(".card-number").val(),
@@ -25,5 +25,16 @@ $(document).ready(function() {
       exp_year: $(".card-expiry-year").val()
     }, stripeResponseHandler);
     return false;
+  });
+
+  // Javascript to enable link to tab
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+  }
+
+  // Change hash for page-reload
+  $('.nav-tabs a').on('shown', function (e) {
+      window.location.hash = e.target.hash;
   });
 });
