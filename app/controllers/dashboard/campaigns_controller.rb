@@ -17,6 +17,7 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
 
   def create
     create!
-    Permission.new(campaign: @campaign, member: current_member);
+    @campaign_permission = Permission.new(campaign: @campaign, member: current_member);
+    @campaign_permission.save
   end
 end
