@@ -57,7 +57,7 @@ FlamingWight::Application.routes.draw do
   post 'signup_fb' => 'site#createUser'
   get 'signup_done' => 'site#signup_done'
 
-  get "survey/:id" => 'survey#index'
+  get "survey/:id" => 'campaign#index'
 
   match 'member_root' => 'site#features', :as => :dashboard
 

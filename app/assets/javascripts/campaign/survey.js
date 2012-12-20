@@ -21,6 +21,31 @@ App.SurveyData = Ember.ArrayProxy.create({
   uploadData: function() {
     $.post('upload', JSON.stringify(this.content,null));
   }
+
+  storerecord: function() {
+    //store data for submission
+    var records = [];
+    if ( amplify.store('records') == undefined ) {
+      amplify.store('records', records);
+    }
+    records = amplify.store('records');
+    records.push(data);
+    amplify.store('records', records);
+  },
+  pushrecords: function() {
+    var records = amplify.store('records');
+    _.each(records, function(value) {
+      $.post('upload', value , 'json')
+      .success(function() {
+        amplify.store('records', _.without(records, value));
+      })
+      .error(function(data) {
+        if(data.responseText == '"Phone Number already exists in the system."') {
+          amplify.store('records', _.without(records, value));
+        }
+      });
+    });
+  }
 });
 
 

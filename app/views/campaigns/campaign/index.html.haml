@@ -1,7 +1,7 @@
 
 - content_for :scripts do
-  = javascript_include_tag 'survey/ember-facebook'
-  = javascript_include_tag 'survey/survey'
+  = javascript_include_tag 'campaign/ember-facebook'
+  = javascript_include_tag 'campaign/survey'
 
 - content_for :script_includes do
   :javascript
@@ -12,6 +12,13 @@
 - content_for :style do
   = @campaign.theme.css
 
+%script{:'data-template-name' => 'app' , :type=>"text/x-handlebars"}
+  {{outlet}}
+  {{#if App.button}}
+  .btn{:_action => 'incrementStep' } Next > 
+  {{/if}}
+
+
 - @templates.each do |template|
-  %script{:'data-template-name' => template.name , :type=>"text/x-handlebars"}
-    != template.content
+  %script{:'data-template-name' => template[:name] , :type=>"text/x-handlebars"}
+    != template[:content]
