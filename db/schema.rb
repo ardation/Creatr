@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121219133133) do
+ActiveRecord::Schema.define(:version => 20121220033458) do
 
   create_table "campaign_counters", :force => true do |t|
     t.integer "campaign_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20121219133133) do
     t.boolean  "is_published",      :default => false
     t.text     "theming_data"
     t.text     "css"
+    t.integer  "sync_type",         :default => 0
   end
 
   create_table "contents", :force => true do |t|
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20121219133133) do
     t.integer  "position"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "name"
   end
 
   create_table "crms", :force => true do |t|
@@ -77,7 +79,6 @@ ActiveRecord::Schema.define(:version => 20121219133133) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
     t.text    "api_key"
     t.integer "client"
   end
@@ -126,13 +127,11 @@ ActiveRecord::Schema.define(:version => 20121219133133) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"

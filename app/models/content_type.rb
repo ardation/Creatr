@@ -1,12 +1,19 @@
 class ContentType < ActiveRecord::Base
   require 'json'
-  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published, :theming_data
+  attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published, :theming_data, :sync_type
   belongs_to :inheritance, :class_name => "ContentType", :foreign_key => "inherited_type_id"
   validates :name, :format => { :with => /[a-z0-9]/ }, :uniqueness => true, :presence => true
   validates_presence_of :name
   validates_presence_of :default_template, :validator, :js, :theming_data, :unless => :inheritance?
   validate :working_javascript, :working_validator, :working_theming_data, :working_inheritance
   has_many :content
+
+  NON_SYNCABLE = 0
+  SHORT_ANSWER = 1
+  CHECK_BOX = 2
+  DROPDOWN = 3
+  RADIO_BUTTON = 4
+  FACEBOOK_AUTH = 5
 
   def working_javascript
     unless js.empty?
