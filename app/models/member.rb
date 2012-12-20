@@ -6,7 +6,8 @@ class Member < ActiveRecord::Base
   has_many :permissions
   has_many :campaigns, through: :permissions
 
-  has_many :organisations, through: :crms
+  has_many :member_organisations
+  has_many :organisations, through: :member_organisations, dependent: :destroy
 
   has_many :favourites, dependent: :destroy
 

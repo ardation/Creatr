@@ -1,8 +1,4 @@
 class Dashboard::BillingController < Dashboard::BaseController
-  def index
-
-  end
-
   def credit_card
     # set your secret key
     Stripe.api_key = ENV['stripe_secret_key']

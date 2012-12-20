@@ -10,7 +10,7 @@ function templateFire() {
     var target = $( $(e.target).attr('href') );
     target.find('.empty, .content').hide();
     target.find('.loading').fadeIn(function() {
-      $.get('/dashboard/themes/'+$(e.target).attr('id')+'/' + $(e.target).data('offset') + '.json', function(data) {
+      $.get('/dashboard/themes/'+$(e.target).attr('id')+'/' + $(e.target).data('offset') + '/3.json', function(data) {
         if ( $(e.target).data('offset') > 0 )
           target.find('.previous').removeClass('disabled');
         else

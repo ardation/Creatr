@@ -20,7 +20,7 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   end
 
   def get_data
-    @offset = ( (params[:offset].to_i || 0) * 4 )
+    @offset = ( (params[:offset].to_i || 0) * (params[:multiplier].to_i || 4) )
     @offset = 0 if @offset < 0
     send(params[:method], @offset) if ['featured', 'recent', 'me', 'favourites'].include?(params[:method])
   end
@@ -43,23 +43,23 @@ class Dashboard::ThemesController < Dashboard::ResourceController
   private
 
   def featured(offset)
-    @themes = Theme.where(featured: true, published: true).where("published_at is not null").all(offset: offset, limit: 4, order: :featured_at)
+    @themes = Theme.where(featured: true, published: true).where("published_at is not null").all(offset: offset, limit: (params[:multiplier] || 4), order: :featured_at)
     respond_with(@themes)
   end
 
   def recent(offset)
-    @themes = Theme.where(published: true).where("published_at is not null").all(offset: offset, limit: 4, order: :published_at)
+    @themes = Theme.where(published: true).where("published_at is not null").all(offset: offset, limit: (params[:multiplier] || 4), order: :published_at)
     respond_with(@themes)
   end
 
   def me(offset)
-    @themes = Theme.where(owner_id: current_member.id).all(offset: offset, limit: 4, order: "created_at DESC")
+    @themes = Theme.where(owner_id: current_member.id).all(offset: offset, limit: (params[:multiplier] || 4), order: "created_at DESC")
     respond_with(@themes)
   end
 
   def favourites(offset)
     @themes = []
-    current_member.favourites.all(offset: offset, limit: 4, order: "created_at DESC").each do |favourite|
+    current_member.favourites.all(offset: offset, limit: (params[:multipliermultiplier] || 4), order: "created_at DESC").each do |favourite|
       @themes.push favourite.theme if (favourite.theme.published? or favourite.theme.owner_id == current_member.id) and !favourite.theme.published_at.nil?
     end
     respond_with(@themes)

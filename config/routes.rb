@@ -19,11 +19,13 @@ FlamingWight::Application.routes.draw do
     match 'billing' => 'billing#index'
     match 'billing/credit_card' => 'billing#credit_card'
     match 'settings' => 'dashboard#settings'
+    put 'settings/mhub' => 'dashboard#settings_mhub'
     match 'iframe' => 'dashboard#iframe'
 
     get 'themes/:method/:offset' => 'themes#get_data'
     get 'themes/favourites/add/:theme_id' => 'themes#add_favourite'
     get 'themes/favourites/remove/:theme_id' => 'themes#remove_favourite'
+    get 'themes/:method/:offset/:multiplier' => 'themes#get_data'
     resources :themes
 
     get 'campaigns/crm_data' => 'campaigns#crm_data'
