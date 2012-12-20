@@ -2,26 +2,39 @@
   .span3
     %ul.nav.nav-tabs.nav-stacked
       %li
-        %a
-          %i.icon-ok
+        %a{:_action => 'showstep0'}
+          %i.icon-bolt
           Get Started
-      %li.active
-        %a
+      %li
+        %a{:_action => 'showstep1'}
           %i.icon-filter
           Data Point
-          %i.icon-chevron-right
       %li
-        %a
+        %a{:_action => 'showstep2'}
           %i.icon-calendar
           Campaign Dates
       %li
-        %a
+        %a{:_action => 'showstep3'}
           %i.icon-file
           Create Content
       %li
-        %a
+        %a{:_action => 'showstep4'}
           %i.icon-gift
           Theme Selection
+      %li.active
+        %a{:_action => 'showstep5'}
+          %i.icon-envelope
+          SMS Setup
+          %i.icon-chevron-right
+      %li
+        %a{:_action => 'showstep6'}
+          %i.icon-wrench
+          Advanced
+      %li 
+        %a
+          %i.icon-check
+          Create
+
   .span9
     %h2 Add ons
     %p Creatr has SMS integration set up, so that for a small fee a confirmation message can be sent after a survey entry.  Set up this message here

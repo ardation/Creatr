@@ -2,26 +2,38 @@
   .span3
     %ul.nav.nav-tabs.nav-stacked
       %li
-        %a
-          %i.icon-ok
+        %a{:_action => 'showstep0'}
+          %i.icon-bolt
           Get Started
       %li
-        %a
-          %i.icon-ok
+        %a{:_action => 'showstep1'}
+          %i.icon-filter
           Data Point
       %li
-        %a
-          %i.icon-ok
+        %a{:_action => 'showstep2'}
+          %i.icon-calendar
           Campaign Dates
       %li
-        %a
-          %i.icon-ok
+        %a{:_action => 'showstep3'}
+          %i.icon-file
           Create Content
       %li.active
-        %a
+        %a{:_action => 'showstep4'}
           %i.icon-gift
           Theme Selection
           %i.icon-chevron-right
+      %li
+        %a{:_action => 'showstep5'}
+          %i.icon-envelope
+          SMS Setup
+      %li
+        %a{:_action => 'showstep6'}
+          %i.icon-wrench
+          Advanced
+      %li 
+        %a
+          %i.icon-check
+          Create
   .span9.themes-container
     .row
       .span9
@@ -55,9 +67,9 @@
             .pager
               %ul.pager
                 %li.previous.disabled
-                  %a{:href => "#"} ← Newer
+                  %a ← Newer
                 %li.next.disabled
-                  %a{:href => "#"} Older →
+                  %a Older →
               %br
           #library_recent.tab-pane
             .loading
@@ -70,9 +82,9 @@
             .pager
               %ul.pager
                 %li.previous.disabled
-                  %a{:href => "#"} ← Newer
+                  %a ← Newer
                 %li.next.disabled
-                  %a{:href => "#"} Older →
+                  %a Older →
           #my_favourites.tab-pane
             .loading
             .empty.hidden
@@ -84,9 +96,9 @@
             .pager
               %ul.pager
                 %li.previous.disabled
-                  %a{:href => "#"} ← Newer
+                  %a ← Newer
                 %li.next.disabled
-                  %a{:href => "#"} Older →
+                  %a Older →
           #my_themes.tab-pane
             .loading
             .empty.hidden
@@ -98,9 +110,9 @@
             .pager
               %ul.pager
                 %li.previous.disabled
-                  %a{:href => "#"} ← Newer
+                  %a ← Newer
                 %li.next.disabled
-                  %a{:href => "#"} Older →
+                  %a Older →
     %form.form-horizontal
       .form-actions
         .btn{:_action => 'showstep3'}

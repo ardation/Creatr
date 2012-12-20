@@ -21,6 +21,7 @@ group :production do
 end
 
 gem 'hamlbars'
+gem 'sprockets'
 gem 'compass-rails'
 gem 'bootstrap-sass', '~> 2.1.1.0'
 
