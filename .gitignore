@@ -17,3 +17,6 @@
 /config/database.yml
 
 .env
+
+config/config.yml
+vendor/ruby/
