@@ -2,13 +2,64 @@
   %h2 Campaign Creator
   %p Create your Outreach
 - content_for :scripts do
-  = javascript_include_tag "all"
-- content_for :scripts do
   = javascript_include_tag "templates/all"
 - content_for :scripts do
   = javascript_include_tag 'create/create'
-/ - content_for :scripts do
-/   = javascript_include_tag 'theme_library.js'
+- content_for :scripts do
+  = javascript_include_tag 'create/theme_picker'
+
+%script#content_template{type:"text"}
+  {{#each themes}}
+  .span3.theme
+    .stats
+      .pull-right
+        .name
+          %strong {{owner_name}}
+      %i.icon-bolt
+      {{stats.campaigns}} &nbsp;
+      %i.icon-heart
+      {{stats.favourite.count}} &nbsp;
+      {{#if stats.feature}}
+      %i.icon-star
+      {{else}}
+      {{#if stats.publish.published}}
+      {{#if stats.publish.pending}}
+      %i.icon-bookmark-empty
+      {{else}}
+      %i.icon-bookmark
+      {{/if}}
+      {{/if}}
+      {{/if}}
+    %img{src:"{{main_image_url}}"}
+    .content-container
+      %h4 {{title}}
+      %p.description
+        %small {{short_description}}
+      .pull-right
+        {{#if stats.editable}}
+        %a.btn.btn-small{href: "/dashboard/themes/{{id}}"}
+          %i.icon-edit
+        {{/if}}
+        {{#if stats.favourite.me}}
+        %a.btn.btn-danger.btn-small.un.likable{href:"#", "data-id" => "{{id}}"}
+          %i.icon-heart
+        {{else}}
+        %a.btn.btn-small.likable{href:"#", "data-id" => "{{id}}"}
+          %i.icon-heart-empty
+        {{/if}}
+      %a.btn.btn-primary.btn-small{ :onclick => 'selectThisTheme({{id}})' }
+        %i.icon-bolt &nbsp;
+        %strong Use Theme
+  {{/each}}
+
+%script#extra_template{type:"text"}
+  .span3.extra
+  %a.btn.btn-small{href: new_dashboard_theme_path}
+    %i.icon-bolt &nbsp;
+    Roll your own Theme
+
+
+
 
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
   {{outlet}}

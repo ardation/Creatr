@@ -24,7 +24,7 @@
           %i.icon-chevron-right
   .span9
     .row
-      .span12
+      .span9
         %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}
           %li.active
             %a{id: "featured", :href => "#library_featured", "data-toggle" => "tab", "data-offset" => 0}

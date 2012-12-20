@@ -75,7 +75,8 @@ App.Surveys = Ember.Object.create({
   jsonContents: function() {
     json = [];
     this.contents.forEach(function(content) {
-      json.push({name: content.name, content_type_id: content.content_type_id, position: content.position, data: JSON.parse(JSON.stringify(content.hash))});
+      if(content.name != "")
+        json.push({name: content.name, content_type_id: content.content_type_id, position: content.position, data: JSON.parse(JSON.stringify(content.hash))});
     });
     return json;
   }
@@ -212,6 +213,9 @@ App.Step3View = Ember.View.extend ({
 
 App.Step4View = Ember.View.extend ({
   templateName: 'step4',
+  didInsertElement: function() {
+    templateFire();
+  }
 });
 
 App.Step5View = Ember.View.extend ({
@@ -246,6 +250,7 @@ App.Router = Em.Router.extend ({
   enableLogging: true,
 
   root: Em.Route.extend ({
+    showstep0: Ember.Route.transitionTo('index'),
     showstep1: Ember.Route.transitionTo('step1'),
     showstep2: Ember.Route.transitionTo('step2'),
     showstep3: Ember.Route.transitionTo('step3'),
@@ -302,5 +307,6 @@ App.Router = Em.Router.extend ({
   })
 });
 
-
-Ember.LOG_BINDINGS=true;
+function selectThisTheme(id) {
+  App.Surveys.set('themeID', id);
+}
