@@ -101,3 +101,11 @@
                   %a{:href => "#"} ← Newer
                 %li.next.disabled
                   %a{:href => "#"} Older →
+    %form.form-horizontal
+      .form-actions
+        .btn{:_action => 'showstep3'}
+          %i.icon-chevron-left
+          Back
+        .btn.btn-primary{:_action => 'showstep5'}
+          Next Step
+          %i.icon-chevron-right

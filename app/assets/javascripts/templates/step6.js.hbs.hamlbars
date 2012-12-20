@@ -32,4 +32,12 @@
           %label.control-label{:for => "crm"} CNAME Alias
           .controls
             {{view Ember.TextField valueBinding="App.Surveys.cname_alias"}}
+          .form-actions
+            .btn{:_action => 'showstep5'}
+              %i.icon-chevron-left
+              Back
+            .btn.btn-primary{:_action => 'showstep7'}
+              Next Step
+              %i.icon-chevron-right
+
 
