@@ -20,7 +20,7 @@ class Dashboard::DashboardController < Dashboard::BaseController
 
   def settings_mhub
     mHub = Crm.where(name: "MissionHub").first
-    @mhub_user = current_member.member_crms.where(crm_id: mHub.id).first
+    @mhub_user = current_member.member_crms.where(crm_id: mHub.id).first_or_create
     @mhub_user.api_key = params[:member_crm][:api_key]
     begin
       @mhub_user.save!

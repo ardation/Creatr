@@ -20,6 +20,7 @@ FlamingWight::Application.routes.draw do
     match 'billing/credit_card' => 'billing#credit_card'
     match 'settings' => 'dashboard#settings'
     put 'settings/mhub' => 'dashboard#settings_mhub'
+    post 'settings/mhub' => 'dashboard#settings_mhub'
     match 'iframe' => 'dashboard#iframe'
 
     get 'themes/:method/:offset' => 'themes#get_data'
