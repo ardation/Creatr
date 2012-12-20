@@ -4,9 +4,9 @@ class Campaigns::BaseController < ApplicationController
   protected
 
   def get_campaign
-    @campaign = Campaign.last()
-    # @campaign = Campaign.first(:conditions => {
-    #     :cached_domain => request.host
-    # })
+    # @campaign = Campaign.last()
+    @campaign = Campaign.first(:conditions => {
+        :cached_domain => request.host
+    })
   end
 end

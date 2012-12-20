@@ -70,7 +70,7 @@ App.Surveys = Ember.Object.create({
     };
   },
   uploadModel: function() {
-    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: this.jsonContents()}};//this.jsonContents()
+    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: JSON.stringify(this.jsonContents())}};//this.jsonContents()
     $.post('/dashboard/campaigns.json',  data, function(data) {
       
     }).fail(function(error, text) {
