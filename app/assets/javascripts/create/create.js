@@ -68,9 +68,8 @@ App.Surveys = Ember.Object.create({
     };
   },
   uploadModel: function() {
-    test = this.jsonContents()[0];
-    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: test}};//this.jsonContents()
-    $.post('/dashboard/campaigns/',  data);
+    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, contents_attributes: this.jsonContents()}};//this.jsonContents()
+    $.post('/dashboard/campaigns.json',  data);
   },
   jsonContents: function() {
     json = [];
@@ -296,7 +295,7 @@ App.Router = Em.Router.extend ({
     connectOutlets: function(router) {
       router.get('applicationController').connectOutlet('step5')
     },
-    }),    
+    }),
 
     step6: Ember.Route.extend ({
     route: 'step6',

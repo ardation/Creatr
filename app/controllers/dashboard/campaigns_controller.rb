@@ -14,4 +14,9 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     @content_types = ContentType.all
     respond_with(@content_types.to_json(only: [:name, :id, :validator]))
   end
+
+  def create
+    create!
+    Permission.new(campaign: @campaign, member: current_member);
+  end
 end
