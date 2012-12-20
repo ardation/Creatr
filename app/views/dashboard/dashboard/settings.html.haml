@@ -52,27 +52,28 @@
           = f.actions do
             = f.action :submit, :button_html => { :value => "Save", :disable_with => 'Wait...' }
       #billing.tab-pane
-        - unless @customer.try(:active_card)
-          %h4 Billing Information
-          %hr
-          %table.table.table-bordered
-            %tbody
-              %tr
-                %td
-                  %strong Number
-                %td= "**** **** **** " + @customer.active_card.last4
-              %tr
-                %td
-                  %strong Expires
-                %td= @customer.active_card.exp_month.to_s + ' / ' + @customer.active_card.exp_year.to_s
-              %tr
-                %td
-                  %strong Type
-                %td= @customer.active_card.type
-              %tr
-                %td
-                  %strong Origin
-                %td= @customer.active_card.country
+        - unless @customer.nil?
+          - unless @customer.try(:active_card)
+            %h4 Billing Information
+            %hr
+            %table.table.table-bordered
+              %tbody
+                %tr
+                  %td
+                    %strong Number
+                  %td= "**** **** **** " + @customer.active_card.last4
+                %tr
+                  %td
+                    %strong Expires
+                  %td= @customer.active_card.exp_month.to_s + ' / ' + @customer.active_card.exp_year.to_s
+                %tr
+                  %td
+                    %strong Type
+                  %td= @customer.active_card.type
+                %tr
+                  %td
+                    %strong Origin
+                  %td= @customer.active_card.country
         %br
         %form#payment-form.formtastic{:action => "", :method => "POST"}
           .payment-errors

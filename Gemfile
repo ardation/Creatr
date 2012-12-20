@@ -78,4 +78,4 @@ gem 'rabl-rails'
 
 gem 'ejs'
 
-gem 'MissionHub', git: 'git://github.com/Godmedia/missionhub-gem.git'
+gem 'MissionHub', git: => "https://github.com/Godmedia/missionhub-gem.git"
