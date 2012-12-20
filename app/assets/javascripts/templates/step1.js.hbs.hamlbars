@@ -44,7 +44,7 @@
         .control-group
           %label.control-label{:for => "crm"} CRM
           .controls
-            {{view App.CRMSelect contentBinding="App.CRMData.crm_data" optionValuePath="content.id" optionLabelPath="content.name" id="crm"}}
+            {{view App.CRMSelect valueBinding="App.Surveys.crm_id" contentBinding="App.CRMData.crm_data" optionValuePath="content.id" optionLabelPath="content.name" id="crm"}}
 
         .control-group
           %label.control-label{:for => "organisation"} Organisation
