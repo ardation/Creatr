@@ -16,4 +16,8 @@ class Campaigns::CampaignController < Campaigns::BaseController
       render "lost", layout: "campaign", status: 404
     end
   end
+
+  def submit
+
+  end
 end

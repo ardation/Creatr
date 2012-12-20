@@ -13,14 +13,9 @@
 -content_for :title, @campaign.tidy_name
 - content_for :style do
   = @campaign.theme.css
-
-/ %script{:'data-template-name' => 'app' , :type=>"text/x-handlebars"}
-/   {{outlet}}
-/   {{#if App.button}}
-/   .btn{:_action => 'incrementStep' } Next > 
-/   {{/if}}
-
-
 - @templates.each do |template|
-  %script{:'data-template-name' => template[:name] , :type=>"text/x-handlebars"}
-    != template[:content]
+  %script{:'data-template-name' => template.name , :type=>"text/x-handlebars"}
+    != template.content
+
+%script{:'data-template-name' => "app" , :type=>"text/x-handlebars"}
+  != @campaign.theme.container_template
