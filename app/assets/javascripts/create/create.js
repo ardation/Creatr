@@ -145,7 +145,7 @@ App.CRMData.reopenClass ({
       if(org.crm_id == crm_id) {
         context.org_display_data.pushObject(App.CRMData.create({id: org.id, name: org.name}));
       }
-    }, context)
+    }, context);
   }
 });
 
