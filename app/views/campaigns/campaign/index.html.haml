@@ -14,8 +14,8 @@
 - content_for :style do
   = @campaign.theme.css
 - @templates.each do |template|
-  %script{:'data-template-name' => template.name , :type=>"text/x-handlebars"}
-    != template.content
+  %script{:'data-template-name' => template[:name] , :type=>"text/x-handlebars"}
+    != template[:content]
 
 %script{:'data-template-name' => "app" , :type=>"text/x-handlebars"}
   != @campaign.theme.container_template

@@ -48,6 +48,7 @@ App.Surveys = Ember.Object.create({
   start: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   end: $.datepicker.formatDate('mm/dd/yy' , new Date()),
   themeID: 3,
+  org_id: 1,
   cname_alias: "",
   sms_template: "",
   contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
@@ -132,7 +133,7 @@ App.CRMData.reopenClass ({
           context.org_data.pushObject(App.CRMData.create({id: org.id, name: org.name, crm_id: crm.id}));
         }, context)
       }, context)
-      context.updateOrganisations(5);
+      //context.updateOrganisations(5);
     });
     return this.crm_data;
   },

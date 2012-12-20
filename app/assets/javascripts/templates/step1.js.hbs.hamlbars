@@ -49,7 +49,7 @@
         .control-group
           %label.control-label{:for => "organisation"} Organisation
           .controls
-            {{view Ember.Select contentBinding="App.CRMData.org_display_data" optionValuePath="content.id" optionLabelPath="content.name"}}
+            {{view Ember.Select valueBinding="App.Surveys.org_id" contentBinding="App.CRMData.org_display_data" optionValuePath="content.id" optionLabelPath="content.name"}}
         .form-actions
           .btn{:_action => 'showstep0'}
             %i.icon-chevron-left

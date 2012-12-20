@@ -85,11 +85,11 @@ for(i = 0; i<survey_contents.length; i++) {
     },
 
     writeHelper: function(index, data) {
-      App.SurveyData[index] = data;
+      App.SurveyData.content[index] = data;
     },
     
     readHelper: function(index) {
-      return App.SurveyData[index];
+      return App.SurveyData.content[index];
     },
     _propertySet: function(name, data) {
       App.surveyControllers[this.id].set(name, data);
