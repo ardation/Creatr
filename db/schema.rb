@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121220062540) do
+ActiveRecord::Schema.define(:version => 20121220231921) do
 
   create_table "campaign_counters", :force => true do |t|
     t.integer "campaign_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20121220062540) do
     t.date    "finish_date"
     t.string  "cached_domain"
     t.string  "cname_alias"
+    t.text    "sms_template"
   end
 
   add_index "campaigns", ["cached_domain"], :name => "index_campaigns_on_cached_domain"

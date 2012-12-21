@@ -1,14 +1,14 @@
 GIT
-  remote: git://github.com/Godmedia/missionhub-gem.git
-  revision: c821512ac18d5936c8c5231e23ed64bcbb3e8ae3
-  specs:
-    MissionHub (2.0.1)
-
-GIT
   remote: git://github.com/josh/useragent.git
   revision: d575b214128ab2a44b971e714e01446786932322
   specs:
     useragent (0.4.15)
+
+GIT
+  remote: https://github.com/Godmedia/missionhub-gem.git
+  revision: c821512ac18d5936c8c5231e23ed64bcbb3e8ae3
+  specs:
+    MissionHub (2.0.1)
 
 GIT
   remote: https://github.com/stripe/stripe-ruby

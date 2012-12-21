@@ -5,8 +5,8 @@ class Campaign < ActiveRecord::Base
   has_many :contents
   has_many :campaign_counters
   belongs_to :theme
-  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
+  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias
   validate :valid_name
   validates_uniqueness_of :name,
                           :cached_domain

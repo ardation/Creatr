@@ -167,6 +167,33 @@ App.Router = Ember.Router.extend({
   })
 });
 
+App.Checkbox = Ember.Checkbox.extend({
+  init: function() {
+    this._super();
+    test = this;
+    saveObject = this.get('parentView').get('content');
+    console.log(saveObject);
+    // name = this.get('templateData').view.content.name;
+    // ext = new Object();
+    // ext[name] = "";
+
+    // if(typeof saveObject.hash[name] =='undefined')
+    //   $.extend(saveObject.hash, ext);
+
+    // this.set('obj_path', 'hash.'+name);
+    // this.set('obj', saveObject);
+    // this.set('val', this.obj.get(this.obj_path));
+  },
+  // valueBinding: "val",
+  // val: "",
+  // valObserver: function() {
+  //   test = this.obj;
+  //   this.obj.set(this.obj_path, this.val);
+  // }.observes('val')
+
+});
+
+
 Ember.LOG_BINDINGS=true;
 
 $(document).ready(function() {
