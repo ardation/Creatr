@@ -56,11 +56,14 @@ for(i = 0; i<survey_contents.length; i++) {
 
   App.surveyViews[i] = Ember.View.extend
   ({
+    id: i,
+    content_store: content_type,
+    data: JSON.parse(survey_contents[i].data),
     templateName: content_type.name,
     classTest: 'test',
     didInsertElement: function() {
-      fx = eval(content_type.js).render;
-      fx();
+      fx = eval(this.content_store.js).render;
+      fx(this);
     }
   });
 

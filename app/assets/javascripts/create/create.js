@@ -70,7 +70,7 @@ App.Surveys = Ember.Object.create({
     };
   },
   uploadModel: function() {
-    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, theme_id: this.themeID, cname_alias: this.cname_alias, sms_template: this.sms_template, organisation_id: this.org_id, contents_attributes: this.jsonContents()}};//this.jsonContents()
+    data = {campaign: {name: this.name, start_date: this.start, finish_date: this.end, organisation_id: this.org_id theme_id: this.themeID, cname_alias: this.cname_alias, sms_template: this.sms_template, contents_attributes: this.jsonContents()}};//this.jsonContents()
     $.post('/dashboard/campaigns.json',  data, function(data) {
 
     }).fail(function(error, text) {
@@ -341,11 +341,3 @@ function selectThisTheme(id) {
   App.Surveys.set('themeID', id);
   App.get('router').transitionTo('step5');
 }
-
-Handlebars.registerHelper('ifequal', function (val1, val2, options) {
-  console.log(val1, val2)
-  if (val1 === Ember.get(val2)) {
-      return options.fn(this);
-  }
-  return options.inverse(this);
-});
