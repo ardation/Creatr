@@ -1,19 +1,21 @@
 class Campaign < ActiveRecord::Base
   before_validation :cache_domain
-  has_many :permissions
+  has_many :permissions, dependent: :destroy
   has_many :members, through: :permissions
-  has_many :contents
-  has_many :campaign_counters
+  has_many :contents, dependent: :destroy
+  has_many :campaign_counters, dependent: :destroy
   belongs_to :theme
+  belongs_to :organisation
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
-  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias
+  attr_accessible :name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias, :organisation_id, :foreign_id
   validate :valid_name
   validates_uniqueness_of :name,
                           :cached_domain
   validates_uniqueness_of :cname_alias,
                           :allow_blank => true
   validates_presence_of   :name,
-                          :cached_domain
+                          :cached_domain,
+                          :organisation
   validates_exclusion_of  :name,
                           :in => %w(staging),
                           :message => "is taken"

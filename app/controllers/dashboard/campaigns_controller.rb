@@ -17,7 +17,11 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
 
   def create
     create!
-    @campaign_permission = Permission.new(campaign: @campaign, member: current_member);
+    @campaign_permission = Permission.new(campaign: @campaign, member: current_member)
     @campaign_permission.save
+    crm_base_model = "#{@campaign.organisation.crm.name}Crm"
+    crm_base_model = Kernel.const_get(crm_base_model)
+    crm_base_model.create(@campaign, current_member)
+    raise "LOL"
   end
 end

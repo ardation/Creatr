@@ -8,7 +8,8 @@ class MemberCrm < ActiveRecord::Base
 
   def validate_missionhub_api_key
     begin
-      MissionHub::Organization.all(params: {secret: api_key}).each do |org|
+      MissionHub.client_secret = api_key
+      MissionHub::Organization.all.each do |org|
         db_org = Organisation.where(crm_id: self.crm.id, foreign_id: org.attributes["id"]).first_or_create(name: org.attributes["name"])
         MemberOrganisation.where(member_id: self.member.id, organisation_id: db_org.id).first_or_create
       end

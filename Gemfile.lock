@@ -6,7 +6,7 @@ GIT
 
 GIT
   remote: https://github.com/Godmedia/missionhub-gem.git
-  revision: c821512ac18d5936c8c5231e23ed64bcbb3e8ae3
+  revision: 9139bdf465f15dc21cc02cda02a061093ec3ebdd
   specs:
     MissionHub (2.0.1)
 

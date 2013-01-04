@@ -1,5 +1,6 @@
 class ContentType < ActiveRecord::Base
   require 'json'
+  set_primary_key 'id'
   attr_accessible :validator, :js, :name, :template_id, :inherited_type_id, :default_template, :is_published, :theming_data, :sync_type
   belongs_to :inheritance, :class_name => "ContentType", :foreign_key => "inherited_type_id"
   validates :name, :format => { :with => /[a-z0-9]/ }, :uniqueness => true, :presence => true
