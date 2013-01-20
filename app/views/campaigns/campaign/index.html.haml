@@ -12,7 +12,7 @@
 
 -content_for :title, @campaign.tidy_name
 - content_for :style do
-  = @campaign.theme.css
+  = @campaign.theme.css.html_safe
 - @templates.each do |template|
   %script{:'data-template-name' => template[:name] , :type=>"text/x-handlebars"}
     != template[:content]

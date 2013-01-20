@@ -4,10 +4,10 @@
       var content_type = #{@content_type.to_json}
 
 - content_for :style do
-  = @css
+  = @css.html_safe
 
 - content_for :scripts do
-  = javascript_include_tag 'survey/demo'
+  = javascript_include_tag 'campaign/demo'
 
 
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}

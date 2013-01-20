@@ -5,6 +5,7 @@ else
 
 App = Ember.Application.create({
     rootElement: '#view',
+    button: true
 });
 
 App.ApplicationView = Ember.View.extend({
@@ -15,7 +16,7 @@ App.ContentView = Ember.View.extend({
     templateName: content_template,
     didInsertElement: function() {
       fx = eval(content_type.js).render;
-      fx();
+      fx(this);
     }
 
 });
@@ -24,7 +25,7 @@ App.ApplicationController = Ember.Controller.extend({});
 App.ContentController = Ember.Controller.extend({
   data: function() {
     fx = eval(content_type.js).data;
-    return fx();
+    return fx($.parseJSON(content_type.theming_data));
   }.property()
 });
 

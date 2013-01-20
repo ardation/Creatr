@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/josh/useragent.git
-  revision: d575b214128ab2a44b971e714e01446786932322
+  revision: 461b4ae4559cda893001191331d603da79d4ef3e
   specs:
-    useragent (0.4.15)
+    useragent (0.4.16)
 
 GIT
   remote: https://github.com/Godmedia/missionhub-gem.git
@@ -12,9 +12,9 @@ GIT
 
 GIT
   remote: https://github.com/stripe/stripe-ruby
-  revision: 0c281891948a793e79cc997d31918ba7f987f7ae
+  revision: fb29711a4f0101001f63e4fde9803d57b07adedd
   specs:
-    stripe (1.7.8)
+    stripe (1.7.9)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
 
@@ -68,7 +68,7 @@ GEM
       builder
       girl_friday
     arel (3.0.2)
-    aws-sdk (1.7.1)
+    aws-sdk (1.8.0)
       httparty (~> 0.7)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
@@ -80,7 +80,7 @@ GEM
     builder (3.0.4)
     cancan (1.6.8)
     choice (0.1.6)
-    chunky_png (1.2.6)
+    chunky_png (1.2.7)
     cocaine (0.4.2)
     cocoon (1.1.1)
     codemirror-rails (3.00)
@@ -98,8 +98,8 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
-    connection_pool (0.9.3)
-    devise (2.1.2)
+    connection_pool (1.0.0)
+    devise (2.2.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
@@ -115,7 +115,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    font-awesome-sass-rails (2.0.0.0)
+    font-awesome-sass-rails (3.0.0.1)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     formtastic (2.2.1)
@@ -126,8 +126,8 @@ GEM
       railties (>= 3.1.0)
       sass-rails
     fssm (0.2.9)
-    girl_friday (0.11.1)
-      connection_pool (~> 0.9.0)
+    girl_friday (0.11.2)
+      connection_pool (~> 1.0)
       rubinius-actor
     haml (3.1.7)
     hamlbars (2.0.0)
@@ -137,11 +137,11 @@ GEM
       tilt
     has_scope (0.5.1)
     hashie (1.2.0)
-    highcharts-rails (2.3.3.1)
+    highcharts-rails (2.3.5)
       railties (>= 3.1)
     hike (1.2.1)
     hirefireapp (0.0.8)
-    httparty (0.9.0)
+    httparty (0.10.0)
       multi_json (~> 1.0)
       multi_xml
     httpauth (0.2.0)
@@ -155,23 +155,23 @@ GEM
     jquery-fileupload-rails (0.3.5)
       actionpack (>= 3.1)
       railties (>= 3.1)
-    jquery-rails (2.1.4)
+    jquery-rails (2.2.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (2.0.2)
+    jquery-ui-rails (3.0.1)
       jquery-rails
       railties (>= 3.1.0)
     jshintrb (0.2.1)
       execjs
       multi_json (>= 1.3)
       rake
-    json (1.7.5)
+    json (1.7.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.7.4)
+    kgio (2.8.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -181,7 +181,7 @@ GEM
       json
     mime-types (1.19)
     multi_json (1.5.0)
-    multi_xml (0.5.1)
+    multi_xml (0.5.2)
     multipart-post (1.1.5)
     nokogiri (1.5.6)
     oauth2 (0.8.0)
@@ -199,7 +199,7 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
-    paperclip (3.3.1)
+    paperclip (3.4.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -210,7 +210,7 @@ GEM
     rabl-rails (0.3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-    rack (1.4.1)
+    rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-protection (1.3.2)
@@ -227,7 +227,7 @@ GEM
       activesupport (= 3.2.3)
       bundler (~> 1.0)
       railties (= 3.2.3)
-    rails-erd (1.0.0)
+    rails-erd (1.1.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       choice (~> 0.1.6)
@@ -262,13 +262,13 @@ GEM
     rspec-core (2.12.2)
     rspec-expectations (2.12.1)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.12.0)
+    rspec-mocks (2.12.1)
     rubinius-actor (0.0.2)
       rubinius-core-api
     rubinius-core-api (0.0.1)
     ruby-graphviz (1.0.8)
-    sass (3.2.3)
-    sass-rails (3.2.5)
+    sass (3.2.5)
+    sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)

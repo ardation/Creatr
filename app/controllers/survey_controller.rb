@@ -10,5 +10,6 @@ class SurveyController < ApplicationController
     end
     @content_types = @content_types.to_json(only: [:name, :js, :id])
     @css = @survey.theme.css
+    render layout: :campaign
   end
 end

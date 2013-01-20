@@ -1,4 +1,4 @@
-
+  
 - content_for :scripts do
   = javascript_include_tag 'survey/ember-facebook'
   = javascript_include_tag 'survey/survey'
@@ -9,7 +9,7 @@
     var content_types = #{@content_types}
 
 - content_for :style do
-  = @css
+  = @css.html_safe
 
 -content_for :title, @survey.name
 

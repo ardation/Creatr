@@ -20,7 +20,7 @@ class MissionHubCrm
         questions.push(question.id)
       when ContentType::RADIO_BUTTON
         data = JSON.parse content.data
-        question = MissionHub::Question.create(kind: "ChoiceField", style: "radio", label:data["Question"], content:data["Answers"].gsub(",","\r\n") , object_name: content.name)
+        #question = MissionHub::Question.create(kind: "ChoiceField", style: "radio", label:data["Question"], content:data["Answers"].gsub(",","\r\n") , object_name: content.name)
         questions.push(question.id)
       when ContentType::FACEBOOK_AUTH
         #do nothing
