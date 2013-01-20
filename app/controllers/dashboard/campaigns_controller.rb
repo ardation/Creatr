@@ -22,6 +22,5 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     crm_base_model = "#{@campaign.organisation.crm.name}Crm"
     crm_base_model = Kernel.const_get(crm_base_model)
     crm_base_model.create(@campaign, current_member)
-    raise "LOL"
   end
 end
