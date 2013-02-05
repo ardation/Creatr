@@ -1,0 +1,650 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"con",
+				"content_template"
+			],
+			[
+				"json",
+				"jsonContents"
+			],
+			[
+				"conten",
+				"content_type_id"
+			],
+			[
+				"push",
+				"pushObject"
+			],
+			[
+				"content",
+				"content_type"
+			],
+			[
+				"S",
+				"Surveys"
+			],
+			[
+				"App",
+				"App"
+			],
+			[
+				"A",
+				"App"
+			],
+			[
+				"upda",
+				"updatePositions"
+			],
+			[
+				"JQuery",
+				"JQuerySortableItemView"
+			],
+			[
+				"up",
+				"uploadData"
+			],
+			[
+				"survey",
+				"SurveyData"
+			],
+			[
+				"ste",
+				"step"
+			],
+			[
+				"c",
+				"context"
+			],
+			[
+				"fi",
+				"finish"
+			],
+			[
+				"step",
+				"step-1"
+			],
+			[
+				"test",
+				"testAnswer"
+			],
+			[
+				"sur",
+				"surveyControllers"
+			],
+			[
+				"conte",
+				"content_id_counter"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"reopen",
+				"reopenClass"
+			],
+			[
+				"te",
+				"Testing"
+			],
+			[
+				"Su",
+				"SurveyContent"
+			],
+			[
+				"org_",
+				"org_display_data"
+			],
+			[
+				"crm_",
+				"crm_organisations"
+			],
+			[
+				"facebook",
+				"facebook_data"
+			],
+			[
+				"me",
+				"members"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "create/create.js",
+			"settings":
+			{
+				"buffer_size": 9409,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "campaign/survey.js",
+			"settings":
+			{
+				"buffer_size": 4993,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/campaigns/campaign/index.html.haml",
+			"settings":
+			{
+				"buffer_size": 813,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/campaign.html.haml",
+			"settings":
+			{
+				"buffer_size": 431,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/themes/show.html.haml",
+			"settings":
+			{
+				"buffer_size": 3631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/theme.rb",
+			"settings":
+			{
+				"buffer_size": 3434,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 367.0,
+		"selected_items":
+		[
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"diff",
+				"Set Syntax: Diff"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/campaign/demo.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/application.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/verify.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/verify_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/routes.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/verify/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/verify.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/dashboard.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/lib/mission_hub_crm.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/campaigns/verify.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/dashboard/verify_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/dashboard/iframe.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/dashboard/dashboard_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/campaigns/base_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step1.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/survey/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/surveys.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/survey_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/campaigns/campaign/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/campaigns/campaign_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step4.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step6.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/create.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create/theme_picker.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/campaigns/new.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/template.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step5.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step2.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step0.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step3.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/dashboard.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/Gemfile",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/themes/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/theme_library.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/extra-template.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/content_template.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/campaigns/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/views/campaign_view.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/themes/show.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/jquery-sortable-item.js.hbs.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/campaign/survey.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/survey/survey.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create/create.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/dashboard/campaigns_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/dashboard/create_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/Gemfile.lock",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/survey.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/survey/ember-facebook.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/survey/application.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/all.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/create/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/initializers/hamlbars.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/boot.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/survey/application.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/themes.hbs.handlebars",
+		"/Users/reubenposthuma/DEV/outreach-generator/Procfile",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/survey/ember-facebook.js",
+		"/Users/reubenposthuma/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/survey/application.css",
+		"/Users/reubenposthuma/DEV/outreach-generator/erd.pdf",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/survey/demo.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/survey.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step3.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/environments/production.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/config/application.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/create.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step4.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/application.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/application.css",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step1.js.hamlbars",
+		"/Users/reubenposthuma/Desktop/SO/template3.html",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step0.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/step2.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member.rb",
+		"/Users/reubenposthuma/DEV/Ember/js/app.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create/stuff.js",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/organisation.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/permission.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121120042446_drop_table_organisations_members.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member_organisation.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121120013332_create_member_organisations_s.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121120020632_remove_uid_from_organisation.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/create/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/member_crm.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/create_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/create.js.coffee",
+		"/Users/reubenposthuma/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/assets/javascripts/App.js",
+		"/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/views/appointments/index.html.haml",
+		"/Users/reubenposthuma/DEV/Rails/TestApp/Test/app/assets/javascripts/templates/appointment.hbs",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/crm.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/create/step1.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/organisation_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/organisation/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/schema.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119062258_add_survey_id_to_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119073345_add_api_secret_to_member_crm.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119052015_create_table_permissions.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119051903_create_table_survey_permissions.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119051547_drop.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119034412_add_indexes_to_member_crms.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119043135_rename_crms.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119041245_fix_column_types.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119040355_rename_crms_to_crm.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/application_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119030528_add_indexes.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119031239_create_member_crms.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119033539_rename_member_crm_to_member_crms.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119024544_delete_crm_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/models/crm_organisation.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119012330_add_uid_to_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232646_create_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119010503_create_crms.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121119010647_create_crm_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225459_create_members_organisations_table.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118232709_create_member_organisations.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/controllers/billing_controller.rb",
+		"/Users/reubenposthuma/DEV/outreach-generator/db/migrate/20121118225351_create_organisations_table.rb",
+		"/Users/reubenposthuma/DEV/Ember/index.html",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/application.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/index.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.hamlbars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/stylesheets/site.css.scss",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/views/shared/_footer.html.haml",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.handlebars",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/application.js.hbs",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/billing.js.coffee",
+		"/Users/reubenposthuma/DEV/outreach-generator/app/assets/javascripts/templates/all.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"create",
+			"verify",
+			"Ember.TextField",
+			"css_val",
+			"updateOrganisations",
+			"inspect",
+			"href",
+			"view",
+			"render",
+			"append",
+			"\nApp.Step5View = Ember.View.extend ({\n  templateName: 'step5',\n});",
+			"content_pos",
+			"content_type",
+			"view",
+			"span",
+			"each",
+			"types",
+			"hash",
+			"push",
+			"ContentTypes",
+			"({",
+			"content.",
+			"\n",
+			"scout",
+			"compass",
+			"border-radius",
+			".border",
+			".border-radius",
+			"border-radius",
+			"size",
+			"type",
+			"()\n",
+			"state",
+			"content_type_id",
+			"')",
+			"'",
+			"accordion",
+			"remove",
+			"set",
+			"date",
+			",\n",
+			"App.ContentTypes[0].reopen(App.ViewTypeConvention)",
+			"Date",
+			"apply",
+			"}}*.\n",
+			"selectedIndex",
+			"extend",
+			"step",
+			"'\n",
+			"end"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"content_type_id",
+			"view.content.",
+			"\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "create/create.js",
+					"settings":
+					{
+						"buffer_size": 9409,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2222,
+								2222
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1051.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "campaign/survey.js",
+					"settings":
+					{
+						"buffer_size": 4993,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3252,
+								3252
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1570.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/campaigns/campaign/index.html.haml",
+					"settings":
+					{
+						"buffer_size": 813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								317,
+								317
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/layouts/campaign.html.haml",
+					"settings":
+					{
+						"buffer_size": 431,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								134,
+								134
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/views/dashboard/themes/show.html.haml",
+					"settings":
+					{
+						"buffer_size": 3631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2955,
+								2961
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Rails/Ruby Haml.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 822.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Users/reubenposthuma/DEV/outreach-generator/app/models/theme.rb",
+					"settings":
+					{
+						"buffer_size": 3434,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2820,
+								2820
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 11.0,
+						"translation.y": 961.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 238.0,
+	"status_bar_visible": true
+}

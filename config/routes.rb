@@ -48,7 +48,8 @@ FlamingWight::Application.routes.draw do
       get 'themes/:id/feature' => 'themes#feature'
     end
   end
-
+  get "verify" => 'verify#index'
+  post "verify" => 'verify#verify'
   root :to => "site#index"
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"

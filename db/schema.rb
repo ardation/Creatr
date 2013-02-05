@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221093025) do
+ActiveRecord::Schema.define(:version => 20130203161254) do
 
   create_table "campaign_counters", :force => true do |t|
     t.integer "campaign_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20121221093025) do
     t.text     "theming_data"
     t.text     "css"
     t.integer  "sync_type",         :default => 0
+    t.integer  "data_count"
   end
 
   create_table "contents", :force => true do |t|

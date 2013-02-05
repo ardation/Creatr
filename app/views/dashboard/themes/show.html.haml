@@ -82,7 +82,7 @@
     .html
       .pull-right
         %select{:id => "type"}
-          %option#app{:value => "Body", "data-default" => "<div>{{outlet}}</div>", "data-editable" => true} Default
+          %option#app{:value => "Body", "data-default" => @theme.container_template, "data-editable" => true} Default
           - @content_types.each do |content|
             %option{:value => content.id, "data-default" => @theme.get_content_type_template(content.id)}= content.name
       %h5

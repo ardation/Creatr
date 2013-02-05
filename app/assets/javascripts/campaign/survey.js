@@ -52,8 +52,9 @@ App.surveyControllers = [];
 for(i = 0; i<survey_contents.length; i++) {
   content_type_id = survey_contents[i].content_type_id;
   content_type = content_types_obj.get('content').findProperty('id', content_type_id);
-  Ember.get('App.SurveyData').pushObject(""),
-
+  for(j = 0; j < content_type.data_count; j++) {
+    Ember.get('App.SurveyData').pushObject("");  
+  }
   App.surveyViews[i] = Ember.View.extend
   ({
     id: i,
@@ -62,6 +63,7 @@ for(i = 0; i<survey_contents.length; i++) {
     templateName: content_type.name,
     classTest: 'test',
     didInsertElement: function() {
+      $('#animate').slideDown();
       fx = eval(this.content_store.js).render;
       fx(this);
     }
@@ -79,12 +81,13 @@ for(i = 0; i<survey_contents.length; i++) {
 
     enter: function() {
       fx = eval(this.content_store.js).enter;
-      fx(this.readHelper, this.writeHelper, this.id, survey_contents[this.id].data, this);
+      fx(this.readHelper, this.writeHelper, this.id, $.parseJSON(survey_contents[this.id].data), this);
     },
     
     exit: function() {
+      $('#animate').slideUp();
       fx = eval(this.content_store.js).exit;
-      fx(this.readHelper, this.writeHelper, this.id, survey_contents[this.id].data, this);
+      fx(this.readHelper, this.writeHelper, this.id, $.parseJSON(survey_contents[this.id].data), this);
     },
 
     writeHelper: function(index, data) {
@@ -111,16 +114,16 @@ App.ApplicationController = Ember.Controller.extend({
   test: 2
 });
 
-App.SubmitView = Ember.View.extend({
-  templateName: 'final'
-});
-
 App.Router = Ember.Router.extend({
   enableLogging: true,
   root: Ember.Route.extend({
 
     incrementStep: function(router) {
       router.transitionTo('step', {step:App.nextStep});
+    },
+
+    backStep: function(router) {
+      router.transitionTo('step', {step:App.nextStep-2});
     },
 
     index: Em.Route.extend({
@@ -143,9 +146,9 @@ App.Router = Ember.Router.extend({
               controller: App.surveyControllers[context.step-1],
               context: {}
           });
-        }
-        else {
-          router.transitionTo('finish');
+          if(context.step*1 == App.surveyViews.length) {
+            router.transitionTo('finish');
+          }
         }
       },
       exit: function(router) {
@@ -156,7 +159,7 @@ App.Router = Ember.Router.extend({
       route: '/submit',
       connectOutlets: function(router, context) {
         App.set('button', false);
-        router.get('applicationController').connectOutlet('submit');
+        //router.get('applicationController').connectOutlet('submit');
         if( navigator.onLine ){
         //internet connection
           App.SurveyData.storerecord();
@@ -174,6 +177,13 @@ Ember.LOG_BINDINGS=true;
 
 $(document).ready(function() {
   App.initialize();
+});
+$('html').bind('keypress', function(e)
+{
+   if(e.keyCode == 13)
+   {
+      return false;
+   }
 });
 
 window.addEventListener('online',function(evt) { App.SurveyData.pushrecords();});

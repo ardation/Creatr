@@ -1,0 +1,7 @@
+- content_for :scripts do
+  = javascript_include_tag 'verify'
+
+%form
+  %fieldset
+  %label Code
+  %input{:type=>"number", :id=>"code", :class=>'span12'}
