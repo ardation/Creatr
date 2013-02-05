@@ -40,9 +40,19 @@
           channelUrl: facebookParams.get('channelUrl') || void 0
         });
         FB.init(facebookParams);
+        FB.getLoginStatus(function(response) {
+          console.log(response);
+          if(response.status == 'connected') {
+            console.log('trying to logout');
+            FB.logout();
+            delete App.FBUser;
+          }
+        });
         this.set('FBloading', true);
         FB.Event.subscribe('auth.authResponseChange', function(response) {
-          return _this.updateFBUser(response);
+          retVal =  _this.updateFBUser(response);
+          App.set('button', true);
+          return retVal;
         });
         return FB.getLoginStatus(function(response) {
           return _this.updateFBUser(response);

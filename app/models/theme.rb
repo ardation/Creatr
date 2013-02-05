@@ -64,7 +64,7 @@ class Theme < ActiveRecord::Base
 
   def css_validator
     begin
-      css = Sass::Engine.new(self.css, :syntax => :scss).render unless self.css.nil?
+      Sass::Engine.new(self.css, :syntax => :scss).render unless self.css.nil?
     rescue
       errors[:css] = "Your CSS has an error. Check and try again."
     end

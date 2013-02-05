@@ -9,7 +9,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
           @templates << {name: content.content_type.name, content: @campaign.theme.get_content_type_template(content.content_type.id) }
         end
       end
-      @content_types = @content_types.to_json(only: [:name, :js, :id])
+      @content_types = @content_types.to_json(only: [:name, :js, :id, :data_count])
       render layout: "campaign"
     else
       params[:action] = "error"
