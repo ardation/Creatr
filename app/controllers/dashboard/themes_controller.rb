@@ -19,6 +19,10 @@ class Dashboard::ThemesController < Dashboard::ResourceController
     render layout: "roller"
   end
 
+  def edit
+
+  end
+
   def get_data
     @offset = ( (params[:offset].to_i || 0) * (params[:multiplier].to_i || 4) )
     @offset = 0 if @offset < 0

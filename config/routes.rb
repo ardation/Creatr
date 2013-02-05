@@ -23,11 +23,12 @@ FlamingWight::Application.routes.draw do
     post 'settings/mhub' => 'dashboard#settings_mhub'
     match 'iframe' => 'dashboard#iframe'
 
+
+    resources :themes
     get 'themes/:method/:offset' => 'themes#get_data'
     get 'themes/favourites/add/:theme_id' => 'themes#add_favourite'
     get 'themes/favourites/remove/:theme_id' => 'themes#remove_favourite'
     get 'themes/:method/:offset/:multiplier' => 'themes#get_data'
-    resources :themes
 
     get 'campaigns/crm_data' => 'campaigns#crm_data'
     get 'campaigns/content_types' => 'campaigns#content_types'

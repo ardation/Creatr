@@ -10,6 +10,7 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     @crms = current_member.crms
     respond_with(@crms)
   end
+
   def content_types
     @content_types = ContentType.all
     respond_with(@content_types.to_json(only: [:name, :id, :validator]))
