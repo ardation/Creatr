@@ -1,6 +1,6 @@
 class CreatorMailer < Devise::Mailer
   helper :application # gives access to all helpers defined within `application_helper`.
-  def confirmation_instructions(record)
+  def confirmation_instructions(record, opts={})
     @resource = record
     m = Mandrill::API.new(ENV['mandrill_api_key'])
     m.messages 'send-template', {
