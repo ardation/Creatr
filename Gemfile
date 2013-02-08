@@ -64,12 +64,12 @@ gem 'highcharts-rails'
 
 gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 gem 'mandrill'
 
 gem "jquery-fileupload-rails"
 
-gem 'useragent', :git => "git://github.com/josh/useragent.git"
+gem 'useragent'
 
 gem 'codemirror-rails'
 
