@@ -15,10 +15,22 @@ class Campaign < ActiveRecord::Base
                           :allow_blank => true
   validates_presence_of   :name,
                           :cached_domain,
-                          :organisation
+                          :organisation,
+                          :campaign_code
   validates_exclusion_of  :name,
                           :in => %w(staging),
                           :message => "is taken"
+  validates_length_of :campaign_code, :minimum => 5, :maximum => 5
+
+  before_create :generate_code
+
+  def generate_code
+    begin
+      token = rand(10000..99999)
+    end while Campaign.where(:campaign_code => token.to_s).exists?
+    self.campaign_code = token
+  end
+
   def valid_name
     reg = /\A(?:[a-z0-9]_?)*[a-z](?:_?[a-z0-9])*\z/i
     errors[:name] = "Invalid characters in your campaign name" unless reg.match self.name

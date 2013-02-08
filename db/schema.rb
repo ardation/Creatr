@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203161254) do
+ActiveRecord::Schema.define(:version => 20130206072814) do
 
   create_table "campaign_counters", :force => true do |t|
     t.integer "campaign_id"
@@ -31,9 +31,11 @@ ActiveRecord::Schema.define(:version => 20130203161254) do
     t.string  "cname_alias"
     t.text    "sms_template"
     t.integer "foreign_id"
+    t.integer "campaign_code"
   end
 
   add_index "campaigns", ["cached_domain"], :name => "index_campaigns_on_cached_domain"
+  add_index "campaigns", ["campaign_code"], :name => "index_campaigns_on_campaign_code"
 
   create_table "content_types", :force => true do |t|
     t.string   "name"
@@ -83,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20130203161254) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
     t.text    "api_key"
     t.integer "client"
   end
@@ -137,14 +138,12 @@ ActiveRecord::Schema.define(:version => 20130203161254) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
     t.integer "foreign_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"

@@ -1,4 +1,5 @@
 class Campaigns::CampaignController < Campaigns::BaseController
+  respond_to :html, :json
   def index
     unless @campaign.nil?
       @content_types = []
@@ -19,5 +20,17 @@ class Campaigns::CampaignController < Campaigns::BaseController
 
   def submit
 
+  end
+
+  def validate_sms_code
+    if false
+      render json: ":"  #Force JSON Error for CrossDomain
+    else
+      respond_with "#{params[:callback]}({validate:true})"
+    end
+  end
+
+  def fb_image
+    render json: {validate: true}.to_json
   end
 end

@@ -4,6 +4,8 @@ FlamingWight::Application.routes.draw do
   constraints(PersonalizedDomain) do
     namespace :campaigns, :path => '/' do
       root :to => "campaign#index"
+      match "sms_code/:token" => 'campaign#validate_sms_code'
+      match "fb_image/:token" => 'campaign#fb_image'
     end
   end
 
@@ -22,7 +24,6 @@ FlamingWight::Application.routes.draw do
     put 'settings/mhub' => 'dashboard#settings_mhub'
     post 'settings/mhub' => 'dashboard#settings_mhub'
     match 'iframe' => 'dashboard#iframe'
-
 
     resources :themes
     get 'themes/:method/:offset' => 'themes#get_data'
@@ -48,8 +49,9 @@ FlamingWight::Application.routes.draw do
       get 'themes/:id/feature' => 'themes#feature'
     end
   end
-  get "verify" => 'verify#index'
-  post "verify" => 'verify#verify'
+  namespace :api do
+    match "campaign_code/:token" => 'verify#verify_campaign'
+  end
   root :to => "site#index"
   match 'features' => "site#features"
   match 'testimonials' => "site#testimonials"

@@ -1,6 +1,10 @@
 - content_for :masthead do
   %h2 Campaign Statistics
   %p= @campaign.tidy_name
+.row-fluid
+  .span3{style: "border:1px solid #ccc; text-align:center; padding:50px 10px;"}
+    %h1= @campaign.campaign_code
+    %h4.muted Unique Campaign Code
 
 = link_to 'Edit', edit_dashboard_campaign_path(@campaign)
 \|
