@@ -37,7 +37,7 @@ class Theme < ActiveRecord::Base
   def get_content_type_template(id)
     @record = self.templates.where(content_type_id:id).first
     if @record.nil?
-      ContentType.find(:first, id).default_template
+      ContentType.find(id).default_template
     else
       @record.content
     end

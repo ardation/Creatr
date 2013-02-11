@@ -22,8 +22,7 @@ class Campaign < ActiveRecord::Base
                           :in => %w(staging),
                           :message => "is taken"
   validates_length_of :campaign_code, :minimum => 5, :maximum => 5
-
-  before_create :generate_code
+  before_validation :generate_code, :on => :create
 
   def generate_code
     begin

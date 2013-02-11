@@ -1,6 +1,6 @@
 - content_for :masthead do
   %h2 Dashboard
-  %p= "You are currently working on #{@surveys.length} campaigns."
+  %p= "You are currently working on #{pluralize @surveys.length, "campaign"}."
 .row
   .span4
     %h3= "Welcome back, #{current_member.name}."
@@ -19,7 +19,7 @@
           %td.full Surveys Today
         %tr
           %td.value= current_member.campaigns.length
-          %td.full Active Campaigns
+          %td.full= "Active #{"Campaign".pluralize(current_member.campaigns.length)}"
         %tr
           %td.value= current_member.themes.length
-          %td.full Personalised Themes
+          %td.full= "Personalized #{"Theme".pluralize(current_member.themes.length)}"

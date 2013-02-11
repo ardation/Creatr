@@ -18,6 +18,15 @@ html, body {
   font-family: 'Open Sans', sans-serif;
   height: 100%;
   background:#fff;
+  [class^="icon-"], [class*=" icon-"] {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+    margin-top:0;
+    line-height: inherit !important;
+  }
+
 }
 .operations{
   background:#ddd;
@@ -520,14 +529,4 @@ body .dashboard-create {
       }
     }
   }
-}
-
-[class^="icon-"],
-[class*=" icon-"] {
-  display: inline-block;
-  width: auto;
-  height: auto;
-  vertical-align: middle;
-  margin-top:0;
-  line-height: inherit !important;
 }

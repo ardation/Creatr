@@ -197,7 +197,7 @@ var CampaignsNew = new function() {
       content_type_id: 2,
       content_hash: function() {
         var content = App.ContentTypes.content.findProperty('id', this.content_type_id);
-        JSON.parse(content.validator);
+        return JSON.parse(content.validator);
       }.property('content_type_id').volatile(),
 
       delete: function(event) {
@@ -229,7 +229,7 @@ var CampaignsNew = new function() {
       crm_id: 1,
       cname_alias: "",
       sms_template: "",
-      contents: [App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
+      contents: [App.SurveyContent.create(), App.SurveyContent.create()],    //Pushing an instance of App.SurveyContent onto this
       createResponse: "Please wait",
       contentsNameObserver: function() {
         context = this;

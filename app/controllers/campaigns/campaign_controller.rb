@@ -18,6 +18,15 @@ class Campaigns::CampaignController < Campaigns::BaseController
     end
   end
 
+  def content
+    @content = @campaign.contents.find_by_position(params[:id])
+    @content_type = @content.content_type
+  end
+
+  def content_types
+    @content_type = ContentType.find(params[:id])
+  end
+
   def submit
 
   end

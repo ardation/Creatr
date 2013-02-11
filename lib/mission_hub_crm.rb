@@ -30,7 +30,10 @@ class MissionHubCrm
         #do nothing
       end
     end
+    campaign.save!
+  end
 
-    campaign.save
+  def self.delete(campaign, current_member)
+    MissionHub::Survey.find(campaign.foreign_id).destroy
   end
 end

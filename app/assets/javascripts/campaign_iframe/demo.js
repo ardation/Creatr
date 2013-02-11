@@ -11,7 +11,7 @@ App = Ember.Application.create({
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
 });
-  
+
 App.ContentView = Ember.View.extend({
     templateName: content_template,
     didInsertElement: function() {
