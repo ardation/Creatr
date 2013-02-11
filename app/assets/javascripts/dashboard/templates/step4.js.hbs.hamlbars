@@ -25,7 +25,7 @@
             .loading
             .empty.hidden
               %h3 No themes are currently featured.
-              %a.btn.btn-primary{:href => new_dashboard_theme_path, target: "_blank"}
+              %a.btn.btn-primary{:href => "/dashboard/themes/new", target: "_blank"}
                 %i{class:"icon-bolt"}
                 Roll your own theme
             .content.row.hidden
@@ -40,7 +40,7 @@
             .loading
             .empty.hidden
               %h3 No recent themes.
-              %a.btn.btn-primary{:href => new_dashboard_theme_path, target: "_blank"}
+              %a.btn.btn-primary{:href => "/dashboard/themes/new", target: "_blank"}
                 %i{class:"icon-bolt"}
                 Roll your own theme
             .content.row.hidden
@@ -54,7 +54,7 @@
             .loading
             .empty.hidden
               %h3 You haven't added any themes to your favourites.
-              %a.btn.btn-primary{:href => new_dashboard_theme_path, target: "_blank"}
+              %a.btn.btn-primary{:href => "/dashboard/themes/new", target: "_blank"}
                 %i{class:"icon-bolt"}
                 Roll your own theme
             .content.row.hidden
@@ -68,7 +68,7 @@
             .loading
             .empty.hidden
               %h3 You haven't created any themes.
-              %a.btn.btn-primary{:href => new_dashboard_theme_path, target: "_blank"}
+              %a.btn.btn-primary{:href => "/dashboard/themes/new", target: "_blank"}
                 %i{class:"icon-bolt"}
                 Roll your own theme
             .content.row.hidden
