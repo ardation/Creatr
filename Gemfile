@@ -44,8 +44,6 @@ gem 'jshintrb'
 
 gem "paperclip", "~> 3.0"
 gem 'aws-sdk'
-
-gem 'formtastic'
 gem 'haml'
 
 gem 'kaminari'

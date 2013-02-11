@@ -2,12 +2,13 @@
  *= require codemirror
  *= require jquery.ui.datepicker
  *= require _font-awesome
+ *= require_self
 */
 
 @import 'bootstrap';
 @import 'bootstrap-responsive';
-@import 'formtastic-plus-bootstrap';
 @import 'compass/css3';
+@import 'formtastic-plus-bootstrap';
 
 @import 'dashboard/theme';
 
@@ -521,3 +522,12 @@ body .dashboard-create {
   }
 }
 
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+  margin-top:0;
+  line-height: inherit !important;
+}
