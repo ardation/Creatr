@@ -1,0 +1,20 @@
+%h2 Setup a new Campaign!
+%p
+  Getting Started couldn't be easier. Give your campaign a name and Click below to get started.
+  %br
+  %small.muted Note: You won't be billed for this new campaign until you leave developer mode.
+%hr
+%form.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label{:for => "txtName"} Survey Name
+      .controls
+        {{view Ember.TextField valueBinding="App.Surveys.name" class="txtName"}}
+    .control-group
+      %label.control-label{:for => "txtName"} Short Name
+      .controls
+        {{view Ember.TextField valueBinding="App.Surveys.short_name" class="txtName"}} .creatr.io
+    .form-actions
+      .btn.btn-primary
+        Start
+        %i.icon-chevron-right

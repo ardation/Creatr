@@ -307,7 +307,7 @@ DEPENDENCIES
   formtastic
   formtastic-plus-bootstrap
   haml
-  hamlbars
+  hamlbars (~> 2.0)
   highcharts-rails
   hirefireapp
   inherited_resources

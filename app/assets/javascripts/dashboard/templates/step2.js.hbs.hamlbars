@@ -1,0 +1,23 @@
+= hb 'view App.Step2View' do
+  %h2 Campaign Dates
+  %p
+    Choose a start date and a finish date where you want to accept submissions to your campaign.
+    %br
+    %small.muted Tip: Leave either date empty to start immediately or extend indefinately.
+  %hr
+  %form.form-horizontal
+    .control-group
+      %label.control-label{:for => "dateStart"} Survey Start
+      .controls
+        {{view App.DateField valueBinding="App.Surveys.start" class="dateStart" class="jquery-ui-datepicker"}}
+    .control-group
+      %label.control-label{:for => "dateEnd"} Survey End
+      .controls
+        {{view App.DateField valueBinding="App.Surveys.end" class="dateEnd" class="jquery-ui-datepicker"}}
+    .form-actions
+      .btn{:_action => 'showstep1'}
+        %i.icon-chevron-left
+        Back
+      .btn.btn-primary{:_action => 'showstep3'}
+        Next Step
+        %i.icon-chevron-right

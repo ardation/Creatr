@@ -1,0 +1,5 @@
+.row
+  .span3
+    {{view view.NavbarView}}
+  .span9
+    {{outlet}}

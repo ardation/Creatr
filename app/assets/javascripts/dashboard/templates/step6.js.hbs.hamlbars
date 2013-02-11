@@ -1,0 +1,18 @@
+%h2 Add ons
+%p Creatr has support for custom domains.  Set up your CNAME alias here
+%hr
+%form.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label{:for => "crm"} CNAME Alias
+      .controls
+        {{view Ember.TextField valueBinding="App.Surveys.cname_alias"}}
+      .form-actions
+        .btn{:_action => 'showstep5'}
+          %i.icon-chevron-left
+          Back
+        .btn.btn-primary{:_action => 'createCampaign'}
+          Create Campaign
+          %i.icon-chevron-right
+
+

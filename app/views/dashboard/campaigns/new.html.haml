@@ -1,13 +1,9 @@
+- content_for :scripts do
+  :javascript
+    var content_types = #{ContentType.all.to_json}
 - content_for :masthead do
   %h2 Campaign Creator
   %p Create your Outreach
-- content_for :scripts do
-  = javascript_include_tag "templates/all"
-- content_for :scripts do
-  = javascript_include_tag 'create/create'
-- content_for :scripts do
-  = javascript_include_tag 'create/theme_picker'
-
 %script#content_template{type:"text"}
   {{#each themes}}
   .span3.theme

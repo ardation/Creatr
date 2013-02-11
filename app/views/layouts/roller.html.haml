@@ -6,9 +6,8 @@
       = params[:controller].capitalize
     = stylesheet_link_tag    "dashboard", :media => "all"
     = csrf_meta_tags
-    = javascript_include_tag "application"
-    = yield :scripts
-  %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}"}
+    = javascript_include_tag "dashboard/index"
+  %body{:class => "#{params[:controller].gsub(/\//, '-')} #{params[:action]}", data: {page: [controller_name.capitalize, action_name.capitalize].join}}
     = render 'dash_nav'
     = yield
     = render 'dash_footer'

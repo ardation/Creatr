@@ -5,6 +5,9 @@
   .span3{style: "border:1px solid #ccc; text-align:center; padding:50px 10px;"}
     %h1= @campaign.campaign_code
     %h4.muted Unique Campaign Code
+  .span3{style: "border:1px solid #ccc; text-align:center; padding:50px 10px;"}
+    %h1= @campaign.total
+    %h4.muted Submissions
 
 = link_to 'Edit', edit_dashboard_campaign_path(@campaign)
 \|

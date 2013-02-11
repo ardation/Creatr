@@ -1,0 +1,3 @@
+%a{_action:'gotoRoute item on="click" target="view.parentView"'}
+  %i{:bind => { :class => 'item.icon' }}
+  {{item.displayText}}

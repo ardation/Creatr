@@ -1,0 +1,17 @@
+%h2 Create Content
+%p
+  Your campaign wouldn't be much use without content now would it? Add content below and drag and drop content to reorder things!
+  %br
+  %small.muted Tip: Creatr automatically adds new content when you fill in the last blank one.
+%hr
+%form.form-horizontal
+  .control-group
+    #accordion.accordion
+      {{view App.JQuerySortableView}}
+    .form-actions
+      .btn{:_action => 'showstep2'}
+        %i.icon-chevron-left
+        Back
+      .btn.btn-primary{:_action => 'showstep4'}
+        Next Step
+        %i.icon-chevron-right

@@ -1,0 +1,17 @@
+%h2 Add ons
+%p Creatr has SMS integration set up, so that for a small fee a confirmation message can be sent after a survey entry.  Set up this message here
+%hr
+%form.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label{:for => "crm"} SMS Template
+      .controls
+        {{view Ember.TextArea valueBinding="App.Surveys.sms_template"}}
+      .form-actions
+        .btn{:_action => 'showstep4'}
+          %i.icon-chevron-left
+          Back
+        .btn.btn-primary{:_action => 'showstep6'}
+          Next Step
+          %i.icon-chevron-right
+

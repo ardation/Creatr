@@ -1,0 +1,6 @@
+%h2 Creating...
+%p Creatr is creating your campaign.  Please be patient, this could take a few moments
+{{App.Surveys.createResponse}}
+
+
+

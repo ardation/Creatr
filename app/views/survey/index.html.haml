@@ -1,7 +1,3 @@
-  
-- content_for :scripts do
-  = javascript_include_tag 'survey/ember-facebook'
-  = javascript_include_tag 'survey/survey'
 
 - content_for :script_includes do
   :javascript
@@ -22,7 +18,7 @@
 <script data-template-name="app" type="text/x-handlebars">
 {{outlet}}
 {{#if App.button}}
-.btn{:_action => 'incrementStep' } Next > 
+.btn{:_action => 'incrementStep' } Next >
 {{/if}}
 </script>
 
@@ -37,7 +33,7 @@
 {{#if App.FBUser}}
 Thanks, you're connected with facebook!
 {{else}}
-{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}} 
+{{#view Em.FacebookView type="login-button" data-size="xlarge" data-scope="email, offline_access"}}
 Connect with facebook
 {{/view}}
 {{/if}}

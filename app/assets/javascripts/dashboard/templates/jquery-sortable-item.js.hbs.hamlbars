@@ -8,8 +8,6 @@
         {{else}}
         New content item
         {{/if}}
-
-
   .accordion-body.collapse{:bind => {:id => 'view.content.id'}}
     .accordion-inner
       %form.form-horizontal
@@ -30,7 +28,7 @@
           %label.control-label
             {{item.name}}
           .controls
-            {{view App.HackExtreme}} 
+            {{view App.HackExtreme}}
             %small.muted
               {{item.help}}
         {{/each}}

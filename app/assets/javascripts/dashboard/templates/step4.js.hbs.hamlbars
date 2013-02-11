@@ -1,40 +1,5 @@
-.row
-  .span3
-    %ul.nav.nav-tabs.nav-stacked
-      %li
-        %a{:_action => 'showstep0'}
-          %i.icon-bolt
-          Get Started
-      %li
-        %a{:_action => 'showstep1'}
-          %i.icon-filter
-          Data Point
-      %li
-        %a{:_action => 'showstep2'}
-          %i.icon-calendar
-          Campaign Dates
-      %li
-        %a{:_action => 'showstep3'}
-          %i.icon-file
-          Create Content
-      %li.active
-        %a{:_action => 'showstep4'}
-          %i.icon-gift
-          Theme Selection
-          %i.icon-chevron-right
-      %li
-        %a{:_action => 'showstep5'}
-          %i.icon-envelope
-          SMS Setup
-      %li
-        %a{:_action => 'showstep6'}
-          %i.icon-wrench
-          Advanced
-      %li 
-        %a
-          %i.icon-check
-          Create
-  .span9.themes-container
+= hb 'view App.Step4View' do
+  .themes-container
     .row
       .span9
         %ul#myTab.nav.nav-pills{style:"margin-bottom:0px;"}

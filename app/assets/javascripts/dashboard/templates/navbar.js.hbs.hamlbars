@@ -1,0 +1,3 @@
+%ul.nav.nav-tabs.nav-stacked
+  = hb 'each item in controller' do
+    {{view view.MenuItemView itemBinding="item"}}

@@ -1,5 +1,3 @@
-- content_for :scripts do
-  = javascript_include_tag 'theme_roller.js'
 .page-left.icons.no-builder
   - if @theme.mobile
     %a.phone.size.link{"data-size" => "phone", :href => "#", class: ("selected" if @media == "phone")}
