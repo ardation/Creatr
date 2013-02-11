@@ -140,22 +140,23 @@ App.Content = DS.Model.extend({
 });
 
 App.ContentController = Ember.Controller.extend({
-  type: null,
   content: null,
+  type: null,
   data: function() {
-    fx = eval(this.type.get('js')).data;
-    return fx(this.content.get('data'));
-  }.property(),
+    this.set('content.data', JSON.parse(this.get('content.data')));
+    fx = eval(this.type.js).data;
+    return fx(this.content.data);
+  }.property('this.content.data'),
 
   enter: function() {
-    fx = eval(this.type.get('js')).enter;
-    fx(this.readHelper, this.writeHelper, this.content.get('id'), this.content.get('data'), this);
+  //  fx = eval(this.type.js).enter;
+  //  fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
   },
 
   exit: function() {
     $('#animate').slideUp();
-    fx = eval(this.type.get('js')).exit;
-    fx(this.readHelper, this.writeHelper, this.content.get('id'), this.content.get('data'), this);
+    fx = eval(this.type.js).exit;
+    fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
   },
 
   writeHelper: function(index, data) {
@@ -181,41 +182,48 @@ App.ContentView = Ember.View.extend
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
-    this.transitionTo('content', App.Content.find(1));
+    this.transitionTo('content', 1);
   }
 });
 
 App.ContentRoute = Ember.Route.extend({
   current_id:0,
+  name: null,
   events: {
     incrementStep: function() {
-      this.transitionTo('content', App.Content.find(this.current_id*1+1));
+      this.transitionTo('content', this.current_id*1+1);
     }, 
     backStep: function() {
-      this.transitionTo('content', App.Content.find(this.current_id*1-1));
+      this.transitionTo('content', this.current_id*1-1);
     }
   },
   model: function(params) {
     console.log(params.id)
     this.current_id = params.id;
-    return this.current_id
+    return this.current_id;
   },
-  serialize: function(model) {
-    this.current_id = model.id;
-    App.Content.find(this.current_id);
-    return { id: model.id };
+  serialize: function(id) {
+    this.current_id = id;
+    return { id: id };
   },
   renderTemplate: function() {
     console.log('all the time')
-    if (this.current_id!=0) {
-      this.render(App.Content.find(this.current_id).get('type').get('name'));
-    }
+    this.render(this.name);
   },
   setupController: function(controller, content) {
     console.log('setting up controller',  content);
-    controller.set('content', content);
-    controller.set('type', content.get('type'));
+    obj =  App._contents.findProperty('position', this.current_id*1);
+    type_id = obj.content_type_id;
+    type_obj = App._types.findProperty('id', type_id);
+    this.name = type_obj.name;
+    controller.set('content', obj);
+    controller.set('type', type_obj);
+    controller.enter();
+  },
+  enter: function() {
+    //this.controller.enter();
   }
+
 });
 /*
 App.Router = Ember.Router.extend({
