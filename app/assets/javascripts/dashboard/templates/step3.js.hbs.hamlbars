@@ -12,6 +12,9 @@
       .btn{:_action => 'showstep2'}
         %i.icon-chevron-left
         Back
+      .btn{:_action => 'addContent'}
+        %i.icon-plus
+        Add Content
       .btn.btn-primary{:_action => 'showstep4'}
         Next Step
         %i.icon-chevron-right

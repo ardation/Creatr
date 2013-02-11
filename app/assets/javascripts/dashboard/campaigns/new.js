@@ -108,36 +108,69 @@ var CampaignsNew = new function() {
     });
 
     App.Step1Route = Em.Route.extend({
+      events: {
+        showstep2: function() {
+          this.transitionTo('step2');
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step1');
       }
     });
 
     App.Step2Route = Em.Route.extend({
+      events: {
+        showstep3: function() {
+          this.transitionTo('step3');
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step2');
       }
     });
 
     App.Step3Route = Em.Route.extend({
+      events: {
+        showstep4: function() {
+          this.transitionTo('step4');
+        },
+        addContent: function() {
+          App.Surveys.contents.pushObject(App.SurveyContent.create());
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step3');
       }
     });
 
     App.Step4Route = Em.Route.extend({
+      events: {
+        showstep5: function() {
+          this.transitionTo('step5');
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step4');
       }
     });
 
     App.Step5Route = Em.Route.extend({
+      events: {
+        showstep6: function() {
+          this.transitionTo('step6');
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step5');
       }
     });
 
     App.Step6Route = Em.Route.extend({
+      events: {
+        createCampaign: function() {
+          this.transitionTo('create');
+        }
+      },
       renderTemplate: function() {
         this.render('dashboard/templates/step6');
       }

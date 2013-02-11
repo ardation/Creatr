@@ -18,6 +18,10 @@ App.setProperties({
     appId: 113411778806173
 });
 
+App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
+App._types = Ember.ArrayProxy.create({content: Ember.A(content_types)});
+
+
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
   storerecord: function() {
@@ -175,17 +179,40 @@ App.ContentView = Ember.View.extend
     }
   });
 
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
+    this.transitionTo('content', App.Content.find(1));
+  }
+});
+
 App.ContentRoute = Ember.Route.extend({
   current_id:0,
+  events: {
+    incrementStep: function() {
+      this.transitionTo('content', App.Content.find(this.current_id*1+1));
+    }, 
+    backStep: function() {
+      this.transitionTo('content', App.Content.find(this.current_id*1-1));
+    }
+  },
   model: function(params) {
+    console.log(params.id)
     this.current_id = params.id;
-    return App.Content.find(params.id);
+    return this.current_id
+  },
+  serialize: function(model) {
+    this.current_id = model.id;
+    App.Content.find(this.current_id);
+    return { id: model.id };
   },
   renderTemplate: function() {
-    if (this.current_id!=0)
+    console.log('all the time')
+    if (this.current_id!=0) {
       this.render(App.Content.find(this.current_id).get('type').get('name'));
+    }
   },
   setupController: function(controller, content) {
+    console.log('setting up controller',  content);
     controller.set('content', content);
     controller.set('type', content.get('type'));
   }
