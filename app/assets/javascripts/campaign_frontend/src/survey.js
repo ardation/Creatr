@@ -39,7 +39,7 @@ App.SurveyData = Ember.ArrayProxy.create({
     var records = amplify.store('records');
     _.each(records, function(value) {
       console.log(value)
-      $.post('upload', value , 'json')
+      $.post('upload', {data: value} , 'json')
       .success(function() {
         amplify.store('records', _.without(records, value));
       })
@@ -59,69 +59,6 @@ for(i = 0; i<survey_contents.length; i++) {
   }
 }
 
-/*
-//Make the required controllers and views
-App.surveyViews = [];
-App.surveyControllers = [];
-$.each(survey_contents, function(i, content) {
-  content_type = content_types_obj.get('content').findProperty('id', content.content_type_id);
-  for(j = 0; j < content_type.data_count; j++) {
-    Ember.get('App.SurveyData').pushObject("");
-  }
-  App.surveyView = Ember.View.extend
-  ({
-    id: i,
-    content_store: content_type,
-    data: JSON.parse(content.data),
-    templateName: content_type.name,
-    classTest: 'test',
-    didInsertElement: function() {
-      $('#animate').slideDown();
-      fx = eval(this.content_store.js).render;
-      fx(this);
-    }
-  });
-
-  App.surveyControllers[i] = Ember.Controller.extend({
-    id: i,
-    content_store: content_type,
-    content: content,
-    next: this.id+1,
-
-    data: function() {
-      fx = eval(this.content_store.js).data;
-      return fx($.parseJSON(content.data));
-    }.property(),
-
-    enter: function() {
-      fx = eval(this.content_store.js).enter;
-      fx(this.readHelper, this.writeHelper, this.id, $.parseJSON(content.data), this);
-    },
-
-    exit: function() {
-      $('#animate').slideUp();
-      fx = eval(this.content_store.js).exit;
-      fx(this.readHelper, this.writeHelper, this.id, $.parseJSON(content.data), this);
-    },
-
-    writeHelper: function(index, data) {
-      App.SurveyData.content[index] = data;
-    },
-
-    readHelper: function(index) {
-      return App.SurveyData.content[index];
-    },
-    _propertySet: function(name, data) {
-      App.surveyControllers[this.id].set(name, data);
-    }
-
-  });
-
-  App.surveyControllers[i] = App.surveyControllers[i].create();
-});
-
-*/
-
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
 });
@@ -134,49 +71,34 @@ App.Router.map(function() {
   this.resource("content", { path: "/content/:id" });
 });
 
-App.Type = DS.Model.extend({
-  js: DS.attr('string'),
-  name: DS.attr('string'),
-  contents: DS.hasMany('App.Content')
-});
-
-App.Content = DS.Model.extend({
-  name: DS.attr('string'),
-  content_store: DS.attr('string'),
-  type: DS.belongsTo('App.Type')
-});
 
 App.ContentController = Ember.Controller.extend({
-  content: null,
+  _content: null,
   type: null,
+  answer: "Reuben is the answer",
   data: function() {
-    dat = this.get('content.data')
+    dat = this.get('_content.data')
     if (dat == undefined) {
       return null;
     } else {
-      this.set('content.data', JSON.parse(dat));
+      this.set('_content.data', JSON.parse(dat));
       fx = eval(this.type.js).data;
-      return fx(this.content.data);
+      return fx(this._content.data);
     }
-  }.property('this.content.data'),
+  }.property('this._content.data'),
 
   enter: function() {
     $('#animate').slideDown();
 
     fx = eval(this.type.js).enter;
-    fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
-
-    //should really be in the view
-    fx = eval(this.type.js).render;
-    fx(this);
-    
+    fx(this.readHelper, this.writeHelper, this._content.position - 1, this._content.data, this);
   },
 
   exit: function() {
     $('#animate').slideUp();
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+      fx(this.readHelper, this.writeHelper, this._content.position - 1, this._content.data, this);
     }
   },
 
@@ -188,7 +110,7 @@ App.ContentController = Ember.Controller.extend({
     return App.SurveyData.content[index];
   },
   _propertySet: function(name, data) {
-    App.surveyControllers[this.id].set(name, data);
+    this.set(name, data);
   }
 });
 
@@ -199,8 +121,9 @@ App.ContentView = Ember.View.extend
     classTest: 'test',
     didInsertElement: function() {
       console.log('did insert element!!!')
-      fx = eval(this.type.get('js')).render;
-      fx(this);
+    },
+    afterRender: function() {
+      alert('rendered');
     }
   });
 
@@ -213,6 +136,8 @@ App.IndexRoute = Ember.Route.extend({
 App.ContentRoute = Ember.Route.extend({
   current_id:0,
   name: null,
+  type: null, 
+  _content: null,
   events: {
     incrementStep: function() {
       this.transitionTo('content', this.current_id*1+1);
@@ -233,81 +158,38 @@ App.ContentRoute = Ember.Route.extend({
   renderTemplate: function() {
     console.log('all the time')
     this.render(this.name);
-
+    var _this = this;
+    fx = eval(_this.type.js).render;
+    fx(_this, _this._content.data, _this._content.position);
+    
   },
-  setupController: function(controller, content) {
+  setupController: function(controller, model) {
 
     //simulate exit for now
-    controller.exit();
-    console.log('setting up controller',  content);
     obj =  App._contents.findProperty('position', this.current_id*1);
+    controller.exit();
     type_id = obj.content_type_id;
     type_obj = App._types.findProperty('id', type_id);
     this.name = type_obj.name;
-    controller.set('content', obj);
+    this.set('_content', obj);
+    controller.set('_content', obj);
     controller.set('type', type_obj);
+    this.set('type', type_obj);
     controller.enter();
     if(this.current_id*1 == survey_contents.length) {
       console.log('trying to upload data');
       App.SurveyData.storerecord();
     }
   },
+  activate: function() {
+    console.log("we're in bro");
+  },
+  deactivate: function () {
+    console.log('Outies');
+  }
 
 });
-/*
-App.Router = Ember.Router.extend({
-  enableLogging: true,
-  root: Ember.Route.extend({
 
-    incrementStep: function(router) {
-      router.transitionTo('step', {step:App.nextStep});
-    },
-
-    backStep: function(router) {
-      router.transitionTo('step', {step:App.nextStep-2});
-    },
-
-    index: Em.Route.extend({
-      route: '/',
-      connectOutlets: function(router) {
-        //router.route('//1');
-        test = {step:1};
-        router.transitionTo('step', {step:1});
-      }
-    }),
-    step: Em.Route.extend({
-      route: '/:step',
-      connectOutlets: function(router, context) {
-        if(context.step*1 <= App.surveyViews.length) {
-          App.set('nextStep', context.step*1+1);
-          this.currentStep = context.step;
-          App.surveyControllers[context.step-1].enter();
-          router.get('applicationController').connectOutlet({
-              viewClass: App.surveyViews[context.step-1],
-              controller: App.surveyControllers[context.step-1],
-              context: {}
-          });
-          if(context.step*1 == App.surveyViews.length) {
-            router.transitionTo('finish');
-          }
-        }
-      },
-      exit: function(router) {
-        App.surveyControllers[this.currentStep-1].exit();
-      }
-    }),
-    finish: Em.Route.extend({
-      route: '/submit',
-      connectOutlets: function(router, context) {
-        App.set('button', false);
-        //router.get('applicationController').connectOutlet('submit');
-        App.SurveyData.storerecord();
-        if( navigator.onLine ) App.SurveyData.pushrecords();
-      }
-    })
-  })
-});
-*/
 
 Ember.LOG_BINDINGS=true;
 
