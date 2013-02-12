@@ -36,7 +36,7 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'ember-rails'
+gem 'ember-rails', :path => "vendor/gems/ember-rails-0.9.2"
 
 gem 'unicorn'
 

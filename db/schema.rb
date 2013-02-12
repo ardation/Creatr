@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212084547) do
+ActiveRecord::Schema.define(:version => 20130212095122) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(:version => 20130212084547) do
   create_table "member_crms", :force => true do |t|
     t.integer "member_id"
     t.integer "crm_id"
-    t.string  "api_secret"
     t.text    "api_key"
     t.integer "client"
   end
@@ -148,14 +147,12 @@ ActiveRecord::Schema.define(:version => 20130212084547) do
 
   create_table "organisations", :force => true do |t|
     t.string  "name"
-    t.integer "uid"
     t.integer "crm_id"
     t.integer "foreign_id"
   end
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
-  add_index "organisations", ["uid"], :name => "index_organisations_on_uid"
 
   create_table "people", :force => true do |t|
     t.string   "first_name"
@@ -164,10 +161,16 @@ ActiveRecord::Schema.define(:version => 20130212084547) do
     t.integer  "facebook_id"
     t.string   "facebook_access_token"
     t.integer  "sms_token"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "campaign_id"
+    t.string   "email"
+    t.boolean  "sms_validated",         :default => false
+    t.boolean  "photo_validated",       :default => false
+    t.boolean  "synced",                :default => false
   end
+
+  add_index "people", ["sms_token"], :name => "index_people_on_sms_token"
 
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"

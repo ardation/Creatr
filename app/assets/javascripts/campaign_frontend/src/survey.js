@@ -161,8 +161,8 @@ App.ContentController = Ember.Controller.extend({
   }.property('this.content.data'),
 
   enter: function() {
-    fx = eval(this.type.js).enter;
-    fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+    //fx = eval(this.type.js).enter;
+    //fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
   },
 
   exit: function() {
