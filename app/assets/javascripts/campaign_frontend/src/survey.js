@@ -161,14 +161,23 @@ App.ContentController = Ember.Controller.extend({
   }.property('this.content.data'),
 
   enter: function() {
+    $('#animate').slideDown();
+
     fx = eval(this.type.js).enter;
     fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+
+    //should really be in the view
+    fx = eval(this.type.js).render;
+    fx(this);
+    
   },
 
   exit: function() {
     $('#animate').slideUp();
-    fx = eval(this.type.js).exit;
-    fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+    if(this.type != null) {
+      fx = eval(this.type.js).exit;
+      fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+    }
   },
 
   writeHelper: function(index, data) {
@@ -177,6 +186,9 @@ App.ContentController = Ember.Controller.extend({
 
   readHelper: function(index) {
     return App.SurveyData.content[index];
+  },
+  _propertySet: function(name, data) {
+    App.surveyControllers[this.id].set(name, data);
   }
 });
 
@@ -186,7 +198,7 @@ App.ContentView = Ember.View.extend
     data: null,
     classTest: 'test',
     didInsertElement: function() {
-      $('#animate').slideDown();
+      console.log('did insert element!!!')
       fx = eval(this.type.get('js')).render;
       fx(this);
     }
@@ -221,8 +233,12 @@ App.ContentRoute = Ember.Route.extend({
   renderTemplate: function() {
     console.log('all the time')
     this.render(this.name);
+
   },
   setupController: function(controller, content) {
+
+    //simulate exit for now
+    controller.exit();
     console.log('setting up controller',  content);
     obj =  App._contents.findProperty('position', this.current_id*1);
     type_id = obj.content_type_id;
@@ -236,9 +252,6 @@ App.ContentRoute = Ember.Route.extend({
       App.SurveyData.storerecord();
     }
   },
-  enter: function() {
-    //this.controller.enter();
-  }
 
 });
 /*
