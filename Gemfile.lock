@@ -76,7 +76,7 @@ GEM
     chunky_png (1.2.7)
     cocaine (0.4.2)
     cocoon (1.1.2)
-    codemirror-rails (3.00)
+    codemirror-rails (3.02)
       railties (~> 3.0)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -152,7 +152,7 @@ GEM
       execjs
       multi_json (>= 1.3)
       rake
-    json (1.7.6)
+    json (1.7.7)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.14.1)
@@ -164,7 +164,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    multi_json (1.5.0)
+    multi_json (1.5.1)
     multipart-post (1.1.5)
     nokogiri (1.5.6)
     oauth2 (0.8.0)
