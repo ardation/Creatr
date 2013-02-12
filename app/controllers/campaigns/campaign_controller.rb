@@ -32,9 +32,11 @@ class Campaigns::CampaignController < Campaigns::BaseController
   end
 
   def validate_sms_code
-    if false
+    @person = @campaign.people.find_by_sms_token(params[:token].to_i)
+    if @person.nil?
       render json: ":"  #Force JSON Error for CrossDomain
     else
+      if @person.val
       respond_with "#{params[:callback]}({validate:true})"
     end
   end

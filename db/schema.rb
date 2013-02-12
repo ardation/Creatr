@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211013433) do
+ActiveRecord::Schema.define(:version => 20130212084547) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "content_id"
+    t.integer  "person_id"
+    t.string   "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "campaign_counters", :force => true do |t|
     t.integer "campaign_id"
@@ -145,6 +153,18 @@ ActiveRecord::Schema.define(:version => 20130211013433) do
 
   add_index "organisations", ["crm_id"], :name => "index_organisations_on_crm"
   add_index "organisations", ["id"], :name => "index_organisations_on_id", :unique => true
+
+  create_table "people", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "phone"
+    t.integer  "facebook_id"
+    t.string   "facebook_access_token"
+    t.integer  "sms_token"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "campaign_id"
+  end
 
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"
