@@ -1,21 +1,18 @@
+
 - unless @content_type.nil?
   - content_for :scripts do
     :javascript
-      var content_type = #{@content_type.to_json}
+      var content_type = #{@content_type.to_json};
+- else
+  - content_for :scripts do
+    :javascript
+      var content_type = null;
 
 - content_for :style do
   = @css.html_safe
-
-- content_for :scripts do
-  = javascript_include_tag 'campaign/demo'
-  = javascript_include_tag 'http://use.edgefonts.net/passion-one.js'
-
-
 %script{:type => "text/x-handlebars", :'data-template-name' => "app"}
   = @app_html.html_safe
-
 - unless @content_type.nil?
   %script{:type => "text/x-handlebars", :'data-template-name' => @content_type.name}
     = @html
-
 #view

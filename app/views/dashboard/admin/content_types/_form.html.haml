@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :name
   = f.inputs title: "Configuration" do
-    = f.input :sync_type, collection: {"Non Syncable" => ContentType::NON_SYNCABLE, "Short Answer (Free form response)" => ContentType::SHORT_ANSWER, "Checkbox (Choose one or more)" => ContentType::CHECK_BOX, "Dropdown (Choose one)" => ContentType::DROPDOWN, "Radio Button (Choose one)" => ContentType::RADIO_BUTTON, "Facebook (Authentication)" => ContentType::FACEBOOK_AUTH}, as: :select
+    = f.input :sync_type, collection: {"Non Syncable" => ContentType::NON_SYNCABLE, "Short Answer (Free form response)" => ContentType::SHORT_ANSWER, "Checkbox (Choose one or more)" => ContentType::CHECK_BOX, "Dropdown (Choose one)" => ContentType::DROPDOWN, "Radio Button (Choose one)" => ContentType::RADIO_BUTTON, "Facebook (Authentication)" => ContentType::FACEBOOK_AUTH, "Contact Details" => ContentType::CONTACT}, as: :select
     = f.input :inheritance, :label => "Parent Content Type"
     = f.input :default_template
     :javascript

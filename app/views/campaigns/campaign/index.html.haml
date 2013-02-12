@@ -11,7 +11,7 @@
     var survey_contents = #{@campaign.contents.find(:all, :order => "position").to_json};
     var content_types = #{@content_types}
 
--content_for :title, @campaign.tidy_name
+-content_for :title, @campaign.name
 - if @campaign.theme.try(:css)
   - content_for :style do
     = @campaign.theme.css.html_safe

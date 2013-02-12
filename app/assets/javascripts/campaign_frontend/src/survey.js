@@ -143,9 +143,14 @@ App.ContentController = Ember.Controller.extend({
   content: null,
   type: null,
   data: function() {
-    this.set('content.data', JSON.parse(this.get('content.data')));
-    fx = eval(this.type.js).data;
-    return fx(this.content.data);
+    dat = this.get('content.data')
+    if (dat == undefined) {
+      return null;
+    } else {
+      this.set('content.data', JSON.parse(dat));
+      fx = eval(this.type.js).data;
+      return fx(this.content.data);
+    }
   }.property('this.content.data'),
 
   enter: function() {
@@ -192,7 +197,7 @@ App.ContentRoute = Ember.Route.extend({
   events: {
     incrementStep: function() {
       this.transitionTo('content', this.current_id*1+1);
-    }, 
+    },
     backStep: function() {
       this.transitionTo('content', this.current_id*1-1);
     }

@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title
+      = yield :title
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
+    = stylesheet_link_tag    "campaign_frontend/index", :media => "all"
+    = csrf_meta_tags
+    = yield :scripts
+    = javascript_include_tag "campaign_iframe/index"
+    %style
+      = yield :style
+  %body{class: "#{params[:action]}"}
+    #surveyContainer
+      = yield

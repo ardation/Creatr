@@ -7,8 +7,6 @@ class Dashboard::DashboardController < Dashboard::BaseController
   def settings
     # set your secret key
     Stripe.api_key = ENV['stripe_secret_key']
-
-
     unless current_member.stripe.blank?
       @customer = Stripe::Customer.retrieve(current_member.stripe)
     end
@@ -45,7 +43,7 @@ class Dashboard::DashboardController < Dashboard::BaseController
         @description = "Your CSS has an error. Check and try again."
         render "iframe_error", :layout => "error"
         return
-      end 
+      end
     end
     begin
       @html = params[:html].html_safe unless params[:html].nil?
@@ -63,6 +61,6 @@ class Dashboard::DashboardController < Dashboard::BaseController
     end
     @content_type = ContentType.find(params[:content_type].to_i) unless params[:content_type] == "Body"
     @app_html = params[:app_html]
-    render "iframe", :layout => "campaign"
+    render "iframe", :layout => "iframe"
   end
 end

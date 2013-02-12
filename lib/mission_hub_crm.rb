@@ -34,6 +34,7 @@ class MissionHubCrm
   end
 
   def self.delete(campaign, current_member)
+    MissionHub.client_secret = current_member.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
     MissionHub::Survey.find(campaign.foreign_id).destroy
   end
 end

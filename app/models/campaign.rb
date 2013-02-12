@@ -4,6 +4,8 @@ class Campaign < ActiveRecord::Base
   has_many :members, through: :permissions
   has_many :contents, dependent: :destroy
   has_many :campaign_counters, dependent: :destroy
+  has_many :people, dependent: :destroy
+
   belongs_to :theme
   belongs_to :organisation
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
@@ -46,9 +48,5 @@ class Campaign < ActiveRecord::Base
 
   def total
     self.campaign_counters.sum(:count)
-  end
-
-  def tidy_name
-    self.name.gsub(/_/, ' ').capitalize
   end
 end
