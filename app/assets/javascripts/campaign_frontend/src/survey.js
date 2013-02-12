@@ -1,6 +1,5 @@
 nextStep = 1;
 
-subViews = new Array();
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
 
 App = Ember.Application.createWithMixins({    // When ember updates we will need to use createWithMixins
@@ -20,6 +19,7 @@ App.setProperties({
 
 App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
 App._types = Ember.ArrayProxy.create({content: Ember.A(content_types)});
+SurveyLength = App._contents.length;
 
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
@@ -81,7 +81,8 @@ App.ContentController = Ember.Controller.extend({
     if (dat == undefined) {
       return null;
     } else {
-      this.set('_content.data', JSON.parse(dat));
+      if(typeof dat != "object")
+        this.set('_content.data', JSON.parse(dat));
       fx = eval(this.type.js).data;
       return fx(this._content.data);
     }
@@ -111,20 +112,14 @@ App.ContentController = Ember.Controller.extend({
   },
   _propertySet: function(name, data) {
     this.set(name, data);
-  }
+  },
 });
 
 App.ContentView = Ember.View.extend
   ({
     type: null,
     data: null,
-    classTest: 'test',
-    didInsertElement: function() {
-      console.log('did insert element!!!')
-    },
-    afterRender: function() {
-      alert('rendered');
-    }
+    classTest: 'test'
   });
 
 App.IndexRoute = Ember.Route.extend({
@@ -144,23 +139,25 @@ App.ContentRoute = Ember.Route.extend({
     },
     backStep: function() {
       this.transitionTo('content', this.current_id*1-1);
-    }
+    } 
   },
   model: function(params) {
-    console.log(params.id)
-    this.current_id = params.id;
+    console.log('updating this at 152;');
+    this.set('current_id', params.id);
     return this.current_id;
   },
   serialize: function(id) {
-    this.current_id = id;
+    console.log('updating this at 156')
+    this.set('current_id', id);
     return { id: id };
   },
   renderTemplate: function() {
-    console.log('all the time')
     this.render(this.name);
     var _this = this;
-    fx = eval(_this.type.js).render;
-    fx(_this, _this._content.data, _this._content.position);
+    Ember.run.next(function(){
+      fx = eval(_this.type.js).render;
+      fx(_this, _this._content.data, _this._content.position);
+    });
     
   },
   setupController: function(controller, model) {
@@ -176,18 +173,12 @@ App.ContentRoute = Ember.Route.extend({
     controller.set('type', type_obj);
     this.set('type', type_obj);
     controller.enter();
-    if(this.current_id*1 == survey_contents.length) {
+    if(this.current_id*1 == SurveyLength) {
       console.log('trying to upload data');
       App.SurveyData.storerecord();
     }
-  },
-  activate: function() {
-    console.log("we're in bro");
-  },
-  deactivate: function () {
-    console.log('Outies');
+    console.log('final');
   }
-
 });
 
 
