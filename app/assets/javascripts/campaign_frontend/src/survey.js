@@ -21,7 +21,6 @@ App.setProperties({
 App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
 App._types = Ember.ArrayProxy.create({content: Ember.A(content_types)});
 
-
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
   storerecord: function() {
@@ -34,6 +33,7 @@ App.SurveyData = Ember.ArrayProxy.create({
     data = JSON.parse(JSON.stringify(this.content));
     records.push(data);
     amplify.store('records', records);
+    this.pushrecords();
   },
   pushrecords: function() {
     var records = amplify.store('records');
@@ -51,6 +51,13 @@ App.SurveyData = Ember.ArrayProxy.create({
     });
   }
 });
+
+for(i = 0; i<survey_contents.length; i++) {
+  content_type = content_types_obj.get('content').findProperty('id', survey_contents[i].content_type_id);
+  for(j = 0; j < content_type.data_count; j++) {
+    Ember.get('App.SurveyData').pushObject("");
+  }
+}
 
 /*
 //Make the required controllers and views
@@ -154,8 +161,8 @@ App.ContentController = Ember.Controller.extend({
   }.property('this.content.data'),
 
   enter: function() {
-  //  fx = eval(this.type.js).enter;
-  //  fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
+    fx = eval(this.type.js).enter;
+    fx(this.readHelper, this.writeHelper, this.content.id, this.content.data, this);
   },
 
   exit: function() {
@@ -224,6 +231,10 @@ App.ContentRoute = Ember.Route.extend({
     controller.set('content', obj);
     controller.set('type', type_obj);
     controller.enter();
+    if(this.current_id*1 == survey_contents.length) {
+      console.log('trying to upload data');
+      App.SurveyData.storerecord();
+    }
   },
   enter: function() {
     //this.controller.enter();
