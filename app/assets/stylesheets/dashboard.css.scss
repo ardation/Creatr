@@ -2,15 +2,15 @@
  *= require codemirror
  *= require jquery.ui.datepicker
  *= require _font-awesome
- *= require bootstrap-without-forms
- *= require formtastic-plus-bootstrap
- *= require bootstrap-responsive
- *= require formtastic-plus-bootstrap/responsive
  *= require_self
 */
 
+@import 'bootstrap';
+@import 'bootstrap-responsive';
 @import 'compass/css3';
+
 @import 'dashboard/theme';
+
 @import 'http://fonts.googleapis.com/css?family=Open+Sans:400,600,300';
 
 html, body {
