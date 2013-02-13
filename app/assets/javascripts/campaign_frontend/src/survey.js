@@ -2,6 +2,10 @@ nextStep = 1;
 
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
 
+if (amplify.store('current_content') == undefined) {
+  amplify.store('current_content', 1);
+}
+
 App = Ember.Application.createWithMixins({    // When ember updates we will need to use createWithMixins
     rootElement: '#surveyContainer',
     autoinit: false,
@@ -80,6 +84,7 @@ App.ContentController = Ember.Controller.extend({
   type: null,
   answer: "Reuben is the answer",
   data: function() {
+    console.log(this._content);
     dat = this._content.data
     if (dat == undefined) {
       return null;
@@ -92,7 +97,6 @@ App.ContentController = Ember.Controller.extend({
   }.property('this._content.data'),
 
   enter: function() {
-    console.log(this._content);
     $('#surveyContainer').delay(500).fadeIn();
 
     fx = eval(this.type.js).enter;
@@ -142,20 +146,29 @@ App.ContentRoute = Ember.Route.extend({
       var context = this;
       $('#surveyContainer').fadeOut(500);
       $('body').toggleClass('alt');
+      amplify.store('current_content', this.current_id*1+1);
       setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 500);
     },
-
     resetStep: function() {
       var context = this;
       $('#surveyContainer').fadeOut(500);
       $('body').toggleClass('alt');
+      amplify.store('current_content', 1);
       setTimeout(function() {context.transitionTo('content', 1)}, 500);
     },
     backStep: function() {
+      amplify.store('current_content', this.current_id*1-1);
       this.transitionTo('content', this.current_id*1-1);
     }
   },
   model: function(params) {
+    var router = this;
+    Ember.run.next(function() {
+      if (amplify.store('current_content') != router.current_id) {
+        router.transitionTo('content', amplify.store('current_content'));
+      }
+    });
+
     this.set('current_id', params.id);
     return this.current_id;
   },
@@ -174,7 +187,7 @@ App.ContentRoute = Ember.Route.extend({
     if (this.current_id == 1 || App._contents.get('length') == this.current_id)
       App.set('back_button', false)
     else
-      App.set('back_button', true)
+      App.set('back_button', false)
 
     this.render(this.name);
     var _this = this;
@@ -182,7 +195,6 @@ App.ContentRoute = Ember.Route.extend({
       fx = eval(_this.type.js).render;
       fx(_this, _this._content.data, _this._content.position);
     });
-
   },
   setupController: function(controller, model) {
 
@@ -198,13 +210,10 @@ App.ContentRoute = Ember.Route.extend({
     this.set('type', type_obj);
     controller.enter();
     if(this.current_id*1 == SurveyLength) {
-      console.log('trying to upload data');
       App.SurveyData.storerecord();
     }
-    console.log('final');
   }
 });
-
 
 Ember.LOG_BINDINGS=true;
 
