@@ -10,7 +10,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
           @templates << {name: content.content_type.name, content: @campaign.theme.get_content_type_template(content.content_type.id) }
         end
       end
-      @content_types = @content_types.to_json(only: [:name, :js, :id, :data_count])
+      @content_types = @content_types.to_json(only: [:name, :js, :id, :data_count, :sync_type])
       render layout: "campaign"
     else
       params[:action] = "error"
@@ -44,11 +44,15 @@ class Campaigns::CampaignController < Campaigns::BaseController
     end
   end
 
+  #def fb
+
+  #end
   def fb_image
     @person = @campaign.people.find_by_sms_token(params[:token].to_i)
-    if @person.nil?
+    if @person.nil? or params[:file].blank?
       render json: {validate: false}.to_json
     elsif !@person.photo_validated?
+      @person.upload_photo params[:file]
       @person.sms_validated = true
       @person.photo_validated = true
       @person.save

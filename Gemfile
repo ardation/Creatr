@@ -11,8 +11,6 @@ gem 'rake'
 gem 'redis'
 gem 'resque'
 
-
-
 group :development do
   gem "rails-erd"
 end
@@ -37,6 +35,9 @@ end
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'ember-rails', :path => "vendor/gems/ember-rails-0.9.2"
+
+gem "koala"
+gem 'twilio-ruby'
 
 gem 'unicorn'
 

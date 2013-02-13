@@ -6,6 +6,7 @@ FlamingWight::Application.routes.draw do
       root :to => "campaign#index"
       match "sms_code/:token" => 'campaign#validate_sms_code'
       match "fb_image/:token" => 'campaign#fb_image'
+      #match "fb" => 'campaign#fb' #DEBUG
       match "contents/:id" => "campaign#content"
       match "types/:id" => "campaign#content_types"
     end

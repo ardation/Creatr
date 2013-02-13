@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212095122) do
+ActiveRecord::Schema.define(:version => 20130212134148) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -158,16 +158,16 @@ ActiveRecord::Schema.define(:version => 20130212095122) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "phone"
-    t.integer  "facebook_id"
+    t.integer  "facebook_id",           :limit => 8
     t.string   "facebook_access_token"
     t.integer  "sms_token"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.integer  "campaign_id"
     t.string   "email"
-    t.boolean  "sms_validated",         :default => false
-    t.boolean  "photo_validated",       :default => false
-    t.boolean  "synced",                :default => false
+    t.boolean  "sms_validated",                      :default => false
+    t.boolean  "photo_validated",                    :default => false
+    t.boolean  "synced",                             :default => false
   end
 
   add_index "people", ["sms_token"], :name => "index_people_on_sms_token"

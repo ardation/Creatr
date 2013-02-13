@@ -27,6 +27,8 @@ var ThemesShow = new function() {
         css_val = css.getSession().getValue();
       });
 
+      css_val = css.getSession().getValue();
+
       html.getSession().on('change', function (e) {
         html_val = html.getSession().getValue();
         $('#type').find(':selected').data('default', html_val );

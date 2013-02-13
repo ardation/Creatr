@@ -6,7 +6,10 @@ App = Ember.Application.createWithMixins({    // When ember updates we will need
     rootElement: '#surveyContainer',
     autoinit: false,
     nextStep: 1,
-    button: true
+    button: true,
+    back_button: false,
+    reset_button: false,
+    foward_button: true
 }, Em.Facebook);
 
 App.Store = DS.Store.extend({
@@ -14,12 +17,12 @@ App.Store = DS.Store.extend({
 });
 
 App.setProperties({
-    appId: 113411778806173
+    appId: 367941839912657
 });
 
 App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
 App._types = Ember.ArrayProxy.create({content: Ember.A(content_types)});
-SurveyLength = App._contents.length;
+SurveyLength = App._contents.get('length');
 
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
@@ -77,7 +80,7 @@ App.ContentController = Ember.Controller.extend({
   type: null,
   answer: "Reuben is the answer",
   data: function() {
-    dat = this.get('_content.data')
+    dat = this._content.data
     if (dat == undefined) {
       return null;
     } else {
@@ -89,17 +92,18 @@ App.ContentController = Ember.Controller.extend({
   }.property('this._content.data'),
 
   enter: function() {
-    $('#animate').slideDown();
+    console.log(this._content);
+    $('#surveyContainer').delay(500).fadeIn();
 
     fx = eval(this.type.js).enter;
     fx(this.readHelper, this.writeHelper, this._content.position - 1, this._content.data, this);
   },
 
   exit: function() {
-    $('#animate').slideUp();
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      fx(this.readHelper, this.writeHelper, this._content.position - 1, this._content.data, this);
+      if (this._content.data != null)
+        fx(this.readHelper, this.writeHelper, this._content.position - 1, this._content.data, this);
     }
   },
 
@@ -131,34 +135,54 @@ App.IndexRoute = Ember.Route.extend({
 App.ContentRoute = Ember.Route.extend({
   current_id:0,
   name: null,
-  type: null, 
+  type: null,
   _content: null,
   events: {
     incrementStep: function() {
-      this.transitionTo('content', this.current_id*1+1);
+      var context = this;
+      $('#surveyContainer').fadeOut(500);
+      $('body').toggleClass('alt');
+      setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 500);
+    },
+
+    resetStep: function() {
+      var context = this;
+      $('#surveyContainer').fadeOut(500);
+      $('body').toggleClass('alt');
+      setTimeout(function() {context.transitionTo('content', 1)}, 500);
     },
     backStep: function() {
       this.transitionTo('content', this.current_id*1-1);
-    } 
+    }
   },
   model: function(params) {
-    console.log('updating this at 152;');
     this.set('current_id', params.id);
     return this.current_id;
   },
   serialize: function(id) {
-    console.log('updating this at 156')
     this.set('current_id', id);
     return { id: id };
   },
   renderTemplate: function() {
+    if (App._contents.get('length') == this.current_id) {
+      App.set('reset_button', true)
+      App.set('forward_button', false)
+    } else {
+      App.set('reset_button', false)
+      App.set('forward_button', true)
+    }
+    if (this.current_id == 1 || App._contents.get('length') == this.current_id)
+      App.set('back_button', false)
+    else
+      App.set('back_button', true)
+
     this.render(this.name);
     var _this = this;
     Ember.run.next(function(){
       fx = eval(_this.type.js).render;
       fx(_this, _this._content.data, _this._content.position);
     });
-    
+
   },
   setupController: function(controller, model) {
 
