@@ -1,11 +1,3 @@
-
-- content_for :scripts do
-  = javascript_include_tag 'campaign/ember-facebook'
-  = javascript_include_tag 'campaign/survey'
-  = javascript_include_tag 'lib/underscore'
-  = javascript_include_tag 'lib/amplify.min'
-  = javascript_include_tag 'http://use.edgefonts.net/passion-one.js'
-
 - content_for :script_includes do
   :javascript
     var survey_contents = #{@campaign.contents.find(:all, :order => "position").to_json};
