@@ -185,6 +185,7 @@ App.ContentRoute = Ember.Route.extend({
       this._controller.exit();
       $('#surveyContainer').fadeOut(300);
       amplify.store('current_content', 1);
+      amplify.store('response', {});
       setTimeout(function() {context.transitionTo('content', 1)}, 300);
     },
     backStep: function() {
