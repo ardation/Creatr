@@ -4,7 +4,15 @@
     %title
       = yield :title
     %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1.0"}
-
+    %meta{name:"apple-mobile-web-app-capable", content:"yes"}
+    %meta{name:"apple-mobile-web-app-status-bar-style", content:"black"}
+    %link{:href => "images/icon.png", :rel => "apple-touch-icon"}
+    %link{:href => "images/icon-114.png", :rel => "apple-touch-icon", :sizes => "114x114"}
+    %link{:href => "images/icon-72.png", :rel => "apple-touch-icon", :sizes => "72x72"}
+    %link{:href => "images/default.png", :rel => "apple-touch-startup-image"}
+    %link{:href => "images/default-landscape-ipad.png", :rel => "apple-touch-startup-image", :sizes => "1024x748"}
+    %link{:href => "images/default-portrait-ipad.png", :rel => "apple-touch-startup-image", :sizes => "768x1004"}
+    %link{:href => "images/default-2x.png", :rel => "apple-touch-startup-image", :sizes => "640x960"}
     = stylesheet_link_tag    "campaign_frontend/index", :media => "all"
     = csrf_meta_tags
     = yield :script_includes
