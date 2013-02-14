@@ -9,6 +9,7 @@ FlamingWight::Application.routes.draw do
       #match "fb" => 'campaign#fb' #DEBUG
       match "contents/:id" => "campaign#content"
       match "types/:id" => "campaign#content_types"
+      post "endpoint" => "campaign#endpoint"
     end
   end
 

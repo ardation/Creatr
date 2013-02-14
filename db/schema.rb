@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212134148) do
+ActiveRecord::Schema.define(:version => 20130214082800) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -171,6 +171,8 @@ ActiveRecord::Schema.define(:version => 20130212134148) do
     t.boolean  "sms_validated",                      :default => false
     t.boolean  "photo_validated",                    :default => false
     t.boolean  "synced",                             :default => false
+    t.string   "gender"
+    t.integer  "mobile",                :limit => 8
   end
 
   add_index "people", ["sms_token"], :name => "index_people_on_sms_token"
