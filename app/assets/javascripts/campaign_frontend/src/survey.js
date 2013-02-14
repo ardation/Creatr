@@ -127,8 +127,8 @@ App.ContentController = Ember.Controller.extend({
   exit: function() {
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      if(verify(this))
-        return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
+      //if(verify(this))
+      return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
       return false;
     }
   },
@@ -296,39 +296,39 @@ window.addEventListener('online', App.SurveyData.pushrecords );
 // }
 
 
-function verify(context) {
-  if(context.first_name == "" || context.first_name == null) {
-    App.set('Error', 'You haven\'t forgotten your own name, have you?');
-    return false;
-  }
-  if(context.first_name == "" || context.first_name == null) {
-    App.set('Error', 'Last names are important too...');
-    return false;
-  }
+// function verify(context) {
+//   if(context.first_name == "" || context.first_name == null) {
+//     App.set('Error', 'You haven\'t forgotten your own name, have you?');
+//     return false;
+//   }
+//   if(context.last_name == "" || context.last_name == null) {
+//     App.set('Error', 'Last names are important too...');
+//     return false;
+//   }
 
-  if(context.mobile == "" || context.mobile == null) {
-    App.set('Error', 'If we don\'t have your cellphone number, we can\'t send you a code for your new shades!');
-    return false;
-  }
+//   if(context.mobile == "" || context.mobile == null) {
+//     App.set('Error', 'If we don\'t have your cellphone number, we can\'t send you a code for your new shades!');
+//     return false;
+//   }
 
-  if(typeof $('input:radio[name=gender]:checked').val() == "undefined") {
-    App.set('Error', 'Knowing your gender makes it less awkward for both of us...');
-    return false;
-  }
+//   if(typeof $('input:radio[name=gender]:checked').val() == "undefined") {
+//     App.set('Error', 'Knowing your gender makes it less awkward for both of us...');
+//     return false;
+//   }
 
-  if(context.degree == "" || context.degree == null) {
-    App.set('Error', 'What are you studying here?');
-    return false;
-  }
+//   if(context.degree == "" || context.degree == null) {
+//     App.set('Error', 'What are you studying here?');
+//     return false;
+//   }
 
-  if(context.hall  == "" || context.hall == null) {
-    App.set('Error', 'If we know where you\'re staying we can hook you up with sweet events and people!');
-    return false;
-  }
+//   if(context.hall  == "" || context.hall == null) {
+//     App.set('Error', 'If we know where you\'re staying we can hook you up with sweet events and people!');
+//     return false;
+//   }
 
-  if(typeof $('input:radio[name=year]:checked').val() == "undefined") {
-    App.set('Error', 'What year are you?');
-    return false;
-  }
-  return true;
-}
+//   if(typeof $('input:radio[name=year]:checked').val() == "undefined") {
+//     App.set('Error', 'What year are you?');
+//     return false;
+//   }
+//   return true;
+// }
