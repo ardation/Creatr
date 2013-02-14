@@ -6,6 +6,12 @@ GIT
       httpi
       json
 
+GIT
+  remote: git://github.com/newrelic/rpm.git
+  revision: cdc6672694be5bb2616013f86919651fcaa87941
+  specs:
+    newrelic_rpm (3.5.6)
+
 PATH
   remote: vendor/gems/ace-rails-ap-1.0.0
   specs:
@@ -180,7 +186,6 @@ GEM
     mime-types (1.21)
     multi_json (1.5.1)
     multipart-post (1.1.5)
-    newrelic_rpm (3.5.6.46)
     nokogiri (1.5.6)
     oauth2 (0.8.0)
       faraday (~> 0.8)
@@ -338,7 +343,7 @@ DEPENDENCIES
   kaminari
   koala
   mandrill!
-  newrelic_rpm
+  newrelic_rpm!
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)

@@ -81,5 +81,5 @@ gem 'rabl-rails'
 gem 'ejs'
 
 gem 'MissionHub'
-gem 'newrelic_rpm'
+gem 'newrelic_rpm', git: "git://github.com/newrelic/rpm.git"
 gem 'delayed_job_active_record'
