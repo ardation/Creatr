@@ -61,9 +61,13 @@ class Person < ActiveRecord::Base
 
   def send_sms
     if !self.mobile.blank? and !self.campaign.sms_template.blank?
+      begin
       @client = Twilio::REST::Client.new(ENV['sms_sid'], ENV['sms_token'])
       @account = @client.account
       @message = @account.sms.messages.create({:from => '+17784021163', :to => "+64#{self.mobile}", :body => "#{self.campaign.sms_template.gsub(/\[fname\]/, self.first_name)} #{self.sms_token}" })
+    rescue => ex
+      #fake number
+    end
     end
   end
 end
