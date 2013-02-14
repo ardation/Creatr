@@ -27,8 +27,9 @@ class Campaigns::CampaignController < Campaigns::BaseController
     @content_type = ContentType.find(params[:id])
   end
 
-  def submit
-
+  def endpoint
+    @campaign.people.create params[:person]
+    render json: {validate: true}.to_json
   end
 
   def validate_sms_code
@@ -36,8 +37,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
     if @person.nil?
       render json: ":"  #Force JSON Error for CrossDomain
     elsif !@person.sms_validated?
-      @person.sms_validated = true
-      @person.save
+      @person.sms_validate
       respond_with "#{params[:callback]}({validate:true})"
     else
       render json: ":"  #Force JSON Error for CrossDomain
@@ -53,9 +53,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
       render json: {validate: false}.to_json
     elsif !@person.photo_validated?
       @person.upload_photo params[:file]
-      @person.sms_validated = true
-      @person.photo_validated = true
-      @person.save
+      @person.photo_validate
       render json: {validate: true}.to_json
     else
       render json: {validate: false}.to_json
