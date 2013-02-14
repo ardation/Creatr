@@ -170,23 +170,30 @@ App.ContentRoute = Ember.Route.extend({
   events: {
     incrementStep: function() {
       var context = this;
-      if(this._controller.exit() != false) {
+      if($('input:visible').filter(function() { return $(this).val() == ""; }).length > 0) {
+        //input type text
+        $('#error').fadeIn();
+      } else if (!$('input:visible[type=radio]').is(':checked') && $('input:visible[type=radio]').length > 0) {
+        //input type radio
+        $('#error').fadeIn();
+
+      } else {
+      //if(this._controller.exit() != false) {
         $('#error').fadeOut();
         $('#surveyContainer').fadeOut(300);
         amplify.store('current_content', this.current_id*1+1);
         setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 300);
       }
-      else {
-        $('#error').fadeIn();
-      }
     },
     resetStep: function() {
-      var context = this;
-      this._controller.exit();
-      $('#surveyContainer').fadeOut(300);
-      amplify.store('current_content', 1);
-      amplify.store('response', {});
-      setTimeout(function() {context.transitionTo('content', 1)}, 300);
+      if ( amplify.store('current_content') != 1 ) {
+        var context = this;
+        this._controller.exit();
+        $('#surveyContainer').fadeOut(300);
+        amplify.store('current_content', 1);
+        amplify.store('response', {});
+        setTimeout(function() {context.transitionTo('content', 1)}, 300);
+      }
     },
     backStep: function() {
       var context = this;
