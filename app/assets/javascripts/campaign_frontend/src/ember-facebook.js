@@ -45,7 +45,7 @@
           if(response.status == 'connected') {
             console.log('trying to logout');
             FB.logout();
-            delete App.FBUser;
+            App.set('FBUser', false);;
           }
         });
         this.set('FBloading', true);

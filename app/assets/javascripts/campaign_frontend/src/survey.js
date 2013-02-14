@@ -102,7 +102,6 @@ App.Router.map(function() {
 App.ContentController = Ember.Controller.extend({
   _content: null,
   type: null,
-  answer: "Reuben is the answer",
   data: function() {
     if (this._content.content_type_id != this.type.id)
       this.set('type', App._types.findProperty('id', this._content.content_type_id));
@@ -128,7 +127,7 @@ App.ContentController = Ember.Controller.extend({
   exit: function() {
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
+      return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
     }
   },
 
@@ -165,24 +164,35 @@ App.ContentRoute = Ember.Route.extend({
   name: null,
   type: null,
   _content: null,
+  _controller: null,
   events: {
     incrementStep: function() {
       var context = this;
-      $('#surveyContainer').fadeOut(500);
-      amplify.store('current_content', this.current_id*1+1);
-      setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 500);
+      if(this._controller.exit() != false) {
+        $('#surveyContainer').fadeOut(300);
+        amplify.store('current_content', this.current_id*1+1);
+        setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 300);
+      }
     },
     resetStep: function() {
       var context = this;
-      $('#surveyContainer').fadeOut(500);
+      this._controller.exit();
+      $('#surveyContainer').fadeOut(300);
       amplify.store('current_content', 1);
-      setTimeout(function() {context.transitionTo('content', 1)}, 500);
+      setTimeout(function() {context.transitionTo('content', 1)}, 300);
     },
     backStep: function() {
       var context = this;
-      $('#surveyContainer').fadeOut(500);
+      $('#surveyContainer').fadeOut(300);
       amplify.store('current_content', this.current_id*1-1);
-      setTimeout(function() {context.transitionTo('content', context.current_id*1-1)}, 500);
+      setTimeout(function() {context.transitionTo('content', context.current_id*1-1)}, 300);
+    },
+    skipFacebook: function() {
+      var context = this;
+      $('#surveyContainer').fadeOut(300);
+      amplify.store('current_content', 3);
+      App.set('button', true);
+      setTimeout(function() {context.transitionTo('content', 3)}, 300);
     }
   },
   model: function(params) {
@@ -221,10 +231,13 @@ App.ContentRoute = Ember.Route.extend({
     });
   },
   setupController: function(controller, model) {
-
+    this._controller = controller;
+    if(this.current_id*1 == 2 && !navigator.onLine) { //facebook step but no connectivity
+      amplify.store('current_content', 3);  //skip step
+      this.transitionTo('content', 3);
+    }
     //simulate exit for now
     obj =  App._contents.findProperty('position', this.current_id*1);
-    controller.exit();
     type_id = obj.content_type_id;
     type_obj = App._types.findProperty('id', type_id);
     this.name = type_obj.name;
