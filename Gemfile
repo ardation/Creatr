@@ -81,3 +81,5 @@ gem 'rabl-rails'
 gem 'ejs'
 
 gem 'MissionHub'
+
+gem 'delayed_job_active_record'

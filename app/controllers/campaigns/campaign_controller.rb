@@ -28,8 +28,13 @@ class Campaigns::CampaignController < Campaigns::BaseController
   end
 
   def endpoint
-    @campaign.people.create params[:person]
-    render json: {validate: true}.to_json
+    unless @campaign.people.exists?(mobile: params[:person][:mobile].to_i)
+      @campaign.people.create params[:person]
+      @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
+      render json: {validate: true}.to_json
+    else
+      render json: {validate: false}.to_json
+    end
   end
 
   def validate_sms_code
@@ -37,6 +42,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
     if @person.nil?
       render json: ":"  #Force JSON Error for CrossDomain
     elsif !@person.sms_validated?
+      #@person.sync
       @person.sms_validate
       respond_with "#{params[:callback]}({validate:true})"
     else

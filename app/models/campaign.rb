@@ -5,7 +5,6 @@ class Campaign < ActiveRecord::Base
   has_many :contents, dependent: :destroy
   has_many :campaign_counters, dependent: :destroy
   has_many :people, dependent: :destroy
-
   belongs_to :theme
   belongs_to :organisation
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true

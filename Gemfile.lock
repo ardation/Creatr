@@ -101,6 +101,11 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    delayed_job (3.0.5)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.4.1)
+      activerecord (>= 2.1.0, < 4)
+      delayed_job (~> 3.0)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -313,6 +318,7 @@ DEPENDENCIES
   codemirror-rails
   coffee-rails (~> 3.2.1)
   compass-rails
+  delayed_job_active_record
   devise
   ejs
   ember-rails!

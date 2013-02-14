@@ -7,11 +7,14 @@ class Person < ActiveRecord::Base
   before_validation :generate_code, :on => :create
   before_create :get_extended_token
   after_create :send_sms
-  validates_presence_of :first_name, :campaign
+  validates_presence_of :first_name, :campaign, :mobile
+  validates_uniqueness_of :mobile
 
   def upload_photo(file)
-    @graph = Koala::Facebook::API.new(self.facebook_access_token)
-    @graph.put_picture(file, {:message => "Get your free sunglass on campus from Student Life! http://slnz.co"}, "me")
+    unless self.facebook_access_token.blank?
+      @graph = Koala::Facebook::API.new(self.facebook_access_token)
+      @graph.put_picture(file, {:message => "Get your free sunglass on campus from Student Life! http://slnz.co"}, "me")
+    end
   end
 
   def sms_validate
@@ -29,6 +32,12 @@ class Person < ActiveRecord::Base
     super(number.to_i)
   end
 
+  def sync
+    crm_base_model = "#{self.campaign.organisation.crm.name}Crm"
+    crm_base_model = Kernel.const_get(crm_base_model)
+    crm_base_model.sync(self, self.campaign, self.campaign.members.first)
+  end
+
   private
 
   def generate_code
@@ -41,8 +50,12 @@ class Person < ActiveRecord::Base
   def get_extended_token
     #Create a new koala Oauth object.
     unless self.facebook_access_token.blank?
-      oauth = Koala::Facebook::OAuth.new(367941839912657, 'e8d52319cc337c4e457c60f584206f4d')
-      self.facebook_access_token = oauth.exchange_access_token(self.facebook_access_token)
+      begin
+        oauth = Koala::Facebook::OAuth.new(367941839912657, 'e8d52319cc337c4e457c60f584206f4d')
+        self.facebook_access_token = oauth.exchange_access_token(self.facebook_access_token)
+      rescue => ex
+        self.facebook_access_token = ""
+      end
     end
   end
 

@@ -20,6 +20,21 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     create!
     @campaign_permission = Permission.new(campaign: @campaign, member: current_member)
     @campaign_permission.save
+    @campaign.contents.each do |content|
+      case content.content_type.sync_type
+      when ContentType::CHECK_BOX, ContentType::DROPDOWN, ContentType::RADIO_BUTTON
+        data = JSON.parse content.data
+        data["Answers"] = data["Answers"].split(',').map{|data| data.strip}.join(',')
+        content.data = data
+      when ContentType::CONTACT
+        data = JSON.parse content.data
+        data["DegreeOptions"] = data["DegreeOptions"].split(',').map{|data| data.strip}.join(',')
+        data["YearOptions"] = data["YearOptions"].split(',').map{|data| data.strip}.join(',')
+        data["HallOptions"] = data["HallOptions"].split(',').map{|data| data.strip}.join(',')
+        content.data = data
+      end
+    end
+
     crm_base_model = "#{@campaign.organisation.crm.name}Crm"
     crm_base_model = Kernel.const_get(crm_base_model)
     crm_base_model.create(@campaign, current_member)

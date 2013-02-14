@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214082800) do
+ActiveRecord::Schema.define(:version => 20130214143304) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -71,11 +71,28 @@ ActiveRecord::Schema.define(:version => 20130214082800) do
     t.datetime "updated_at",      :null => false
     t.string   "name"
     t.integer  "foreign_id"
+    t.string   "foreign_hash"
   end
 
   create_table "crms", :force => true do |t|
     t.string "name"
   end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "favourites", :force => true do |t|
     t.integer  "theme_id"
@@ -170,8 +187,10 @@ ActiveRecord::Schema.define(:version => 20130214082800) do
     t.boolean  "synced",                             :default => false
     t.string   "gender"
     t.integer  "mobile",                :limit => 8
+    t.integer  "foreign_id"
   end
 
+  add_index "people", ["mobile", "campaign_id"], :name => "index_people_on_mobile_and_campaign_id", :unique => true
   add_index "people", ["sms_token"], :name => "index_people_on_sms_token"
 
   create_table "permissions", :force => true do |t|
