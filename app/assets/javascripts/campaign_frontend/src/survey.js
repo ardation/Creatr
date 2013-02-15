@@ -176,13 +176,13 @@ App.ContentRoute = Ember.Route.extend({
       } else if (!$('input:visible[type=radio]').is(':checked') && $('input:visible[type=radio]').length > 0) {
         //input type radio
         $('#error').fadeIn();
-
-      } else {
-      //if(this._controller.exit() != false) {
+      } else if(this._controller.exit() != false) {
         $('#error').fadeOut();
         $('#surveyContainer').fadeOut(300);
         amplify.store('current_content', this.current_id*1+1);
         setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 300);
+      } else {
+        $('#error').fadeIn();
       }
     },
     resetStep: function() {

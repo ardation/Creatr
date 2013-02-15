@@ -28,6 +28,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
   end
 
   def endpoint
+    raise params[:person].inspect
     unless @campaign.people.exists?(mobile: params[:person][:mobile].to_i)
       @campaign.people.create params[:person]
       @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
