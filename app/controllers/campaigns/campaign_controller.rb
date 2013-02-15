@@ -28,16 +28,12 @@ class Campaigns::CampaignController < Campaigns::BaseController
   end
 
   def endpoint
-    if (params[:person].blank?)
-      render json: {validate: false}.to_json
+    unless @campaign.people.exists?(mobile: params[:person][:mobile].to_i)
+      @campaign.people.create params[:person]
+      @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
+      render json: {validate: true}.to_json
     else
-      unless @campaign.people.exists?(mobile: params[:person][:mobile].to_i)
-        @campaign.people.create params[:person]
-        @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
-        render json: {validate: true}.to_json
-      else
-        render json: {validate: false}.to_json
-      end
+      render json: {validate: false}.to_json
     end
   end
 
