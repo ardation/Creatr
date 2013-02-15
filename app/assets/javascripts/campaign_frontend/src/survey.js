@@ -52,29 +52,32 @@ App.SurveyData = Ember.ArrayProxy.create({
   pushrecords: function() {
     var records = amplify.store('records');
     _.each(records, function(value) {
-      var person = {};
-      var answers_attributes = []
-      $.each( value, function( key, data ) {
-        if(parseInt(key) == key) {
-          //content
-          if (typeof data == 'object')
-            data = JSON.stringify(data);
-          answers_attributes.push({content_id: parseInt(key), data: data});
-        } else {
-          //attribute
-          person[key] = data;
-        }
-      });
-      person['answers_attributes'] = answers_attributes;
-      $.post('/endpoint.json', {person: person} , 'json')
-      .success(function() {
-        amplify.store('records', _.without(records, value));
-      })
-      .error(function(data) {
-        // if(data.responseText == '"Phone Number already exists in the system."') {
-        //   amplify.store('records', _.without(records, value));
-        // }
-      });
+      if (_.size(value) != 0) {
+        var person = {};
+        var answers_attributes = [];
+        $.each( value, function( key, data ) {
+          if(parseInt(key) == key) {
+            //content
+            if (typeof data == 'object')
+              data = JSON.stringify(data);
+            answers_attributes.push({content_id: parseInt(key), data: data});
+          } else {
+            //attribute
+            person[key] = data;
+          }
+        });
+
+        person['answers_attributes'] = answers_attributes;
+        $.post('/endpoint.json', {person: person} , 'json')
+        .success(function() {
+          amplify.store('records', _.without(records, value));
+        })
+        .error(function(data) {
+          // if(data.responseText == '"Phone Number already exists in the system."') {
+          //   amplify.store('records', _.without(records, value));
+          // }
+        });
+      }
     });
   }
 });
