@@ -104,7 +104,7 @@ class SiteController < ApplicationController
     manifest_file = File.join(Rails.root,'public','assets','manifest.yml')
     if FileTest.exist?(manifest_file)
       File.open(manifest_file).each do |l|
-        if l.include? ":" && (l.include? "campaign_app" || l.include? "roboto")
+        if l.include?(":") and l.include?("campaign_app")
           @files << "assets/#{l.split(":").last().strip()}"
         end
       end

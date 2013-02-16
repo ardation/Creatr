@@ -7,20 +7,20 @@
   font-family: 'Roboto';
   font-weight:bold;
   font-style:normal;
-  src: url(font-path('roboto-bold.eot') + "?#iefix") format('embedded-opentype'),
-       url(font-path('roboto-bold.woff')) format('woff'),
-       url(font-path('roboto-bold.ttf'))  format('truetype'),
-       url(font-path('roboto-bold.svg') + "#RobotoBold") format('svg');
+  src: url(font-path('campaign_app/roboto-bold.eot') + "?#iefix") format('embedded-opentype'),
+       url(font-path('campaign_app/roboto-bold.woff')) format('woff'),
+       url(font-path('campaign_app/roboto-bold.ttf'))  format('truetype'),
+       url(font-path('campaign_app/roboto-bold.svg') + "#RobotoBold") format('svg');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-weight:normal;
   font-style:normal;
-  src: url(font-path('roboto-regular.eot') + "?#iefix") format('embedded-opentype'),
-       url(font-path('roboto-regular.woff')) format('woff'),
-       url(font-path('roboto-regular.ttf'))  format('truetype'),
-       url(font-path('roboto-regular.svg') + "#RobotoRegular") format('svg');
+  src: url(font-path('campaign_app/roboto-regular.eot') + "?#iefix") format('embedded-opentype'),
+       url(font-path('campaign_app/roboto-regular.woff')) format('woff'),
+       url(font-path('campaign_app/roboto-regular.ttf'))  format('truetype'),
+       url(font-path('campaign_app/roboto-regular.svg') + "#RobotoRegular") format('svg');
 }
 .btn {
 display: inline-block;
