@@ -4,9 +4,49 @@ class Api::VerifyController < ApplicationController
   def verify_campaign
     @campaign = Campaign.find_by_campaign_code(params['token'].to_i)
     if @campaign.nil?
-      render json: ":"  #Force JSON Error for CrossDomain
+      render :json => { :error => "Campaign does not exist!" }, :status => 404
     else
-      respond_with "#{params[:callback]}(#{@campaign.to_json(only: [:id, :cached_domain, :start_date, :finish_date, :name, :campaign_code], methods: [:total])})"
+      render json: @campaign.to_json(only: [:id, :cached_domain, :start_date, :finish_date, :name, :campaign_code], methods: [:total])
+    end
+  end
+
+  def validate_sms_code
+    @campaign = Campaign.find_by_campaign_code(params[:campaign_token].to_i)
+    if @campaign.nil?
+      render :json => { :error => "Campaign does not exist!" }, :status => 401
+    else
+      @person = @campaign.people.find_by_sms_token(params[:token].to_i)
+      if @person.nil?
+        render :json => { :error => "That's an invalid SMS code. Try again!" }, :status => 404
+      else
+        #@person.sync
+        if !@person.sms_validated?
+          @person.sms_validate
+          render json: {validate: true}.to_json
+        else
+          render :json => { :error => "That code has already been used. Try again!", :sms_photo => !@person.photo_validated? }, :status => 422
+        end
+      end
+    end
+  end
+
+  def fb_image
+    @campaign = Campaign.find_by_campaign_code(params['campaign_token'].to_i)
+    if @campaign.nil?
+      render :json => { :error => "Campaign does not exist!" }, :status => 401
+    else
+      @person = @campaign.people.find_by_sms_token(params[:token].to_i)
+      if @person.nil?
+        render :json => { :error => "That's an invalid SMS code. Try again!" }, :status => 404
+      elsif params[:file].blank?
+        render :json => { :error => "No file attached. Try again!" }, :status => 422
+      elsif !@person.photo_validated?
+        @person.upload_photo params[:file]
+        @person.photo_validate
+        render json: {validate: true}.to_json
+      else
+        render :json => { :error => "That person already has a photo!. Try again!" }, :status => 422
+      end
     end
   end
 end

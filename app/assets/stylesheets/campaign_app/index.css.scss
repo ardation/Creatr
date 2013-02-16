@@ -1,5 +1,110 @@
-/* @@@@@@@@@@@@@@@@@@@@@@@@@@ */
-/* /css/mobile/reset.css */
+/*
+ *= require_tree .
+ *= require_self
+*/
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight:bold;
+  font-style:normal;
+  src: url(font-path('roboto-bold.eot') + "?#iefix") format('embedded-opentype'),
+       url(font-path('roboto-bold.woff')) format('woff'),
+       url(font-path('roboto-bold.ttf'))  format('truetype'),
+       url(font-path('roboto-bold.svg') + "#RobotoBold") format('svg');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight:normal;
+  font-style:normal;
+  src: url(font-path('roboto-regular.eot') + "?#iefix") format('embedded-opentype'),
+       url(font-path('roboto-regular.woff')) format('woff'),
+       url(font-path('roboto-regular.ttf'))  format('truetype'),
+       url(font-path('roboto-regular.svg') + "#RobotoRegular") format('svg');
+}
+.btn {
+display: inline-block;
+padding: 4px 12px;
+margin-bottom: 0;
+font-size: 14px;
+line-height: 20px;
+color: #333333;
+text-align: center;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+vertical-align: middle;
+cursor: pointer;
+background-color: #f5f5f5;
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+background-repeat: repeat-x;
+border: 1px solid #bbbbbb;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+border-bottom-color: #a2a2a2;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-success {
+color: #ffffff;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+background-color: #5bb75b;
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+background-image: -o-linear-gradient(top, #62c462, #51a351);
+background-image: linear-gradient(to bottom, #62c462, #51a351);
+background-image: -moz-linear-gradient(top, #62c462, #51a351);
+background-repeat: repeat-x;
+border-color: #51a351 #51a351 #387038;
+border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
+filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+.fileinput {
+  text-align: center;
+  padding:20px 10px;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  float: left;
+  margin-right: 4px;
+  width:100%;
+  line-height: 48px;
+  margin:20px 0;
+  box-sizing: border-box;
+}
+.fileinput-button i {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  line-height: 14px;
+  vertical-align: middle;
+  background-image: url("../img/glyphicons-halflings.png");
+  background-position: 14px 14px;
+  background-repeat: no-repeat;
+}
+.fileinput input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  transform: translate(-300px, 0) scale(4);
+  font-size: 23px;
+  direction: ltr;
+  cursor: pointer;
+  opacity:0
+}
 
 a {
     text-decoration: none
@@ -88,7 +193,7 @@ a {
 }
 
 .ui-body-c {
-    background: #fff url('../images/tiny_grid.png') repeat center top;
+    background: #fff image-url('campaign_app/tiny_grid.png') repeat center top;
 	font-family:"Roboto", Arial;
 }
 
@@ -139,7 +244,7 @@ h1.ui-title {
 }
 
 .ui-content {
-	padding:6px;	
+	padding:6px;
 }
 
 .m-wrapper {
@@ -165,7 +270,7 @@ h1.ui-title {
     line-height: 42px;
     margin: 0;
     padding: 0;
-    font-weight: bold
+    font-weight: normal
 }
 
 .m-wrapper .m-top-cap p a.m-profile-follow {
@@ -219,7 +324,7 @@ h1.ui-title {
 }
 .m-number-pad-entry a.backspace {
 	float:right;
-	background:url(../images/backspace.png) no-repeat center center;
+	background:image-url('campaign_app/backspace.png') no-repeat center center;
 	display:inline-block;
 	width:60px;
 	height:30px;
@@ -228,15 +333,12 @@ h1.ui-title {
 }
 .m-number-pad-entry input[type=text], #add-campaign-number-pad-entry, #validator-number-pad-entry, #photo-booth-number-pad-entry {
 	border:0;
-	float:left;
 	box-shadow:none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	width:150px;
 	font-size:35px;
 	line-height:50px;
 	padding:0;
 	margin:0;
+  outline: none;
 }
 .ui-body-c {
 	border:0;
@@ -251,7 +353,7 @@ h1.ui-title {
 	padding-left:15px;
 }
 .m-campaign {
-	cursor:pointer;	
+	cursor:pointer;
 }
 .m-dialog-error {
 	color:red;
@@ -276,7 +378,7 @@ h1.ui-title {
 	width:22px;
 	height:22px;
 	margin:6px;
-	background:url(../images/ajax-loader.gif) no-repeat;
+	background:image-url('campaign_app/ajax-loader.gif') no-repeat;
 	background-size:cover;
 	float:right;
 	display:none;
@@ -285,7 +387,7 @@ h1.ui-title {
 	margin:0 auto;
 	width:100%;
 	max-width:400px;
-	background:url(../images/logo-large.png) center center no-repeat;
+	background:image-url('campaign_app/logo-large.png') center center no-repeat;
 	background-size:contain;
 	padding-top:350px;
 	text-align:center;
@@ -369,7 +471,7 @@ h1.ui-title {
     line-height: 42px;
     margin: 0;
     padding: 0 0 0 4px;
-    font-weight: bold
+    font-weight: normal
 }
 
 .m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-title {
@@ -386,26 +488,6 @@ h1.ui-title {
 
 .m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-polls,.m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-photos {
     float: right
-}
-
-.m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-polls {
-    background: url('/img/mobile/icons/all-polls-icon.png') no-repeat left center;
-    padding: 0 14px 0 18px
-}
-
-.m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-polls.m-top-cap-selected {
-    background: url('/img/mobile/icons/all-polls-icon-selected.png') no-repeat left center;
-    color: #2f83be
-}
-
-.m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-photos {
-    background: url('/img/mobile/icons/photos-icon.png') no-repeat left center;
-    padding: 0 14px 0 22px
-}
-
-.m-wrapper .m-top-cap .m-top-cap-nav .m-top-cap-photos.m-top-cap-selected {
-    background: url('/img/mobile/icons/photos-icon-selected.png') no-repeat left center;
-    color: #2f83be
 }
 
 .m-poll-images {
@@ -499,7 +581,7 @@ h1.ui-title {
 .m-poll-author-name {
     font-size: .8em;
     color: #000;
-    font-weight: bold;
+    font-weight: normal;
     display: block
 }
 
@@ -526,37 +608,6 @@ p.m-poll-text {
     font-size: 14px;
     line-height: 1.3em;
     color: #333
-}
-
-a.m-poll-view-image.ui-link {
-    color: #878787;
-    font-size: .8em;
-    background: url('/img/mobile/icons/view-image-icon.png') no-repeat left center;
-    padding-left: 26px;
-    padding-right: 20px;
-    line-height: 1.5em;
-    display: block;
-    float: left
-}
-
-a.m-poll-retweet.ui-link {
-    color: #878787;
-    font-size: .8em;
-    background: url('/img/mobile/icons/retweet-icon.png') no-repeat left center;
-    padding-left: 26px;
-    line-height: 1.5em;
-    display: block;
-    float: left
-}
-
-a.m-poll-reply.ui-link {
-    color: #878787;
-    font-size: .8em;
-    background: url('/img/mobile/icons/reply-icon.png') no-repeat 10px 2px;
-    padding-left: 32px;
-    line-height: 1.5em;
-    display: block;
-    float: left
 }
 
 .m-author-button.ui-btn-up-c,.m-author-button.ui-btn-hover-c,.m-author-button.ui-btn-down-c,.m-author-button.ui-btn-active-c {
@@ -719,19 +770,6 @@ a.m-poll-reply.ui-link {
     margin: 0;
     list-style: none;
     list-style-type: none
-}
-
-.m-lightbox .m-wrapper .m-photo-poll-image .m-poll-image-rating .m-poll-image-rating-stars li {
-    width: 30px;
-    height: 44px;
-    background: url('/img/mobile/icons/rating-star.png') no-repeat center center;
-    text-indent: -9999px;
-    float: left;
-    padding-left: 6px
-}
-
-.m-lightbox .m-wrapper .m-photo-poll-image .m-poll-image-rating .m-poll-image-rating-stars li.m-poll-image-rating-star-selected {
-    background: url('/img/mobile/icons/rating-star-selected.png') no-repeat center center
 }
 
 .m-lightbox .m-wrapper .m-poll-author-details {
@@ -912,7 +950,7 @@ a.m-poll-reply.ui-link {
 }
 
 #post .m-header .m-header-options h1 a {
-    background: url('/img/mobile/logo.png') no-repeat left center;
+    background: image-url('./img/mobile/logo.png') no-repeat left center;
     text-indent: -9999px;
     display: block;
     width: 80px;
@@ -960,15 +998,6 @@ a.m-poll-reply.ui-link {
     -moz-box-shadow: inset 0 1px 0 #fff;
     box-shadow: inset 0 1px 0 #fff;
     padding: 0 14px
-}
-
-.m-poll-updated-at .m-refresh-link {
-    background: url('/img/mobile/icons/refresh-icon.png') no-repeat center center;
-    width: 18px;
-    height: 18px;
-    display: block;
-    float: right;
-    text-indent: -9999px
 }
 
 .m-poll-results {
@@ -1052,7 +1081,7 @@ a.m-poll-reply.ui-link {
 	height:18px;
 	float:right;
 	background-position: -105px -1px;
-	background-image: url(themes/default/images/icons-36-black.png) /*{global-icon-set}*/;
+	background-image: image-url('campaign_app/images/icons-36-black.png');
 	background-size:864px 18px;
 	opacity:0.4;
 }
@@ -1114,7 +1143,7 @@ a.m-poll-reply.ui-link {
 .ui-listview .m-list-author-name {
     font-size: 1em;
     color: #000;
-    font-weight: bold;
+    font-weight: normal;
     display: block
 }
 
@@ -1163,12 +1192,6 @@ a.m-poll-reply.ui-link {
 	color:#999;
 }
 
-.ui-listview .m-list-post-time .m-image-icon {
-    background: url('/img/mobile/icons/image-icon.png') no-repeat left center;
-    height: 11px;
-    padding: 0 17px 0 0
-}
-
 a.m-list-load-more.ui-link {
     text-align: center;
     font-size: .9em;
@@ -1180,16 +1203,16 @@ a.m-list-load-more.ui-link {
     display: block
 }
 .m-header .logo {
-	background:url(../images/logo.png) no-repeat center right;
+	background:image-url('campaign_app/logo.png') no-repeat center right;
 	margin:7px 5px;
 	width:32px;
 	height:32px;
 	float:left;
 }
 .m-header .back {
-	
+
 	background-position: -145px -1px;
-	background-image: url(themes/default/images/icons-36-black.png) /*{global-icon-set}*/;
+	background-image: image-url('campaign_app/images/icons-36-black.png') /*{global-icon-set}*/;
 	background-size:864px 18px;
 	margin:14px 0 0 6px;
 	width:10px;
@@ -1215,7 +1238,7 @@ a.m-list-load-more.ui-link {
 #m-stats {
 	padding:10px;
 	text-align:center;
-	color:#aaa;	
+	color:#aaa;
 }
 #m-stats h1 {
 	color:#444;
@@ -1223,9 +1246,10 @@ a.m-list-load-more.ui-link {
 }
 .nav-glyphish .ui-btn .ui-btn-inner { padding-top: 40px !important; }
 		.nav-glyphish .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
-		#camera .ui-icon { background:  url(../images/492-instagram.png) 50% 50% no-repeat; background-size: 24px 22px; }
-		#validation .ui-icon { background:  url(../images/427-todo-list.png) 50% 50% no-repeat; background-size: 24px 26px;  }
-		#survey .ui-icon { background:  url(../images/389-flash.png) 50% 50% no-repeat;  background-size: 12px 26px; }
+    #camera .ui-icon { background:  image-url('campaign_app/492-instagram.png') 50% 50% no-repeat; background-size: 24px 22px; }
+    #camera .ui-icon.ui-white { background:  image-url('campaign_app/492-instagram-gray.png') 50% 50% no-repeat; background-size: 24px 22px; }
+		#validation .ui-icon { background:  image-url('campaign_app/427-todo-list.png') 50% 50% no-repeat; background-size: 24px 26px;  }
+		#survey .ui-icon { background:  image-url('campaign_app/389-flash.png') 50% 50% no-repeat;  background-size: 12px 26px; }
 .ui-footer {
 	border-top:5px solid orange;
 }
@@ -1236,93 +1260,19 @@ a.m-list-load-more.ui-link {
 	display:block;
 }
 @media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (min-resolution:240dpi) {
-		#camera .ui-icon { background-image:  url(../images/492-instagram@2x.png); }
-		#validation .ui-icon { background-image:  url(../images/427-todo-list@2x.png);  }
-		#survey .ui-icon { background-image:  url(../images/389-flash@2x.png); }
+		#camera .ui-icon { background-image:  image-url('campaign_app/492-instagram@2x.png'); }
+    #camera .ui-icon.ui-white { background:  image-url('campaign_app/492-instagram@2x-gray.png') 50% 50% no-repeat; background-size: 24px 22px; }
+		#validation .ui-icon { background-image:  image-url('campaign_app/427-todo-list@2x.png');  }
+		#survey .ui-icon { background-image:  image-url('campaign_app/389-flash@2x.png'); }
 		.m-logo-large {
-			background-image:url(../images/logo-large@2x.png);
+			background-image:image-url('campaign_app/logo-large@2x.png');
 		}
 	.m-header .logo {
-		background:url(../images/logo@2x.png) no-repeat center right;
+		background:image-url('campaign_app/logo@2x.png') no-repeat center right;
 		-moz-background-size: 32px 32px;
         -o-background-size: 32px 32px;
         -webkit-background-size: 32px 32px;
         -ms-background-size: 32px 32px;
         background-size: 32px 32px;
 	}
-	.m-number-pad-entry a.backspace {
-		background:url(../images/backspace@2x.png) no-repeat center center;
-		background-size:contain;
-	}
-    .m-header h1.ui-title a {
-        background: url('/img/mobile/logo-2x.png') no-repeat left center;
-        -moz-background-size: 110px 29px;
-        -o-background-size: 110px 29px;
-        -webkit-background-size: 110px 29px;
-        -ms-background-size: 110px 29px;
-        background-size: 110px 29px;
-    }
-
-    .m-header-options-settings {
-        background: url('/img/mobile/icons/settings-icon-2x.png') no-repeat center center;
-        -moz-background-size: 15px 16px;
-        -o-background-size: 15px 16px;
-        -webkit-background-size: 15px 16px;
-        -ms-background-size: 15px 16px;
-        background-size: 15px 16px;
-    }
-
-    .m-wrapper .m-top-cap a.m-polls-link {
-        background: url('/img/mobile/icons/all-polls-icon-2x.png') no-repeat left center;
-        -moz-background-size: 12px 15px;
-        -o-background-size: 12px 15px;
-        -webkit-background-size: 12px 15px;
-        -ms-background-size: 12px 15px;
-        background-size: 12px 15px;
-    }
-
-    .m-wrapper .m-top-cap a.m-photos-link {
-        background: url('/img/mobile/icons/image-icon-2x.png') no-repeat left center;
-        -moz-background-size: 13px 11px;
-        -o-background-size: 13px 11px;
-        -webkit-background-size: 13px 11px;
-        -ms-background-size: 13px 11px;
-        background-size: 13px 11px;
-    }
-
-    .ui-listview .m-list-post-time .m-image-icon {
-        background: url('/img/mobile/icons/image-icon-2x.png') no-repeat left center;
-        -moz-background-size: 13px 11px;
-        -o-background-size: 13px 11px;
-        -webkit-background-size: 13px 11px;
-        -ms-background-size: 13px 11px;
-        background-size: 13px 11px;
-    }
-
-    a.m-poll-view-image.ui-link {
-        background: url('/img/mobile/icons/view-image-icon-2x.png') no-repeat left center;
-        -moz-background-size: 20px 18px;
-        -o-background-size: 20px 18px;
-        -webkit-background-size: 20px 18px;
-        -ms-background-size: 20px 18px;
-        background-size: 20px 18px;
-    }
-
-    a.m-poll-retweet.ui-link {
-        background: url('/img/mobile/icons/retweet-icon-2x.png') no-repeat left center;
-        -moz-background-size: 22px 13px;
-        -o-background-size: 22px 13px;
-        -webkit-background-size: 22px 13px;
-        -ms-background-size: 22px 13px;
-        background-size: 22px 13px;
-    }
-
-    .m-poll-updated-at .m-refresh-link {
-        background: url('/img/mobile/icons/refresh-icon-2x.png') no-repeat center center;
-        -moz-background-size: 18px 18px;
-        -o-background-size: 18px 18px;
-        -webkit-background-size: 18px 18px;
-        -ms-background-size: 18px 18px;
-        background-size: 18px 18px;
-    }
 }

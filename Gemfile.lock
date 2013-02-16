@@ -12,6 +12,12 @@ GIT
   specs:
     newrelic_rpm (3.5.6)
 
+GIT
+  remote: git://github.com/wycats/rack-offline.git
+  revision: 5db88612cada7c846ac08dc12e7afa3e91a7613d
+  specs:
+    rack-offline (0.6.4)
+
 PATH
   remote: vendor/gems/ace-rails-ap-1.0.0
   specs:
@@ -354,6 +360,7 @@ DEPENDENCIES
   pg
   pusher
   rabl-rails
+  rack-offline!
   rails (= 3.2.3)
   rails-erd
   rake

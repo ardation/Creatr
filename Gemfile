@@ -85,3 +85,5 @@ gem 'newrelic_rpm', git: "git://github.com/newrelic/rpm.git"
 gem 'delayed_job_active_record'
 
 gem 'pusher'
+
+gem 'rack-offline', :git => 'git://github.com/wycats/rack-offline.git'

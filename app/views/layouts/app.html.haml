@@ -1,0 +1,29 @@
+!!!
+%html{:manifest => "/application.manifest"}
+  %head
+    %title Creatr+
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    = stylesheet_link_tag "campaign_app/index", :media => "all"
+    = csrf_meta_tags
+    = javascript_include_tag "campaign_app/index"
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "black-translucent", :name => "apple-mobile-web-app-status-bar-style"}/
+    -# iPhone
+    %link{:href => asset_path("campaign_app/icon.png"), :rel => "apple-touch-icon-precomposed", :sizes => "57x57"}/
+    %link{:href => "start-320x480.png", :media => "(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)", :rel => "apple-touch-startup-image"}/
+    -# iPhone (Retina)
+    %link{:href => asset_path("campaign_app/icon-114.png"), :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}/
+    %link{:href => "start-640x960.png", :media => "(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)", :rel => "apple-touch-startup-image"}/
+    -# iPhone 5
+    %link{:href => "start-640x1136.png", :media => "(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)", :rel => "apple-touch-startup-image"}/
+    -# iPad
+    %link{:href => asset_path("campaign_app/icon-72.png"), :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}/
+    %link{:href => "start-768x1004.png", :media => "(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 1)", :rel => "apple-touch-startup-image"}/
+    %link{:href => "start-1024x748.png", :media => "(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 1)", :rel => "apple-touch-startup-image"}/
+    -# iPad (Retina)
+    %link{:href => asset_path("campaign_app/icon-144.png"), :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}/
+    %link{:href => "start-1536x2008.png", :media => "(device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)", :rel => "apple-touch-startup-image"}/
+    -#%link{:href => "start-1496x2048.png", :media => "(device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)", :rel => "apple-touch-startup-image"}/
+  %body
+    = yield

@@ -6,9 +6,6 @@ FlamingWight::Application.routes.draw do
   constraints(PersonalizedDomain) do
     namespace :campaigns, :path => '/' do
       root :to => "campaign#index"
-      match "sms_code/:token" => 'campaign#validate_sms_code'
-      match "fb_image/:token" => 'campaign#fb_image'
-      #match "fb" => 'campaign#fb' #DEBUG
       match "contents/:id" => "campaign#content"
       match "types/:id" => "campaign#content_types"
       post "endpoint" => "campaign#endpoint"
@@ -57,6 +54,8 @@ FlamingWight::Application.routes.draw do
   end
   namespace :api do
     match "campaign_code/:token" => 'verify#verify_campaign'
+      match ":campaign_token/sms_code/:token" => 'verify#validate_sms_code'
+      match ":campaign_token/fb_image/:token" => 'verify#fb_image'
   end
   root :to => "site#index"
   match 'features' => "site#features"
@@ -67,12 +66,14 @@ FlamingWight::Application.routes.draw do
   get 'signup_fb' => 'site#signup_fb'
   post 'signup_fb' => 'site#createUser'
   get 'signup_done' => 'site#signup_done'
-
+  get 'app' => 'site#app'
   get "survey/:id" => 'campaign#index'
 
   match 'member_root' => 'site#features', :as => :dashboard
 
   match 'resent' => 'site#resent'
   match 'confirmed' => 'site#confirmed'
+
+  match "application.manifest" => 'site#manifest'
 
 end
