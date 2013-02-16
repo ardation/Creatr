@@ -1,5 +1,7 @@
 FlamingWight::Application.routes.draw do
 
+  post "pusher" => "pusher#pusher"
+
   # config/routes
   constraints(PersonalizedDomain) do
     namespace :campaigns, :path => '/' do

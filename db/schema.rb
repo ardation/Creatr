@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130214143304) do
+ActiveRecord::Schema.define(:version => 20130216045807) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -207,6 +207,12 @@ ActiveRecord::Schema.define(:version => 20130214143304) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "sms_devices", :force => true do |t|
+    t.string   "channel_name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "templates", :force => true do |t|
     t.integer  "theme_id"
