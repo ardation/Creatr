@@ -228,6 +228,7 @@ App.ContentRoute = Ember.Route.extend({
       }
     },
     resetStep: function() {
+      App.set('button', true);
       if ( App.get('stage') != 1 ) {
         var context = this;
         this._controller.exit();
