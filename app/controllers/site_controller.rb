@@ -74,4 +74,40 @@ class SiteController < ApplicationController
     end
     #self.route(current_member)
   end
+
+  def app
+    render layout: "app"
+  end
+
+  def manifest
+    @files = ["CACHE MANIFEST\n"]
+
+    add_from_asset_manifest
+
+    @files << "\nNETWORK:"
+    @files << '*'
+
+    digest = Digest::SHA1.new
+    @files.each do |f|
+      actual_file = File.join(Rails.root,'public',f)
+      digest << "##{File.mtime(actual_file)}" if File.exist?(actual_file)
+    end
+    @files << "\n# Modification Digest: #{digest.hexdigest}"
+
+    render :text => @files.join("\n"), :content_type => 'text/cache-manifest', :layout => nil
+  end
+
+
+  protected
+
+  def add_from_asset_manifest
+    manifest_file = File.join(Rails.root,'public','assets','manifest.yml')
+    if FileTest.exist?(manifest_file)
+      File.open(manifest_file).each do |l|
+        if l.include?(":") and l.include?("campaign_app")
+          @files << "assets/#{l.split(":").last().strip()}"
+        end
+      end
+    end
+  end
 end

@@ -1,0 +1,152 @@
+#page-home.ui-page.ui-body-c.ui-page-header-fixed.ui-page-active{"data-role" => "page", :style => "padding-top: 45px; min-height: 318px;", :tabindex => "0"}
+  #home-header.m-header{"data-position" => "fixed", "data-role" => "header"}
+    .logo
+    %h1 Creatr+
+    #header-options.m-header-options
+      %a.m-header-button{"data-corners" => "true", "data-iconshadow" => "true", "data-rel" => "dialog", "data-role" => "button", "data-shadow" => "true", "data-theme" => "a", "data-transition" => "slidedown", "data-wrapperels" => "span", :href => "#add-campaign"} Add Campaign
+  .ui-content{"data-role" => "content", :role => "main"}
+    .m-wrapper
+      .m-top-cap
+        %ul.m-top-cap-nav
+          %li.m-top-cap-title My Campaigns
+      %ul#campaign-list.ui-listview{"data-role" => "listview", "data-theme" => "g"}
+#add-campaign.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      .m-loader
+      %h1 Campaign ID
+    #add-campaign-error.m-dialog-error That's an invalid Campaign ID. Try again!
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      #add-campaign-number.m-number{"data-size" => "5"}
+        .m-number-pad-entry
+          %form#add-campaign-form{:action => "#add-campaign"}
+            %input#add-campaign-number-pad-entry{"data-role" => "none", :maxlength => "5", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a#validator-cancel{:href => "#page-home"} Cancel
+          %li
+            %a#add-campaign-button.m-number-button Add
+#validator.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      .m-loader
+      %h1 SMS Code Validator
+    #validator-error.m-dialog-error That's an invalid SMS Code. Try again!
+    #validator-success.m-dialog-success That's a valid SMS Code!
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      #validator-number.m-number{"data-size" => "5"}
+        .m-number-pad-entry
+          %form#validator-form{:action => "#validator"}
+            %input#validator-number-pad-entry{"data-role" => "none", :maxlength => "5", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
+    .m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a#validator-cancel{:href => "#page-campaign"} Cancel
+          %li
+            %a#validator-button.m-number-button Validate
+#photo-booth.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      .m-loader
+      %h1 Photo Booth
+    #photo-booth-error.m-dialog-error That's an invalid SMS Code. Try again!
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      #photo-booth-number.m-number{"data-size" => "5"}
+        .m-number-pad-entry
+          %form#photo-booth-form{:action => "#photo-booth"}
+            %input#photo-booth-number-pad-entry{"data-role" => "none", :maxlength => "5", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a#validator-cancel{:href => "#page-campaign"} Cancel
+          %li
+            %a#photo-booth-button.m-number-button Take Photo
+#photo-booth-wait.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      .m-loader.m-display
+      %h1 Photo Booth
+    #photo-booth-wait-error.m-dialog-error That's an invalid SMS Code. Try again!
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      .m-logo-large
+        %h2 Please Wait
+        Uploading your photo to the Cloud
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a#validator-cancel{:href => "#page-campaign"} Cancel
+#photo-booth-ios6.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      %h1 Photo Booth
+    #camera.ui-content.ui-body-c.m-white.fileinput{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      %form
+        %span.btn.btn-success.fileinput-button
+          %i.ui-icon.ui-white
+          %span Take Photo
+        %input{:accept => "image/*", :capture => "camera", "data-role" => "none", :type => "file", name:"file", id:"fileupload"}/
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a{:href => "#page-campaign"} Close
+#photo-booth-thanks.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      %h1 Photo Booth
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      .m-logo-large
+        %h2 Thanks.
+        Your awesome photo is now on your Timeline!
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a{:href => "#page-campaign"} Close
+          %li
+            %a{:href => "#photo-booth"} Back to Photo Booth
+#page-campaign{"data-role" => "page"}
+  .m-header{"data-position" => "fixed", "data-role" => "header", "data-tap-toggle" => "false"}
+    %a{"data-role" => "none", "data-transition" => "pop", :href => "#page-home"}
+      .m-header-link
+        .back
+        .logo
+        %h1.ui-title Creatr+
+    #m-campaign-title
+  .ui-content{"data-role" => "content"}
+    .m-wrapper
+      .m-top-cap
+        %ul.m-top-cap-nav
+          %li.m-top-cap-title
+            %span#m-campaign-address
+      #m-stats
+        %h1>
+        submissions
+    %div{"data-position" => "fixed", "data-role" => "footer", "data-tap-toggle" => "false", "data-theme" => "d"}
+      .nav-glyphish{"data-iconpos" => "top", "data-role" => "navbar"}
+        %ul
+          %li#photobooth-link
+            %a#camera{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#photo-booth"} Photo Booth
+          %li
+            %a#validation{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#validator"} Validator
+          %li
+            %a#survey{"data-icon" => "custom", "data-transition" => "slide", :href => "#page-survey"} Survey Mode
+#page-survey{"data-role" => "page"}
+  .m-header{"data-position" => "fixed", "data-role" => "header", "data-tap-toggle" => "false"}
+    %a{"data-role" => "none", "data-transition" => "pop", :href => "#page-campaign"}/
+    .m-header-link
+      .back
+      .logo
+      %h1.ui-title Creatr+
+    #m-campaign-title
+  .ui-content{"data-role" => "content"}
+    .m-logo-large
+      %h2 This action will take you away from the Creatr+ app
+      To get back to the app you'll need to restart it
+      %br/
+      %a#go{"data-role" => "button"} Go

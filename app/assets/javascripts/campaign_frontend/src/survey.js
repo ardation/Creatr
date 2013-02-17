@@ -17,7 +17,27 @@ App = Ember.Application.createWithMixins({    // When ember updates we will need
     button: true,
     back_button: false,
     reset_button: false,
-    foward_button: true
+    foward_button: true,
+    skip_button: false,
+    firstStage: true,
+    stage: 1,
+    init: function() {
+      this._super();
+      this.set('stage', amplify.store('current_content'));
+    },
+    stageDidChange: function(element, property, value) {
+      amplify.store('current_content', this.get('stage'));
+      if (this.get('stage') == 1)
+        this.set('firstStage', true)
+      else
+        this.set('firstStage', false)
+
+      if (survey_contents[this.get('stage')-1].name == "Facebook")
+        this.set('skip_button', true)
+      else
+        this.set('skip_button', false)
+
+    }.observes('stage'),
 }, Em.Facebook);
 
 App.Store = DS.Store.extend({
@@ -31,7 +51,6 @@ App.setProperties({
 App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
 App._types = Ember.ArrayProxy.create({content: Ember.A(content_types)});
 SurveyLength = App._contents.get('length');
-
 
 App.SurveyData = Ember.ArrayProxy.create({
   content: [],
@@ -52,29 +71,32 @@ App.SurveyData = Ember.ArrayProxy.create({
   pushrecords: function() {
     var records = amplify.store('records');
     _.each(records, function(value) {
-      var person = {};
-      var answers_attributes = []
-      $.each( value, function( key, data ) {
-        if(parseInt(key) == key) {
-          //content
-          if (typeof data == 'object')
-            data = JSON.stringify(data);
-          answers_attributes.push({content_id: parseInt(key), data: data});
-        } else {
-          //attribute
-          person[key] = data;
-        }
-      });
-      person['answers_attributes'] = answers_attributes;
-      $.post('/endpoint.json', {person: person} , 'json')
-      .success(function() {
-        amplify.store('records', _.without(records, value));
-      })
-      .error(function(data) {
-        // if(data.responseText == '"Phone Number already exists in the system."') {
-        //   amplify.store('records', _.without(records, value));
-        // }
-      });
+      if (_.size(value) != 0) {
+        var person = {};
+        var answers_attributes = [];
+        $.each( value, function( key, data ) {
+          if(parseInt(key) == key) {
+            //content
+            if (typeof data == 'object')
+              data = JSON.stringify(data);
+            answers_attributes.push({content_id: parseInt(key), data: data});
+          } else {
+            //attribute
+            person[key] = data;
+          }
+        });
+
+        person['answers_attributes'] = answers_attributes;
+        $.post('/endpoint.json', {person: person} , 'json')
+        .success(function() {
+          amplify.store('records', _.without(records, value));
+        })
+        .error(function(data) {
+          // if(data.responseText == '"Phone Number already exists in the system."') {
+          //   amplify.store('records', _.without(records, value));
+          // }
+        });
+      }
     });
   }
 });
@@ -97,7 +119,6 @@ App.ApplicationController = Ember.Controller.extend({
 App.Router.map(function() {
   this.resource("content", { path: "/content/:id" });
 });
-
 
 App.ContentController = Ember.Controller.extend({
   _content: null,
@@ -125,16 +146,10 @@ App.ContentController = Ember.Controller.extend({
   },
 
   exit: function() {
-    if(typeof this._content.data == "string") {
-      data = JSON.parse(this._content.data);
-    }
-    else 
-      data = this._content.data;
-    verify = eval(data.Validator);
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      if(verify(this))
-        return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
+      //if(verify(this))
+      return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
       return false;
     }
   },
@@ -166,7 +181,25 @@ App.IndexRoute = Ember.Route.extend({
     this.transitionTo('content', 1);
   }
 });
-
+function radio_validate() {
+  var names = [];
+  $('input:visible[type=radio]').each(function() {
+    if( $.inArray( $(this).attr('name'), names ) == -1 )
+      names.push( $(this).attr('name') );
+  });
+  if (names == [])
+    return false;
+  else {
+    var returnable = false;
+    $.each(names, function(index, value) {
+      if ( !$('input:visible[name='+value+']').is(':checked') ) {
+        returnable = true;
+        return;
+      }
+    });
+    return returnable;
+  }
+}
 App.ContentRoute = Ember.Route.extend({
   current_id:0,
   name: null,
@@ -176,42 +209,57 @@ App.ContentRoute = Ember.Route.extend({
   events: {
     incrementStep: function() {
       var context = this;
-      if(this._controller.exit() != false) {
-        $('#error').fadeOut();
+
+      if($('input:visible').filter(function() { return $(this).val() == ""; }).length > 0) {
+        //input type text
+        $('#error').slideDown(200);
+      } else if (radio_validate() ) {
+        //input type radio
+        $('#error').slideDown(200);
+      } else if(this._controller.exit() != false) {
+        $('#error').slideUp(200);
         $('#surveyContainer').fadeOut(300);
-        amplify.store('current_content', this.current_id*1+1);
-        setTimeout(function() {context.transitionTo('content', context.current_id*1+1)}, 300);
-      }
-      else {
-        $('#error').fadeIn();
+        setTimeout(function() {
+          App.set('stage', context.current_id*1+1);
+          context.transitionTo('content', context.current_id*1+1);
+        }, 300);
+      } else {
+        $('#error').slideDown();
       }
     },
     resetStep: function() {
-      var context = this;
-      this._controller.exit();
-      $('#surveyContainer').fadeOut(300);
-      amplify.store('current_content', 1);
-      setTimeout(function() {context.transitionTo('content', 1)}, 300);
+      if ( App.get('stage') != 1 ) {
+        var context = this;
+        this._controller.exit();
+        $('#surveyContainer').fadeOut(300);
+        amplify.store('response', {});
+        setTimeout(function() {
+          App.set('stage', 1);
+          context.transitionTo('content', 1);
+        }, 300);
+      }
     },
     backStep: function() {
+      $('#error').slideUp(200);
       var context = this;
       $('#surveyContainer').fadeOut(300);
-      amplify.store('current_content', this.current_id*1-1);
-      setTimeout(function() {context.transitionTo('content', context.current_id*1-1)}, 300);
+      setTimeout(function() {App.set('stage', context.current_id*1-1); context.transitionTo('content', context.current_id*1-1)}, 300);
     },
     skipFacebook: function() {
       var context = this;
       $('#surveyContainer').fadeOut(300);
-      amplify.store('current_content', 3);
-      App.set('button', true);
-      setTimeout(function() {context.transitionTo('content', 3)}, 300);
+      setTimeout(function() {
+        App.set('button', true);
+        App.set('stage', App.get('stage') + 1);
+        context.transitionTo('content', App.get('stage'));
+      }, 300);
     }
   },
   model: function(params) {
     var router = this;
     Ember.run.next(function() {
-      if (amplify.store('current_content') != router.current_id) {
-        router.transitionTo('content', amplify.store('current_content'));
+      if (App.get('stage') != router.current_id) {
+        router.transitionTo('content', App.get('stage'));
       }
     });
 
@@ -245,7 +293,7 @@ App.ContentRoute = Ember.Route.extend({
   setupController: function(controller, model) {
     this._controller = controller;
     if(this.current_id*1 == 2 && !navigator.onLine) { //facebook step but no connectivity
-      amplify.store('current_content', 3);  //skip step
+      App.set('stage', 3);  //skip step
       this.transitionTo('content', 3);
     }
     //simulate exit for now
@@ -275,66 +323,3 @@ $('html').bind('keypress', function(e)
 });
 App.SurveyData.pushrecords();
 window.addEventListener('online', App.SurveyData.pushrecords );
-
-// function verify(context) {
-//   if(context.answer == '' || context.answer == null) {
-//     App.set('Error', 'Enter what you\'d like to see happen in your life!');
-//     return false;
-//   }
-//   return true;
-// }
-
-
-// function verify(context) {
-//   if(typeof $('input:radio[name=rdGroup]:checked').val() == "undefined") {
-//     App.set('Error', 'Tell us where you\'re at on your journey!');
-//     return false;
-//   }
-//   return true;
-// }
-
-// function verify(context) {
-//   if(typeof $('input:radio[name=rdGroup]:checked').val() == "undefined") {
-//     App.set('Error', 'How interested are you in finding out about this Jesus guy?');
-//     return false;
-//   }
-//   return true;
-// }
-
-
-// function verify(context) {
-//   if(context.first_name == "" || context.first_name == null) {
-//     App.set('Error', 'You haven\'t forgotten your own name, have you?');
-//     return false;
-//   }
-//   if(context.last_name == "" || context.last_name == null) {
-//     App.set('Error', 'Last names are important too...');
-//     return false;
-//   }
-
-//   if(context.mobile == "" || context.mobile == null) {
-//     App.set('Error', 'If we don\'t have your cellphone number, we can\'t send you a code for your new shades!');
-//     return false;
-//   }
-
-//   if(typeof $('input:radio[name=gender]:checked').val() == "undefined") {
-//     App.set('Error', 'Knowing your gender makes it less awkward for both of us...');
-//     return false;
-//   }
-
-//   if(context.degree == "" || context.degree == null) {
-//     App.set('Error', 'What are you studying here?');
-//     return false;
-//   }
-
-//   if(context.hall  == "" || context.hall == null) {
-//     App.set('Error', 'If we know where you\'re staying we can hook you up with sweet events and people!');
-//     return false;
-//   }
-
-//   if(typeof $('input:radio[name=year]:checked').val() == "undefined") {
-//     App.set('Error', 'What year are you?');
-//     return false;
-//   }
-//   return true;
-// }
