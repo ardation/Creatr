@@ -125,10 +125,16 @@ App.ContentController = Ember.Controller.extend({
   },
 
   exit: function() {
+    if(typeof this._content.data == "string") {
+      data = JSON.parse(this._content.data);
+    }
+    else 
+      data = this._content.data;
+    verify = eval(data.Validator);
     if(this.type != null) {
       fx = eval(this.type.js).exit;
-      //if(verify(this))
-      return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
+      if(verify(this))
+        return fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
       return false;
     }
   },
@@ -271,7 +277,7 @@ App.SurveyData.pushrecords();
 window.addEventListener('online', App.SurveyData.pushrecords );
 
 // function verify(context) {
-//   if(context.answer == "" || context.answer == null) {
+//   if(context.answer == '' || context.answer == null) {
 //     App.set('Error', 'Enter what you\'d like to see happen in your life!');
 //     return false;
 //   }
