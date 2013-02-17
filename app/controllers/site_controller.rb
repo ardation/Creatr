@@ -92,6 +92,7 @@ class SiteController < ApplicationController
       actual_file = File.join(Rails.root,'public',f)
       digest << "##{File.mtime(actual_file)}" if File.exist?(actual_file)
     end
+    digest << Time.now.strftime("%S") #DEBUG
     @files << "\n# Modification Digest: #{digest.hexdigest}"
 
     render :text => @files.join("\n"), :content_type => 'text/cache-manifest', :layout => nil

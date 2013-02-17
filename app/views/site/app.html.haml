@@ -28,30 +28,11 @@
             %a#validator-cancel{:href => "#page-home"} Cancel
           %li
             %a#add-campaign-button.m-number-button Add
-#validator.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
-  .m-dialog{:role => "dialog"}
-    %div{"data-role" => "header"}
-      .m-loader
-      %h1 SMS Code Validator
-    #validator-error.m-dialog-error That's an invalid SMS Code. Try again!
-    #validator-success.m-dialog-success That's a valid SMS Code!
-    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
-      #validator-number.m-number{"data-size" => "5"}
-        .m-number-pad-entry
-          %form#validator-form{:action => "#validator"}
-            %input#validator-number-pad-entry{"data-role" => "none", :maxlength => "5", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
-    .m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
-      %div{"data-role" => "navbar"}
-        %ul
-          %li
-            %a#validator-cancel{:href => "#page-campaign"} Cancel
-          %li
-            %a#validator-button.m-number-button Validate
 #photo-booth.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
   .m-dialog{:role => "dialog"}
     %div{"data-role" => "header"}
       .m-loader
-      %h1 Photo Booth
+      %h1 Validator
     #photo-booth-error.m-dialog-error That's an invalid SMS Code. Try again!
     .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
       #photo-booth-number.m-number{"data-size" => "5"}
@@ -64,7 +45,7 @@
           %li
             %a#validator-cancel{:href => "#page-campaign"} Cancel
           %li
-            %a#photo-booth-button.m-number-button Take Photo
+            %a#photo-booth-button.m-number-button Validate
 #photo-booth-wait.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
   .m-dialog{:role => "dialog"}
     %div{"data-role" => "header"}
@@ -84,6 +65,7 @@
   .m-dialog{:role => "dialog"}
     %div{"data-role" => "header"}
       %h1 Photo Booth
+    #photo-booth-ios6-success.m-dialog-success{style: "display:block"} That's a valid SMS Code!
     #camera.ui-content.ui-body-c.m-white.fileinput{"data-role" => "content", "data-theme" => "c", :role => "main"}
       %form
         %span.btn.btn-success.fileinput-button
@@ -95,6 +77,8 @@
         %ul
           %li
             %a{:href => "#page-campaign"} Close
+          %li
+            %a{:href => "#photo-booth"} Back to Validator
 #photo-booth-thanks.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
   .m-dialog{:role => "dialog"}
     %div{"data-role" => "header"}
@@ -131,9 +115,7 @@
       .nav-glyphish{"data-iconpos" => "top", "data-role" => "navbar"}
         %ul
           %li#photobooth-link
-            %a#camera{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#photo-booth"} Photo Booth
-          %li
-            %a#validation{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#validator"} Validator
+            %a#camera{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#photo-booth"} Validator & Booth
           %li
             %a#survey{"data-icon" => "custom", "data-transition" => "slide", :href => "#page-survey"} Survey Mode
 #page-survey{"data-role" => "page"}

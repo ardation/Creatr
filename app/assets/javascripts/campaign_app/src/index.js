@@ -165,15 +165,11 @@ var photo_booth_submit = function () {
       $.ajax({ url:'/api/'+data.campaign_code+'/sms_code/' + $('#photo-booth-number-pad-entry').val(), dataType: 'json', success: photo_booth_valid_sms,
       error: function(data) {
         var decoded = $.parseJSON(data.responseText);
-        if (decoded.sms_photo) {
-          photo_booth_valid_sms();
-        } else {
-          $('#photo-booth-button, #photo-booth-cancel').removeClass('ui-disabled');
-          $('#photo-booth-error').text(decoded.error);
-          $('#photo-booth .m-loader').fadeOut();
-          $('#photo-booth-error').slideDown(100);
-          $('#photo-booth-number-pad-entry').focus();
-        }
+        $('#photo-booth-button, #photo-booth-cancel').removeClass('ui-disabled');
+        $('#photo-booth-error').text(decoded.error);
+        $('#photo-booth .m-loader').fadeOut();
+        $('#photo-booth-error').slideDown(100);
+        $('#photo-booth-number-pad-entry').focus();
       } });
     });
     return false;
