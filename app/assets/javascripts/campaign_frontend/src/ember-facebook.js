@@ -41,11 +41,14 @@
         });
         FB.init(facebookParams);
         FB.getLoginStatus(function(response) {
-          console.log(response);
           if(response.status == 'connected') {
             console.log('trying to logout');
-            FB.logout();
-            App.set('FBUser', false);;
+            FB.getLoginStatus(function(response) {
+              FB.logout();
+              App.set('button', false);
+            });
+            App.set('button', false);
+            App.set('FBUser', false);
           }
         });
         this.set('FBloading', true);

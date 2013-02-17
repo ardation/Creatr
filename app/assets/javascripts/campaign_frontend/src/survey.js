@@ -1,3 +1,5 @@
+//routerHack = null;
+
 nextStep = 1;
 
 content_types_obj = Ember.ArrayProxy.create({content: content_types});
@@ -217,6 +219,22 @@ App.ContentRoute = Ember.Route.extend({
         //input type radio
         $('#error').slideDown(200);
       } else if(this._controller.exit() != false) {
+        if(context.current_id*1 == 1) {
+          App.set('FBUser',false);
+          if(FB) {
+            FB.getLoginStatus(function(response) {
+              if(response.status == 'connected') {
+                console.log('trying to logout');
+                FB.logout();
+                App.set('button', false);
+                App.set('FBUser', false);
+              }
+            });
+          }
+          else {
+            alert('test');
+          }
+        }
         $('#error').slideUp(200);
         $('#surveyContainer').fadeOut(300);
         setTimeout(function() {
@@ -292,6 +310,7 @@ App.ContentRoute = Ember.Route.extend({
     });
   },
   setupController: function(controller, model) {
+    //window['routerHack'] = this;
     this._controller = controller;
     if(this.current_id*1 == 2 && !navigator.onLine) { //facebook step but no connectivity
       App.set('stage', 3);  //skip step
