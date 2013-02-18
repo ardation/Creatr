@@ -44,6 +44,17 @@ class Api::VerifyController < ApplicationController
     render json: {validate: true}
   end
 
+  def update_mobile
+    @campaign = Campaign.find_by_campaign_code(params[:campaign_token].to_i)
+    @person = @campaign.people.find(params[:token])
+    unless @person.blank?
+      @person.mobile = params[:mobile]
+      @person.save!
+      @person.send_sms
+    end
+    render json: {validate: true}
+  end
+
   def fb_image
     @campaign = Campaign.find_by_campaign_code(params['campaign_token'].to_i)
     if @campaign.nil?
@@ -59,7 +70,7 @@ class Api::VerifyController < ApplicationController
         @person.photo_validate
         render json: {validate: true}.to_json
       else
-        render :json => { :error => "That person already has a photo!. Try again!" }, :status => 422
+        render :json => { :error => "That person already has a photo! Try again!" }, :status => 422
       end
     end
   end

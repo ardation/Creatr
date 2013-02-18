@@ -58,6 +58,7 @@ FlamingWight::Application.routes.draw do
     match ":campaign_token/fb_image/:token" => 'verify#fb_image'
     match ":campaign_token/search" => 'verify#search_by_name'
     match ":campaign_token/person/:token/sms" => 'verify#send_sms'
+    match ":campaign_token/person/:token/mobile" => 'verify#update_mobile'
   end
   root :to => "site#index"
   match 'features' => "site#features"

@@ -28,7 +28,7 @@ $('.m-number-dialog').live('pagecreate', function() {
 	$(this).find('.m-number-button').addClass('ui-disabled');
 });
 $('#page-campaign').live('pagebeforeshow', function() {
-	var data = $.jStorage.get($.jStorage.get('current'));
+  var data = $.jStorage.get($.jStorage.get('current'));
 	$('#m-campaign-title').text(data.name);
 	$('#m-stats h1').text(data.total);
 	$('#m-campaign-address').text(data.cached_domain);
@@ -107,7 +107,7 @@ $('#add-campaign').live('pageinit', function() {
 
 $('#page-survey').live('pageinit', function() {
 	$('#go').click(function() {
-		var data = $.jStorage.get($.jStorage.get('current'));
+    var data = $.jStorage.get($.jStorage.get('current'));
 		window.location.href = 'http://'+data.cached_domain+'/';
 	});
 });
@@ -183,11 +183,11 @@ $('#page-sms').live('pageinit', function() {
     var ms = 200; // milliseconds
     var val = this.value;
 
-    $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g" id="campaign-list"></div>');
+    $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g"></div>');
     if ($('#page-sms-search').val() != '') {
       timer = setTimeout(function() {
         $.post('/api/'+data.campaign_code+'/search', { name: $('#page-sms-search').val()}, function(data) {
-          $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g" id="campaign-list"></div>');
+          $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g"></div>');
           $.each(data, function(index, obj) {
             $('#page-sms-results .m-wrapper ul').append('<li class="ui-li ui-li-static ui-body-g m-campaign"><div class="ui-li-aside m-list-post-time m-campaign-data"><a class="btn change_mobile" data-mini="true" data-mobile="'+obj.mobile+'" data-person="'+obj.id+'">Edit</a>&nbsp;&nbsp;<a class="btn btn-success resend_sms" data-mini="true" data-person="'+obj.id+'">Resend</a></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+obj.first_name+' '+obj.last_name+'</span><span class="m-list-author-handle">0'+obj.mobile+'</span></p></div></li>');
           });
@@ -199,17 +199,23 @@ $('#page-sms').live('pageinit', function() {
 
 
           $('.change_mobile').bind('tap', function() {
-            $.jStorage.set('person', $(this).data('person'));
-            $.jStorage.get('mobile', $(this).data('mobile'));
-            $.mobile.changePage("#change_mobile");
+            window.person = $(this).data('person');
+            window.mobile = $(this).data('mobile');
+            $.mobile.changePage("#change-mobile");
           });
         }, 'json');
       }, ms);
     }
   });
 });
-$('#change_mobile').live('pagebeforeshow', function() {
-  $('#change-mobile-pad-entry').val($.jStorage.set('mobile'));
+$('#change-mobile').live('pageinit', function() {
+  $('#change-mobile-apply').bind('tap', function() {
+    var data = $.jStorage.get($.jStorage.get('current'));
+    $.post('/api/'+data.campaign_code+'/person/'+window.person+'/mobile', {mobile: $('#change-mobile-pad-entry').val()} );
+    $.mobile.changePage('#page-sms');
+  });
+}).live('pagebeforeshow', function() {
+  $('#change-mobile-pad-entry').val("0" + window.mobile);
 });
 
 $('#photo-booth').live('pageinit', function() {
@@ -224,6 +230,7 @@ $('#photo-booth-ios6').live('pageinit', function() {
   $('.fileinput-button').click(function() {
       $('#fileupload').trigger('click');
   });
+}).live('pagebeforeshow', function() {
   $('#fileupload').fileupload({
     url: '/api/'+$.jStorage.get($.jStorage.get('current')).campaign_code+'/fb_image/' +  window.photo_sms_code,
     dataType: 'json',

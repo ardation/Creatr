@@ -79,23 +79,6 @@
             %a{:href => "#page-campaign"} Close
           %li
             %a{:href => "#photo-booth"} Back to Validator
-#change-mobile.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
-  .m-dialog{:role => "dialog"}
-    %div{"data-role" => "header"}
-      %h1 Photo Booth
-    #change-mobile.m-dialog-error That's an invalid SMS Code. Try again!
-    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
-      #change-mobile-number.m-number{"data-size" => "5"}
-        .m-number-pad-entry
-          %form#change-mobile-form{:action => "#photo-booth"}
-            %input#change-mobile-pad-entry{"data-role" => "none", :maxlength => "5", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
-    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
-      %div{"data-role" => "navbar"}
-        %ul
-          %li
-            %a{:href => "#page-campaign"} Close
-          %li
-            %a{:href => "#photo-booth"} Change Mobile
 #photo-booth-thanks.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
   .m-dialog{:role => "dialog"}
     %div{"data-role" => "header"}
@@ -148,6 +131,23 @@
   .ui-content{"data-role" => "content"}
     %input{type: "search", id: "page-sms-search"}
     #page-sms-results
+#change-mobile.m-number-dialog{"data-close-btn" => "none", "data-corners" => "false", "data-external-page" => "true", "data-role" => "dialog"}
+  .m-dialog{:role => "dialog"}
+    %div{"data-role" => "header"}
+      %h1 Photo Booth
+    #change-mobile.m-dialog-error That's an invalid SMS Code. Try again!
+    .ui-content.ui-body-c.m-white{"data-role" => "content", "data-theme" => "c", :role => "main"}
+      #change-mobile-number.m-number{"data-size" => "20"}
+        .m-number-pad-entry
+          %form#change-mobile-form{:action => "#photo-booth"}
+            %input#change-mobile-pad-entry{"data-role" => "none", :maxlength => "20", :pattern => "\\d*", :placeholder => "...", :type => "tel"}/
+    .ui-footer.m-dialog-footer{"data-role" => "footer", "data-theme" => "d"}
+      %div{"data-role" => "navbar"}
+        %ul
+          %li
+            %a{:href => "#page-sms"} Close
+          %li
+            %a#change-mobile-apply Apply
 #page-survey{"data-role" => "page"}
   .m-header{"data-position" => "fixed", "data-role" => "header", "data-tap-toggle" => "false"}
     %a{"data-role" => "none", "data-transition" => "pop", :href => "#page-campaign"}/

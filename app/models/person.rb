@@ -11,8 +11,7 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :mobile
 
   scope :find_by_full_name, lambda {|full_name|
-  { :conditions => ["upper(people.first_name) LIKE upper(?) or upper(people.last_name) LIKE upper(?)",
-    "%#{full_name.split(' ').first}%", "%#{full_name.split(' ').last}%"] }}
+  { :conditions => ["people.sms_validated = false and (upper(people.first_name) LIKE upper(?) or upper(people.last_name) LIKE upper(?))", "%#{full_name.split(' ').first}%", "%#{full_name.split(' ').last}%"] }}
 
   def upload_photo(file)
     unless self.facebook_access_token.blank?
