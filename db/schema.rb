@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130216045807) do
+ActiveRecord::Schema.define(:version => 20130218215600) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -30,17 +30,21 @@ ActiveRecord::Schema.define(:version => 20130216045807) do
   add_index "campaign_counters", ["date"], :name => "index_campaign_counters_on_date"
 
   create_table "campaigns", :force => true do |t|
-    t.string  "name"
-    t.integer "organisation_id"
-    t.integer "theme_id"
-    t.date    "start_date"
-    t.date    "finish_date"
-    t.string  "cached_domain"
-    t.string  "cname_alias"
-    t.text    "sms_template"
-    t.integer "foreign_id"
-    t.integer "campaign_code"
-    t.string  "short_name"
+    t.string   "name"
+    t.integer  "organisation_id"
+    t.integer  "theme_id"
+    t.date     "start_date"
+    t.date     "finish_date"
+    t.string   "cached_domain"
+    t.string   "cname_alias"
+    t.text     "sms_template"
+    t.integer  "foreign_id"
+    t.integer  "campaign_code"
+    t.string   "short_name"
+    t.string   "fb_image_file_name"
+    t.string   "fb_image_content_type"
+    t.integer  "fb_image_file_size"
+    t.datetime "fb_image_updated_at"
   end
 
   add_index "campaigns", ["cached_domain"], :name => "index_campaigns_on_cached_domain"

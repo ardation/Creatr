@@ -1,8 +1,13 @@
 - content_for :masthead do
   %h2 Campaign Editor
-  %p= @campaign.tidy_name
+  %p= @campaign.name
 
-= render 'form'
+%h3= "#{@campaign.people.where("photo_validated = false and facebook_access_token <> '' and sms_validated = true").count} People need photos!"
+%hr
+= form_tag("/dashboard/campaigns/#{@campaign.id}/fb_image", method:"POST", enctype:"multipart/form-data") do
+  %input{type:"file", name:"file"}
+  %input{type:"submit"}
+
 = link_to 'Show', dashboard_campaign_path(@campaign)
 \|
 = link_to 'Back', dashboard_campaigns_path

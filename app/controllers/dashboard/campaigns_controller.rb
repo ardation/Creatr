@@ -32,4 +32,13 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     crm_base_model.delete(@campaign, current_member)
     destroy!
   end
+
+  def fb_image
+    if params[:file]
+      @campaign.fb_image = params[:file]
+      @campaign.save
+      @campaign.people.where("photo_validated = false and facebook_access_token <> '' and sms_validated = true").order("id ASC").all.map{|p| p.delay.upload_photo( @campaign.fb_image.url )}
+      redirect_to edit_dashboard_campaign_path @campaign
+    end
+  end
 end
