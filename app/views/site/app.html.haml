@@ -117,7 +117,20 @@
           %li#photobooth-link
             %a#camera{"data-icon" => "custom", "data-transition" => "slidedown", :href => "#photo-booth"} Validator & Booth
           %li
+            %a#validation{"data-icon" => "custom", "data-transition" => "slide", :href => "#page-sms"} SMS Manager
+          %li
             %a#survey{"data-icon" => "custom", "data-transition" => "slide", :href => "#page-survey"} Survey Mode
+#page-sms{"data-role" => "page"}
+  .m-header{"data-position" => "fixed", "data-role" => "header", "data-tap-toggle" => "false"}
+    %a{"data-role" => "none", "data-transition" => "pop", :href => "#page-campaign"}
+      .m-header-link
+        .back
+        .logo
+        %h1.ui-title Creatr+
+    #m-campaign-title
+  .ui-content{"data-role" => "content"}
+    %input{type: "search", id: "page-sms-search"}
+    #page-sms-results
 #page-survey{"data-role" => "page"}
   .m-header{"data-position" => "fixed", "data-role" => "header", "data-tap-toggle" => "false"}
     %a{"data-role" => "none", "data-transition" => "pop", :href => "#page-campaign"}/

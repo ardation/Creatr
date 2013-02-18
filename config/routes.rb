@@ -54,8 +54,10 @@ FlamingWight::Application.routes.draw do
   end
   namespace :api do
     match "campaign_code/:token" => 'verify#verify_campaign'
-      match ":campaign_token/sms_code/:token" => 'verify#validate_sms_code'
-      match ":campaign_token/fb_image/:token" => 'verify#fb_image'
+    match ":campaign_token/sms_code/:token" => 'verify#validate_sms_code'
+    match ":campaign_token/fb_image/:token" => 'verify#fb_image'
+    match ":campaign_token/search" => 'verify#search_by_name'
+    match ":campaign_token/person/:token/sms" => 'verify#send_sms'
   end
   root :to => "site#index"
   match 'features' => "site#features"

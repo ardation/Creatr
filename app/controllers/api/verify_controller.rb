@@ -30,6 +30,20 @@ class Api::VerifyController < ApplicationController
     end
   end
 
+  def search_by_name
+    @campaign = Campaign.find_by_campaign_code(params[:campaign_token].to_i)
+    if (params[:name])
+      @people = @campaign.people.find_by_full_name(params[:name]).all
+      render json: @people.to_json(only: [:first_name, :last_name, :id, :mobile])
+    end
+  end
+
+  def send_sms
+    @campaign = Campaign.find_by_campaign_code(params[:campaign_token].to_i)
+    @campaign.people.find(params[:token]).try(:send_sms)
+    render json: {validate: true}
+  end
+
   def fb_image
     @campaign = Campaign.find_by_campaign_code(params['campaign_token'].to_i)
     if @campaign.nil?

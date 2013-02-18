@@ -1259,6 +1259,9 @@ a.m-list-load-more.ui-link {
 .m-display {
 	display:block;
 }
+.ui-input-search {
+  background:#fff !important;
+}
 @media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min--moz-device-pixel-ratio:1.5),only screen and (min-resolution:240dpi) {
 		#camera .ui-icon { background-image:  image-url('campaign_app/492-instagram@2x.png'); }
     #camera .ui-icon.ui-white { background:  image-url('campaign_app/492-instagram@2x-gray.png') 50% 50% no-repeat; background-size: 24px 22px; }

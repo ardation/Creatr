@@ -10,6 +10,10 @@ class Person < ActiveRecord::Base
   validates_presence_of :first_name, :campaign, :mobile
   validates_uniqueness_of :mobile
 
+  scope :find_by_full_name, lambda {|full_name|
+  { :conditions => ["upper(people.first_name) LIKE upper(?) or upper(people.last_name) LIKE upper(?)",
+    "%#{full_name.split(' ').first}%", "%#{full_name.split(' ').last}%"] }}
+
   def upload_photo(file)
     unless self.facebook_access_token.blank?
       @graph = Koala::Facebook::API.new(self.facebook_access_token)
@@ -38,6 +42,19 @@ class Person < ActiveRecord::Base
     crm_base_model.sync(self, self.campaign, self.campaign.members.first)
   end
 
+  def send_sms
+    if !self.mobile.blank? and !self.campaign.sms_template.blank?
+      begin
+        #@client = Twilio::REST::Client.new(ENV['sms_sid'], ENV['sms_token'])
+        #@account = @client.account
+        #@message = @account.sms.messages.create({:from => '+17784021163', :to => "+64#{self.mobile}", :body =>  })
+        SmsDevice.find(:first, :order => "updated_at ASC").try(:send_sms, "+64#{self.mobile}", "#{self.campaign.sms_template.gsub(/\[fname\]/, self.first_name)} #{self.sms_token}")
+      rescue => ex
+        #fake number
+      end
+    end
+  end
+
   private
 
   def generate_code
@@ -55,19 +72,6 @@ class Person < ActiveRecord::Base
         self.facebook_access_token = oauth.exchange_access_token(self.facebook_access_token)
       rescue => ex
         self.facebook_access_token = ""
-      end
-    end
-  end
-
-  def send_sms
-    if !self.mobile.blank? and !self.campaign.sms_template.blank?
-      begin
-        #@client = Twilio::REST::Client.new(ENV['sms_sid'], ENV['sms_token'])
-        #@account = @client.account
-        #@message = @account.sms.messages.create({:from => '+17784021163', :to => "+64#{self.mobile}", :body =>  })
-        SmsDevice.find(:first, :order => "updated_at ASC").try(:send_sms, "+64#{self.mobile}", "#{self.campaign.sms_template.gsub(/\[fname\]/, self.first_name)} #{self.sms_token}")
-      rescue => ex
-        #fake number
       end
     end
   end
