@@ -182,23 +182,36 @@ $('#page-sms').live('pageinit', function() {
     clearTimeout(timer);
     var ms = 200; // milliseconds
     var val = this.value;
+
     $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g" id="campaign-list"></div>');
     if ($('#page-sms-search').val() != '') {
       timer = setTimeout(function() {
         $.post('/api/'+data.campaign_code+'/search', { name: $('#page-sms-search').val()}, function(data) {
+          $('#page-sms-results').html('<div class="m-wrapper"><ul class="ui-listview" data-role="listview" data-theme="g" id="campaign-list"></div>');
           $.each(data, function(index, obj) {
-            $('#page-sms-results .m-wrapper ul').append('<li class="ui-li ui-li-static ui-body-g m-campaign"><div class="ui-li-aside m-list-post-time m-campaign-data"><a class="btn change_mobile" data-mini="true" data-person="'+obj.id+'">Edit</a>&nbsp;&nbsp;<a class="btn btn-success resend_sms" data-mini="true" data-person="'+obj.id+'">Resend</a></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+obj.first_name+' '+obj.last_name+'</span><span class="m-list-author-handle">0'+obj.mobile+'</span></p></div></li>');
+            $('#page-sms-results .m-wrapper ul').append('<li class="ui-li ui-li-static ui-body-g m-campaign"><div class="ui-li-aside m-list-post-time m-campaign-data"><a class="btn change_mobile" data-mini="true" data-mobile="'+obj.mobile+'" data-person="'+obj.id+'">Edit</a>&nbsp;&nbsp;<a class="btn btn-success resend_sms" data-mini="true" data-person="'+obj.id+'">Resend</a></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+obj.first_name+' '+obj.last_name+'</span><span class="m-list-author-handle">0'+obj.mobile+'</span></p></div></li>');
           });
-          $('.resend_sms').click(function() {
+          $('.resend_sms').bind('tap', function() {
             var data = $.jStorage.get($.jStorage.get('current'));
             $.get('/api/'+data.campaign_code+'/person/'+$(this).data('person')+'/sms');
             $(this).text('SMS Sent!').addClass('ui-disabled');
+          });
+
+
+          $('.change_mobile').bind('tap', function() {
+            $.jStorage.set('person', $(this).data('person'));
+            $.jStorage.get('mobile', $(this).data('mobile'));
+            $.mobile.changePage("#change_mobile");
           });
         }, 'json');
       }, ms);
     }
   });
 });
+$('#change_mobile').live('pagebeforeshow', function() {
+  $('#change-mobile-pad-entry').val($.jStorage.set('mobile'));
+});
+
 $('#photo-booth').live('pageinit', function() {
   $('#photo-booth-button').click(photo_booth_submit);
   $('#photo-booth-form').submit(photo_booth_submit);
