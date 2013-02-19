@@ -1,6 +1,7 @@
 class MissionHubCrm
   def self.create(campaign, current_member)
     MissionHub.client_secret = current_member.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
+    MissionHub.organization_id = MissionHub::Organization.find(campaign.organisation.foreign_id)
 
     @survey = MissionHub::Survey.create(title: campaign.name, post_survey_message: "Thanks.", organization_id: campaign.organisation.foreign_id)
     campaign.foreign_id = @survey.id
@@ -58,10 +59,53 @@ class MissionHubCrm
     end
   end
 
-  def self.sync(person, campaign, current_member)
-    MissionHub.client_secret = current_member.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
-    mhub_person = MissionHub::Person.create({organization_id: campaign.organisation.foreign_id, first_name: person.first_name, last_name: person.last_name, gender: person.gender.try(:capitalize), fb_uid: person.facebook_id,  phone_number: "64#{person.mobile}" })
+  def self.sync(person, campaign)
+    MissionHub.client_secret = campaign.members.first.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
+    MissionHub.organization_id = campaign.organisation.foreign_id
+    mhub_person = MissionHub::Person.create({first_name: person.first_name, last_name: person.last_name, gender: person.gender.try(:capitalize), fb_uid: person.facebook_id,  phone_number: "0#{person.mobile}", email: person.email })
     person.foreign_id = mhub_person.id
     person.save!
+
+    answers = {}
+    person.answers.each do |answer|
+      case answer.content.content_type.sync_type
+      when ContentType::NON_SYNCABLE
+        #do nothing
+      when ContentType::FACEBOOK_AUTH
+        #do nothing
+      when ContentType::SHORT_ANSWER
+        answers[answer.content.foreign_id] = answer.data
+      when ContentType::CHECK_BOX
+        answer_array = JSON.parse(answer.data)
+        final = {}
+        JSON.parse(answer.content.data)["Answers"].split(',').each_with_index do |value, index|
+          if answer_array.include?(value)
+            final[index.to_s] = value
+          else
+            final[index.to_s] = ""
+          end
+        end
+        answers[answer.content.foreign_id] = final
+      when ContentType::DROPDOWN
+        answers[answer.content.foreign_id] = answer.data
+      when ContentType::RADIO_BUTTON
+        answers[answer.content.foreign_id] = answer.data
+      when ContentType::CONTACT
+        data = JSON.parse(answer.data)
+        data.each do |key, value|
+          case key
+          when "year"
+            answers[JSON.parse(answer.content.foreign_hash)["Year"]] = value
+          when "degree"
+            answers[JSON.parse(answer.content.foreign_hash)["Degree"]] = value
+          when "hall"
+            answers[JSON.parse(answer.content.foreign_hash)["Halls"]] = value
+          end
+        end
+      end
+    end
+    #PUT THIS INTO GEM
+    output = {organization_id: campaign.organisation.foreign_id, survey_id:campaign.foreign_id, person_id: person.foreign_id, answers: answers, secret: MissionHub.client_secret}
+    RestClient.post("https://www.missionhub.com/apis/v3/answers", output)
   end
 end

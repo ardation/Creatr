@@ -42,7 +42,9 @@ class Person < ActiveRecord::Base
   def sync
     crm_base_model = "#{self.campaign.organisation.crm.name}Crm"
     crm_base_model = Kernel.const_get(crm_base_model)
-    crm_base_model.sync(self, self.campaign, self.campaign.members.first)
+    crm_base_model.sync(self, self.campaign)
+    self.synced = true
+    self.save
   end
 
   def send_sms

@@ -37,6 +37,7 @@ FlamingWight::Application.routes.draw do
     get 'campaigns/crm_data' => 'campaigns#crm_data'
     get 'campaigns/content_types' => 'campaigns#content_types'
     post 'campaigns/:id/fb_image' => 'campaigns#fb_image'
+    get 'campaigns/:id/sync' => 'campaigns#sync'
     resources :campaigns
 
     namespace :admin do

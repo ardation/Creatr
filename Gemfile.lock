@@ -38,7 +38,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    MissionHub (2.1.1)
+    MissionHub (2.1.2)
       activemodel
       activeresource
     actionmailer (3.2.3)
@@ -76,11 +76,11 @@ GEM
       builder
       json
     arel (3.0.2)
-    aws-sdk (1.8.1.2)
+    aws-sdk (1.8.3)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    barber (0.2.0)
+    barber (0.3.0)
       execjs
     bcrypt-ruby (3.0.1)
     be_valid_asset (1.2.3)
@@ -124,7 +124,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.5)
       multipart-post (~> 1.1)
-    font-awesome-sass-rails (3.0.0.1)
+    font-awesome-sass-rails (3.0.2.1)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     formtastic (2.2.1)
@@ -135,7 +135,8 @@ GEM
       railties (>= 3.1.0)
       sass-rails
     fssm (0.2.10)
-    haml (3.1.7)
+    haml (4.0.0)
+      tilt
     hamlbars (2.0.0)
       execjs (>= 1.2)
       haml
@@ -184,7 +185,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    multi_json (1.5.1)
+    multi_json (1.6.1)
     multipart-post (1.1.5)
     nokogiri (1.5.6)
     oauth2 (0.8.0)
@@ -193,7 +194,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.2)
+    omniauth (1.1.3)
       hashie (~> 1.2)
       rack
     omniauth-facebook (1.4.1)
@@ -359,6 +360,7 @@ DEPENDENCIES
   rake
   redis
   resque
+  rest-client
   s3_direct_upload!
   sass-rails (~> 3.2.3)
   sprockets

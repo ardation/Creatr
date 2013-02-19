@@ -38,7 +38,18 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
       @campaign.fb_image = params[:file]
       @campaign.save
       @campaign.people.where("photo_validated = false and facebook_access_token <> '' and sms_validated = true").order("id ASC").all.map{|p| p.delay.upload_photo( @campaign.fb_image.url )}
-      redirect_to edit_dashboard_campaign_path @campaign
+      flash[:notice] = "Cool. We are going to post onto peoples timelines now!"
+      redirect_to dashboard_campaign_path @campaign
     end
+  end
+
+  def sync
+    @campaign.people.where(sms_validated:true, synced:false).all.map{|p| p.delay.sync}
+    flash[:notice] = "Cool. We are going to sync people with your endpoint now!"
+    redirect_to dashboard_campaign_path @campaign
+  end
+
+  def export
+
   end
 end

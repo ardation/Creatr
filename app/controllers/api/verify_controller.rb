@@ -19,7 +19,7 @@ class Api::VerifyController < ApplicationController
       if @person.nil?
         render :json => { :error => "That's an invalid SMS code. Try again!" }, :status => 404
       else
-        #@person.sync
+        @person.delay.sync
         if !@person.sms_validated?
           @person.sms_validate
           render json: {validate: true}.to_json
