@@ -1,8 +1,7 @@
 class MissionHubCrm
   def self.create(campaign, current_member)
     MissionHub.client_secret = current_member.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
-    MissionHub.organization_id = MissionHub::Organization.find(campaign.organisation.foreign_id)
-
+    MissionHub.organization_id = campaign.organisation.foreign_id
     @survey = MissionHub::Survey.create(title: campaign.name, post_survey_message: "Thanks.", organization_id: campaign.organisation.foreign_id)
     campaign.foreign_id = @survey.id
 
@@ -45,6 +44,14 @@ class MissionHubCrm
           foreign_hash["Halls"] = question.id
         end
         content.foreign_hash = foreign_hash.to_json
+      when ContentType::MULTI_ANSWER
+        data = JSON.parse content.data
+        foreign_hash = {}
+        question1 = MissionHub::Question.create(kind: "ChoiceField", style: "drop-down", label:data["JourneyQuestion"], content:data["JourneyValues"].gsub(",","\r\n"), slug: "Interest", survey_id: @survey.id)
+        foreign_hash["Interest"] = question1.id
+        question2 = MissionHub::Question.create(kind: "ChoiceField", style: "drop-down", label:data["KennedyQuestion"], content:data["KennedyAnswers"].gsub(",","\r\n"), slug: "Kennedy", survey_id: @survey.id)
+        foreign_hash["Kennedy"] = question2.id
+        content.foreign_hash = foreign_hash.to_json
       end
     end
     campaign.save!
@@ -62,7 +69,6 @@ class MissionHubCrm
   def self.sync(person, campaign)
     MissionHub.client_secret = campaign.members.first.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
     MissionHub.organization_id = campaign.organisation.foreign_id
-    mhub_person = MissionHub::Person.create({first_name: person.first_name, last_name: person.last_name, gender: person.gender.try(:capitalize), fb_uid: person.facebook_id,  phone_number: "0#{person.mobile}", email: person.email })
     person.foreign_id = mhub_person.id
     person.save!
 
@@ -100,6 +106,16 @@ class MissionHubCrm
             answers[JSON.parse(answer.content.foreign_hash)["Degree"]] = value
           when "hall"
             answers[JSON.parse(answer.content.foreign_hash)["Halls"]] = value
+          end
+        end
+      when ContentType::MULTI_ANSWER
+        data = JSON.parse(answer.data)
+        data.each do |key, value|
+          case key
+          when "interest"
+            answers[JSON.parse(answer.content.foreign_hash)["Interest"]] = value
+          when "kennedy"
+            answers[JSON.parse(answer.content.foreign_hash)["Kennedy"]] = value
           end
         end
       end

@@ -34,7 +34,7 @@ App = Ember.Application.createWithMixins({    // When ember updates we will need
       else
         this.set('firstStage', false)
 
-      if (survey_contents[this.get('stage')-1].name == "Facebook")
+      if (typeof survey_contents[this.get('stage')-1] != "undefined" && survey_contents[this.get('stage')-1].name == "Facebook")
         this.set('skip_button', true)
       else
         this.set('skip_button', false)

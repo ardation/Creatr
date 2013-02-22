@@ -16,6 +16,7 @@ class ContentType < ActiveRecord::Base
   RADIO_BUTTON = 4
   FACEBOOK_AUTH = 5
   CONTACT = 6
+  MULTI_ANSWER = 7
 
   def working_javascript
     unless js.empty?
