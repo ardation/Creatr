@@ -69,6 +69,7 @@ class MissionHubCrm
   def self.sync(person, campaign)
     MissionHub.client_secret = campaign.members.first.member_crms.where(crm_id: campaign.organisation.crm).first.api_key
     MissionHub.organization_id = campaign.organisation.foreign_id
+    mhub_person = MissionHub::Person.create({first_name: person.first_name, last_name: person.last_name, gender: person.gender.try(:capitalize), fb_uid: person.facebook_id,  phone_number: "0#{person.mobile}", email: person.email })
     person.foreign_id = mhub_person.id
     person.save!
 
