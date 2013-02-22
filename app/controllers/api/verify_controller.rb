@@ -19,10 +19,10 @@ class Api::VerifyController < ApplicationController
       if @person.nil?
         render :json => { :error => "That's an invalid SMS code. Try again!" }, :status => 404
       else
-        @person.delay.Personsync
+        @person.delay.sync
         if !@person.sms_validated?
           @person.sms_validate
-          render json: {validate: true}.to_json
+          render json: {validate: true, photo_capable: !@person.facebook_access_token.blank? }.to_json
         else
           render :json => { :error => "That code has already been used. Try again!", :sms_photo => !@person.photo_validated? }, :status => 422
         end
