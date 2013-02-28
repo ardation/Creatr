@@ -49,6 +49,6 @@ class Campaign < ActiveRecord::Base
   end
 
   def total
-    self.campaign_counters.sum(:count)
+    self.people.count
   end
 end

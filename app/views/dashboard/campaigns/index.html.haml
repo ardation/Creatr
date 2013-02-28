@@ -18,4 +18,4 @@
       = t.cell :name
       = t.cell(:url) { |p| link_to p.cached_domain, "//#{p.cached_domain}:#{request.port}", target: '_blank' }
       = t.cell(:status) {"Development"}
-      = t.cell :total
+      = t.cell(:total) { |p| "#{p.people.where(sms_validated: true).count} / #{p.people.count}" }

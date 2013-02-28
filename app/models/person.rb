@@ -37,7 +37,7 @@ class Person < ActiveRecord::Base
   end
 
   def mobile=(number)
-    unless number.blank? and number.length < 5
+    unless number.blank? and number.length < 3
       number = number.gsub(/[^0-9]/i, '')
       number = number[2..-1] if number[0..1] == "64"
       super(number.to_i)
