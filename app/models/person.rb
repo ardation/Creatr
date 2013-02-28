@@ -37,7 +37,11 @@ class Person < ActiveRecord::Base
   end
 
   def mobile=(number)
-    super(number.to_i)
+    unless number.blank? and number.length < 5
+      number = number.gsub(/[^0-9]/i, '')
+      number = number[2..-1] if number[0..1] == "64"
+      super(number.to_i)
+    end
   end
 
   def sync
