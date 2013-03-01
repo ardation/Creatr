@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
   before_create :get_extended_token
   after_create :send_sms
   validates_presence_of :first_name, :campaign, :mobile
-  validates_uniqueness_of :mobile
+  validates_uniqueness_of :mobile, :scope => :campaign_id
 
   scope :find_by_full_name, lambda {|full_name|
   { :conditions => ["people.sms_validated = false and (upper(people.first_name) LIKE upper(?) or upper(people.last_name) LIKE upper(?))", "%#{full_name.split(' ').first}%", "%#{full_name.split(' ').last}%"] }}

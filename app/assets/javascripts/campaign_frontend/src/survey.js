@@ -94,9 +94,7 @@ App.SurveyData = Ember.ArrayProxy.create({
           amplify.store('records', _.without(records, value));
         })
         .error(function(data) {
-          // if(data.responseText == '"Phone Number already exists in the system."') {
-          //   amplify.store('records', _.without(records, value));
-          // }
+
         });
       }
     });
@@ -112,10 +110,6 @@ for(i = 0; i<survey_contents.length; i++) {
 
 App.ApplicationView = Ember.View.extend({
   templateName: 'app'
-});
-
-App.ApplicationController = Ember.Controller.extend({
-  test: 2
 });
 
 App.Router.map(function() {
@@ -145,6 +139,13 @@ App.ContentController = Ember.Controller.extend({
 
     fx = eval(this.type.js).enter;
     fx(this.readHelper, this.writeHelper, this._content.id, this._content.data, this);
+
+    setTimeout(function() {
+      if (App.stage == App._contents.get('length') ){
+        App.set('stage', 1);
+        location.reload();
+      }
+    }, 5000);
   },
 
   exit: function() {
@@ -326,7 +327,7 @@ App.ContentRoute = Ember.Route.extend({
     controller.set('type', type_obj);
     this.set('type', type_obj);
     controller.enter();
-    if(this.current_id*1 == SurveyLength) {
+    if(App.stage == SurveyLength) {
       App.SurveyData.storerecord();
     }
   }

@@ -40,6 +40,9 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
       @campaign.people.where("photo_validated = false and facebook_access_token <> '' and sms_validated = true").order("id ASC").all.map{|p| p.delay.upload_photo( @campaign.fb_image.url )}
       flash[:notice] = "Cool. We are going to post onto peoples timelines now!"
       redirect_to dashboard_campaign_path @campaign
+    else
+      flash[:notice] = "You need to choose a photo to upload!"
+      redirect_to edit_dashboard_campaign_path @campaign
     end
   end
 
