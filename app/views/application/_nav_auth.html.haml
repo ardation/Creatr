@@ -1,39 +1,39 @@
-.container.navbar-wrapper
-  .navbar.navbar-inverse
-    .navbar-inner
-      .container
-        %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.brand{:href => "#"} +Creator
-        .nav-collapse.collapse
-          %ul.nav
-            %li{:class => ("active" if params[:action] == "index")}
-              %a{:href => "/ "}
-                %i{:class => "icon-home icon-white"}
-                Home
-            %li{:class => ("active" if params[:action] == "features")}
-              %a{:href => "/features"}
-                %i{:class => "icon-star icon-white"}
-                Features
-            %li{:class => ("active" if params[:action] == "pricing")}
-              %a{:href => "/pricing"}
-                %i{:class => "icon-shopping-cart icon-white"}
-                Pricing
-            %li{:class => ("active" if params[:action] == "testimonials")}
-              %a{:href => "/testimonials"}
-                %i{:class => "icon-user icon-white"}
-                Testimonials
-          .pull-right
-            %ul.nav
-              - if current_member.activated
-                %li{:class => ("active" if params[:action] == "dashboard")}
-                  %a{:href => "/dashboard"}
-                    %i{:class => "icon-th-large icon-white"}
-                    Dashboard
-              %li
-                %form.navbar-form
-                  %a.btn.btn-info{:href => destroy_user_session_path}
-                    %strong +Creator
-                    Logout
+#topbar
+  .container
+    .row
+      .pull-right
+        %a{:href => "/dashboard"}
+          Open Dashboard
+        or
+        %a{:href => destroy_user_session_path}
+          Sign out
+%header
+  .container.navigation
+    .row
+      .logo.span3
+        %a.brand{:href => "#"}
+          %i.icon-tint
+          Creatr
+          %div
+            beta
+      .span9
+        .navbar.navbar-inverse
+          .navbar-inner
+            %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            .nav-collapse.collapse
+              %ul.nav
+                %li{:class => ("active" if params[:action] == "index")}
+                  %a{:href => "/ "}
+                    Home
+                %li{:class => ("active" if params[:action] == "tour")}
+                  %a{:href => "/tour"}
+                    Tour
+                %li{:class => ("active" if params[:action] == "pricing")}
+                  %a{:href => "/pricing"}
+                    Pricing
+                %li
+                  %a{:href => "http://help.creatr.io"}
+                    Support

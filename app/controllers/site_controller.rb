@@ -4,7 +4,7 @@ class SiteController < ApplicationController
 
 	end
 
-	def features
+	def tour
 
 	end
 

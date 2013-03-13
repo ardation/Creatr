@@ -12,11 +12,95 @@
       hide_tab: "true"
     });
   }
-.container.footerClass
-  %hr
-    %footer
-      %a{href:"#", onClick:"script: Zenbox.show(); return false;"}Support
-      %p.pull-right
-        ©
-        %a{:href => "http://www.cru.org"} Cru
-        = DateTime.now.strftime("%Y")
+#footer
+  / start: Container
+  .container
+    / start: Row
+    .row
+      / start: About
+      .span3
+        %h3 GodMedia
+        %p
+          %i.icon-map-marker
+          71 Harrow Street
+          %br
+          Dunedin, Otago, NZ 9010
+        %p
+          %i.icon-phone
+          Phone: 64 21 589 083
+        %p
+          %i.icon-envelope
+          Email: creatr@godmedia.org.nz
+        %p
+          %i.icon-globe
+          Web: godmedia.org.nz
+      / end: About
+      / start: Latest Tweets
+      .span6
+        %h3 Latest Tweets
+        %ul#twitter
+          %li
+            %span
+              Marcin Szeląg — Guy Kawasaki : top 10 błędów popełnianych przez startupy. (via @
+              %a{:href => "http://twitter.com/Pocket"}> Pocket
+              )
+              %a{:href => "http://t.co/Kxhulmy4Aa"} http://t.co/Kxhulmy4Aa
+            %br/
+            %b
+              %a{:href => "http://twitter.com/lukaszholeczek/statuses/310741852561227776"} 1 day ago
+          %li
+            %span
+              @
+              %a{:href => "http://twitter.com/mike_arney"} mike_arney
+              thanks!
+            %br/
+            %b
+              %a{:href => "http://twitter.com/lukaszholeczek/statuses/310721773777858560"} 1 day ago
+          %li
+            %span
+              I need your votes
+              %a{:href => "https://t.co/lmAONebWPV"} https://t.co/lmAONebWPV
+              \#forrst #help #votes
+            %br/
+            %b
+              %a{:href => "http://twitter.com/lukaszholeczek/statuses/308482769292496897"} 7 days ago
+        .clear
+      / end: Latest Tweets
+      / start: Follow Us
+      .span3
+        %h3 Follow Us
+        #social-r.tooltips
+          %a.facebook{:href => "https://www.facebook.com/pages/GodMedia/242430162465506", :rel => "tooltip", :title => "Facebook"} Facebook
+          %a.github{:href => "https://github.com/Godmedia/", :rel => "tooltip", :title => "Github"} Github
+          %a.googleplus{:href => "#", :rel => "tooltip", :title => "Google Plus"} Google Plus
+          %a.twitter{:href => "https://twitter.com/god_media", :rel => "tooltip", :title => "Twitter"} Twitter
+          %a.vimeo{:href => "#", :rel => "tooltip", :title => "Vimeo"} Vimeo
+      / end: Follow Us
+    / end: Row
+  / end: Container
+#under-footer.hidden-tablet.hidden-phone
+  / start: Container
+  .container
+    / start: Row
+    .row
+      / start: Footer Menu Logo
+      .span2
+        #under-footer-logo
+          %a.brand{:href => "#"}
+            %i.icon-tint
+            Creatr
+            %span> {beta}
+      / end: Footer Menu Logo
+      / start: Footer Menu Links
+      .span9
+        #under-footer-copyright
+          ©
+          %a{:href => "http://www.cru.org"} Cru
+          = DateTime.now.strftime("%Y.")
+          Designed by
+          %a{:href => "http://godmedia.org.nz"} GodMedia
+          in New Zealand
+          %img{:alt => "Poland", :src => "img/poland.png", :style => "margin-top:-4px"}/
+      .span1
+        #under-footer-back-to-top
+          %a{:href => "#"}

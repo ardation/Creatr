@@ -1,35 +1,40 @@
-.container.navbar-wrapper
-  .navbar.navbar-inverse
-    .navbar-inner
-      .container
-        %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.brand{:href => "#"} +Creator
-        .nav-collapse.collapse
-          %ul.nav
-            %li{:class => ("active" if params[:action] == "index")}
-              %a{:href => "/ "}
-                %i{:class => "icon-home icon-white"}
-                Home
-            %li{:class => ("active" if params[:action] == "features")}
-              %a{:href => "/features"}
-                %i{:class => "icon-star icon-white"}
-                Features
-            %li{:class => ("active" if params[:action] == "pricing")}
-              %a{:href => "/pricing"}
-                %i{:class => "icon-shopping-cart icon-white"}
-                Pricing
-            %li{:class => ("active" if params[:action] == "testimonials")}
-              %a{:href => "/testimonials"}
-                %i{:class => "icon-user icon-white"}
-                Testimonials
-            - if current_member.nil?
-              %li{:class => ("active" if params[:action] == "signup" or params[:action] == "signup_fb")}
-                %a{:href => "/signup"}
-                  %i{:class => "icon-map-marker icon-white"}
-                  Sign Up
-          %form.navbar-form.pull-right
-            %form.navbar-form.pull-right
-              %a.btn.btn-info{:href => member_omniauth_authorize_path(:facebook)} Sign in with Facebook
+#topbar
+  .container
+    .row
+      .pull-right
+        - if current_member.nil?
+          %a{:href => member_omniauth_authorize_path(:facebook)}
+            Sign in
+          or
+          %a{:href => member_omniauth_authorize_path(:facebook)}
+            Create an Account
+%header
+  .container.navigation
+    .row
+      .logo.span3
+        %a.brand{:href => "#"}
+          %i.icon-tint
+          Creatr
+          %div
+            beta
+      .span9
+        .navbar.navbar-inverse
+          .navbar-inner
+            %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse"}
+              %span.icon-bar
+              %span.icon-bar
+              %span.icon-bar
+            .nav-collapse.collapse
+              %ul.nav
+                %li{:class => ("active" if params[:action] == "index")}
+                  %a{:href => "/ "}
+                    Home
+                %li{:class => ("active" if params[:action] == "tour")}
+                  %a{:href => "/tour"}
+                    Tour
+                %li{:class => ("active" if params[:action] == "pricing")}
+                  %a{:href => "/pricing"}
+                    Pricing
+                %li
+                  %a{:href => "http://help.creatr.io"}
+                    Support

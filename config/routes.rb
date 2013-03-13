@@ -63,7 +63,7 @@ FlamingWight::Application.routes.draw do
     match ":campaign_token/person/:token/mobile" => 'verify#update_mobile'
   end
   root :to => "site#index"
-  match 'features' => "site#features"
+  match 'tour' => "site#tour"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
   match 'signup' => 'site#signup'

@@ -1,10 +1,14 @@
 !!!
 %html
   %head
-    %title Creatr+
+    %title Creatr
     = stylesheet_link_tag    "application", :media => "all"
     = csrf_meta_tags
-    = javascript_include_tag "application"
+    = javascript_include_tag "creatr_site/index"
+    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans:400,700", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Serif", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Boogaloo", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Economica:700,400italic", :rel => "stylesheet", :type => "text/css"}/
   %body
     -if current_member.nil?
       =render 'nav'

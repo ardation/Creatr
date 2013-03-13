@@ -1,26 +1,83 @@
-.jumbotron
+#page-title
+  #page-title-inner
+    .container
+      %p.overview
+        Creatr organizes & monitors your digital outreaches so you can focus on connecting with people.
+        %a{href: "/tour"} Find out how Creatr will make your life easier »
+#wrapper
   .container
-    .hero-unit
-      %h1 +Creator
-      %p This tool is for ministries around the world to create surveys and digital outreaches
-      %p
-        - if current_member.nil?
-          = link_to "Sign up now!", '/signup', class: "btn btn-large btn-primary"
-.container
-  / Main hero unit for a primary marketing message or call to action
-  .row
-    .span4
-      %h2 Features
-      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      %p
-        %a.btn{:href => "/features"} View details »
-    .span4
-      %h2 Pricing
-      %p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-      %p
-        %a.btn{:href => "/pricing"} View details »
-    .span4
-      %h2 Testimonials
-      %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-      %p
-        %a.btn{:href => "/testimonials"} View details »
+    .slider-wrapper
+      #da-slider.da-slider
+        .da-slide
+          %h2 Modern & Clean
+          %p Create beautiful campaigns with a pre-made selection of themes or roll your own using our awesome theme roller. Too busy to make a theme? Hire us to get your campaign looking sweet!
+          %a.da-link{:href => "/tour"} Read more
+          .da-img
+            %img{:alt => "image01", :src => "/img/parallax-slider/imac.png"}/
+        .da-slide
+          %h2 Responsive Design
+          %p Our theming system comes with Twitter's Bootstrap built in. Start creating campaigns that work on mobiles, tablets, laptops and everything in between.
+          %a.da-link{:href => "/tour"} Read more
+          .da-img
+            %img{:alt => "image02", :src => "/img/parallax-slider/ipad-mini.png"}/
+        .da-slide
+          %h2 World Ready
+          %p Creatr is built to handle thousands of connections throughout the world on hundreds of different devices. All this infrastructure engineered to take the worry off you. Get started today!
+          %a.da-link{:href => "/tour"} Read more
+          .da-img{:style => "margin-left: -150px"}
+            %img{:alt => "image03", :src => "/img/parallax-slider/mapa.png"}/
+        .da-slide
+          %h2 HTML5+CSS3
+          %p Creatr makes use of the latest web standards. This helps your campaigns looks gorgeous on the latest devices and gracefully degrade automatically on older browsers to maximize your outreach potential.
+          %a.da-link{:href => "/tour"} Read more
+          .da-img{:style => "margin-left: -100px"}
+            %img{:alt => "image04", :src => "/img/parallax-slider/html5.png"}/
+        %nav.da-arrows
+          %span.da-arrows-prev
+          %span.da-arrows-next
+    %hr.clean/
+    .row
+      .span3
+        .box
+          %i.icon-bullhorn
+          %h3 Get the word out
+          %p
+            Gather vital information for follow-up by using Facebook, Twitter and/ or Google+ with your campaigns. Leverage these connections using our incredible social addons.
+          .clear
+      .span3
+        .box
+          %i.icon-bolt
+          %h3 Theme Roller
+          %p
+            Making your campaigns look the part is as easy as pie! Either choose a pre‑designed theme, or customise your creation by starting from the ground up by coding your own.
+          .clear
+      .span3
+        .box
+          %i.icon-comments-alt
+          %h3 SMS Messaging
+          %p
+            Get connected with your audience by getting in touch with them. Use our built in SMS tools to send them a message and increase your audiences participation!
+          .clear
+      .span3
+        .box
+          %i.icon-star-empty
+          %h3 Dynamic Content
+          %p
+            Questions not enough? Creatr is flexible enough to work with a whole range of different workflows so jazz up your campaigns by popping in videos, articles, maps and more!
+          .clear
+    %hr/
+    .title
+      %h3 Partners
+    .clients-carousel
+      %ul.slides.clients
+        %li
+          %img{:alt => "", :src => "/img/logos/1.png"}/
+        %li
+          %img{:alt => "", :src => "/img/logos/2.png"}/
+        %li
+          %img{:alt => "", :src => "/img/logos/3.png"}/
+        %li
+          %img{:alt => "", :src => "/img/logos/4.png"}/
+        %li
+          %img{:alt => "", :src => "/img/logos/5.png"}/
+    %hr.clean/

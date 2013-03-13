@@ -59,7 +59,7 @@ FlamingWight::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w[application.js application.css dashboard/index.js dashboard.css campaign_frontend/index.js campaign_frontend/index.css campaign_frontend/iframe.js campaign_app/index.css campaign_app/index.js .svg .eot .woff .ttf]
+  config.assets.precompile += %w[application.js application.css dashboard/index.js dashboard.css campaign_frontend/index.js campaign_frontend/index.css campaign_frontend/iframe.js campaign_app/index.css campaign_app/index.js .svg .eot .woff .ttf creatr_site/index.js]
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
