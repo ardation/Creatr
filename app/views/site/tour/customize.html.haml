@@ -1,0 +1,49 @@
+= render 'site/tour/nav'
+#page-title
+  #page-title-inner
+    .container
+      .overview
+        Customize.
+        %br
+        %small Increase engagement by making smart customizations.
+.container
+  .row
+    .span8.offset2
+      .row-fluid
+        .span3.center
+          %i.icon-beaker.circle-color.big
+        .span9
+          %h3
+            Custom Domains
+          %p
+            Use a custom domain like
+            %a{href:"#"} campaign.example.com
+            %span>. Using a custom domain helps people recognize your ministry and increases people trust in your campaign. Custom domains are configured using a simple change to your DNS records.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-mobile-phone.circle-color.big
+        .span9
+          %h3
+            Mobile Validation
+          %p
+            Get Data integrity with Mobile Validation. Send your users an SMS that contains a Unique Code then use our app to validate the unique code. This guarantees that user submissions are genuine, leaving the door open for you to connect with them.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-camera-retro.circle-color.big
+        .span9
+          %h3
+            Photobooth Addon
+          %p
+            An awesome addon that lets you take a photo of your user once they've validated their mobile. Creatr takes this photo and posts it onto any social networks your user has let us access. This is a neat way to interact with your users and leave them with a lasting impression of your ministry.
+      = render "site/tour/signup"
+      %hr
+      .row-fluid
+        .span12
+          %i.icon-chevron-left &nbsp;
+          %a{href:"connect"} Previous: Connect
+          .pull-right
+            %a{href:"review"} Next: Review
+            &nbsp;
+            %i.icon-chevron-right

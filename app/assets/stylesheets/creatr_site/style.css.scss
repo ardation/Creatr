@@ -8,7 +8,7 @@
 }
 
 body {
-  font-family: 'Droid Sans';
+  font-family: 'Droid Sans', arial, serif;
   background: rgb(255, 255, 255);
   /* Old browsers */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -184,8 +184,8 @@ a {
   -webkit-box-shadow: 0px 1px 1px rgba(223, 85, 38, 0.35);
   -moz-box-shadow: 0px 1px 1px rgba(223, 85, 38, 0.35);
   box-shadow: 0px 1px 1px rgba(223, 85, 38, 0.35);
-  i {
-    margin: -16px 0px;
+  a, a:link, a:visited {
+    color:#ddd;
   }
 }
 
@@ -941,6 +941,13 @@ html[xmlns] .slides {
 }
 
 .big {
+  background: #fff !important;
+  color:#fd9f8f;
+  font-size:48px;
+  text-align:center;
+  line-height:48px;
+  width:48px !important;
+  height:48px !important;
   border: 20px solid #fff !important;
 }
 
@@ -2636,8 +2643,30 @@ li.current {
   a, a:link {
     color: #eee;
   }
+  small {
+    font-size:15px;
+    line-height:18px;
+  }
 }
-
+.center {
+  text-align: center;
+}
+.tour {
+  font-family: "Georgia", "Times New Roman", Times, sans-serif;
+  border-top:1px #ddd solid;
+  padding:15px 0 10px 0;
+  text-align: center;
+  font-size:14px;
+  margin-top:5px;
+  i {
+    font-size:12px;
+    color: #aaa;
+    padding:0 6px;
+  }
+  a.active {
+    color:#999;
+  }
+}
 #topbar {
   background-color: #f3705a;
   color:#d9d9d9;

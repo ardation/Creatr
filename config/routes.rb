@@ -64,6 +64,7 @@ FlamingWight::Application.routes.draw do
   end
   root :to => "site#index"
   match 'tour' => "site#tour"
+  match 'tour/:page' => "site#tour"
   match 'testimonials' => "site#testimonials"
   match 'pricing' => "site#pricing"
   match 'signup' => 'site#signup'

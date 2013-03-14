@@ -1,0 +1,14 @@
+.container
+  .row
+    .tour
+      %a{href: "overview", :class => ("active" if params[:page] == "overview")} Overview
+      %i.icon-double-angle-right
+      %a{href: "create", :class => ("active" if params[:page] == "create")} Create
+      %i.icon-double-angle-right
+      %a{href: "design", :class => ("active" if params[:page] == "design")} Design
+      %i.icon-double-angle-right
+      %a{href: "connect", :class => ("active" if params[:page] == "connect")} Connect
+      %i.icon-double-angle-right
+      %a{href: "customize", :class => ("active" if params[:page] == "customize")} Customize
+      %i.icon-double-angle-right
+      %a{href: "review", :class => ("active" if params[:page] == "review")} Review

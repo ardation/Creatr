@@ -1,0 +1,59 @@
+= render 'site/tour/nav'
+#page-title
+  #page-title-inner
+    .container
+      .overview
+        Connect.
+        %br
+        %small Move user info where it needs to go.
+.container
+  .row
+    .span8.offset2
+      .row-fluid
+        .span3.center
+          %i.icon-pushpin.circle-color.big
+        .span9
+          %h3
+            Data Points
+          %p
+            Creatr makes it easy to use a range of CRMs and even program your own solutions. Use WebHooks to get programatic access to your data (Our system will post a range of requests to an endpoint that you specify). If there is a CRM that you use that we don't support, get in touch with us by starting a discussion&nbsp;
+            %a{href:"http://help.creatr.io"}> here
+            \.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-globe.circle-color.big
+        .span9
+          %h3
+            MissionHub
+          %p
+            %a{href: "http://www.missionhub.com/"} MissionHub
+            is a first class citizen in our app and is our team's CRM of choice. Features such as campaigns that can feed directly into any organization you have access to, automatically syncing changes to your campaign on MissionHub. Our team is able to provide additional support for ministries that make use of MissionHub.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-facebook.circle-color.big
+        .span9
+          %h3
+            Facebook Connect
+          %p
+            Social networking is an essential way for people to express themselves and communicate with others. Leverage your users connection with Facebook to both propagate your campaign, and connect with them effectively by sharing content with them.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-comments.circle-color.big
+        .span9
+          %h3
+            SMS Messaging
+          %p
+            Getting in touch is important. Use SMS messages to connect with your users as part of your campaign flow. Creatr makes use of Twilio to send SMSes around the world. Creatr also makes use of Messagedly, a service that lets you host your own gateway using android devices.
+      = render "site/tour/signup"
+      %hr
+      .row-fluid
+        .span12
+          %i.icon-chevron-left &nbsp;
+          %a{href:"design"} Previous: Design
+          .pull-right
+            %a{href:"customize"} Next: Customize
+            &nbsp;
+            %i.icon-chevron-right

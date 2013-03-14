@@ -5,7 +5,15 @@ class SiteController < ApplicationController
 	end
 
 	def tour
-
+    if params[:page].blank?
+      redirect_to '/tour/overview'
+      return
+    end
+    if template_exists? "site/tour/#{params[:page]}"
+      render "site/tour/#{params[:page]}"
+    else
+      redirect_to '/tour/overview'
+    end
 	end
 
 	def testimonials

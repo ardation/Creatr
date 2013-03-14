@@ -1,0 +1,46 @@
+= render 'site/tour/nav'
+#page-title
+  #page-title-inner
+    .container
+      .overview
+        Review.
+        %br
+        %small Collect stats that'll keep tabs on your current campaigns &amp; help you shape future ones.
+.container
+  .row
+    .span8.offset2
+      .row-fluid
+        .span3.center
+          %i.icon-bar-chart.circle-color.big
+        .span9
+          %h3
+            In-Depth Statistics
+          %p
+            We collect stats about almost everything. From how much time users are spending on each step right through to how long a user watched a video in your campaigns. Stats help you make wise decisions about future campaigns, so its our goal to show you relevant stats when and where you need it.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-dashboard.circle-color.big
+        .span9
+          %h3
+            Dashboard Overview
+          %p
+            Quickly see the state of all your campaigns as soon as you open up Creatr. The dashboard reflects whats happening with your campaigns, how many people have flowed through your campaigns and the various routes they took. All of this available simply by signing in.
+      %hr
+      .center
+        %h3.muted Coming Features
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-star-empty.circle-color.big
+        .span9
+          %h3
+            A/B Testing
+          %p
+            Thought of things you'd like to try with your campaigns? Use A/B Testing to deploy changes to your campaigns and review their effectiveness, and then apply them to live campaigns.
+      = render "site/tour/signup"
+      %hr
+      .row-fluid
+        .span12
+          %i.icon-chevron-left &nbsp;
+          %a{href:"customize"} Previous: Customize

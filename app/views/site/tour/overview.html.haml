@@ -1,0 +1,58 @@
+= render 'site/tour/nav'
+#page-title
+  #page-title-inner
+    .container
+      .overview
+        We’ve built a simple outreach application that we think you and your ministry will love. Take a few minutes and learn how Creatr will streamline your digital outreaches.
+.container
+  .row
+    .span8.offset2
+      .row-fluid
+        .span3.center
+          %i.icon-lightbulb.circle-color.big
+        .span9
+          %h3
+            %a{href:"create"} Create
+          %h3.muted Let your imagination run and create some amazing campaigns.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-leaf.circle-color.big
+        .span9
+          %h3
+            %a{href:"design"} Design
+          %h3.muted Get your look pixel perfect with custom themes.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-link.circle-color.big
+        .span9
+          %h3
+            %a{href:"connect"} Connect
+          %h3.muted Move user info where it needs to go.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-heart-empty.circle-color.big
+        .span9
+          %h3
+            %a{href:"customize"} Customize
+          %h3.muted Increase engagement by making smart customizations.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-tasks.circle-color.big
+        .span9
+          %h3
+            %a{href:"review"} Review
+          %h3.muted Collect stats that'll keep tabs on your current campaigns.
+      = render "site/tour/signup"
+      %hr
+      .row-fluid
+        .span12
+          .pull-right
+            %a{href:"create"}
+              Next: Create
+            &nbsp;
+            %i.icon-chevron-right
+

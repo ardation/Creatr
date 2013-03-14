@@ -1,0 +1,66 @@
+= render 'site/tour/nav'
+#page-title
+  #page-title-inner
+    .container
+      .overview
+        Create.
+        %br
+        %small We've made the creatr flexible enough for a huge range of applications. Let your imagination run.
+.container
+  .row
+    .span8.offset2
+      .row-fluid
+        .span3.center
+          %i.icon-list-ol.circle-color.big
+        .span9
+          %h3
+            Guided Creation Wizard
+          %p
+            The entire process from fit to finish happens in a simple guided wizard. The campaign creator scales in complexity depending on what you feel comfortable with. The first time you go through there is even an awesome tour, so sit back, relax and get your imagination on.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-edit.circle-color.big
+        .span9
+          %h3
+            Trial and Error
+          %p
+            Get creative. Creatr encourages you to make changes to your outreach in order to get the perfect result. Try reordering content, modify the flow, edit sms messages. Creatr leaves you in control of your outreach, and even lets you edit live campaigns.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-copy.circle-color.big
+        .span9
+          %h3
+            Mulitipage Q&A
+          %p
+            The major problem with most surveys (beyond the fact that they tend to look icky) is that all the content is on one page. To make it easier for your users, Creatr splits each piece of content onto separate pages allowing them to focus on one thing at a time.
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-gift.circle-color.big
+        .span9
+          %h3
+            Content Types
+          %p
+            = "Creatr lets you add a huge range of content to your campaigns. Currently there are #{ContentType.count} different types of content available. From multichoice questions, short answers, articles, videos with more types being added. ( If you have a great idea for content that would be useful to you, get in touch with our team by starting a discussion"
+            %a{href: "http://help.creatr.io"} here
+            )
+      %hr
+      .row-fluid
+        .span3.center
+          %i.icon-sitemap.circle-color.big
+        .span9
+          %h3
+            Flow Control
+          %p Sometimes you'll need to show content based on interactions with previous content. Use our simple flow control language to get precise control of the content that your users see.
+      = render "site/tour/signup"
+      %hr
+      .row-fluid
+        .span12
+          %i.icon-chevron-left &nbsp;
+          %a{href:"overview"} Previous: Overview
+          .pull-right
+            %a{href:"design"} Next: Design
+            &nbsp;
+            %i.icon-chevron-right
