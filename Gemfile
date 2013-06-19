@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+ruby "2.0.0"
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.13'
 gem 'pg'
 gem 'devise'
 gem 'omniauth'
@@ -24,9 +24,7 @@ gem 'sprockets'
 gem 'sass-rails',   '~> 3.2.3'
 gem 'bootstrap-sass', '~> 2.1.1.0'
 gem 'font-awesome-sass-rails'
-
-
-  gem 'compass-rails'
+gem 'compass-rails'
 
 group :assets do
   gem 'hamlbars', '~> 2.0'
@@ -66,7 +64,7 @@ gem 'highcharts-rails'
 gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"
 
 gem 'stripe'
-gem 'mandrill', git: "git://github.com/cyu/mandrill.git"
+gem 'mandrill', :git => "git://github.com/cyu/mandrill.git"
 
 gem "jquery-fileupload-rails"
 
@@ -81,7 +79,7 @@ gem 'rabl-rails'
 gem 'ejs'
 
 gem 'MissionHub'
-gem 'newrelic_rpm', git: "git://github.com/newrelic/rpm.git"
+gem 'newrelic_rpm'
 gem 'delayed_job_active_record'
 
 gem 'pusher'
