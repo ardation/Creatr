@@ -47,7 +47,7 @@ App.Store = DS.Store.extend({
 });
 
 App.setProperties({
-    appId: 367941839912657
+    appId: 344474969028297
 });
 
 App._contents = Ember.ArrayProxy.create({content: Ember.A(survey_contents)});
