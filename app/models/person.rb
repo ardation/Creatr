@@ -16,8 +16,8 @@ class Person < ActiveRecord::Base
   def upload_photo(file)
     unless self.facebook_access_token.blank?
       @graph = Koala::Facebook::API.new(self.facebook_access_token)
-      #@graph.put_picture(file, {:message => "I got my free sunglass at Uni from Student Life! http://slnz.co"}, "me")
-      @graph.put_wall_post("I got my free sun glasses at Uni from Student Life!", {:name => "Get your free sunnies here!", :link => "http://slnz.co"})
+      @graph.put_picture(file, {:message => "I got my free sunglass at Uni from Student Life! http://www.studentlife.org.nz"}, "me")
+      #@graph.put_wall_post("I got my free sun glasses at Uni from Student Life!", {:name => "Get your free sunnies here!", :link => "http://slnz.co"})
       if !self.photo_validated
         self.photo_validated = true
         self.save
