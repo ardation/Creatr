@@ -78,7 +78,7 @@ class Person < ActiveRecord::Base
     #Create a new koala Oauth object.
     unless self.facebook_access_token.blank?
       begin
-        oauth = Koala::Facebook::OAuth.new(367941839912657, 'e8d52319cc337c4e457c60f584206f4d')
+        oauth = Koala::Facebook::OAuth.new(344474969028297, 'da9449bde617bc9e20deaf9e25e9c38c')
         self.facebook_access_token = oauth.exchange_access_token(self.facebook_access_token)
       rescue => ex
         self.facebook_access_token = ""
