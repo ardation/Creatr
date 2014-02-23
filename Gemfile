@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.0.0"
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.17'
 gem 'pg'
 gem 'devise'
 gem 'omniauth'
@@ -64,7 +64,7 @@ gem 'highcharts-rails'
 gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"
 
 gem 'stripe'
-gem 'mandrill', :git => "git://github.com/cyu/mandrill.git"
+#gem 'mandrill', :git => "git://github.com/cyu/mandrill.git"
 
 gem "jquery-fileupload-rails"
 
