@@ -88,6 +88,14 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def first_name
+     read_attribute(:first_name).try(:titleize)
+  end
+
+  def last_name
+     read_attribute(:last_name).try(:titleize)
+  end
+
   private
 
   def generate_code
