@@ -20,6 +20,7 @@ end
 
 group :production do
   gem 'hirefireapp'
+  gem 'rails_12factor'
 end
 
 gem 'sprockets'
