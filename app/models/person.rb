@@ -37,16 +37,18 @@ class Person < ActiveRecord::Base
       end
 
       unless self.facebook_access_token.blank?
+        begin
+          #get access token
+          @person_graph = Koala::Facebook::API.new(self.facebook_access_token)
 
-        #get access token
-        @person_graph = Koala::Facebook::API.new(self.facebook_access_token)
+          #like photo
+          @person_graph.put_like(photo["post_id"])
 
-        #like photo
-        @person_graph.put_like(photo["post_id"])
-
-        #share
-        @person_graph.put_picture(self.photo.file.url, {message: "I got my free sunnies at uni from Student Life! www.slnz.co"})
-
+          #share
+          @person_graph.put_picture(self.photo.file.url, {message: "I got my free sunnies at uni from Student Life! www.slnz.co"})
+        rescue
+          #FB Token Invalid
+        end
       end
     end
   end
