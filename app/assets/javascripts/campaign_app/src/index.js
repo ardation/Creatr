@@ -246,9 +246,6 @@ $('#photo-booth-ios6').live('pageinit', function() {
     url: '/api/'+$.jStorage.get($.jStorage.get('current')).campaign_code+'/fb_image/' +  window.photo_sms_code,
     dataType: 'json',
     send: function (e, data) {
-      $.mobile.changePage('#photo-booth-wait', { transition: "slide"})
-    },
-    done: function (e, data) {
       $.mobile.changePage('#photo-booth-thanks', { transition: "slide"})
     },
     error: function(data) {
