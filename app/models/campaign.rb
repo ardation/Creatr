@@ -8,7 +8,7 @@ class Campaign < ActiveRecord::Base
   belongs_to :theme
   belongs_to :organisation
   accepts_nested_attributes_for :contents, :reject_if => :all_blank, :allow_destroy => true
-  attr_accessible :name, :short_name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias, :organisation_id, :foreign_id, :fb_image, :fb_image_file_name
+  attr_accessible :name, :short_name, :contents, :start_date, :finish_date, :theme_id, :sms_template, :contents_attributes, :cname_alias, :organisation_id, :foreign_id, :fb_image, :fb_image_file_name, :fb_page
   has_attached_file :fb_image,
     :path => ":class/:id/fb_image/:style/:filename",
     :default_url => '/images/:attachment/missing_:style.gif'

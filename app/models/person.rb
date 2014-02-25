@@ -9,30 +9,50 @@ class Person < ActiveRecord::Base
   after_create :send_sms
   validates_presence_of :first_name, :campaign, :mobile
   validates_uniqueness_of :mobile, :scope => :campaign_id
-
+  has_one :photo, dependent: :destroy
   scope :find_by_full_name, lambda {|full_name|
   { :conditions => ["people.sms_validated = false and (upper(people.first_name) LIKE upper(?) or upper(people.last_name) LIKE upper(?))", "%#{full_name.split(' ').first}%", "%#{full_name.split(' ').last}%"] }}
 
   def upload_photo(file)
-    unless self.facebook_access_token.blank?
-      @graph = Koala::Facebook::API.new(self.facebook_access_token)
-      #@graph.put_picture(file, {:message => "I got my free sunglass at Uni from Student Life! http://www.studentlife.org.nz"}, "me")
-      @graph.put_wall_post("I got my free sun glasses at Uni from Student Life!", {:name => "Get your free sunnies here!", :link => "http://www.studentlife.org.nz"})
+    @photo = Photo.new({person: self})
+    @photo.file = file
+    @photo.person = self
+    @photo.save
+  end
+
+  def fb_sync
+    unless self.photo.blank? and self.campaign.fb_page.blank?
+
+      #get page permissions
+      @member_graph = Koala::Facebook::API.new(self.campaign.members.first.token)
+      @page_token = @member_graph.get_page_access_token(self.campaign.fb_page)
+      @page_graph = Koala::Facebook::API.new(@page_token)
+
+      #publish photo on page
+      photo = @page_graph.put_picture(self.photo.file.url, {message: "#{self.first_name} got #{if self.gender == "male" then "his" else "her" end} free sunnies at uni from us!"})
+
       if !self.photo_validated
-        self.photo_validated = true
-        self.save
+        #self.photo_validated = true
+        #self.save
+      end
+
+      unless self.facebook_access_token.blank?
+
+        #get access token
+        @person_graph = Koala::Facebook::API.new(self.facebook_access_token)
+
+        #like photo
+        @person_graph.put_like(photo["post_id"])
+
+        #share
+        @person_graph.put_picture(self.photo.file.url, {message: "I got my free sunnies at uni from Student Life! www.slnz.co"})
+
       end
     end
   end
 
   def sms_validate
     self.sms_validated = true
-    self.save
-  end
-
-  def photo_validate
-    self.sms_validated = true
-    self.photo_validated = true
     self.save
   end
 

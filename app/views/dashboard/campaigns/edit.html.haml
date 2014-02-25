@@ -1,15 +1,19 @@
 - content_for :masthead do
-  %h2 Campaign Editor
-  %p= @campaign.name
+	%h2 Campaign Editor
+	%p= @campaign.name
 
 %h3= "#{pluralize(@campaign.people.where("photo_validated = false and facebook_access_token <> '' and sms_validated = true").count, "person")} can recieve a photo!"
 %hr
 = form_tag("/dashboard/campaigns/#{@campaign.id}/fb_image", method:"POST", enctype:"multipart/form-data") do
-  %input{type:"file", name:"file"}
-  %input{type:"submit"}
+	%input{type:"file", name:"file"}
+	%input{type:"submit"}
 
 %h3= "#{pluralize(@campaign.people.where(sms_validated: true, synced: false).count, "person")} to sync!"
 = link_to "Sync these users", "/dashboard/campaigns/#{@campaign.id}/sync"
+%hr
+= semantic_form_for [:dashboard, @campaign], builder: FormtasticBootstrap::FormBuilder do |f|
+	= f.input :fb_page, as: :select, collection: @pages
+	= f.submit
 %hr
 = link_to 'Show', dashboard_campaign_path(@campaign)
 \|

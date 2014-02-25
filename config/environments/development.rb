@@ -1,3 +1,6 @@
+require 'dotenv'
+Dotenv.load
+
 FlamingWight::Application.configure do
 
   config.paperclip_defaults = {

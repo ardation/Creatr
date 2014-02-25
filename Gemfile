@@ -13,6 +13,9 @@ gem 'resque'
 
 group :development do
   gem "rails-erd"
+  gem "better_errors"
+  gem 'dotenv-rails'
+  gem "binding_of_caller"
 end
 
 group :production do
@@ -39,7 +42,7 @@ gem 'ember-rails', :path => "vendor/gems/ember-rails-0.9.2"
 gem "koala"
 gem 'twilio-ruby'
 
-gem 'unicorn'
+gem 'puma'
 
 gem 'jshintrb'
 
@@ -58,7 +61,7 @@ gem 'be_valid_asset'
 gem 'inherited_resources'
 gem 'tabletastic'
 gem 'formtastic'
-gem 'formtastic-plus-bootstrap'
+gem 'formtastic-bootstrap'
 gem 'highcharts-rails'
 
 gem 'ace-rails-ap', :path => "vendor/gems/ace-rails-ap-1.0.0"

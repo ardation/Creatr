@@ -19,7 +19,12 @@ class Member < ActiveRecord::Base
   validates_uniqueness_of :email, :uid
 
 	def self.find_for_facebook_oauth(auth)
-		return Member.where(:provider => auth.provider, :uid => auth.uid).first
+    @member = Member.where(:provider => auth.provider, :uid => auth.uid).first
+    unless @member.blank?
+      @member.token = auth.credentials.token
+      @member.save
+    end
+    @member
 	end
 
   def only_if_unconfirmed

@@ -52,6 +52,11 @@ class Dashboard::CampaignsController < Dashboard::ResourceController
     redirect_to dashboard_campaign_path @campaign
   end
 
+  def edit
+    @user_graph = Koala::Facebook::API.new(current_member.token)
+    @pages = @user_graph.get_connections('me', 'accounts').map{|r| [r["name"], r["id"]] }
+  end
+
   def export
 
   end

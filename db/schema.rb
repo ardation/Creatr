@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218215600) do
+ActiveRecord::Schema.define(:version => 20140224231227) do
 
   create_table "answers", :force => true do |t|
     t.integer  "content_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20130218215600) do
     t.string   "fb_image_content_type"
     t.integer  "fb_image_file_size"
     t.datetime "fb_image_updated_at"
+    t.string   "fb_page"
   end
 
   add_index "campaigns", ["cached_domain"], :name => "index_campaigns_on_cached_domain"
@@ -200,6 +201,16 @@ ActiveRecord::Schema.define(:version => 20130218215600) do
   create_table "permissions", :force => true do |t|
     t.integer "campaign_id"
     t.integer "member_id"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.integer  "person_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "sessions", :force => true do |t|

@@ -61,8 +61,19 @@ $('#page-home').live('pageinit', function() {
 	} else {
 		$.each(data, function(index, value) {
 			var campaign = $.jStorage.get(value);
-			$('#campaign-list').append( '<li class="ui-li ui-li-static ui-body-g m-campaign" data-campaign="'+campaign.campaign_code+'"><a href="index.html" data-role="button" data-icon="delete" class="m-campaign-delete" data-campaign="'+campaign.campaign_code+'">Delete</a><div class="ui-li-aside m-list-post-time m-campaign-data"><div class="m-icon-arrow"></div>'+campaign.total+' Complete<br><span>'+campaign.campaign_code+'</span></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+campaign.name+'</span><span class="m-list-author-handle">'+campaign.cached_domain+'</span></p></div></li>' )
-		});
+      if (window.navigator.onLine) {
+        $.ajax({
+          url:'/api/campaign_code/' + campaign.campaign_code,
+          dataType: 'json',
+          success: function(campaign) {
+            $.jStorage.set(campaign.campaign_code, campaign);
+            $('#campaign-list').append( '<li class="ui-li ui-li-static ui-body-g m-campaign" data-campaign="'+campaign.campaign_code+'"><a href="index.html" data-role="button" data-icon="delete" class="m-campaign-delete" data-campaign="'+campaign.campaign_code+'">Delete</a><div class="ui-li-aside m-list-post-time m-campaign-data"><div class="m-icon-arrow"></div>'+campaign.total+' Complete<br><span>'+campaign.campaign_code+'</span></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+campaign.name+'</span><span class="m-list-author-handle">'+campaign.cached_domain+'</span></p></div></li>' )
+          }
+        });
+      } else {
+			 $('#campaign-list').append( '<li class="ui-li ui-li-static ui-body-g m-campaign" data-campaign="'+campaign.campaign_code+'"><a href="index.html" data-role="button" data-icon="delete" class="m-campaign-delete" data-campaign="'+campaign.campaign_code+'">Delete</a><div class="ui-li-aside m-list-post-time m-campaign-data"><div class="m-icon-arrow"></div>'+campaign.total+' Complete<br><span>'+campaign.campaign_code+'</span></div><div class="m-list-prompt"><p class="m-list-author ui-li-desc"><span class="m-list-author-name">'+campaign.name+'</span><span class="m-list-author-handle">'+campaign.cached_domain+'</span></p></div></li>' )
+		  }
+    });
 		$('#campaign-list .m-campaign-delete').click(function () {
 			$.jStorage.deleteKey($(this).data('campaign'));
 			$(this).closest('li').slideUp(100, function() {

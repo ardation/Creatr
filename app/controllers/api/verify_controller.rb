@@ -66,7 +66,6 @@ class Api::VerifyController < ApplicationController
       elsif params[:file].blank?
         render :json => { :error => "No file attached. Try again!" }, :status => 422
       elsif !@person.photo_validated?
-        @person.photo_validate
         @person.upload_photo params[:file]
         render json: {validate: true}.to_json
       else
