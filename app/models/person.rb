@@ -21,7 +21,13 @@ class Person < ActiveRecord::Base
   end
 
   def fb_sync
-    unless self.photo.blank? and self.campaign.fb_page.blank?
+    unless self.photo.blank? or self.campaign.fb_page.blank? or self.photo_validated?
+
+      #mark db
+      if !self.photo_validated
+        self.photo_validated = true
+        self.save
+      end
 
       #get page permissions
       @member_graph = Koala::Facebook::API.new(self.campaign.members.first.token)
@@ -29,12 +35,7 @@ class Person < ActiveRecord::Base
       @page_graph = Koala::Facebook::API.new(@page_token)
 
       #publish photo on page
-      photo = @page_graph.put_picture(self.photo.file.url, {message: "#{self.first_name} got #{if self.gender == "male" then "his" else "her" end} free sunnies at uni from us!"})
-
-      if !self.photo_validated
-        #self.photo_validated = true
-        #self.save
-      end
+      photo = @page_graph.put_picture(self.photo.file.url, {message: "#{self.first_name} got #{if self.gender == "male" then "his" else "her" end} free sunnies at uni from us! www.slnz.co"})
 
       unless self.facebook_access_token.blank?
         begin
