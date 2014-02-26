@@ -38,6 +38,8 @@ class Campaigns::CampaignController < Campaigns::BaseController
       else
         render json: {validate: false}.to_json
       end
+    else
+      render json: {validate: false}.to_json
     end
   end
 end

@@ -68,6 +68,7 @@ class Api::VerifyController < ApplicationController
       elsif !@person.photo_validated?
         @person.upload_photo params[:file]
         @person.delay.fb_sync
+        
         render json: {validate: true}.to_json
       else
         render :json => { :error => "That person already has a photo! Try again!" }, :status => 422
