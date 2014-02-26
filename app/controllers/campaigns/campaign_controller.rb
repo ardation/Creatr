@@ -28,18 +28,24 @@ class Campaigns::CampaignController < Campaigns::BaseController
   end
 
   def endpoint
-    unless params[:person][:mobile].blank?
-      number = params[:person][:mobile].gsub(/[^0-9]/i, '')
-      number = number[2..-1] if number[0..1] == "64"
-      unless @campaign.people.exists?(mobile: number.to_i)
-        @campaign.people.create! params[:person]
-        @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
-        render json: {validate: true}.to_json
-      else
-        render json: {validate: false}.to_json
+    if params.has_key? :person and params[:person].is_a?(Hash)
+      if params[:person].has_key? :mobile
+        number = params[:person][:mobile].gsub(/[^0-9]/i, '')
+        number = number[2..-1] if number[0..1] == "64"
+        unless @campaign.people.exists?(mobile: number.to_i)
+          p = Person.new params[:person]
+          p.campaign = @campaign
+          if p.valid?
+            p.save
+            @campaign.campaign_counters.first_or_create(date: DateTime.now.to_date).increment
+            render json: {validate: true}.to_json
+          else
+            render json: {validate: false, errors: p.errors}.to_json
+          end
+          return
+        end
       end
-    else
-      render json: {validate: false}.to_json
     end
+    render json: {validate: false}.to_json
   end
 end
