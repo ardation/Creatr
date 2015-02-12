@@ -43,6 +43,10 @@ class MissionHubCrm
           question = MissionHub::Question.create(kind: "ChoiceField", style: "drop-down", label:"Halls", content:data["HallOptions"].gsub(",","\r\n"), survey_id: @survey.id)
           foreign_hash["Halls"] = question.id
         end
+        if data["Campus"] == "true"
+          question = MissionHub::Question.create(kind: "ChoiceField", style: "drop-down", label:"Campus", content:data["CampusOptions"].gsub(",","\r\n"), survey_id: @survey.id)
+          foreign_hash["Campus"] = question.id
+        end
         content.foreign_hash = foreign_hash.to_json
       when ContentType::MULTI_ANSWER
         data = JSON.parse content.data
@@ -107,6 +111,8 @@ class MissionHubCrm
             answers[JSON.parse(answer.content.foreign_hash)["Degree"]] = value
           when "hall"
             answers[JSON.parse(answer.content.foreign_hash)["Halls"]] = value
+          when "campus"
+            answers[JSON.parse(answer.content.foreign_hash)["Campus"]] = value
           end
         end
       when ContentType::MULTI_ANSWER
