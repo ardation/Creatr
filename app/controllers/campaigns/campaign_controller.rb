@@ -32,7 +32,7 @@ class Campaigns::CampaignController < Campaigns::BaseController
       if params[:person].has_key? :mobile
         number = params[:person][:mobile].gsub(/[^0-9]/i, '')
         number = number[2..-1] if number[0..1] == "64"
-        unless @campaign.people.exists?(mobile: number.to_i)
+        unless @campaign.people.exists?(mobile: number.to_i.to_s)
           p = Person.new params[:person]
           p.campaign = @campaign
           if p.valid?
