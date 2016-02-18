@@ -79,7 +79,7 @@ class Theme < ActiveRecord::Base
   end
 
   def owner_name
-    owner.name
+    owner.try(:name)
   end
 
   def favourite?(id)
