@@ -201,6 +201,7 @@ GEM
       mime-types
     pg (0.18.4)
     polyglot (0.3.4)
+    power_assert (0.2.2)
     puma (2.16.0)
     pusher (0.11.3)
       multi_json (~> 1.0)
@@ -286,6 +287,8 @@ GEM
       rest-client (~> 1.4)
     tabletastic (0.2.3)
       activesupport (~> 3.0)
+    test-unit (3.0.8)
+      power_assert
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.15)
@@ -362,9 +365,10 @@ DEPENDENCIES
   sprockets
   stripe
   tabletastic
+  test-unit
   twilio-ruby
   uglifier (>= 1.0.3)
   useragent
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
