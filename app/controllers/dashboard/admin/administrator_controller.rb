@@ -2,13 +2,11 @@ class Dashboard::Admin::AdministratorController < Dashboard::BaseController
   before_filter :is_admin
 
   def is_admin
-    if !current_member.admin?
-      redirect_to 'dashboard/unauthorized'
-    end
+    redirect_to 'dashboard/unauthorized' unless current_member.admin?
   end
 
   def accounts
-    Tabletastic.default_table_html = { :class => 'table table-striped' }
+    Tabletastic.default_table_html = { class: 'table table-striped' }
     @members = Member.order(:activated).all
   end
 
@@ -18,10 +16,10 @@ class Dashboard::Admin::AdministratorController < Dashboard::BaseController
       m.activate
       flash[:success] = "Successfully activated #{m.name}"
       unless params[:notify].nil?
-        mail(m, "Your account has been activated!", "We've just activated your account which means your ready to start setting up your first campaign, Sweet!", 'http://' + request.env['HTTP_HOST'] + '/dashboard', 'Go To +Creator')
+        mail(m, 'Your account has been activated!', "We've just activated your account which means your ready to start setting up your first campaign, Sweet!", 'http://' + request.env['HTTP_HOST'] + '/dashboard', 'Go To +Creator')
       end
     else
-      flash[:error] = "Cannot activate self"
+      flash[:error] = 'Cannot activate self'
     end
     redirect_to request.referer
   end
@@ -32,10 +30,10 @@ class Dashboard::Admin::AdministratorController < Dashboard::BaseController
       m.deactivate
       flash[:warning] = "Successfully deactivated #{m.name}"
       unless params[:notify].nil?
-        mail(m, "Your account has been Deactivated!", "Sorry. We had to deactivate your account. Get in touch with our support team if you think we've made a mistake.", 'mailto:creator@godmedia.org.nz?subject=Account%20Deactivation', 'Contact Support')
+        mail(m, 'Your account has been Deactivated!', "Sorry. We had to deactivate your account. Get in touch with our support team if you think we've made a mistake.", 'mailto:creator@godmedia.org.nz?subject=Account%20Deactivation', 'Contact Support')
       end
     else
-      flash[:error] = "Cannot deactivate self"
+      flash[:error] = 'Cannot deactivate self'
     end
     redirect_to request.referer
   end
@@ -46,7 +44,7 @@ class Dashboard::Admin::AdministratorController < Dashboard::BaseController
       m.promote
       flash[:success] = "Successfully promoted #{m.name}"
     else
-      flash[:error] = "Cannot promote self"
+      flash[:error] = 'Cannot promote self'
     end
     redirect_to request.referer
   end
@@ -57,9 +55,8 @@ class Dashboard::Admin::AdministratorController < Dashboard::BaseController
       m.demote
       flash[:warning] = "Successfully demoted #{m.name}"
     else
-      flash[:error] = "Cannot demote self"
+      flash[:error] = 'Cannot demote self'
     end
     redirect_to request.referer
   end
-
 end

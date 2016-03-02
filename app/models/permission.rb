@@ -3,5 +3,4 @@ class Permission < ActiveRecord::Base
   belongs_to :member
 
   attr_accessible :campaign, :member
-
 end

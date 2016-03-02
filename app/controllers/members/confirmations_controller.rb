@@ -9,11 +9,9 @@ class Members::ConfirmationsController < Devise::ConfirmationsController
 
   def show
     with_unconfirmed_confirmable do
-      if @confirmable.valid?
-        do_confirm
-      end
+      do_confirm if @confirmable.valid?
     end
-    if !@confirmable.errors.empty?
+    unless @confirmable.errors.empty?
       self.resource = @confirmable
       if params[:confirmation_token].nil?
         render 'devise/confirmations/resend'
@@ -33,13 +31,10 @@ class Members::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_resending_confirmation_instructions_path_for(resource_name)
-
   end
 
   def with_unconfirmed_confirmable
     @confirmable = Member.find_or_initialize_with_error_by(:confirmation_token, params[:confirmation_token])
-    if !@confirmable.new_record?
-      @confirmable.only_if_unconfirmed {yield}
-    end
+    @confirmable.only_if_unconfirmed { yield } unless @confirmable.new_record?
   end
 end

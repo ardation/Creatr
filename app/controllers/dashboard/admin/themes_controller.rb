@@ -3,7 +3,7 @@ class Dashboard::Admin::ThemesController < Dashboard::ResourceController
 
   def index
     @themes = Theme.where(published: true).all
-    Tabletastic.default_table_html = { :class => 'table table-striped' }
+    Tabletastic.default_table_html = { class: 'table table-striped' }
   end
 
   def publish
@@ -41,9 +41,6 @@ class Dashboard::Admin::ThemesController < Dashboard::ResourceController
   protected
 
   def is_admin
-    if !current_member.admin?
-      redirect_to 'dashboard/unauthorized'
-    end
+    redirect_to 'dashboard/unauthorized' unless current_member.admin?
   end
-
 end

@@ -1,1 +1,1 @@
-#Hamlbars::Template.render_templates_for :ember
+# Hamlbars::Template.render_templates_for :ember

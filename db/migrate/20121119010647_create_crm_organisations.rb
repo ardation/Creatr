@@ -7,7 +7,8 @@ class CreateCrmOrganisations < ActiveRecord::Migration
       t.timestamps
     end
   end
-  def down 
+
+  def down
     drop_table :crm_organisations
   end
 end

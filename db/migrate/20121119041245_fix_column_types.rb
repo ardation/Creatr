@@ -1,6 +1,5 @@
 class FixColumnTypes < ActiveRecord::Migration
   def up
-
     remove_column :member_crms, :member_id
     remove_column :member_crms, :crm_id
 

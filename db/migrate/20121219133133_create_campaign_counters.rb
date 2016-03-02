@@ -5,6 +5,6 @@ class CreateCampaignCounters < ActiveRecord::Migration
       t.date :date
       t.integer :count, default: 0
     end
-    add_index :campaign_counters, ["date"]
+    add_index :campaign_counters, ['date']
   end
 end

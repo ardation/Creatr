@@ -2,13 +2,12 @@ require 'dotenv'
 Dotenv.load
 
 FlamingWight::Application.configure do
-
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['AWS_BUCKET'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['AWS_BUCKET'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
 
@@ -31,7 +30,7 @@ FlamingWight::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { :host => ENV['app_url'] }
+  config.action_mailer.default_url_options = { host: ENV['app_url'] }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
@@ -56,11 +55,11 @@ FlamingWight::Application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  :address              => "smtp.mandrillapp.com",
-  :port                 => 587,
-  :domain               => 'godmedia.org.nz',
-  :user_name            => 'tataihono.nikora@gmail.com',
-  :password             => '3ba33630-3929-4de1-80c2-f7f86de2587e',
-  :authentication       => 'plain',
-  :enable_starttls_auto => true  }
+    address: 'smtp.mandrillapp.com',
+    port: 587,
+    domain: 'godmedia.org.nz',
+    user_name: 'tataihono.nikora@gmail.com',
+    password: '3ba33630-3929-4de1-80c2-f7f86de2587e',
+    authentication: 'plain',
+    enable_starttls_auto: true }
 end

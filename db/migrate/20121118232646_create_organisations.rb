@@ -5,9 +5,10 @@ class CreateOrganisations < ActiveRecord::Migration
       t.integer :id
       t.integer :uid
       t.integer :crm_id
-  	end
-    add_index(:organisations, :id, :unique => true)
+    end
+    add_index(:organisations, :id, unique: true)
   end
+
   def down
     drop_table :organisations
   end

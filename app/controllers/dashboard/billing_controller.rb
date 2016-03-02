@@ -10,26 +10,26 @@ class Dashboard::BillingController < Dashboard::BaseController
     unless Stripe::Token.retrieve(token).nil?
       # create a Customer
       if current_member.stripe.blank?
-        #create
+        # create
         customer = Stripe::Customer.create(
-          :card => token,
-          :email => current_member.email
+          card: token,
+          email: current_member.email
         )
         current_member.stripe = customer.id
         current_member.save
       else
-        #update
+        # update
         customer = Stripe::Customer.retrieve(current_member.stripe)
         customer.card = token
         customer.email = current_member.email
         customer.save
       end
       respond_to do |format|
-        format.json  { render :json => '{"state": "success"}'}
+        format.json  { render json: '{"state": "success"}' }
       end
     else
       respond_to do |format|
-        format.json  { render :json => '{"state": "failed"}'}
+        format.json  { render json: '{"state": "failed"}' }
       end
     end
   end

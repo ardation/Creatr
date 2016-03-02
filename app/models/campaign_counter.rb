@@ -3,11 +3,11 @@ class CampaignCounter < ActiveRecord::Base
   belongs_to :campaign
 
   def increment
-    if self.count.blank?
-      self.count = 1
-    else
-      self.count = self.count + 1
-    end
-    self.save!
+    self.count = if count.blank?
+                   1
+                 else
+                   count + 1
+                 end
+    save!
   end
 end

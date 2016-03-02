@@ -1,0 +1,15 @@
+AllCops:
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+  Exclude:
+    - db/**/*
+    - script/**/*
+    - vendor/**/*
+    - bin/**/*
+Documentation:
+  Enabled: false
+Lint/Debugger:
+  AutoCorrect: false
+LineLength:
+  Max: 120

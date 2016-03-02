@@ -1,11 +1,10 @@
 FlamingWight::Application.configure do
-
   config.paperclip_defaults = {
-    :storage => :s3,
-    :s3_credentials => {
-      :bucket => ENV['AWS_BUCKET'],
-      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    storage: :s3,
+    s3_credentials: {
+      bucket: ENV['AWS_BUCKET'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
     }
   }
 
@@ -59,7 +58,7 @@ FlamingWight::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += %w[application.js application.css dashboard/index.js dashboard.css campaign_frontend/index.js campaign_frontend/index.css campaign_frontend/iframe.js campaign_app/index.css campaign_app/index.js .svg .eot .woff .ttf creatr_site/index.js]
+  config.assets.precompile += %w(application.js application.css dashboard/index.js dashboard.css campaign_frontend/index.js campaign_frontend/index.css campaign_frontend/iframe.js campaign_app/index.css campaign_app/index.js .svg .eot .woff .ttf creatr_site/index.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -78,5 +77,5 @@ FlamingWight::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  config.action_mailer.default_url_options = { :host => ENV['app_url'] }
+  config.action_mailer.default_url_options = { host: ENV['app_url'] }
 end

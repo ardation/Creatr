@@ -1,5 +1,4 @@
 class Organisation < ActiveRecord::Base
-
   has_many :campaigns
 
   validates_presence_of :name, :foreign_id
