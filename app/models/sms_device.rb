@@ -11,11 +11,12 @@ class SmsDevice < ActiveRecord::Base
   # message = 'Hello %{name}, how are you?'
   def self.batch_send(people, message)
     people.each do |person|
+      person = OpenStruct.new(person) if person.is_a?(Hash)
       sms_device = SmsDevice.find(:first, order: 'updated_at ASC')
       next unless sms_device
       mobile = person.mobile.try(:gsub, /\D/, '').to_i
       next unless mobile
-      filtered_message = message.gsub! '%{name}', person.name
+      filtered_message = message.gsub '%{name}', person.name
       sms_device.send_sms "+#{mobile}", filtered_message
       sleep 3
     end
