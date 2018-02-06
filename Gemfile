@@ -3,7 +3,7 @@ ruby '2.2.4'
 
 gem 'rails', '3.2.17'
 gem 'pg'
-gem 'devise', '2.1.4'
+gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
