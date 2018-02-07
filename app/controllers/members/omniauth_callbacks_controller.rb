@@ -4,6 +4,6 @@ class Members::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = Member.find_for_facebook_oauth(request.env['omniauth.auth'])
     session['devise.facebook_data'] = request.env['omniauth.auth'] if @user.nil?
-    redirect_to '/sign_in'
+    redirect_to route(@user, false)
   end
 end
